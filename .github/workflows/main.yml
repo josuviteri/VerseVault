@@ -1,0 +1,17 @@
+name: Check Pusher
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check-pusher:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check pusher
+        if: github.actor != 'josuviteri' && github.actor != 'GiovanniPacchetti' && github.actor != 'Potzon' && github.actor != 'asier-larrazabal'
+        run: |
+          echo "Error: Unauthorized push. Only josuviteri and asier-larrazabal are allowed to push to this repository."
+          exit 1
