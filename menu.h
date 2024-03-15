@@ -8,6 +8,8 @@ typedef struct {
     char passw[MAX];
 } User;
 
+
+void imprimirInicial();
 //apartado gestion usuarios
 void iniciarSesion();
 void registrarCuenta();
