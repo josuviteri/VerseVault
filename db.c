@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <sqlite3.h>
+#include "sqlite/sqlite3.h"
 
 // Función callback para manejar el resultado de las consultas SQL
 static int callback(void *NotUsed, int argc, char **argv, char **azColName){
