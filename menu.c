@@ -30,7 +30,7 @@ void imprimirInicial(){
 
         }else if(sel == '3'){
             printf("\ncorrecto 3\n\n");
-        
+            imprimirMenuInvitado();
         }else if(sel == '4'){
             printf("\ncerrando...");
         }else{
@@ -38,19 +38,166 @@ void imprimirInicial(){
     }
 
     }while(sel != '4');
+    //}while(sel != '4' && sel != '3' && sel != '2' && sel != '1');
 }
 
-void iniciarSesion(){
+void imprimirMenu(){
+    char input[10];
+    char sel;
 
+    printf(NEGRITA"Menu Principal\nUsuario: \n\n" QUITAR_NEGRITA);
+
+
+    do{
+        printf("\nSelecciona una opcion: \n");
+        printf("1. Seleccionar libro de mi lista\n2. Gestionar Contenido\n3. Cerrar Sesion\n");
+
+        fgets(input, sizeof(input), stdin);
+        sscanf(input, " %c", &sel); 
+
+        if(sel == '1'){
+            printf("\ncorrecto 1\n\n");
+            //cargar los libros de ese usuario en la db y mostrarlos
+
+        }else if(sel == '2'){
+            printf("\ncorrecto 2\n\n");
+            imprimirGestion();
+
+        }else if(sel == '3'){
+            printf("\ncerrando sesion...\n\n");
+        }else{
+            printf("\nIntroduce un valor valido\n\n");
+    }
+
+    }while(sel != '3');
+    imprimirInicial();
+
+}
+
+void imprimirMenuInvitado(){
+    char input[10];
+    char sel;
+
+    printf(NEGRITA"Menu Principal\nSesion de invitado\n\n" QUITAR_NEGRITA);
+
+
+    do{
+        printf("\nSelecciona una opcion: \n");
+        printf("1. Seleccionar libro\n2. Gestionar Contenido\n3. Cerrar Sesion\n");
+
+        fgets(input, sizeof(input), stdin);
+        sscanf(input, " %c", &sel); 
+
+        if(sel == '1'){
+            printf("\ncorrecto 1\n\n");
+            //cargar los libros de ese usuario en la db y mostrarlos
+
+        }else if(sel == '2'){
+            printf("\ncorrecto 2\n\n");
+            imprimirGestionInvitado();
+
+        }else if(sel == '3'){
+            printf("\ncerrando sesion...\n\n");
+        }else{
+            printf("\nIntroduce un valor valido\n\n");
+    }
+
+    }while(sel != '3');
+    imprimirInicial();
+
+}
+
+void imprimirGestion(){
+    char input[10];
+    char sel;
+
+    printf(NEGRITA"Menu de Gestion de Contenido\nUsuario: \n\n" QUITAR_NEGRITA);
+
+
+    do{
+        printf("\nSelecciona una opcion: \n");
+        printf("1. Agregar Libro\n2. Eliminar Libro\n3. Aportar Libro\n4. Descargar Libro\n5. Volver\n");
+
+        fgets(input, sizeof(input), stdin);
+        sscanf(input, " %c", &sel); 
+
+        if(sel == '1'){
+            printf("\ncorrecto 1\n\n");
+            agregarLibro();
+
+        }else if(sel == '2'){
+            printf("\ncorrecto 2\n\n");
+            eliminarLibro();
+
+        }else if(sel == '3'){
+            printf("\ncorrecto 3\n\n");
+            aportarLibro();
+        }else if(sel == '4'){
+            printf("\ncorrecto 4\n\n");
+            descargarLibro();
+        }else if(sel == '5'){
+            printf("\nvolviendo...\n\n");
+        }
+        else{
+            printf("\nIntroduce un valor valido\n\n");
+    }
+
+    }while(sel != '5');
+    imprimirMenu();
+}
+
+void imprimirGestionInvitado(){
+    char input[10];
+    char sel;
+
+    printf(NEGRITA"Menu de Gestion de Contenido\nSesion de invitado\n\n" QUITAR_NEGRITA);
+
+
+    do{
+        printf("\nSelecciona una opcion: \n");
+        printf("1. Aportar Libro\n2. Descargar Libro\n3. Volver\n");
+
+        fgets(input, sizeof(input), stdin);
+        sscanf(input, " %c", &sel); 
+
+        if(sel == '1'){
+            printf("\ncorrecto 1\n\n");
+            aportarLibro();
+        }else if(sel == '2'){
+            printf("\ncorrecto 2\n\n");
+            descargarLibro();
+        }else if(sel == '3'){
+            printf("\nvolviendo...\n\n");
+        }
+        else{
+            printf("\nIntroduce un valor valido\n\n");
+    }
+
+    }while(sel != '3');
+    imprimirMenuInvitado();    
+}
+
+
+
+//apartado gestion usuarios
+void iniciarSesion(){ //char usuario, char contraseña
+    //deberia conectarse a la db y hacer una query con los datos
+    imprimirMenu();
 }
 void registrarCuenta(){
-
+    //deberia conectarse a la db y registrar los datos 
 }
 
-//apartado gestion de contenido
-void guardarLibro(){
-
+//apartado gestion de contenido de la db
+void agregarLibro(){
+    //debria contectarse y agregar un libro de los disponibles en la db a la lista personal    
 }
-void cargarLibro(){
-    
+void eliminarLibro(){
+    //debria contectarse a la db y eliminar un libro de la lista personal    
+}
+void aportarLibro(){
+    //debria contectarse y agregar un libro a la db
+} 
+void descargarLibro(){
+    //debria contectarse a la db y descargar un libro en formato txt, o el formato seleccionado    
 }
