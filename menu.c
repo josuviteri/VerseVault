@@ -10,8 +10,8 @@ void imprimirInicial(){
     char input[10];
     char sel;
 
-    printf("\nProyecto Programacion IV | Grupo PVI-04\n");
-    printf(NEGRITA"Bienvenido al Sistema de Libreria Virtual\n\n" QUITAR_NEGRITA);
+    printf("\nProyecto Programacion IV | Grupo PVI-04\n\n");
+    printf(NEGRITA"Bienvenido al Sistema de Libreria Virtual\nVerseVault\n\n" QUITAR_NEGRITA);
 
     do{
         printf("\nSelecciona una opcion: \n");
