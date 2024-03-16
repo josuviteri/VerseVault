@@ -10,7 +10,7 @@ void imprimirInicial(){
     char input[10];
     char sel;
 
-    printf("Proyecto Programacion IV | Grupo PVI-04\n");
+    printf("\nProyecto Programacion IV | Grupo PVI-04\n");
     printf(NEGRITA"Bienvenido al Sistema de Libreria Virtual\n\n" QUITAR_NEGRITA);
 
     do{
@@ -37,8 +37,7 @@ void imprimirInicial(){
             printf("\nIntroduce un valor valido\n\n");
     }
 
-    }while(sel != '4');
-    //}while(sel != '4' && sel != '3' && sel != '2' && sel != '1');
+    }while(sel != '4' && sel != '3' && sel != '2' && sel != '1');
 }
 
 void imprimirMenu(){
@@ -65,12 +64,13 @@ void imprimirMenu(){
 
         }else if(sel == '3'){
             printf("\ncerrando sesion...\n\n");
+            imprimirInicial();
         }else{
             printf("\nIntroduce un valor valido\n\n");
     }
 
-    }while(sel != '3');
-    imprimirInicial();
+    }while(sel != '3' && sel != '2' && sel != '1');
+
 
 }
 
@@ -98,12 +98,13 @@ void imprimirMenuInvitado(){
 
         }else if(sel == '3'){
             printf("\ncerrando sesion...\n\n");
+            imprimirInicial();
         }else{
             printf("\nIntroduce un valor valido\n\n");
     }
 
-    }while(sel != '3');
-    imprimirInicial();
+    }while(sel != '3' && sel != '2' && sel != '1');
+
 
 }
 
@@ -137,13 +138,14 @@ void imprimirGestion(){
             descargarLibro();
         }else if(sel == '5'){
             printf("\nvolviendo...\n\n");
+            imprimirMenu();
         }
         else{
             printf("\nIntroduce un valor valido\n\n");
     }
 
-    }while(sel != '5');
-    imprimirMenu();
+    }while(sel != '4' && sel != '3' && sel != '2' && sel != '1' && sel != '5');
+
 }
 
 void imprimirGestionInvitado(){
@@ -168,13 +170,14 @@ void imprimirGestionInvitado(){
             descargarLibro();
         }else if(sel == '3'){
             printf("\nvolviendo...\n\n");
+            imprimirMenuInvitado();  
         }
         else{
             printf("\nIntroduce un valor valido\n\n");
     }
 
-    }while(sel != '3');
-    imprimirMenuInvitado();    
+    }while(sel != '3' && sel != '2' && sel != '1');
+  
 }
 
 
