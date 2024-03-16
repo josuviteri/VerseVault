@@ -15,7 +15,7 @@ void imprimirInicial(){
 
     do{
         printf("\nSelecciona una opcion: \n");
-        printf("1. Iniciar Sesion \n2. Registrar cuenta \n3. Continuar como invitado \n4. Salir\n");
+        printf("1. Iniciar Sesion \n2. Registrar cuenta \n3. Continuar como invitado \n4. Salir\n\n");
 
         fgets(input, sizeof(input), stdin);
         sscanf(input, " %c", &sel); 
