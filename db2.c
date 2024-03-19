@@ -79,10 +79,10 @@ int deleteAllClients(sqlite3 *db) {
     return SQLITE_OK;
 }
 
-int insertNewCliente(sqlite3 *db, char name[], char passwd[]) {
+int insertNewCliente(sqlite3 *db, char name[]) {
     sqlite3_stmt *stmt;
 
-    char sql[] = "insert into Cliente (id_cl, nom_cl, email_cl, contra_cl, fecha_n_cl, es_admin, id_ciudad) values (1, ?, NULL, ?, NULL, 0, NULL)";
+    char sql[] = "insert into Cliente (id_cl, nom_cl, email_cl, contra_cl, fecha_n_cl, es_admin, id_ciudad) values (NULL, ?, NULL, NULL, NULL, 0, NULL)";
     int result = sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL) ;
     if (result != SQLITE_OK) {
         printf("Error preparing statement (INSERT)\n");
@@ -126,21 +126,25 @@ int main() {
         return result;
     }
 
-    printf("Database opened\n") ;
+    printf("Database opened\n\n") ;
 
+    //delete funciona
     result = deleteAllClients(db);
     if (result != SQLITE_OK) {
         printf("Error deleting all clients\n");
         printf("%s\n", sqlite3_errmsg(db));
         return result;
     }
-
-    result = insertNewCliente(db, "Josu", "1234");
+    //al insertar no encuentra la columna id_cl
+    result = insertNewCliente(db, "Josu");
     if (result != SQLITE_OK) {
         printf("Error inserting new data\n");
         printf("%s\n", sqlite3_errmsg(db));
         return result;
     }
+
+
+
 
     result = showAllClientes(db);
     if (result != SQLITE_OK) {
@@ -148,6 +152,7 @@ int main() {
         printf("%s\n", sqlite3_errmsg(db));
         return result;
     }
+
 
     result = sqlite3_close(db);
     if (result != SQLITE_OK) {
