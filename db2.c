@@ -2,6 +2,18 @@
 #include "sqlite/sqlite3.h"
 #include <string.h>
 
+void errorMsg(char mensaje[]){
+    FILE* f;
+
+
+    f = fopen("log.txt", "a"); //log.log?
+
+    fprintf(f, "%s\n", mensaje);
+
+    fclose(f);
+}
+
+
 int showAllClientes(sqlite3 *db) {
     sqlite3_stmt *stmt;
 
@@ -117,7 +129,18 @@ int insertNewCliente(sqlite3 *db, char name[]) {
     return SQLITE_OK;
 }
 
+
+
+
 int main() {
+
+
+
+
+
+
+
+
     sqlite3 *db;
 
     int result = sqlite3_open("libreria.sqlite", &db);
@@ -163,5 +186,10 @@ int main() {
 
     printf("Database closed\n") ;
 
+    errorMsg("aaa");
+
+
     return 0;
+
+
 }
