@@ -4,7 +4,7 @@
 
 #define NEGRITA "\e[1m" // Renombramos el código de los caracteres en negrita para que sea mas entendible
 #define QUITAR_NEGRITA "\e[m" // Renombramos el codigo de quitar la negrita a los caracteres para que sea mas entendible
-
+//"Sin dolor no hay gloria" - Proverbio Romano 
 
 void imprimirInicial(){
     char input[10];
