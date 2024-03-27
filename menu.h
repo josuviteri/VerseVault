@@ -3,7 +3,7 @@
 
 #define MAX 20 //max passwd length
 
-typedef struct {
+typedef struct User{
     char id;
     char passw[MAX];
 } User;
