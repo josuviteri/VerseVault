@@ -204,3 +204,11 @@ void aportarLibro(){
 void descargarLibro(){
     //debria contectarse a la db y descargar un libro en formato txt, o el formato seleccionado    
 }
+
+int main() {
+    imprimirInicial();
+    
+    
+
+    return 0;
+}
