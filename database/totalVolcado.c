@@ -41,13 +41,13 @@ void procesar_csv(const char* csvPath, sqlite3* db) {
         // Leer y procesar el resto del archivo línea por línea
         while (fgets(buffer, MAX_BUFFER_SIZE, csvFile) != NULL) {
             // Tokenizar la línea por el delimitador '^p'
-            char* id_libro = strtok(buffer, "^p");
-            char* Tipo = strtok(NULL, "^p");
-            char* fecha_publicacion = strtok(NULL, "^p");
-            char* Titulo = strtok(NULL, "^p");
-            char* Idioma = strtok(NULL, "^p");
-            char* Genero = strtok(NULL, "^p");
-            char* Autor = strtok(NULL, "^p");
+            char* id_libro = strtok(buffer, "@");
+            char* Tipo = strtok(NULL, "@");
+            char* fecha_publicacion = strtok(NULL, "@");
+            char* Titulo = strtok(NULL, "@");
+            char* Idioma = strtok(NULL, "@");
+            char* Genero = strtok(NULL, "@");
+            char* Autor = strtok(NULL, "@");
 
             // Insertar los datos en la base de datos SQLite
             char sql[MAX_BUFFER_SIZE];
@@ -67,6 +67,20 @@ void procesar_csv(const char* csvPath, sqlite3* db) {
     fclose(csvFile);
 }
 
+int limpiar_tabla(sqlite3* db) {
+    char* errMsg = 0;
+    int rc = sqlite3_exec(db, "DELETE FROM Datos;", 0, 0, &errMsg);
+    if (rc != SQLITE_OK) {
+        errorMsg("Error al limpiar la tabla.");
+        fprintf(stderr, "Error al eliminar SQL: %s\n", errMsg);
+        sqlite3_free(errMsg);
+        return 1;
+    }
+
+    printf("Tabla limpia exitosamente.\n");
+    return 0;
+}
+
 int main() {
     const char* csvPath = "./ficheros/Libros_Data_Limpia.csv";
 
@@ -78,6 +92,9 @@ int main() {
     }
 
     procesar_csv(csvPath, db);
+
+    //limpiar_tabla(db);
+
 
     sqlite3_close(db);
 
