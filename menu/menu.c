@@ -21,15 +21,13 @@ void imprimirInicial(){
         sscanf(input, " %c", &sel); 
 
         if(sel == '1'){
-            printf("\ncorrecto 1\n\n");
+            
             iniciarSesion();
 
         }else if(sel == '2'){
-            printf("\ncorrecto 2\n\n");
             registrarCuenta();
 
         }else if(sel == '3'){
-            printf("\ncorrecto 3\n\n");
             imprimirMenuInvitado();
         }else if(sel == '4'){
             printf("\ncerrando...");
