@@ -3,12 +3,36 @@
 #include <string.h>
 #include "../sqlite/sqlite3.h"
 #include "../structs/autor.h"
+#include <time.h>
+
+void errorMsg(char mensaje[]){
+    FILE* f;
+    time_t rawtime;
+    struct tm* timeinfo;
+    char timestamp[80];
+
+    // Obtener la hora actual
+    time(&rawtime);
+    timeinfo = localtime(&rawtime);
+
+    // Formatear la fecha y hora
+    strftime(timestamp, sizeof(timestamp), "%Y-%m-%d %H:%M:%S", timeinfo);
+    
+    f = fopen("ficheros/db.log", "a"); 
+
+    //fprintf(f, "%s\n", mensaje);
+    fprintf(f, "[%s] %s\n", timestamp, mensaje);
+
+    fclose(f);
+}
+
 
 // Función para cargar los autores desde un archivo CSV a una base de datos SQLite
 int cargar_autores_desde_csv(sqlite3 *db, const char *nombre_archivo){
     // Abrir el archivo CSV
     FILE *file = fopen(nombre_archivo, "r");
     if (!file) {
+        errorMsg("No se pudo abrir el archivo CSV\n");
         fprintf(stderr, "No se pudo abrir el archivo CSV\n");
         return 1;
     }
@@ -18,6 +42,7 @@ int cargar_autores_desde_csv(sqlite3 *db, const char *nombre_archivo){
     sqlite3_stmt *stmt;
     int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
     if (rc != SQLITE_OK) {
+        errorMsg("Error al preparar la consulta SQL\n");
         fprintf(stderr, "Error al preparar la consulta SQL: %s\n", sqlite3_errmsg(db));
         fclose(file);
         return 1;
@@ -43,6 +68,7 @@ int cargar_autores_desde_csv(sqlite3 *db, const char *nombre_archivo){
         // Insertar el autor en la base de datos
         rc = sqlite3_bind_text(stmt, 1, autor, -1, SQLITE_STATIC);
         if (rc != SQLITE_OK) {
+            errorMsg("Error al enlazar el nombre del autor\n");
             fprintf(stderr, "Error al enlazar el nombre del autor: %s\n", sqlite3_errmsg(db));
             sqlite3_finalize(stmt);
             fclose(file);
@@ -51,6 +77,7 @@ int cargar_autores_desde_csv(sqlite3 *db, const char *nombre_archivo){
 
         rc = sqlite3_step(stmt);
         if (rc != SQLITE_DONE) {
+            errorMsg("Error al ejecutar la consulta SQL\n");
             fprintf(stderr, "Error al ejecutar la consulta SQL: %s\n", sqlite3_errmsg(db));
             sqlite3_finalize(stmt);
             fclose(file);
@@ -79,6 +106,7 @@ void selectTopAuthors(sqlite3 *db) {
     // Preparar la sentencia SQL
     rc = sqlite3_prepare_v2(db, sql_select_author, -1, &stmt, 0);
     if (rc != SQLITE_OK) {
+        errorMsg("Error preparando la consulta SQL\n");
         fprintf(stderr, "Error preparando la consulta SQL: %s\n", sqlite3_errmsg(db));
         return;
     }
@@ -100,6 +128,7 @@ void selectTopAuthors(sqlite3 *db) {
 int insertAuthorsFromCSV(sqlite3 *db) {
     FILE *csv_file = fopen("ficheros/Libros_Data_Limpia.csv", "r");
     if (!csv_file) {
+        errorMsg("Error al abrir el archivo CSV\n");
         fprintf(stderr, "Error al abrir el archivo CSV\n");
         return -1;
     }
@@ -109,6 +138,7 @@ int insertAuthorsFromCSV(sqlite3 *db) {
     sqlite3_stmt *stmt_insert_author;
     int rc = sqlite3_prepare_v2(db, sql_insert_author, -1, &stmt_insert_author, 0);
     if (rc != SQLITE_OK) {
+        errorMsg("Error preparando la consulta SQL\n");
         fprintf(stderr, "Error preparando la consulta SQL: %s\n", sqlite3_errmsg(db));
         return rc;
     }
@@ -119,6 +149,7 @@ int insertAuthorsFromCSV(sqlite3 *db) {
         sqlite3_bind_text(stmt_insert_author, 1, author, -1, SQLITE_STATIC);
         rc = sqlite3_step(stmt_insert_author);
         if (rc != SQLITE_DONE) {
+            errorMsg("Error insertando autor\n");
             fprintf(stderr, "Error insertando autor: %s\n", sqlite3_errmsg(db));
         } else {
             printf("Autor insertado correctamente: %s\n", author);
@@ -183,6 +214,7 @@ int deleteAllAuthors(sqlite3 *db) {
     sqlite3_stmt *stmt;
     rc = sqlite3_prepare_v2(db, sql, -1, &stmt, 0);
     if (rc != SQLITE_OK) {
+        errorMsg("Error preparando la consulta SQL\n");
         fprintf(stderr, "Error preparando la consulta SQL: %s\n", sqlite3_errmsg(db));
         return rc;
     }
@@ -190,6 +222,7 @@ int deleteAllAuthors(sqlite3 *db) {
     // Ejecutar la consulta SQL
     rc = sqlite3_step(stmt);
     if (rc != SQLITE_DONE) {
+        errorMsg("Error eliminando datos de la tabla Autor\n");
         fprintf(stderr, "Error eliminando datos de la tabla Autor: %s\n", sqlite3_errmsg(db));
     } else {
         printf("Datos eliminados correctamente de la tabla Autor\n");
@@ -206,6 +239,7 @@ int cargar_10autores_desde_csv(sqlite3 *db, const char *nombre_archivo){
     // Abrir el archivo CSV
     FILE *file = fopen(nombre_archivo, "r");
     if (!file) {
+        errorMsg("No se pudo abrir el archivo CSV\n");
         fprintf(stderr, "No se pudo abrir el archivo CSV\n");
         return 1;
     }
@@ -213,6 +247,7 @@ int cargar_10autores_desde_csv(sqlite3 *db, const char *nombre_archivo){
     // Descartar la primera línea que contiene los encabezados
     char line[1024];
     if (!fgets(line, sizeof(line), file)) {
+        errorMsg("No se pudo leer la primera línea del archivo CSV\n");
         fprintf(stderr, "No se pudo leer la primera línea del archivo CSV\n");
         fclose(file);
         return 1;
@@ -223,6 +258,7 @@ int cargar_10autores_desde_csv(sqlite3 *db, const char *nombre_archivo){
     sqlite3_stmt *stmt;
     int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
     if (rc != SQLITE_OK) {
+        errorMsg("Error al preparar la consulta SQL");
         fprintf(stderr, "Error al preparar la consulta SQL: %s\n", sqlite3_errmsg(db));
         fclose(file);
         return 1;
@@ -257,6 +293,7 @@ int cargar_10autores_desde_csv(sqlite3 *db, const char *nombre_archivo){
         // Insertar el autor en la base de datos
         rc = sqlite3_bind_text(stmt, 1, autor, -1, SQLITE_STATIC);
         if (rc != SQLITE_OK) {
+            errorMsg("Error al enlazar el nombre del autor\n");
             fprintf(stderr, "Error al enlazar el nombre del autor: %s\n", sqlite3_errmsg(db));
             sqlite3_finalize(stmt);
             fclose(file);
@@ -265,6 +302,7 @@ int cargar_10autores_desde_csv(sqlite3 *db, const char *nombre_archivo){
 
         rc = sqlite3_step(stmt);
         if (rc != SQLITE_DONE) {
+            errorMsg("Error al ejecutar la consulta SQL\n");
             fprintf(stderr, "Error al ejecutar la consulta SQL: %s\n", sqlite3_errmsg(db));
             sqlite3_finalize(stmt);
             fclose(file);
@@ -292,6 +330,7 @@ int main(int argc, char* argv[]) {
     // Abrir la base de datos
     rc = sqlite3_open("libreria.db", &db);
     if(rc) {
+        errorMsg("Error, No se puede abrir la base de datos\n");
         fprintf(stderr, "No se puede abrir la base de datos: %s\n", sqlite3_errmsg(db));
         return 0;
     } else {
@@ -307,14 +346,16 @@ int main(int argc, char* argv[]) {
     // selectTopAuthors(db);
 
     // Borrar todos los datos de la tabla Autor
-    // rc = deleteAllAuthors(db);
-    // if (rc != SQLITE_OK) {
-    //     fprintf(stderr, "Error al eliminar datos de la tabla Autor\n");
-    // }
+     //rc = deleteAllAuthors(db);
+     //if (rc != SQLITE_OK) {
+     //   errorMsg("Error al eliminar datos de la tabla Autor\n");
+     //   fprintf(stderr, "Error al eliminar datos de la tabla Autor\n");
+     //}
 
     if (cargar_10autores_desde_csv(db, "./ficheros/Libros_Data_Limpia.csv") != 0) {
+        errorMsg("Error al cargar los autores desde el archivo CSV\n");
         fprintf(stderr, "Error al cargar los autores desde el archivo CSV\n");
-        //sqlite3_close(db);
+        sqlite3_close(db);
         return 1;
     }
 
