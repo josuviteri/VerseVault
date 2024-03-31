@@ -101,7 +101,7 @@ void selectTopAuthors(sqlite3 *db) {
     sqlite3_stmt *stmt;
     
     // Query para seleccionar los primeros 10 autores
-    const char *sql_select_author = "SELECT id_autor, nom_autor FROM Autor LIMIT 30";
+    const char *sql_select_author = "SELECT id_autor, nom_autor FROM Autor LIMIT 20";
 
     // Preparar la sentencia SQL
     rc = sqlite3_prepare_v2(db, sql_select_author, -1, &stmt, 0);
@@ -303,69 +303,69 @@ int cargar_10autores_desde_csv(sqlite3 *db, const char *nombre_archivo){
     }
 
     // Leer y procesar cada línea del archivo CSV
-    char *autor;
-    char *token;
-    const char delimiter[3] = "^p"; // Cambiado el delimitador
-    int count = 0; // Contador de autores insertados
-    while (fgets(line, sizeof(line), file)) {
-        // Verificar si se ha alcanzado el límite de 10 autores
-        if (count >= 20) {
-            break;
-        }
+char *autor;
+char *token;
+const char delimiter[3] = "^p"; // Cambiado el delimitador
+int count = 0; // Contador de autores insertados
+while (fgets(line, sizeof(line), file)) {
+    // Verificar si se ha alcanzado el límite de 20 autores
+    if (count >= 20) {
+        break;
+    }
 
-        // Copiar la línea para evitar modificar la original
-        char line_copy[1024];
-        strcpy(line_copy, line);
+    // Copiar la línea para evitar modificar la original
+    char line_copy[1024];
+    strcpy(line_copy, line);
 
-        // Utilizar strtok para dividir la línea en tokens
-        token = strtok(line_copy, delimiter);
-        // Ignorar las primeras 6 columnas
-        for (int i = 0; i < 6; ++i) {
-            token = strtok(NULL, delimiter);
-        }
-        // Verificar si se obtuvo el token de la séptima columna
-        if (token != NULL) {
-            // Tomar la séptima columna como el nombre del autor
-            autor = token;
-            // Eliminar el carácter de nueva línea al final del autor
-            autor[strcspn(autor, "\n")] = 0;
-        } else {
-            // Ignorar esta línea porque no tiene suficientes columnas
-            continue;
-        }
-        // Verificar si el autor ya existe en la base de datos
-        int id_autor = autor_existe(db, autor);
-        if (id_autor == -1) {
-            // Error al comprobar la existencia del autor
+    // Utilizar strtok para dividir la línea en tokens
+    token = strtok(line_copy, delimiter);
+    // Ignorar las primeras 6 columnas
+    for (int i = 0; i < 6; ++i) {
+        token = strtok(NULL, delimiter);
+    }
+    // Verificar si se obtuvo el token de la séptima columna
+    if (token != NULL) {
+        // Tomar la séptima columna como el nombre del autor
+        autor = token;
+        // Eliminar el carácter de nueva línea al final del autor
+        autor[strcspn(autor, "\n")] = 0;
+    } else {
+        // Ignorar esta línea porque no tiene suficientes columnas
+        continue;
+    }
+    // Verificar si el autor ya existe en la base de datos
+    int id_autor = autor_existe(db, autor);
+    if (id_autor == -1) {
+        // Error al comprobar la existencia del autor
+        fclose(file);
+        return 1;
+    } else if (id_autor == 0) {
+        // El autor no existe, insertarlo en la base de datos
+        rc = sqlite3_bind_text(stmt, 1, autor, -1, SQLITE_STATIC);
+        if (rc != SQLITE_OK) {
+            errorMsg("Error al enlazar el nombre del autor");
+            fprintf(stderr, "Error al enlazar el nombre del autor: %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
             fclose(file);
             return 1;
-        } else if (id_autor == 0) {
-            // El autor no existe, insertarlo en la base de datos
-            rc = sqlite3_bind_text(stmt, 1, autor, -1, SQLITE_STATIC);
-            if (rc != SQLITE_OK) {
-                errorMsg("Error al enlazar el nombre del autor");
-                fprintf(stderr, "Error al enlazar el nombre del autor: %s\n", sqlite3_errmsg(db));
-                sqlite3_finalize(stmt);
-                fclose(file);
-                return 1;
-            }
-
-            rc = sqlite3_step(stmt);
-            if (rc != SQLITE_DONE) {
-                errorMsg("Error al ejecutar la consulta SQL");
-                fprintf(stderr, "Error al ejecutar la consulta SQL: %s\n", sqlite3_errmsg(db));
-                sqlite3_finalize(stmt);
-                fclose(file);
-                return 1;
-            }
         }
 
-        // Incrementar el contador de autores
-        count++;
-
-        // Reiniciar la consulta para el próximo autor
-        sqlite3_reset(stmt);
+        rc = sqlite3_step(stmt);
+        if (rc != SQLITE_DONE) {
+            errorMsg("Error al ejecutar la consulta SQL");
+            fprintf(stderr, "Error al ejecutar la consulta SQL: %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            fclose(file);
+            return 1;
+        }
     }
+
+    // Incrementar el contador de autores
+    count++;
+
+    // Reiniciar la consulta para el próximo autor
+    sqlite3_reset(stmt);
+}
 
     // Finalizar la consulta y cerrar el archivo
     sqlite3_finalize(stmt);
@@ -398,18 +398,18 @@ int main(int argc, char* argv[]) {
     // selectTopAuthors(db);
 
     // Borrar todos los datos de la tabla Autor
-    // rc = deleteAllAuthors(db);
-    // if (rc != SQLITE_OK) {
-    //     errorMsg("Error al eliminar datos de la tabla Autor\n");
-    //     fprintf(stderr, "Error al eliminar datos de la tabla Autor\n");
-    //  }
+    rc = deleteAllAuthors(db);
+    if (rc != SQLITE_OK) {
+        errorMsg("Error al eliminar datos de la tabla Autor\n");
+        fprintf(stderr, "Error al eliminar datos de la tabla Autor\n");
+     }
 
-    if (cargar_10autores_desde_csv(db, "./ficheros/Libros_Data_Limpia.csv") != 0) {
-        errorMsg("Error al cargar los autores desde el archivo CSV\n");
-        fprintf(stderr, "Error al cargar los autores desde el archivo CSV\n");
-        sqlite3_close(db);
-        return 1;
-    }
+    // if (cargar_10autores_desde_csv(db, "./ficheros/Libros_Data_Limpia.csv") != 0) {
+    //     errorMsg("Error al cargar los autores desde el archivo CSV\n");
+    //     fprintf(stderr, "Error al cargar los autores desde el archivo CSV\n");
+    //     sqlite3_close(db);
+    //     return 1;
+    // }
 
     printf("\nLos primeros 10 autores son:\n");
      selectTopAuthors(db);
