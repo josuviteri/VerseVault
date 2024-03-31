@@ -4,6 +4,71 @@
 #include "../sqlite/sqlite3.h"
 #include "../structs/autor.h"
 
+// Función para cargar los autores desde un archivo CSV a una base de datos SQLite
+int cargar_autores_desde_csv(sqlite3 *db, const char *nombre_archivo){
+    // Abrir el archivo CSV
+    FILE *file = fopen(nombre_archivo, "r");
+    if (!file) {
+        fprintf(stderr, "No se pudo abrir el archivo CSV\n");
+        return 1;
+    }
+
+    // Preparar la consulta SQL para insertar autores
+    const char *sql = "INSERT INTO autores (nom_autor) VALUES (?)";
+    sqlite3_stmt *stmt;
+    int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "Error al preparar la consulta SQL: %s\n", sqlite3_errmsg(db));
+        fclose(file);
+        return 1;
+    }
+
+    // Leer y procesar cada línea del archivo CSV
+    char line[1024];
+    char *autor;
+    char *token;
+    const char delimiter[2] = ",";
+    while (fgets(line, sizeof(line), file)) {
+        // Utilizar strtok para dividir la línea en tokens
+        token = strtok(line, delimiter);
+        // Ignorar las primeras 6 columnas
+        for (int i = 0; i < 6; ++i) {
+            token = strtok(NULL, delimiter);
+        }
+        // Tomar la séptima columna como el nombre del autor
+        autor = token;
+        // Eliminar el carácter de nueva línea al final del autor
+        autor[strcspn(autor, "\n")] = 0;
+
+        // Insertar el autor en la base de datos
+        rc = sqlite3_bind_text(stmt, 1, autor, -1, SQLITE_STATIC);
+        if (rc != SQLITE_OK) {
+            fprintf(stderr, "Error al enlazar el nombre del autor: %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            fclose(file);
+            return 1;
+        }
+
+        rc = sqlite3_step(stmt);
+        if (rc != SQLITE_DONE) {
+            fprintf(stderr, "Error al ejecutar la consulta SQL: %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            fclose(file);
+            return 1;
+        }
+
+        // Reiniciar la consulta para el próximo autor
+        sqlite3_reset(stmt);
+    }
+
+    // Finalizar la consulta y cerrar el archivo
+    sqlite3_finalize(stmt);
+    fclose(file);
+
+    return 0;
+}
+
+
 void selectTopAuthors(sqlite3 *db) {
     int rc;
     sqlite3_stmt *stmt;
@@ -135,6 +200,90 @@ int deleteAllAuthors(sqlite3 *db) {
     return rc;
 }
 
+
+// Función para cargar los autores desde un archivo CSV a una base de datos SQLite
+int cargar_10autores_desde_csv(sqlite3 *db, const char *nombre_archivo){
+    // Abrir el archivo CSV
+    FILE *file = fopen(nombre_archivo, "r");
+    if (!file) {
+        fprintf(stderr, "No se pudo abrir el archivo CSV\n");
+        return 1;
+    }
+
+    // Descartar la primera línea que contiene los encabezados
+    char line[1024];
+    if (!fgets(line, sizeof(line), file)) {
+        fprintf(stderr, "No se pudo leer la primera línea del archivo CSV\n");
+        fclose(file);
+        return 1;
+    }
+
+    // Preparar la consulta SQL para insertar autores
+    const char *sql = "INSERT INTO Autor (nom_autor) VALUES (?)";
+    sqlite3_stmt *stmt;
+    int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "Error al preparar la consulta SQL: %s\n", sqlite3_errmsg(db));
+        fclose(file);
+        return 1;
+    }
+
+    // Leer y procesar cada línea del archivo CSV
+    char *autor;
+    char *token;
+    const char delimiter[3] = "^p"; // Cambiado el delimitador
+    int count = 0; // Contador de autores insertados
+    while (fgets(line, sizeof(line), file)) {
+        // Verificar si se ha alcanzado el límite de 10 autores
+        if (count >= 10) {
+            break;
+        }
+
+        // Copiar la línea para evitar modificar la original
+        char line_copy[1024];
+        strcpy(line_copy, line);
+
+        // Utilizar strtok para dividir la línea en tokens
+        token = strtok(line_copy, delimiter);
+        // Ignorar las primeras 6 columnas
+        for (int i = 0; i < 6; ++i) {
+            token = strtok(NULL, delimiter);
+        }
+        // Tomar la séptima columna como el nombre del autor
+        autor = token;
+        // Eliminar el carácter de nueva línea al final del autor
+        autor[strcspn(autor, "\n")] = 0;
+
+        // Insertar el autor en la base de datos
+        rc = sqlite3_bind_text(stmt, 1, autor, -1, SQLITE_STATIC);
+        if (rc != SQLITE_OK) {
+            fprintf(stderr, "Error al enlazar el nombre del autor: %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            fclose(file);
+            return 1;
+        }
+
+        rc = sqlite3_step(stmt);
+        if (rc != SQLITE_DONE) {
+            fprintf(stderr, "Error al ejecutar la consulta SQL: %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            fclose(file);
+            return 1;
+        }
+
+        // Incrementar el contador de autores
+        count++;
+
+        // Reiniciar la consulta para el próximo autor
+        sqlite3_reset(stmt);
+    }
+
+    // Finalizar la consulta y cerrar el archivo
+    sqlite3_finalize(stmt);
+    fclose(file);
+
+    return 0;
+}
 int main(int argc, char* argv[]) {
     sqlite3 *db;
     char *zErrMsg = 0;
@@ -162,6 +311,12 @@ int main(int argc, char* argv[]) {
     // if (rc != SQLITE_OK) {
     //     fprintf(stderr, "Error al eliminar datos de la tabla Autor\n");
     // }
+
+    if (cargar_10autores_desde_csv(db, "./ficheros/Libros_Data_Limpia.csv") != 0) {
+        fprintf(stderr, "Error al cargar los autores desde el archivo CSV\n");
+        //sqlite3_close(db);
+        return 1;
+    }
 
     printf("\nLos primeros 10 autores son:\n");
      selectTopAuthors(db);
