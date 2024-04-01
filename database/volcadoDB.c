@@ -5,7 +5,7 @@
 #include "../structs/autor.h"
 #include <time.h>
 
-void errorMsg(char mensaje[]){
+void errorMsg(char mensaje[]) {
     FILE* f;
     time_t rawtime;
     struct tm* timeinfo;
@@ -17,8 +17,8 @@ void errorMsg(char mensaje[]){
 
     // Formatear la fecha y hora
     strftime(timestamp, sizeof(timestamp), "%Y-%m-%d %H:%M:%S", timeinfo);
-    
-    f = fopen("ficheros/db.log", "a"); 
+
+    f = fopen("ficheros/db.log", "a");
 
     //fprintf(f, "%s\n", mensaje);
     fprintf(f, "[%s] %s\n", timestamp, mensaje);
@@ -26,343 +26,383 @@ void errorMsg(char mensaje[]){
     fclose(f);
 }
 
-
-// Función para cargar los autores desde un archivo CSV a una base de datos SQLite
-int cargar_autores_desde_csv(sqlite3 *db, const char *nombre_archivo){
-    // Abrir el archivo CSV
-    FILE *file = fopen(nombre_archivo, "r");
-    if (!file) {
-        errorMsg("No se pudo abrir el archivo CSV\n");
-        fprintf(stderr, "No se pudo abrir el archivo CSV\n");
-        return 1;
-    }
-
-    // Preparar la consulta SQL para insertar autores
-    const char *sql = "INSERT INTO autores (nom_autor) VALUES (?)";
-    sqlite3_stmt *stmt;
-    int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+int insertar_autores_distintos(sqlite3* db) {
+    // Consultar autores distintos de la tabla Datos
+    const char* sql_select_autores = "SELECT DISTINCT Autor FROM Datos;";
+    sqlite3_stmt* stmt;
+    int rc = sqlite3_prepare_v2(db, sql_select_autores, -1, &stmt, 0);
     if (rc != SQLITE_OK) {
-        errorMsg("Error al preparar la consulta SQL\n");
-        fprintf(stderr, "Error al preparar la consulta SQL: %s\n", sqlite3_errmsg(db));
-        fclose(file);
-        return 1;
-    }
-
-    // Leer y procesar cada línea del archivo CSV
-    char line[1024];
-    char *autor;
-    char *token;
-    const char delimiter[2] = ",";
-    while (fgets(line, sizeof(line), file)) {
-        // Utilizar strtok para dividir la línea en tokens
-        token = strtok(line, delimiter);
-        // Ignorar las primeras 6 columnas
-        for (int i = 0; i < 6; ++i) {
-            token = strtok(NULL, delimiter);
-        }
-        // Tomar la séptima columna como el nombre del autor
-        autor = token;
-        // Eliminar el carácter de nueva línea al final del autor
-        autor[strcspn(autor, "\n")] = 0;
-
-        // Insertar el autor en la base de datos
-        rc = sqlite3_bind_text(stmt, 1, autor, -1, SQLITE_STATIC);
-        if (rc != SQLITE_OK) {
-            errorMsg("Error al enlazar el nombre del autor\n");
-            fprintf(stderr, "Error al enlazar el nombre del autor: %s\n", sqlite3_errmsg(db));
-            sqlite3_finalize(stmt);
-            fclose(file);
-            return 1;
-        }
-
-        rc = sqlite3_step(stmt);
-        if (rc != SQLITE_DONE) {
-            errorMsg("Error al ejecutar la consulta SQL\n");
-            fprintf(stderr, "Error al ejecutar la consulta SQL: %s\n", sqlite3_errmsg(db));
-            sqlite3_finalize(stmt);
-            fclose(file);
-            return 1;
-        }
-
-        // Reiniciar la consulta para el próximo autor
-        sqlite3_reset(stmt);
-    }
-
-    // Finalizar la consulta y cerrar el archivo
-    sqlite3_finalize(stmt);
-    fclose(file);
-
-    return 0;
-}
-
-
-void selectTopAuthors(sqlite3 *db) {
-    int rc;
-    sqlite3_stmt *stmt;
-    
-    // Query para seleccionar los primeros 10 autores
-    const char *sql_select_author = "SELECT id_autor, nom_autor FROM Autor LIMIT 10";
-
-    // Preparar la sentencia SQL
-    rc = sqlite3_prepare_v2(db, sql_select_author, -1, &stmt, 0);
-    if (rc != SQLITE_OK) {
-        errorMsg("Error preparando la consulta SQL\n");
         fprintf(stderr, "Error preparando la consulta SQL: %s\n", sqlite3_errmsg(db));
-        return;
+        return 1;
     }
 
-    // Ejecutar la consulta SQL y mostrar los resultados
-    printf("ID_Autor  Nombre_Autor\n");
+    // Insertar autores en la tabla Autor
+    const char* sql_insert_autor = "INSERT INTO Autor (nom_autor) VALUES (?);";
+    rc = sqlite3_exec(db, "BEGIN TRANSACTION", 0, 0, 0);
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "Error al iniciar la transacción: %s\n", sqlite3_errmsg(db));
+        sqlite3_finalize(stmt);
+        return 1;
+    }
+
     while (sqlite3_step(stmt) == SQLITE_ROW) {
-        int id_autor = sqlite3_column_int(stmt, 0);
-        const unsigned char *nombre_autor = sqlite3_column_text(stmt, 1);
-        printf("%-9d %s\n", id_autor, nombre_autor);
-    }
+        const char* autor = (const char*)sqlite3_column_text(stmt, 0);
 
-    // Finalizar la consulta y liberar recursos
-    sqlite3_finalize(stmt);
-}
-#define MAX_LINE_LENGTH 1024
-#define MAX_AUTHORS 30
-
-int insertAuthorsFromCSV(sqlite3 *db) {
-    FILE *csv_file = fopen("ficheros/Libros_Data_Limpia.csv", "r");
-    if (!csv_file) {
-        errorMsg("Error al abrir el archivo CSV\n");
-        fprintf(stderr, "Error al abrir el archivo CSV\n");
-        return -1;
-    }
-
-    char line[MAX_LINE_LENGTH];
-    char *sql_insert_author = "INSERT INTO Autor (nom_autor) VALUES (?)";
-    sqlite3_stmt *stmt_insert_author;
-    int rc = sqlite3_prepare_v2(db, sql_insert_author, -1, &stmt_insert_author, 0);
-    if (rc != SQLITE_OK) {
-        errorMsg("Error preparando la consulta SQL\n");
-        fprintf(stderr, "Error preparando la consulta SQL: %s\n", sqlite3_errmsg(db));
-        return rc;
-    }
-
-    int author_count = 0;
-    while (fgets(line, sizeof(line), csv_file) && author_count < MAX_AUTHORS) {
-        char *author = strtok(line, ",");
-        sqlite3_bind_text(stmt_insert_author, 1, author, -1, SQLITE_STATIC);
-        rc = sqlite3_step(stmt_insert_author);
-        if (rc != SQLITE_DONE) {
-            errorMsg("Error insertando autor\n");
-            fprintf(stderr, "Error insertando autor: %s\n", sqlite3_errmsg(db));
-        } else {
-            printf("Autor insertado correctamente: %s\n", author);
-        }
-        sqlite3_reset(stmt_insert_author);
-        author_count++;
-    }
-
-    fclose(csv_file);
-    sqlite3_finalize(stmt_insert_author);
-    return SQLITE_OK;
-}
-// void insertAuthorsFromCSV(sqlite3 *db, const char *csv_file_path) {
-//     int rc;
-//     FILE *csv_file = fopen(csv_file_path, "r");
-//     if (!csv_file) {
-//         fprintf(stderr, "Error al abrir el archivo CSV\n");
-//         return;
-//     }
-
-//     // Ignorar la primera línea si contiene encabezados
-//     char line[1024];
-//     fgets(line, sizeof(line), csv_file);
-
-//     // Query para insertar autores
-//     const char *sql_insert_author = "INSERT INTO Autor (nom_autor) VALUES (?)";
-
-//     // Preparar la sentencia SQL
-//     sqlite3_stmt *stmt_insert_author;
-//     rc = sqlite3_prepare_v2(db, sql_insert_author, -1, &stmt_insert_author, 0);
-//     if (rc != SQLITE_OK) {
-//         fprintf(stderr, "Error preparando la consulta SQL: %s\n", sqlite3_errmsg(db));
-//         fclose(csv_file);
-//         return;
-//     }
-
-//     // Leer y procesar cada línea del archivo CSV
-//     while (fgets(line, sizeof(line), csv_file)) {
-//         char *autor = strtok(line, ",");
-//         // Insertar autor en la base de datos
-//         sqlite3_bind_text(stmt_insert_author, 1, autor, -1, SQLITE_STATIC);
-//         rc = sqlite3_step(stmt_insert_author);
-//         if (rc != SQLITE_DONE) {
-//             fprintf(stderr, "Error insertando autor: %s\n", sqlite3_errmsg(db));
-//         } else {
-//             fprintf(stderr, "Autor insertado correctamente: %s\n", autor);
-//         }
-//         // Reiniciar la sentencia preparada para el siguiente autor
-//         sqlite3_reset(stmt_insert_author);
-//     }
-
-//     // Liberar recursos
-//     fclose(csv_file);
-//     sqlite3_finalize(stmt_insert_author);
-// }
-
-int deleteAllAuthors(sqlite3 *db) {
-    int rc;
-    char *sql = "DELETE FROM Autor";
-
-    // Preparar la sentencia SQL
-    sqlite3_stmt *stmt;
-    rc = sqlite3_prepare_v2(db, sql, -1, &stmt, 0);
-    if (rc != SQLITE_OK) {
-        errorMsg("Error preparando la consulta SQL\n");
-        fprintf(stderr, "Error preparando la consulta SQL: %s\n", sqlite3_errmsg(db));
-        return rc;
-    }
-
-    // Ejecutar la consulta SQL
-    rc = sqlite3_step(stmt);
-    if (rc != SQLITE_DONE) {
-        errorMsg("Error eliminando datos de la tabla Autor\n");
-        fprintf(stderr, "Error eliminando datos de la tabla Autor: %s\n", sqlite3_errmsg(db));
-    } else {
-        printf("Datos eliminados correctamente de la tabla Autor\n");
-    }
-
-    // Finalizar la consulta y liberar recursos
-    sqlite3_finalize(stmt);
-    return rc;
-}
-
-
-// Función para cargar los autores desde un archivo CSV a una base de datos SQLite
-int cargar_10autores_desde_csv(sqlite3 *db, const char *nombre_archivo){
-    // Abrir el archivo CSV
-    FILE *file = fopen(nombre_archivo, "r");
-    if (!file) {
-        errorMsg("No se pudo abrir el archivo CSV\n");
-        fprintf(stderr, "No se pudo abrir el archivo CSV\n");
-        return 1;
-    }
-
-    // Descartar la primera línea que contiene los encabezados
-    char line[1024];
-    if (!fgets(line, sizeof(line), file)) {
-        errorMsg("No se pudo leer la primera línea del archivo CSV\n");
-        fprintf(stderr, "No se pudo leer la primera línea del archivo CSV\n");
-        fclose(file);
-        return 1;
-    }
-
-    // Preparar la consulta SQL para insertar autores
-    const char *sql = "INSERT INTO Autor (nom_autor) VALUES (?)";
-    sqlite3_stmt *stmt;
-    int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
-    if (rc != SQLITE_OK) {
-        errorMsg("Error al preparar la consulta SQL");
-        fprintf(stderr, "Error al preparar la consulta SQL: %s\n", sqlite3_errmsg(db));
-        fclose(file);
-        return 1;
-    }
-
-    // Leer y procesar cada línea del archivo CSV
-    char *autor;
-    char *token;
-    const char delimiter[3] = "^p"; // Cambiado el delimitador
-    int count = 0; // Contador de autores insertados
-    while (fgets(line, sizeof(line), file)) {
-        // Verificar si se ha alcanzado el límite de 10 autores
-        if (count >= 10) {
-            break;
-        }
-
-        // Copiar la línea para evitar modificar la original
-        char line_copy[1024];
-        strcpy(line_copy, line);
-
-        // Utilizar strtok para dividir la línea en tokens
-        token = strtok(line_copy, delimiter);
-        // Ignorar las primeras 6 columnas
-        for (int i = 0; i < 6; ++i) {
-            token = strtok(NULL, delimiter);
-        }
-        // Tomar la séptima columna como el nombre del autor
-        autor = token;
-        // Eliminar el carácter de nueva línea al final del autor
-        autor[strcspn(autor, "\n")] = 0;
-
-        // Insertar el autor en la base de datos
-        rc = sqlite3_bind_text(stmt, 1, autor, -1, SQLITE_STATIC);
+        sqlite3_stmt* insert_stmt;
+        rc = sqlite3_prepare_v2(db, sql_insert_autor, -1, &insert_stmt, 0);
         if (rc != SQLITE_OK) {
-            errorMsg("Error al enlazar el nombre del autor\n");
-            fprintf(stderr, "Error al enlazar el nombre del autor: %s\n", sqlite3_errmsg(db));
+            fprintf(stderr, "Error preparando la inserción: %s\n", sqlite3_errmsg(db));
             sqlite3_finalize(stmt);
-            fclose(file);
+            sqlite3_exec(db, "ROLLBACK TRANSACTION", 0, 0, 0);
             return 1;
         }
 
-        rc = sqlite3_step(stmt);
+        rc = sqlite3_bind_text(insert_stmt, 1, autor, -1, SQLITE_STATIC);
+        if (rc != SQLITE_OK) {
+            fprintf(stderr, "Error al enlazar parámetro: %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            sqlite3_finalize(insert_stmt);
+            sqlite3_exec(db, "ROLLBACK TRANSACTION", 0, 0, 0);
+            return 1;
+        }
+
+        rc = sqlite3_step(insert_stmt);
         if (rc != SQLITE_DONE) {
-            errorMsg("Error al ejecutar la consulta SQL\n");
-            fprintf(stderr, "Error al ejecutar la consulta SQL: %s\n", sqlite3_errmsg(db));
+            fprintf(stderr, "Error al insertar el autor: %s\n", sqlite3_errmsg(db));
             sqlite3_finalize(stmt);
-            fclose(file);
+            sqlite3_finalize(insert_stmt);
+            sqlite3_exec(db, "ROLLBACK TRANSACTION", 0, 0, 0);
             return 1;
         }
 
-        // Incrementar el contador de autores
-        count++;
-
-        // Reiniciar la consulta para el próximo autor
-        sqlite3_reset(stmt);
+        sqlite3_finalize(insert_stmt);
     }
 
-    // Finalizar la consulta y cerrar el archivo
+    rc = sqlite3_exec(db, "COMMIT TRANSACTION", 0, 0, 0);
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "Error al comprometer la transacción: %s\n", sqlite3_errmsg(db));
+        sqlite3_finalize(stmt);
+        return 1;
+    }
+
     sqlite3_finalize(stmt);
-    fclose(file);
+
+    printf("Autores insertados exitosamente en la tabla Autor.\n");
 
     return 0;
 }
-int main(int argc, char* argv[]) {
-    sqlite3 *db;
-    char *zErrMsg = 0;
-    int rc;
 
-    // Abrir la base de datos
-    rc = sqlite3_open("libreria.db", &db);
-    if(rc) {
-        errorMsg("Error, No se puede abrir la base de datos\n");
-        fprintf(stderr, "No se puede abrir la base de datos: %s\n", sqlite3_errmsg(db));
-        return 0;
-    } else {
-        fprintf(stderr, "Base de datos abierta exitosamente\n");
-    }
-
-    // Insertar autores desde el archivo CSV
-    //insertAuthorsFromCSV(db, "./ficheros/Libros_Data_Limpia.csv");
-    //insertAuthorsFromCSV(db);
-
-    // // Seleccionar y mostrar los primeros 10 autores
-    // printf("\nLos primeros 10 autores son:\n");
-    // selectTopAuthors(db);
-
-    // Borrar todos los datos de la tabla Autor
-     //rc = deleteAllAuthors(db);
-     //if (rc != SQLITE_OK) {
-     //   errorMsg("Error al eliminar datos de la tabla Autor\n");
-     //   fprintf(stderr, "Error al eliminar datos de la tabla Autor\n");
-     //}
-
-    if (cargar_10autores_desde_csv(db, "./ficheros/Libros_Data_Limpia.csv") != 0) {
-        errorMsg("Error al cargar los autores desde el archivo CSV\n");
-        fprintf(stderr, "Error al cargar los autores desde el archivo CSV\n");
-        sqlite3_close(db);
+int insertar_generos_distintos(sqlite3* db) {
+    // Consultar géneros distintos de la tabla Datos
+    const char* sql_select_generos = "SELECT DISTINCT Genero FROM Datos;";
+    sqlite3_stmt* stmt;
+    int rc = sqlite3_prepare_v2(db, sql_select_generos, -1, &stmt, 0);
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "Error preparando la consulta SQL: %s\n", sqlite3_errmsg(db));
         return 1;
     }
 
-    printf("\nLos primeros 10 autores son:\n");
-     selectTopAuthors(db);
+    // Insertar géneros en la tabla Genero
+    const char* sql_insert_genero = "INSERT INTO Genero (nom_genero) VALUES (?);";
+    rc = sqlite3_exec(db, "BEGIN TRANSACTION", 0, 0, 0);
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "Error al iniciar la transacción: %s\n", sqlite3_errmsg(db));
+        sqlite3_finalize(stmt);
+        return 1;
+    }
+
+    while (sqlite3_step(stmt) == SQLITE_ROW) {
+        const char* genero = (const char*)sqlite3_column_text(stmt, 0);
+
+        sqlite3_stmt* insert_stmt;
+        rc = sqlite3_prepare_v2(db, sql_insert_genero, -1, &insert_stmt, 0);
+        if (rc != SQLITE_OK) {
+            fprintf(stderr, "Error preparando la inserción: %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            sqlite3_exec(db, "ROLLBACK TRANSACTION", 0, 0, 0);
+            return 1;
+        }
+
+        rc = sqlite3_bind_text(insert_stmt, 1, genero, -1, SQLITE_STATIC);
+        if (rc != SQLITE_OK) {
+            fprintf(stderr, "Error al enlazar parámetro: %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            sqlite3_finalize(insert_stmt);
+            sqlite3_exec(db, "ROLLBACK TRANSACTION", 0, 0, 0);
+            return 1;
+        }
+
+        rc = sqlite3_step(insert_stmt);
+        if (rc != SQLITE_DONE) {
+            fprintf(stderr, "Error al insertar el género: %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            sqlite3_finalize(insert_stmt);
+            sqlite3_exec(db, "ROLLBACK TRANSACTION", 0, 0, 0);
+            return 1;
+        }
+
+        sqlite3_finalize(insert_stmt);
+    }
+
+    rc = sqlite3_exec(db, "COMMIT TRANSACTION", 0, 0, 0);
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "Error al comprometer la transacción: %s\n", sqlite3_errmsg(db));
+        sqlite3_finalize(stmt);
+        return 1;
+    }
+
+    sqlite3_finalize(stmt);
+
+    printf("Géneros insertados exitosamente en la tabla Genero.\n");
+
+    return 0;
+}
+
+
+int insertar_datos_en_libro(sqlite3* db) {
+    const char* sql_select_datos = "SELECT id_libro, Titulo, Idioma, Autor FROM Datos;";
+    sqlite3_stmt* stmt;
+    int rc = sqlite3_prepare_v2(db, sql_select_datos, -1, &stmt, 0);
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "Error preparando la consulta SQL: %s\n", sqlite3_errmsg(db));
+        return 1;
+    }
+
+    // Preparar la consulta para buscar el ID del autor
+    const char* sql_select_autor_id = "SELECT id_autor FROM Autor WHERE nom_autor = ?;";
+    sqlite3_stmt* stmt_autor_id;
+
+    // Insertar datos en la tabla Libro
+    const char* sql_insert_libro = "INSERT INTO Libro (id_libro, titulo, ruta, id_autor, idioma) VALUES (?, ?, '', ?, ?);";
+    rc = sqlite3_exec(db, "BEGIN TRANSACTION", 0, 0, 0);
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "Error al iniciar la transacción: %s\n", sqlite3_errmsg(db));
+        sqlite3_finalize(stmt);
+        return 1;
+    }
+
+    // Variables para el resultado de la consulta
+    int id_libro;
+    const char* titulo;
+    const char* idioma;
+    const char* autor;
+
+    while (sqlite3_step(stmt) == SQLITE_ROW) {
+        // Obtener los datos de la consulta
+        id_libro = sqlite3_column_int(stmt, 0);
+        titulo = (const char*)sqlite3_column_text(stmt, 1);
+        idioma = (const char*)sqlite3_column_text(stmt, 2);
+        autor = (const char*)sqlite3_column_text(stmt, 3);
+
+        // Preparar la consulta para obtener el ID del autor
+        rc = sqlite3_prepare_v2(db, sql_select_autor_id, -1, &stmt_autor_id, 0);
+        if (rc != SQLITE_OK) {
+            fprintf(stderr, "Error preparando la consulta SQL para obtener el ID del autor: %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            sqlite3_exec(db, "ROLLBACK TRANSACTION", 0, 0, 0);
+            return 1;
+        }
+
+        // Enlazar el nombre del autor como parámetro
+        rc = sqlite3_bind_text(stmt_autor_id, 1, autor, -1, SQLITE_STATIC);
+        if (rc != SQLITE_OK) {
+            fprintf(stderr, "Error al enlazar parámetro: %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            sqlite3_finalize(stmt_autor_id);
+            sqlite3_exec(db, "ROLLBACK TRANSACTION", 0, 0, 0);
+            return 1;
+        }
+
+        // Ejecutar la consulta para obtener el ID del autor
+        rc = sqlite3_step(stmt_autor_id);
+        if (rc != SQLITE_ROW) {
+            fprintf(stderr, "No se encontró el autor en la tabla Autor: %s\n", autor);
+            sqlite3_finalize(stmt);
+            sqlite3_finalize(stmt_autor_id);
+            sqlite3_exec(db, "ROLLBACK TRANSACTION", 0, 0, 0);
+            return 1;
+        }
+
+        // Obtener el ID del autor
+        int id_autor = sqlite3_column_int(stmt_autor_id, 0);
+
+        // Insertar el libro en la tabla Libro
+        sqlite3_stmt* insert_stmt;
+        rc = sqlite3_prepare_v2(db, sql_insert_libro, -1, &insert_stmt, 0);
+        if (rc != SQLITE_OK) {
+            fprintf(stderr, "Error preparando la inserción: %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            sqlite3_finalize(stmt_autor_id);
+            sqlite3_exec(db, "ROLLBACK TRANSACTION", 0, 0, 0);
+            return 1;
+        }
+
+        // Enlazar los parámetros para la inserción
+        rc = sqlite3_bind_int(insert_stmt, 1, id_libro);
+        if (rc != SQLITE_OK) {
+            fprintf(stderr, "Error al enlazar parámetro 'id_libro': %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            sqlite3_finalize(stmt_autor_id);
+            sqlite3_finalize(insert_stmt);
+            sqlite3_exec(db, "ROLLBACK TRANSACTION", 0, 0, 0);
+            return 1;
+        }
+
+        rc = sqlite3_bind_text(insert_stmt, 2, titulo, -1, SQLITE_STATIC);
+        if (rc != SQLITE_OK) {
+            fprintf(stderr, "Error al enlazar parámetro 'titulo': %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            sqlite3_finalize(stmt_autor_id);
+            sqlite3_finalize(insert_stmt);
+            sqlite3_exec(db, "ROLLBACK TRANSACTION", 0, 0, 0);
+            return 1;
+        }
+
+        rc = sqlite3_bind_int(insert_stmt, 3, id_autor);
+        if (rc != SQLITE_OK) {
+            fprintf(stderr, "Error al enlazar parámetro 'id_autor': %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            sqlite3_finalize(stmt_autor_id);
+            sqlite3_finalize(insert_stmt);
+            sqlite3_exec(db, "ROLLBACK TRANSACTION", 0, 0, 0);
+            return 1;
+        }
+
+        rc = sqlite3_bind_text(insert_stmt, 4, idioma, -1, SQLITE_STATIC);
+        if (rc != SQLITE_OK) {
+            fprintf(stderr, "Error al enlazar parámetro 'idioma': %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            sqlite3_finalize(stmt_autor_id);
+            sqlite3_finalize(insert_stmt);
+            sqlite3_exec(db, "ROLLBACK TRANSACTION", 0, 0, 0);
+            return 1;
+        }
+
+        // Ejecutar la inserción
+        rc = sqlite3_step(insert_stmt);
+        if (rc != SQLITE_DONE) {
+            fprintf(stderr, "Error al insertar el libro: %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            sqlite3_finalize(stmt_autor_id);
+            sqlite3_finalize(insert_stmt);
+            sqlite3_exec(db, "ROLLBACK TRANSACTION", 0, 0, 0);
+            return 1;
+        }
+
+        sqlite3_finalize(insert_stmt);
+        sqlite3_finalize(stmt_autor_id);
+    }
+
+    rc = sqlite3_exec(db, "COMMIT TRANSACTION", 0, 0, 0);
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "Error al comprometer la transacción: %s\n", sqlite3_errmsg(db));
+        sqlite3_finalize(stmt);
+        return 1;
+    }
+
+    sqlite3_finalize(stmt);
+
+    printf("Datos insertados exitosamente en la tabla Libro.\n");
+
+    return 0;
+}
+
+int insertar_fecha_publicacion_en_libro(sqlite3* db) {
+    const char* sql_select_datos = "SELECT id_libro, fecha_publicacion FROM Datos;";
+    sqlite3_stmt* stmt;
+    int rc = sqlite3_prepare_v2(db, sql_select_datos, -1, &stmt, 0);
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "Error preparando la consulta SQL: %s\n", sqlite3_errmsg(db));
+        return 1;
+    }
+
+    // Insertar la fecha de publicación en la tabla Libro
+    const char* sql_update_libro = "UPDATE Libro SET fecha_publicacion = ? WHERE id_libro = ?;";
     
-    // Cerrar la base de datos
+    // Variables para el resultado de la consulta
+    int id_libro;
+    const char* fecha_publicacion;
+
+    while (sqlite3_step(stmt) == SQLITE_ROW) {
+        // Obtener los datos de la consulta
+        id_libro = sqlite3_column_int(stmt, 0);
+        fecha_publicacion = (const char*)sqlite3_column_text(stmt, 1);
+
+        // Preparar la consulta de actualización
+        sqlite3_stmt* update_stmt;
+        rc = sqlite3_prepare_v2(db, sql_update_libro, -1, &update_stmt, 0);
+        if (rc != SQLITE_OK) {
+            fprintf(stderr, "Error preparando la consulta de actualización: %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            return 1;
+        }
+
+        // Enlazar los parámetros para la actualización
+        rc = sqlite3_bind_text(update_stmt, 1, fecha_publicacion, -1, SQLITE_STATIC);
+        if (rc != SQLITE_OK) {
+            fprintf(stderr, "Error al enlazar parámetro 'fecha_publicacion': %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            sqlite3_finalize(update_stmt);
+            return 1;
+        }
+
+        rc = sqlite3_bind_int(update_stmt, 2, id_libro);
+        if (rc != SQLITE_OK) {
+            fprintf(stderr, "Error al enlazar parámetro 'id_libro': %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            sqlite3_finalize(update_stmt);
+            return 1;
+        }
+
+        // Ejecutar la actualización
+        rc = sqlite3_step(update_stmt);
+        if (rc != SQLITE_DONE) {
+            fprintf(stderr, "Error al actualizar la fecha de publicación: %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            sqlite3_finalize(update_stmt);
+            return 1;
+        }
+
+        sqlite3_finalize(update_stmt);
+    }
+
+    sqlite3_finalize(stmt);
+
+    printf("Fecha de publicación insertada exitosamente en la tabla Libro.\n");
+
+    return 0;
+}
+
+
+int main() {
+    sqlite3* db;
+    int rc = sqlite3_open("libreria.db", &db);
+    if (rc) {
+        fprintf(stderr, "No se puede abrir la base de datos: %s\n", sqlite3_errmsg(db));
+        return 1;
+    }
+
+    // rc = insertar_autores_distintos(db);
+    // if (rc != 0) {
+    //     fprintf(stderr, "Error al insertar autores en la tabla Autor.\n");
+    // }
+
+    // rc = insertar_generos_distintos(db);
+    // if (rc != 0) {
+    //     fprintf(stderr, "Error al insertar géneros en la tabla Genero.\n");
+    // }
+
+    // rc = insertar_datos_en_libro(db);
+    // if (rc != 0) {
+    //     fprintf(stderr, "Error al insertar datos en la tabla Libro.\n");
+    // }
+
+    rc = insertar_fecha_publicacion_en_libro(db);
+    if (rc != 0) {
+        fprintf(stderr, "Error al insertar fecha de publicación en la tabla Libro.\n");
+    }
+
     sqlite3_close(db);
+
     return 0;
 }

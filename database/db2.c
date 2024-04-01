@@ -1,14 +1,25 @@
 #include <stdio.h>
-#include "sqlite/sqlite3.h"
+#include "../sqlite/sqlite3.h"
 #include <string.h>
+#include <time.h>
 
 void errorMsg(char mensaje[]){
     FILE* f;
+    time_t rawtime;
+    struct tm* timeinfo;
+    char timestamp[80];
 
+    // Obtener la hora actual
+    time(&rawtime);
+    timeinfo = localtime(&rawtime);
 
-    f = fopen("log.txt", "a"); //log.log?
+    // Formatear la fecha y hora
+    strftime(timestamp, sizeof(timestamp), "%Y-%m-%d %H:%M:%S", timeinfo);
+    
+    f = fopen("ficheros/db.log", "a"); 
 
-    fprintf(f, "%s\n", mensaje);
+    //fprintf(f, "%s\n", mensaje);
+    fprintf(f, "[%s] %s\n", timestamp, mensaje);
 
     fclose(f);
 }
@@ -91,10 +102,11 @@ int deleteAllClients(sqlite3 *db) {
     return SQLITE_OK;
 }
 
+
 int insertNewCliente(sqlite3 *db, char name[]) {
     sqlite3_stmt *stmt;
 
-    char sql[] = "insert into Cliente (id_cl, nom_cl, email_cl, contra_cl, fecha_n_cl, es_admin, id_ciudad) values (NULL, ?, NULL, NULL, NULL, 0, NULL)";
+    char sql[] = "INSERT INTO Cliente (nom_cl) VALUES (?)";
     int result = sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL) ;
     if (result != SQLITE_OK) {
         printf("Error preparing statement (INSERT)\n");
@@ -104,7 +116,7 @@ int insertNewCliente(sqlite3 *db, char name[]) {
 
     printf("SQL query prepared (INSERT)\n");
 
-    result = sqlite3_bind_text(stmt, 1, name, strlen(name), SQLITE_STATIC);
+    result = sqlite3_bind_text(stmt, 2, name, strlen(name), SQLITE_STATIC);
     if (result != SQLITE_OK) {
         printf("Error binding parameters\n");
         printf("%s\n", sqlite3_errmsg(db));
@@ -135,59 +147,50 @@ int insertNewCliente(sqlite3 *db, char name[]) {
 int main() {
 
 
-
-
-
-
-
-
     sqlite3 *db;
 
-    int result = sqlite3_open("libreria.sqlite", &db);
-    if (result != SQLITE_OK) {
+    int rc = sqlite3_open("libreria.db", &db);
+    if (rc != SQLITE_OK) {
         printf("Error opening database\n");
-        return result;
+        return rc;
     }
 
     printf("Database opened\n\n") ;
 
     //delete funciona
-    result = deleteAllClients(db);
-    if (result != SQLITE_OK) {
-        printf("Error deleting all clients\n");
-        printf("%s\n", sqlite3_errmsg(db));
-        return result;
-    }
+   // rc = deleteAllClients(db);
+    //if (rc != SQLITE_OK) {
+    //    printf("Error deleting all clients\n");
+    //    printf("%s\n", sqlite3_errmsg(db));
+   //     return rc;
+  //  }
     //al insertar no encuentra la columna id_cl
-    result = insertNewCliente(db, "Josu");
-    if (result != SQLITE_OK) {
+    rc = insertNewCliente(db, "Josu");
+    if (rc != SQLITE_OK) {
         printf("Error inserting new data\n");
         printf("%s\n", sqlite3_errmsg(db));
-        return result;
+        return rc;
     }
 
 
 
 
-    result = showAllClientes(db);
-    if (result != SQLITE_OK) {
+    rc = showAllClientes(db);
+    if (rc != SQLITE_OK) {
         printf("Error getting all clients\n");
         printf("%s\n", sqlite3_errmsg(db));
-        return result;
+        return rc;
     }
 
 
-    result = sqlite3_close(db);
-    if (result != SQLITE_OK) {
+    rc = sqlite3_close(db);
+    if (rc != SQLITE_OK) {
         printf("Error opening database\n");
         printf("%s\n", sqlite3_errmsg(db));
-        return result;
+        return rc;
     }
 
     printf("Database closed\n") ;
-
-    errorMsg("aaa");
-
 
     return 0;
 
