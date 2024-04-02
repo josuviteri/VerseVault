@@ -207,11 +207,11 @@ void iniciarSesion(){ //char usuario, char contraseña
     char password[100];
 
     // Solicitamos al usuario su correo electrónico y contraseña
-    printf("Ingrese su correo electrónico: ");
+    printf("Ingrese su correo electronico: ");
     fgets(email, sizeof(email), stdin);
     email[strcspn(email, "\n")] = '\0'; // Eliminamos el carácter de nueva línea al final
 
-    printf("Ingrese su contraseña: ");
+    printf("Ingrese su contrasena: ");
     fgets(password, sizeof(password), stdin);
     password[strcspn(password, "\n")] = '\0'; // Eliminamos el carácter de nueva línea al final
 
@@ -228,10 +228,10 @@ void iniciarSesion(){ //char usuario, char contraseña
         sqlite3_free(error_message);
     } else {
         if (count > 0) {
-            printf("Inicio de sesión exitoso.\n");
+            printf("Inicio de sesion exitoso.\n");
             imprimirMenu(); // Llamada a imprimirMenu después de iniciar sesión exitosamente
         } else {
-            printf("Correo electrónico o contraseña incorrectos.\n");
+            printf("Correo electronico o contraseña incorrectos.\n");
         }
     }
 
@@ -267,7 +267,7 @@ void registrarCuenta(){
     fgets(nombre, sizeof(nombre), stdin);
     nombre[strcspn(nombre, "\n")] = '\0'; // Eliminamos el carácter de nueva línea al final
 
-    printf("Ingrese su correo electrónico: ");
+    printf("Ingrese su correo electronico: ");
     fgets(email, sizeof(email), stdin);
     email[strcspn(email, "\n")] = '\0'; // Eliminamos el carácter de nueva línea al final
 
@@ -275,7 +275,7 @@ void registrarCuenta(){
     fgets(fecha_nacimiento, sizeof(fecha_nacimiento), stdin);
     fecha_nacimiento[strcspn(fecha_nacimiento, "\n")] = '\0'; // Eliminamos el carácter de nueva línea al final
 
-    printf("Ingrese su contraseña: ");
+    printf("Ingrese su contrasena: ");
     fgets(password, sizeof(password), stdin);
     password[strcspn(password, "\n")] = '\0'; // Eliminamos el carácter de nueva línea al final
 
