@@ -1,6 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "menu.h"
+#include "../sqlite/sqlite3.h"
+
 
 #define NEGRITA "\e[1m" // Renombramos el código de los caracteres en negrita para que sea mas entendible
 #define QUITAR_NEGRITA "\e[m" // Renombramos el codigo de quitar la negrita a los caracteres para que sea mas entendible
@@ -186,7 +189,56 @@ void iniciarSesion(){ //char usuario, char contraseña
     imprimirMenu();
 }
 void registrarCuenta(){
-    //deberia conectarse a la db y registrar los datos 
+     sqlite3 *db;
+    char *error_message = 0;
+    int exit_code;
+
+    // Abrimos la conexión a la base de datos
+    exit_code = sqlite3_open(".\\libreria.db", &db);
+
+    if (exit_code) {
+        fprintf(stderr, "No se pudo abrir la base de datos: %s\n", sqlite3_errmsg(db));
+        sqlite3_close(db);
+        return;
+    }
+
+    // Variables para almacenar los datos del nuevo cliente
+    char nombre[100];
+    char email[100];
+    char fecha_nacimiento[100];
+    int id_ciudad;
+
+    // Solicitamos al usuario los datos para registrar la cuenta
+    printf("Ingrese su nombre: ");
+    fgets(nombre, sizeof(nombre), stdin);
+    nombre[strcspn(nombre, "\n")] = '\0'; // Eliminamos el carácter de nueva línea al final
+
+    printf("Ingrese su correo electronico: ");
+    fgets(email, sizeof(email), stdin);
+    email[strcspn(email, "\n")] = '\0'; // Eliminamos el carácter de nueva línea al final
+
+    printf("Ingrese su fecha de nacimiento (AAAA-MM-DD): ");
+    fgets(fecha_nacimiento, sizeof(fecha_nacimiento), stdin);
+    fecha_nacimiento[strcspn(fecha_nacimiento, "\n")] = '\0'; // Eliminamos el carácter de nueva línea al final
+
+    printf("Ingrese el ID de su ciudad: ");
+    scanf("%d", &id_ciudad);
+    getchar(); // Limpiamos el búfer de entrada después de scanf
+
+    // Sentencia SQL para insertar un nuevo cliente con los datos proporcionados por el usuario
+    char sql[200];
+    sprintf(sql, "INSERT INTO Cliente (nom_cl, email_cl, fecha_n_cl, es_admin, id_ciudad) VALUES ('%s', '%s', '%s', 0, %d);", nombre, email, fecha_nacimiento, id_ciudad);
+
+    exit_code = sqlite3_exec(db, sql, 0, 0, &error_message); // Ejecutamos la sentencia SQL
+
+    if (exit_code != SQLITE_OK) {
+        fprintf(stderr, "Error al insertar datos: %s\n", error_message);
+        sqlite3_free(error_message);
+    } else {
+        printf("Registro de cuenta exitoso.\n");
+    }
+
+    sqlite3_close(db); // Cerramos la conexión a la base de datos
 }
 
 //apartado gestion de contenido de la db
