@@ -181,15 +181,68 @@ void imprimirGestionInvitado(){
   
 }
 
-
+int callback_count(void *data, int argc, char **argv, char **azColName) {
+    int *count = (int*)data;
+    *count = atoi(argv[0]);
+    return 0;
+}
 
 //apartado gestion usuarios
 void iniciarSesion(){ //char usuario, char contraseña
-    //deberia conectarse a la db y hacer una query con los datos
-    imprimirMenu();
-}
-void registrarCuenta(){
      sqlite3 *db;
+    char *error_message = 0;
+    int exit_code;
+
+    // Abrimos la conexión a la base de datos
+    exit_code = sqlite3_open(".\\libreria.db", &db);
+
+    if (exit_code) {
+        fprintf(stderr, "No se pudo abrir la base de datos: %s\n", sqlite3_errmsg(db));
+        sqlite3_close(db);
+        return;
+    }
+
+    // Variable para almacenar el email y contraseña ingresados por el usuario
+    char email[100];
+    char password[100];
+
+    // Solicitamos al usuario su correo electrónico y contraseña
+    printf("Ingrese su correo electrónico: ");
+    fgets(email, sizeof(email), stdin);
+    email[strcspn(email, "\n")] = '\0'; // Eliminamos el carácter de nueva línea al final
+
+    printf("Ingrese su contraseña: ");
+    fgets(password, sizeof(password), stdin);
+    password[strcspn(password, "\n")] = '\0'; // Eliminamos el carácter de nueva línea al final
+
+    // Sentencia SQL para verificar las credenciales de inicio de sesión
+    char sql[200];
+    sprintf(sql, "SELECT COUNT(*) FROM Cliente WHERE email_cl = '%s' AND pass_cl = '%s';", email, password);
+
+    // Ejecutamos la sentencia SQL
+    int count;
+    exit_code = sqlite3_exec(db, sql, callback_count, &count, &error_message);
+
+    if (exit_code != SQLITE_OK) {
+        fprintf(stderr, "Error al ejecutar la consulta: %s\n", error_message);
+        sqlite3_free(error_message);
+    } else {
+        if (count > 0) {
+            printf("Inicio de sesión exitoso.\n");
+            imprimirMenu(); // Llamada a imprimirMenu después de iniciar sesión exitosamente
+        } else {
+            printf("Correo electrónico o contraseña incorrectos.\n");
+        }
+    }
+
+    sqlite3_close(db); // Cerramos la conexión a la base de datos
+}
+
+
+
+
+void registrarCuenta(){
+    sqlite3 *db;
     char *error_message = 0;
     int exit_code;
 
@@ -206,6 +259,7 @@ void registrarCuenta(){
     char nombre[100];
     char email[100];
     char fecha_nacimiento[100];
+    char password[100];
     int id_ciudad;
 
     // Solicitamos al usuario los datos para registrar la cuenta
@@ -213,7 +267,7 @@ void registrarCuenta(){
     fgets(nombre, sizeof(nombre), stdin);
     nombre[strcspn(nombre, "\n")] = '\0'; // Eliminamos el carácter de nueva línea al final
 
-    printf("Ingrese su correo electronico: ");
+    printf("Ingrese su correo electrónico: ");
     fgets(email, sizeof(email), stdin);
     email[strcspn(email, "\n")] = '\0'; // Eliminamos el carácter de nueva línea al final
 
@@ -221,13 +275,17 @@ void registrarCuenta(){
     fgets(fecha_nacimiento, sizeof(fecha_nacimiento), stdin);
     fecha_nacimiento[strcspn(fecha_nacimiento, "\n")] = '\0'; // Eliminamos el carácter de nueva línea al final
 
+    printf("Ingrese su contraseña: ");
+    fgets(password, sizeof(password), stdin);
+    password[strcspn(password, "\n")] = '\0'; // Eliminamos el carácter de nueva línea al final
+
     printf("Ingrese el ID de su ciudad: ");
     scanf("%d", &id_ciudad);
     getchar(); // Limpiamos el búfer de entrada después de scanf
 
     // Sentencia SQL para insertar un nuevo cliente con los datos proporcionados por el usuario
     char sql[200];
-    sprintf(sql, "INSERT INTO Cliente (nom_cl, email_cl, fecha_n_cl, es_admin, id_ciudad) VALUES ('%s', '%s', '%s', 0, %d);", nombre, email, fecha_nacimiento, id_ciudad);
+    sprintf(sql, "INSERT INTO Cliente (nom_cl, email_cl, fecha_n_cl, pass_cl, es_admin, id_ciudad) VALUES ('%s', '%s', '%s', '%s', 0, %d);", nombre, email, fecha_nacimiento, password, id_ciudad);
 
     exit_code = sqlite3_exec(db, sql, 0, 0, &error_message); // Ejecutamos la sentencia SQL
 
