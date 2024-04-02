@@ -3,6 +3,7 @@
 #include <string.h>
 #include "menu.h"
 #include "../sqlite/sqlite3.h"
+#include "../database/db2.c"
 
 
 #define NEGRITA "\e[1m" // Renombramos el código de los caracteres en negrita para que sea mas entendible
@@ -24,11 +25,10 @@ void imprimirInicial(){
         sscanf(input, " %c", &sel); 
 
         if(sel == '1'){
-            
-            iniciarSesion();
+            iniciarSesionMenu("email@email.com","pass123");
 
         }else if(sel == '2'){
-            registrarCuenta();
+            registrarCuenta("nombre","email@email.com","pass123");
 
         }else if(sel == '3'){
             imprimirMenuInvitado();
@@ -181,122 +181,61 @@ void imprimirGestionInvitado(){
   
 }
 
-int callback_count(void *data, int argc, char **argv, char **azColName) {
-    int *count = (int*)data;
-    *count = atoi(argv[0]);
-    return 0;
-}
+
 
 //apartado gestion usuarios
-void iniciarSesion(){ //char usuario, char contraseña
-     sqlite3 *db;
-    char *error_message = 0;
-    int exit_code;
-
-    // Abrimos la conexión a la base de datos
-    exit_code = sqlite3_open(".\\libreria.db", &db);
-
-    if (exit_code) {
-        fprintf(stderr, "No se pudo abrir la base de datos: %s\n", sqlite3_errmsg(db));
-        sqlite3_close(db);
+void iniciarSesionMenu(char email_cl[], char pass_cl[]){
+    sqlite3 *db;
+    int rc = sqlite3_open("libreria.db", &db);
+    if (rc != SQLITE_OK) {
+        errorMsg("Error opening database\n");
+        printf("Error opening database\n");
         return;
     }
 
-    // Variable para almacenar el email y contraseña ingresados por el usuario
-    char email[100];
-    char password[100];
-
-    // Solicitamos al usuario su correo electrónico y contraseña
-    printf("Ingrese su correo electronico: ");
-    fgets(email, sizeof(email), stdin);
-    email[strcspn(email, "\n")] = '\0'; // Eliminamos el carácter de nueva línea al final
-
-    printf("Ingrese su contrasena: ");
-    fgets(password, sizeof(password), stdin);
-    password[strcspn(password, "\n")] = '\0'; // Eliminamos el carácter de nueva línea al final
-
-    // Sentencia SQL para verificar las credenciales de inicio de sesión
-    char sql[200];
-    sprintf(sql, "SELECT COUNT(*) FROM Cliente WHERE email_cl = '%s' AND pass_cl = '%s';", email, password);
-
-    // Ejecutamos la sentencia SQL
-    int count;
-    exit_code = sqlite3_exec(db, sql, callback_count, &count, &error_message);
-
-    if (exit_code != SQLITE_OK) {
-        fprintf(stderr, "Error al ejecutar la consulta: %s\n", error_message);
-        sqlite3_free(error_message);
+    char *nombre_cliente = iniciarSesion(db, email_cl, pass_cl);
+    if (nombre_cliente != NULL) {
+        printf("Inicio de sesión exitoso. Bienvenido, %s\n", nombre_cliente);
+        imprimirMenu();
+        free(nombre_cliente); // Liberar la memoria asignada
     } else {
-        if (count > 0) {
-            printf("Inicio de sesion exitoso.\n");
-            imprimirMenu(); // Llamada a imprimirMenu después de iniciar sesión exitosamente
-        } else {
-            printf("Correo electronico o contraseña incorrectos.\n");
-        }
+        printf("Inicio de sesión fallido. Verifica tus credenciales.\n");
     }
 
-    sqlite3_close(db); // Cerramos la conexión a la base de datos
+    rc = sqlite3_close(db);
+    if (rc != SQLITE_OK) {
+        printf("Error opening database\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return;
+    }
 }
 
 
 
 
-void registrarCuenta(){
+void registrarClienteMenu(char nom_cl[], char email_cl[], char pass_cl[]){
     sqlite3 *db;
-    char *error_message = 0;
-    int exit_code;
-
-    // Abrimos la conexión a la base de datos
-    exit_code = sqlite3_open(".\\libreria.db", &db);
-
-    if (exit_code) {
-        fprintf(stderr, "No se pudo abrir la base de datos: %s\n", sqlite3_errmsg(db));
-        sqlite3_close(db);
+    int rc = sqlite3_open("libreria.db", &db);
+    if (rc != SQLITE_OK) {
+        errorMsg("Error opening database\n");
+        printf("Error opening database\n");
         return;
     }
 
-    // Variables para almacenar los datos del nuevo cliente
-    char nombre[100];
-    char email[100];
-    char fecha_nacimiento[100];
-    char password[100];
-    int id_ciudad;
-
-    // Solicitamos al usuario los datos para registrar la cuenta
-    printf("Ingrese su nombre: ");
-    fgets(nombre, sizeof(nombre), stdin);
-    nombre[strcspn(nombre, "\n")] = '\0'; // Eliminamos el carácter de nueva línea al final
-
-    printf("Ingrese su correo electronico: ");
-    fgets(email, sizeof(email), stdin);
-    email[strcspn(email, "\n")] = '\0'; // Eliminamos el carácter de nueva línea al final
-
-    printf("Ingrese su fecha de nacimiento (AAAA-MM-DD): ");
-    fgets(fecha_nacimiento, sizeof(fecha_nacimiento), stdin);
-    fecha_nacimiento[strcspn(fecha_nacimiento, "\n")] = '\0'; // Eliminamos el carácter de nueva línea al final
-
-    printf("Ingrese su contrasena: ");
-    fgets(password, sizeof(password), stdin);
-    password[strcspn(password, "\n")] = '\0'; // Eliminamos el carácter de nueva línea al final
-
-    printf("Ingrese el ID de su ciudad: ");
-    scanf("%d", &id_ciudad);
-    getchar(); // Limpiamos el búfer de entrada después de scanf
-
-    // Sentencia SQL para insertar un nuevo cliente con los datos proporcionados por el usuario
-    char sql[200];
-    sprintf(sql, "INSERT INTO Cliente (nom_cl, email_cl, fecha_n_cl, pass_cl, es_admin, id_ciudad) VALUES ('%s', '%s', '%s', '%s', 0, %d);", nombre, email, fecha_nacimiento, password, id_ciudad);
-
-    exit_code = sqlite3_exec(db, sql, 0, 0, &error_message); // Ejecutamos la sentencia SQL
-
-    if (exit_code != SQLITE_OK) {
-        fprintf(stderr, "Error al insertar datos: %s\n", error_message);
-        sqlite3_free(error_message);
+    rc = registrarCliente(db, nom_cl, email_cl, pass_cl);
+    if (rc != SQLITE_OK) {
+        printf("Error inserting new data\n");
+        printf("%s\n", sqlite3_errmsg(db));
     } else {
-        printf("Registro de cuenta exitoso.\n");
+        printf("Cliente registrado exitosamente\n");
     }
 
-    sqlite3_close(db); // Cerramos la conexión a la base de datos
+    rc = sqlite3_close(db);
+    if (rc != SQLITE_OK) {
+        printf("Error closing database\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return;
+    }
 }
 
 //apartado gestion de contenido de la db
