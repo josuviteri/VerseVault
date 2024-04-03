@@ -15,8 +15,8 @@ void imprimirMenuInvitado();
 void imprimirGestion();
 void imprimirGestionInvitado();
 //apartado gestion usuarios
-void iniciarSesion();
-void registrarCuenta();
+void iniciarSesionMenu(char email_cl[], char pass_cl[]);
+void registrarClienteMenu(char nom_cl[], char email_cl[], char pass_cl[]);
 
 //apartado gestion de contenido
 void agregarLibro();
