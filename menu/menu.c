@@ -12,6 +12,9 @@
 
 void imprimirInicial(){
     char input[10];
+    char nombre[31];
+    char email[101];
+    char pass[31];
     char sel;
 
     printf("\nProyecto Programacion IV | Grupo PVI-04\n\n");
@@ -25,15 +28,31 @@ void imprimirInicial(){
         sscanf(input, " %c", &sel); 
 
         if(sel == '1'){
-            iniciarSesionMenu("email@email.com","pass123");
+            printf("\nIntroduce tus datos para iniciar sesion:\nIntroduce tu correo electronico:\n");
+            fgets(email, sizeof(email), stdin);
+
+            printf("\nIntroduce tu contrasenya:\n");
+            fgets(pass, sizeof(pass), stdin);
+
+            iniciarSesionMenu(email,pass);
 
         }else if(sel == '2'){
-            registrarCuenta("nombre","email@email.com","pass123");
+            printf("\nIntroduce tus datos para registrarte:\nIntroduce tu nombre:\n(30 caracteres como maximo)\n");
+            fgets(nombre, sizeof(nombre), stdin);
+
+            printf("\nIntroduce tu correo electronico:\n");
+            fgets(email, sizeof(email), stdin);
+
+            printf("\nIntroduce tu contrasenya:\n(30 caracteres como maximo)\n");
+            fgets(pass, sizeof(pass), stdin);
+
+
+            registrarClienteMenu(nombre,email,pass);
 
         }else if(sel == '3'){
             imprimirMenuInvitado();
         }else if(sel == '4'){
-            printf("\ncerrando...");
+            printf("\ncerrando...\n");
         }else{
             printf("\nIntroduce un valor valido\n\n");
     }
@@ -45,7 +64,7 @@ void imprimirMenu(){
     char input[10];
     char sel;
 
-    printf(NEGRITA"Menu Principal\nUsuario: \n\n" QUITAR_NEGRITA);
+    printf(NEGRITA"Menu Principal\n\n" QUITAR_NEGRITA);
 
 
     do{
@@ -195,11 +214,11 @@ void iniciarSesionMenu(char email_cl[], char pass_cl[]){
 
     char *nombre_cliente = iniciarSesion(db, email_cl, pass_cl);
     if (nombre_cliente != NULL) {
-        printf("Inicio de sesión exitoso. Bienvenido, %s\n", nombre_cliente);
+        printf("Inicio de sesion exitoso. Bienvenido, %s\n", nombre_cliente);
         imprimirMenu();
         free(nombre_cliente); // Liberar la memoria asignada
     } else {
-        printf("Inicio de sesión fallido. Verifica tus credenciales.\n");
+        printf("Inicio de sesion fallido. Verifica tus credenciales.\n");
     }
 
     rc = sqlite3_close(db);
