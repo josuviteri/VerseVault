@@ -40,6 +40,12 @@ void procesar_csv(const char* csvPath, sqlite3* db) {
     if (fgets(buffer, MAX_BUFFER_SIZE, csvFile) != NULL) {
         // Leer y procesar el resto del archivo línea por línea
         while (fgets(buffer, MAX_BUFFER_SIZE, csvFile) != NULL) {
+            // Eliminar los saltos de línea al final de la línea
+            size_t len = strlen(buffer);
+            if (len > 0 && buffer[len - 1] == '\n') {
+                buffer[len - 1] = '\0';
+            }
+
             // Tokenizar la línea por el delimitador '^p'
             char* id_libro = strtok(buffer, "@");
             char* Tipo = strtok(NULL, "@");
@@ -66,6 +72,7 @@ void procesar_csv(const char* csvPath, sqlite3* db) {
     // Cerrar el archivo CSV
     fclose(csvFile);
 }
+
 
 int limpiar_tabla(sqlite3* db) {
     char* errMsg = 0;
