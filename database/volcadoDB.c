@@ -92,6 +92,20 @@ int insertar_autores_distintos(sqlite3* db) {
     return 0;
 }
 
+int limpiar_tabla_Autor(sqlite3* db) {
+    char* errMsg = 0;
+    int rc = sqlite3_exec(db, "DELETE FROM Autor;", 0, 0, &errMsg);
+    if (rc != SQLITE_OK) {
+        errorMsg("Error al limpiar la tabla.");
+        fprintf(stderr, "Error al eliminar SQL: %s\n", errMsg);
+        sqlite3_free(errMsg);
+        return 1;
+    }
+
+    printf("Tabla limpia exitosamente.\n");
+    return 0;
+}
+
 int insertar_generos_distintos(sqlite3* db) {
     // Consultar géneros distintos de la tabla Datos
     const char* sql_select_generos = "SELECT DISTINCT Genero FROM Datos;";
@@ -397,10 +411,16 @@ int main() {
     //     fprintf(stderr, "Error al insertar datos en la tabla Libro.\n");
     // }
 
-    rc = insertar_fecha_publicacion_en_libro(db);
-    if (rc != 0) {
-        fprintf(stderr, "Error al insertar fecha de publicación en la tabla Libro.\n");
-    }
+    // rc = insertar_fecha_publicacion_en_libro(db);
+    // if (rc != 0) {
+    //     fprintf(stderr, "Error al insertar fecha de publicación en la tabla Libro.\n");
+    // }
+
+    
+    // rc = limpiar_tabla_Autor(db);
+    // if (rc != 0) {
+    //     fprintf(stderr, "Error al insertar géneros en la tabla Genero.\n");
+    // }
 
     sqlite3_close(db);
 
