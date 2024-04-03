@@ -2,6 +2,7 @@
 #include "../sqlite/sqlite3.h"
 #include <string.h>
 #include <time.h>
+#include <stdlib.h>
 
 void errorMsg(char mensaje[]){
     FILE* f;
@@ -18,20 +19,20 @@ void errorMsg(char mensaje[]){
     
     f = fopen("ficheros/db.log", "a"); 
 
-    //fprintf(f, "%s\n", mensaje);
     fprintf(f, "[%s] %s\n", timestamp, mensaje);
 
     fclose(f);
 }
 
-
+//funciona
 int showAllClientes(sqlite3 *db) {
     sqlite3_stmt *stmt;
 
-    char sql[] = "select id_cl, nom_cl from Cliente";
+    char sql[] = "SELECT nom_cl, email_cl FROM Cliente";
 
-    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
     if (result != SQLITE_OK) {
+        errorMsg("Error preparing statement (SELECT)\n");
         printf("Error preparing statement (SELECT)\n");
         printf("%s\n", sqlite3_errmsg(db));
         return result;
@@ -39,26 +40,22 @@ int showAllClientes(sqlite3 *db) {
 
     printf("SQL query prepared (SELECT)\n");
 
-    int id;
     char name[100];
+    char email[100];
 
-    printf("\n");
     printf("\n");
     printf("Showing clients:\n");
-    do {
-        result = sqlite3_step(stmt) ;
-        if (result == SQLITE_ROW) {
-            id = sqlite3_column_int(stmt, 0);
-            strcpy(name, (char *) sqlite3_column_text(stmt, 1));
-            printf("ID: %d Name: %s\n", id, name);
-        }
-    } while (result == SQLITE_ROW);
+    while ((result = sqlite3_step(stmt)) == SQLITE_ROW) {
+        strcpy(name, (char *)sqlite3_column_text(stmt, 0));
+        strcpy(email, (char *)sqlite3_column_text(stmt, 1));
+        printf("Name: %s Email: %s\n", name, email);
+    }
 
-    printf("\n");
     printf("\n");
 
     result = sqlite3_finalize(stmt);
     if (result != SQLITE_OK) {
+        errorMsg("Error finalizing statement (SELECT)\n");
         printf("Error finalizing statement (SELECT)\n");
         printf("%s\n", sqlite3_errmsg(db));
         return result;
@@ -69,6 +66,10 @@ int showAllClientes(sqlite3 *db) {
     return SQLITE_OK;
 }
 
+
+
+
+//funciona
 int deleteAllClients(sqlite3 *db) {
     sqlite3_stmt *stmt;
 
@@ -76,6 +77,7 @@ int deleteAllClients(sqlite3 *db) {
 
     int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
     if (result != SQLITE_OK) {
+        errorMsg("Error preparing statement (DELETE)\n");
         printf("Error preparing statement (DELETE)\n");
         printf("%s\n", sqlite3_errmsg(db));
         return result;
@@ -85,6 +87,7 @@ int deleteAllClients(sqlite3 *db) {
 
     result = sqlite3_step(stmt);
     if (result != SQLITE_DONE) {
+        errorMsg("Error deleting data\n");
         printf("Error deleting data\n");
         printf("%s\n", sqlite3_errmsg(db));
         return result;
@@ -92,6 +95,7 @@ int deleteAllClients(sqlite3 *db) {
 
     result = sqlite3_finalize(stmt);
     if (result != SQLITE_OK) {
+        errorMsg("Error finalizing statement (DELETE)\n");
         printf("Error finalizing statement (DELETE)\n");
         printf("%s\n", sqlite3_errmsg(db));
         return result;
@@ -103,12 +107,15 @@ int deleteAllClients(sqlite3 *db) {
 }
 
 
-int insertNewCliente(sqlite3 *db, char name[]) {
+
+//funciona
+int registrarCliente(sqlite3 *db,char nom_cl[] , char email_cl[], char pass_cl[]) {
     sqlite3_stmt *stmt;
 
-    char sql[] = "INSERT INTO Cliente (nom_cl) VALUES (?)";
+    char sql[] = "INSERT INTO Cliente (nom_cl, email_cl, pass_cl) VALUES (?,?,?)";
     int result = sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL) ;
     if (result != SQLITE_OK) {
+        errorMsg("Error preparing statement (INSERT)\n");
         printf("Error preparing statement (INSERT)\n");
         printf("%s\n", sqlite3_errmsg(db));
         return result;
@@ -116,21 +123,40 @@ int insertNewCliente(sqlite3 *db, char name[]) {
 
     printf("SQL query prepared (INSERT)\n");
 
-    result = sqlite3_bind_text(stmt, 2, name, strlen(name), SQLITE_STATIC);
+   result = sqlite3_bind_text(stmt, 1, nom_cl, strlen(nom_cl), SQLITE_STATIC);
     if (result != SQLITE_OK) {
-        printf("Error binding parameters\n");
+        errorMsg("Error binding id_cl parameter\n");
+        printf("Error binding id_cl parameter\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return result;
+    }
+
+    result = sqlite3_bind_text(stmt, 2, email_cl, strlen(email_cl), SQLITE_STATIC);
+    if (result != SQLITE_OK) {
+        errorMsg("Error binding email_cl parameter\n");
+        printf("Error binding email_cl parameter\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return result;
+    }
+
+    result = sqlite3_bind_text(stmt, 3, pass_cl, strlen(pass_cl), SQLITE_STATIC);
+    if (result != SQLITE_OK) {
+        errorMsg("Error binding pass_cl parameter\n");
+        printf("Error binding pass_cl parameter\n");
         printf("%s\n", sqlite3_errmsg(db));
         return result;
     }
 
     result = sqlite3_step(stmt);
     if (result != SQLITE_DONE) {
+        errorMsg("Error inserting new data into CLIENTE table\n");
         printf("Error inserting new data into CLIENTE table\n");
         return result;
     }
 
     result = sqlite3_finalize(stmt);
     if (result != SQLITE_OK) {
+        errorMsg("Error finalizing statement (INSERT)\n");
         printf("Error finalizing statement (INSERT)\n");
         printf("%s\n", sqlite3_errmsg(db));
         return result;
@@ -143,56 +169,115 @@ int insertNewCliente(sqlite3 *db, char name[]) {
 
 
 
-
-int main() {
-
-
-    sqlite3 *db;
-
-    int rc = sqlite3_open("libreria.db", &db);
-    if (rc != SQLITE_OK) {
-        printf("Error opening database\n");
-        return rc;
-    }
-
-    printf("Database opened\n\n") ;
-
-    //delete funciona
-   // rc = deleteAllClients(db);
-    //if (rc != SQLITE_OK) {
-    //    printf("Error deleting all clients\n");
-    //    printf("%s\n", sqlite3_errmsg(db));
-   //     return rc;
-  //  }
-    //al insertar no encuentra la columna id_cl
-    rc = insertNewCliente(db, "Josu");
-    if (rc != SQLITE_OK) {
-        printf("Error inserting new data\n");
+char* iniciarSesion(sqlite3 *db, char email_cl[], char pass_cl[]) {
+    sqlite3_stmt *stmt;
+    char sql[] = "SELECT nom_cl FROM Cliente WHERE email_cl = ? AND pass_cl = ?";
+    
+    // Preparar la consulta SQL
+    int result = sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL);
+    if (result != SQLITE_OK) {
+        printf("Error preparing statement (SELECT)\n");
         printf("%s\n", sqlite3_errmsg(db));
-        return rc;
+        return NULL;
     }
 
-
-
-
-    rc = showAllClientes(db);
-    if (rc != SQLITE_OK) {
-        printf("Error getting all clients\n");
+    // Enlazar los parámetros de la consulta SQL
+    result = sqlite3_bind_text(stmt, 1, email_cl, strlen(email_cl), SQLITE_STATIC);
+    if (result != SQLITE_OK) {
+        printf("Error binding email_cl parameter\n");
         printf("%s\n", sqlite3_errmsg(db));
-        return rc;
+        sqlite3_finalize(stmt);
+        return NULL;
     }
 
-
-    rc = sqlite3_close(db);
-    if (rc != SQLITE_OK) {
-        printf("Error opening database\n");
+    result = sqlite3_bind_text(stmt, 2, pass_cl, strlen(pass_cl), SQLITE_STATIC);
+    if (result != SQLITE_OK) {
+        printf("Error binding pass_cl parameter\n");
         printf("%s\n", sqlite3_errmsg(db));
-        return rc;
+        sqlite3_finalize(stmt);
+        return NULL;
     }
 
-    printf("Database closed\n") ;
-
-    return 0;
-
-
+    // Ejecutar la consulta
+    result = sqlite3_step(stmt);
+    if (result == SQLITE_ROW) {
+        // Si se encontraron resultados, devolver el nombre del cliente
+        const unsigned char *nombre = sqlite3_column_text(stmt, 0);
+        char *nombre_cliente = strdup((const char*)nombre);
+        sqlite3_finalize(stmt);
+        return nombre_cliente;
+    } else {
+        // Si no se encontraron resultados, las credenciales son incorrectas
+        printf("Credenciales incorrectas\n");
+        sqlite3_finalize(stmt);
+        return NULL;
+    }
 }
+
+
+
+//int main() {
+
+
+   // sqlite3 *db;
+
+   // int rc = sqlite3_open("libreria.db", &db);
+   // if (rc != SQLITE_OK) {
+   //     errorMsg("Error opening database\n");
+   //     printf("Error opening database\n");
+  //      return rc;
+   // }
+
+  //  printf("Database opened\n\n") ;
+
+  //  char nombre[] = "Josu";
+  //  char email[] = "j@email.com";
+  //  char pass[] = "contraseña123";
+
+
+   // rc = registrarCliente(db, nombre, email, pass);
+ //   if (rc != SQLITE_OK) {
+ //       printf("Error inserting new data\n");
+ //       printf("%s\n", sqlite3_errmsg(db));
+ //       return rc;
+ //   }
+
+  //  char *nombre_func = iniciarSesion(db, email, pass); 
+  //  if (nombre_func != NULL) {
+  //      printf("Inicio de sesion exitoso. Bienvenido, %s\n", nombre_func);
+ //      free(nombre_func); // Liberar la memoria asignada
+  //  } else {
+  //      printf("Inicio de sesión fallido. Verifica tus credenciales.\n");
+  //  }
+
+
+ //   rc = showAllClientes(db);
+ //   if (rc != SQLITE_OK) {
+ //       printf("Error getting all clients\n");
+ //       printf("%s\n", sqlite3_errmsg(db));
+ //      return rc;
+ //   }
+
+
+ //   rc = deleteAllClients(db);
+ //   if (rc != SQLITE_OK) {
+//        printf("Error deleting all clients\n");
+ //       printf("%s\n", sqlite3_errmsg(db));
+ //       return rc;
+  //  }
+
+
+
+   // rc = sqlite3_close(db);
+ //   if (rc != SQLITE_OK) {
+ //       printf("Error opening database\n");
+ //       printf("%s\n", sqlite3_errmsg(db));
+ //       return rc;
+ //   }
+
+   // printf("Database closed\n") ;
+
+  //  return 0;
+
+
+//}
