@@ -109,11 +109,54 @@ int deleteAllClients(sqlite3 *db) {
 
 
 //funciona
-int registrarCliente(sqlite3 *db,char nom_cl[] , char email_cl[], char pass_cl[]) {
+int registrarCliente(sqlite3 *db, char nom_cl[], char email_cl[], char pass_cl[]) {
     sqlite3_stmt *stmt;
 
+    // Verificar si el correo electrónico ya existe en la base de datos
+    char query[] = "SELECT COUNT(*) FROM Cliente WHERE email_cl = ?";
+    int result = sqlite3_prepare_v2(db, query, strlen(query) + 1, &stmt, NULL);
+    if (result != SQLITE_OK) {
+        errorMsg("Error preparing statement (SELECT)\n");
+        printf("Error preparing statement (SELECT)\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return result;
+    }
+
+    result = sqlite3_bind_text(stmt, 1, email_cl, strlen(email_cl), SQLITE_STATIC);
+    if (result != SQLITE_OK) {
+        errorMsg("Error binding email_cl parameter\n");
+        printf("Error binding email_cl parameter\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return result;
+    }
+
+    result = sqlite3_step(stmt);
+    if (result == SQLITE_ROW) {
+        int count = sqlite3_column_int(stmt, 0);
+        if (count > 0) {
+            // El correo electrónico ya existe, no se puede registrar
+            printf("Esta direccion de correo electronico ya esta registrada en el sistema\n");
+            return SQLITE_ERROR;
+        }
+    } else {
+        errorMsg("Error fetching data\n");
+        printf("Error fetching data\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return result;
+    }
+
+    // Liberar la consulta SELECT
+    result = sqlite3_finalize(stmt);
+    if (result != SQLITE_OK) {
+        errorMsg("Error finalizing statement (SELECT)\n");
+        printf("Error finalizing statement (SELECT)\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return result;
+    }
+
+    // Si el correo electrónico no existe, proceder con la inserción
     char sql[] = "INSERT INTO Cliente (nom_cl, email_cl, pass_cl) VALUES (?,?,?)";
-    int result = sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL) ;
+    result = sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL);
     if (result != SQLITE_OK) {
         errorMsg("Error preparing statement (INSERT)\n");
         printf("Error preparing statement (INSERT)\n");
@@ -123,10 +166,10 @@ int registrarCliente(sqlite3 *db,char nom_cl[] , char email_cl[], char pass_cl[]
 
     printf("SQL query prepared (INSERT)\n");
 
-   result = sqlite3_bind_text(stmt, 1, nom_cl, strlen(nom_cl), SQLITE_STATIC);
+    result = sqlite3_bind_text(stmt, 1, nom_cl, strlen(nom_cl), SQLITE_STATIC);
     if (result != SQLITE_OK) {
-        errorMsg("Error binding id_cl parameter\n");
-        printf("Error binding id_cl parameter\n");
+        errorMsg("Error binding nom_cl parameter\n");
+        printf("Error binding nom_cl parameter\n");
         printf("%s\n", sqlite3_errmsg(db));
         return result;
     }
@@ -166,6 +209,7 @@ int registrarCliente(sqlite3 *db,char nom_cl[] , char email_cl[], char pass_cl[]
 
     return SQLITE_OK;
 }
+
 
 
 
@@ -216,31 +260,32 @@ char* iniciarSesion(sqlite3 *db, char email_cl[], char pass_cl[]) {
 
 
 
-//int main() {
+
+int main() {
 
 
-   // sqlite3 *db;
+    sqlite3 *db;
 
-   // int rc = sqlite3_open("libreria.db", &db);
-   // if (rc != SQLITE_OK) {
-   //     errorMsg("Error opening database\n");
-   //     printf("Error opening database\n");
-  //      return rc;
-   // }
+    int rc = sqlite3_open("libreria.db", &db);
+    if (rc != SQLITE_OK) {
+        errorMsg("Error opening database\n");
+        printf("Error opening database\n");
+        return rc;
+    }
 
-  //  printf("Database opened\n\n") ;
+    printf("Database opened\n\n") ;
 
-  //  char nombre[] = "Josu";
-  //  char email[] = "j@email.com";
-  //  char pass[] = "contraseña123";
+    char nombre[] = "Josu";
+    char email[] = "j@email.com";
+    char pass[] = "contraseña123";
 
 
-   // rc = registrarCliente(db, nombre, email, pass);
- //   if (rc != SQLITE_OK) {
- //       printf("Error inserting new data\n");
- //       printf("%s\n", sqlite3_errmsg(db));
- //       return rc;
- //   }
+    rc = registrarCliente(db, nombre, email, pass);
+    if (rc != SQLITE_OK) {
+        printf("Error inserting new data\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return rc;
+    }
 
   //  char *nombre_func = iniciarSesion(db, email, pass); 
   //  if (nombre_func != NULL) {
@@ -251,12 +296,12 @@ char* iniciarSesion(sqlite3 *db, char email_cl[], char pass_cl[]) {
   //  }
 
 
- //   rc = showAllClientes(db);
- //   if (rc != SQLITE_OK) {
- //       printf("Error getting all clients\n");
- //       printf("%s\n", sqlite3_errmsg(db));
- //      return rc;
- //   }
+    rc = showAllClientes(db);
+    if (rc != SQLITE_OK) {
+        printf("Error getting all clients\n");
+        printf("%s\n", sqlite3_errmsg(db));
+       return rc;
+    }
 
 
  //   rc = deleteAllClients(db);
@@ -268,16 +313,16 @@ char* iniciarSesion(sqlite3 *db, char email_cl[], char pass_cl[]) {
 
 
 
-   // rc = sqlite3_close(db);
- //   if (rc != SQLITE_OK) {
- //       printf("Error opening database\n");
- //       printf("%s\n", sqlite3_errmsg(db));
- //       return rc;
- //   }
+    rc = sqlite3_close(db);
+    if (rc != SQLITE_OK) {
+        printf("Error opening database\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return rc;
+    }
 
-   // printf("Database closed\n") ;
+    printf("Database closed\n") ;
 
-  //  return 0;
+    return 0;
 
 
-//}
+}
