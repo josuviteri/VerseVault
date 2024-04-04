@@ -261,68 +261,68 @@ char* iniciarSesion(sqlite3 *db, char email_cl[], char pass_cl[]) {
 
 
 
-int main() {
+// int main() {
 
 
-    sqlite3 *db;
+//     sqlite3 *db;
 
-    int rc = sqlite3_open("libreria.db", &db);
-    if (rc != SQLITE_OK) {
-        errorMsg("Error opening database\n");
-        printf("Error opening database\n");
-        return rc;
-    }
+//     int rc = sqlite3_open("libreria.db", &db);
+//     if (rc != SQLITE_OK) {
+//         errorMsg("Error opening database\n");
+//         printf("Error opening database\n");
+//         return rc;
+//     }
 
-    printf("Database opened\n\n") ;
+//     printf("Database opened\n\n") ;
 
-    char nombre[] = "Josu";
-    char email[] = "j@email.com";
-    char pass[] = "contraseña123";
-
-
-    rc = registrarCliente(db, nombre, email, pass);
-    if (rc != SQLITE_OK) {
-        printf("Error inserting new data\n");
-        printf("%s\n", sqlite3_errmsg(db));
-        return rc;
-    }
-
-  //  char *nombre_func = iniciarSesion(db, email, pass); 
-  //  if (nombre_func != NULL) {
-  //      printf("Inicio de sesion exitoso. Bienvenido, %s\n", nombre_func);
- //      free(nombre_func); // Liberar la memoria asignada
-  //  } else {
-  //      printf("Inicio de sesión fallido. Verifica tus credenciales.\n");
-  //  }
+//     char nombre[] = "Josu";
+//     char email[] = "j@email.com";
+//     char pass[] = "contraseña123";
 
 
-    rc = showAllClientes(db);
-    if (rc != SQLITE_OK) {
-        printf("Error getting all clients\n");
-        printf("%s\n", sqlite3_errmsg(db));
-       return rc;
-    }
+//     rc = registrarCliente(db, nombre, email, pass);
+//     if (rc != SQLITE_OK) {
+//         printf("Error inserting new data\n");
+//         printf("%s\n", sqlite3_errmsg(db));
+//         return rc;
+//     }
+
+//   //  char *nombre_func = iniciarSesion(db, email, pass); 
+//   //  if (nombre_func != NULL) {
+//   //      printf("Inicio de sesion exitoso. Bienvenido, %s\n", nombre_func);
+//  //      free(nombre_func); // Liberar la memoria asignada
+//   //  } else {
+//   //      printf("Inicio de sesión fallido. Verifica tus credenciales.\n");
+//   //  }
 
 
- //   rc = deleteAllClients(db);
- //   if (rc != SQLITE_OK) {
-//        printf("Error deleting all clients\n");
- //       printf("%s\n", sqlite3_errmsg(db));
- //       return rc;
-  //  }
+//     rc = showAllClientes(db);
+//     if (rc != SQLITE_OK) {
+//         printf("Error getting all clients\n");
+//         printf("%s\n", sqlite3_errmsg(db));
+//        return rc;
+//     }
+
+
+//  //   rc = deleteAllClients(db);
+//  //   if (rc != SQLITE_OK) {
+// //        printf("Error deleting all clients\n");
+//  //       printf("%s\n", sqlite3_errmsg(db));
+//  //       return rc;
+//   //  }
 
 
 
-    rc = sqlite3_close(db);
-    if (rc != SQLITE_OK) {
-        printf("Error opening database\n");
-        printf("%s\n", sqlite3_errmsg(db));
-        return rc;
-    }
+//     rc = sqlite3_close(db);
+//     if (rc != SQLITE_OK) {
+//         printf("Error opening database\n");
+//         printf("%s\n", sqlite3_errmsg(db));
+//         return rc;
+//     }
 
-    printf("Database closed\n") ;
+//     printf("Database closed\n") ;
 
-    return 0;
+//     return 0;
 
 
-}
+// }
