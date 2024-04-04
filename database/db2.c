@@ -325,7 +325,7 @@ int agregarLibro(sqlite3 *db, char titulo[], char nom_autor[], char idioma[], ch
     }
 
     // Cambiamos el nombre por la id del autor
-    char query[] = "SELECT id_autor FROM AUTOR WHERE nom_autor = ?";
+    int query = "SELECT id_autor FROM AUTOR WHERE nom_autor = ?";
     int result = sqlite3_prepare_v2(db, query, strlen(query) + 1, &stmt, NULL);
     if (result != SQLITE_OK) {
         errorMsg("Error preparing statement (SELECT)\n");
