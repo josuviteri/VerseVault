@@ -1,8 +1,8 @@
 #include <stdio.h>
-#include "../sqlite/sqlite3.h"
 #include <string.h>
 #include <time.h>
 #include <stdlib.h>
+#include "db2.h"
 
 void errorMsg(char mensaje[]){
     FILE* f;
@@ -424,42 +424,42 @@ int main() {
         return rc;
     }
 
-  //  char *nombre_func = iniciarSesion(db, email, pass); 
-  //  if (nombre_func != NULL) {
-  //      printf("Inicio de sesion exitoso. Bienvenido, %s\n", nombre_func);
- //      free(nombre_func); // Liberar la memoria asignada
-  //  } else {
-  //      printf("Inicio de sesión fallido. Verifica tus credenciales.\n");
-  //  }
+//   //  char *nombre_func = iniciarSesion(db, email, pass); 
+//   //  if (nombre_func != NULL) {
+//   //      printf("Inicio de sesion exitoso. Bienvenido, %s\n", nombre_func);
+//  //      free(nombre_func); // Liberar la memoria asignada
+//   //  } else {
+//       printf("Inicio de sesión fallido. Verifica tus credenciales.\n");
+//   }
 
 
-    rc = showAllClientes(db);
-    if (rc != SQLITE_OK) {
-        printf("Error getting all clients\n");
-        printf("%s\n", sqlite3_errmsg(db));
-       return rc;
-    }
+//     rc = showAllClientes(db);
+//     if (rc != SQLITE_OK) {
+//         printf("Error getting all clients\n");
+//         printf("%s\n", sqlite3_errmsg(db));
+//        return rc;
+//     }
 
 
- //   rc = deleteAllClients(db);
- //   if (rc != SQLITE_OK) {
-//        printf("Error deleting all clients\n");
- //       printf("%s\n", sqlite3_errmsg(db));
- //       return rc;
-  //  }
+// //   rc = deleteAllClients(db);
+// //   if (rc != SQLITE_OK) {
+// //        printf("Error deleting all clients\n");
+// //       printf("%s\n", sqlite3_errmsg(db));
+// //       return rc;
+// //  }
 
 
 
-    rc = sqlite3_close(db);
-    if (rc != SQLITE_OK) {
-        printf("Error opening database\n");
-        printf("%s\n", sqlite3_errmsg(db));
-        return rc;
-    }
+//     rc = sqlite3_close(db);
+//     if (rc != SQLITE_OK) {
+//         printf("Error opening database\n");
+//         printf("%s\n", sqlite3_errmsg(db));
+//         return rc;
+//     }
 
-    printf("Database closed\n") ;
+//     printf("Database closed\n") ;
 
-    return 0;
+//     return 0;
 
 
 }

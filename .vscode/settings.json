@@ -4,6 +4,8 @@
         "sqlite3.h": "c",
         "autor.h": "c",
         "string.h": "c",
-        "libro.h": "c"
+        "libro.h": "c",
+        "stdlib.h": "c",
+        "stdio.h": "c"
     }
 }
