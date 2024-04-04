@@ -3,7 +3,7 @@
 #include <string.h>
 #include "menu.h"
 #include "../sqlite/sqlite3.h"
-#include "../database/db2.c"
+#include "../database/db2.h"
 
 
 #define NEGRITA "\e[1m" // Renombramos el código de los caracteres en negrita para que sea mas entendible
@@ -137,26 +137,20 @@ void imprimirGestion(){
 
     do{
         printf("\nSelecciona una opcion: \n");
-        printf("1. Agregar Libro\n2. Eliminar Libro\n3. Aportar Libro\n4. Descargar Libro\n5. Volver\n");
+        printf("1. Buscar Libro\n2. Aportar Libro\n3. Volver\n");
 
         fgets(input, sizeof(input), stdin);
         sscanf(input, " %c", &sel); 
 
         if(sel == '1'){
             printf("\ncorrecto 1\n\n");
-            agregarLibro();
+            // buscarLibro();
 
         }else if(sel == '2'){
             printf("\ncorrecto 2\n\n");
-            eliminarLibro();
+            aportarLibro();
 
         }else if(sel == '3'){
-            printf("\ncorrecto 3\n\n");
-            aportarLibro();
-        }else if(sel == '4'){
-            printf("\ncorrecto 4\n\n");
-            descargarLibro();
-        }else if(sel == '5'){
             printf("\nvolviendo...\n\n");
             imprimirMenu();
         }
@@ -164,7 +158,7 @@ void imprimirGestion(){
             printf("\nIntroduce un valor valido\n\n");
     }
 
-    }while(sel != '4' && sel != '3' && sel != '2' && sel != '1' && sel != '5');
+    }while(sel != '3' && sel != '2' && sel != '1');
 
 }
 
@@ -177,17 +171,17 @@ void imprimirGestionInvitado(){
 
     do{
         printf("\nSelecciona una opcion: \n");
-        printf("1. Aportar Libro\n2. Descargar Libro\n3. Volver\n");
+        printf("1. Buscar Libro\n2. Aportar Libro\n3. Volver\n");
 
         fgets(input, sizeof(input), stdin);
         sscanf(input, " %c", &sel); 
 
         if(sel == '1'){
             printf("\ncorrecto 1\n\n");
-            aportarLibro();
+            // buscarLibro();
         }else if(sel == '2'){
             printf("\ncorrecto 2\n\n");
-            descargarLibro();
+            aportarLibro();
         }else if(sel == '3'){
             printf("\nvolviendo...\n\n");
             imprimirMenuInvitado();  
