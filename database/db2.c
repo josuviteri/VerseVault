@@ -1,8 +1,8 @@
 #include <stdio.h>
-#include "../sqlite/sqlite3.h"
 #include <string.h>
 #include <time.h>
 #include <stdlib.h>
+#include "db2.h"
 
 void errorMsg(char mensaje[]){
     FILE* f;
