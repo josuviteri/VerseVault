@@ -23,5 +23,6 @@ void agregarLibro();
 void eliminarLibro();
 void aportarLibro();
 void descargarLibro();
+void buscarLibro();
 
 #endif
