@@ -131,6 +131,10 @@ void imprimirMenuInvitado(){
 void imprimirGestion(){
     char input[10];
     char sel;
+    char titulo[30];
+    char nom_autor[30];
+    char idioma[10];
+    char fecha_publicacion[10];
 
     printf(NEGRITA"Menu de Gestion de Contenido\nUsuario: \n\n" QUITAR_NEGRITA);
 
@@ -144,7 +148,19 @@ void imprimirGestion(){
 
         if(sel == '1'){
             printf("\ncorrecto 1\n\n");
-            agregarLibro();
+            printf("\nIntroduce los datos del libro:\nIntroduce el nombre del libro:\n(30 caracteres como maximo)\n");
+            fgets(titulo, sizeof(titulo), stdin);
+
+            printf("\nIntroduce el nombre del autor:\n");
+            fgets(nom_autor, sizeof(nom_autor), stdin);
+
+            printf("\nIntroduce el idioma de una manera reducida:\n(ejemplo: es, en...)\n");
+            fgets(idioma, sizeof(idioma), stdin);
+
+            printf("\nIntroduce la fecha de publicacion del libro: \n(formato: aaaa-mm-dd)");
+            fgets(fecha_publicacion, sizeof(fecha_publicacion), stdin);
+
+            agregarLibroMenu(titulo, nom_autor, idioma, fecha_publicacion);
 
         }else if(sel == '2'){
             printf("\ncorrecto 2\n\n");
@@ -258,8 +274,29 @@ void registrarClienteMenu(char nom_cl[], char email_cl[], char pass_cl[]){
 }
 
 //apartado gestion de contenido de la db
-void agregarLibro(){
-    //debria contectarse y agregar un libro de los disponibles en la db a la lista personal    
+void agregarLibroMenu(char titulo[], char nom_autor[], char idioma[], char fecha_publicacion[]){
+    //debria contectarse y agregar un libro de los disponibles en la db a la lista personal
+    sqlite3 *db;
+    int rl = sqlite3_open("libreria.db", &db);
+    if (rl != SQLITE_OK) {
+        errorMsg("Error opening database\n");
+        printf("Error opening database\n");
+        return;
+    }
+    rl = agregarLibro(db, titulo, nom_autor, idioma, fecha_publicacion);
+    if (rl != SQLITE_OK) {
+        printf("Error inserting new data\n");
+        printf("%s\n", sqlite3_errmsg(db));
+    } else {
+        printf("Libro agregado exitosamente\n");
+    }
+
+    rl = sqlite3_close(db);
+    if (rl != SQLITE_OK) {
+        printf("Error closing database\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return;
+    }
 }
 void eliminarLibro(){
     //debria contectarse a la db y eliminar un libro de la lista personal    
