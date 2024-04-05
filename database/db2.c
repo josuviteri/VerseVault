@@ -305,7 +305,7 @@ int agregarLibro(sqlite3 *db, char titulo[], char nom_autor[], char idioma[], ch
     }
 
     // Si el libro no existe, proceder con la inserción
-    char sql[] = "INSERT INTO Libro (titulo, id_autor, idioma, fecha publicacion) VALUES (?,?,?,?)";
+    char sql[] = "INSERT INTO Libro (titulo, id_autor, idioma, fecha_publicacion) VALUES (?,?,?,?)";
     result = sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL);
     if (result != SQLITE_OK) {
         errorMsg("Error preparing statement (INSERT)\n");
@@ -325,34 +325,44 @@ int agregarLibro(sqlite3 *db, char titulo[], char nom_autor[], char idioma[], ch
     }
 
     // Cambiamos el nombre por la id del autor
-    int query = "SELECT id_autor FROM AUTOR WHERE nom_autor = ?";
-    int result = sqlite3_prepare_v2(db, query, strlen(query) + 1, &stmt, NULL);
-    if (result != SQLITE_OK) {
+    char queryForId[] = "SELECT id_autor FROM AUTOR WHERE nom_autor = ?";
+    sqlite3_stmt *stmtForId;
+    int resultForId = sqlite3_prepare_v2(db, queryForId, strlen(queryForId) + 1, &stmtForId, NULL);
+    if (resultForId != SQLITE_OK) {
         errorMsg("Error preparing statement (SELECT)\n");
         printf("Error preparing statement (SELECT)\n");
         printf("%s\n", sqlite3_errmsg(db));
-        return result;
+        return resultForId;
     }
-    result = sqlite3_bind_text(stmt, 1, nom_autor, strlen(titulo), SQLITE_STATIC);
-    if (result != SQLITE_OK) {
+    resultForId = sqlite3_bind_text(stmtForId, 1, nom_autor, strlen(nom_autor), SQLITE_STATIC);
+    if (resultForId != SQLITE_OK) {
         errorMsg("Error binding nom_autor parameter\n");
         printf("Error binding nom_autor parameter\n");
         printf("%s\n", sqlite3_errmsg(db));
-        return result;
+        return resultForId;
     }
-    result = sqlite3_step(stmt);
-    int id_autor = result;
+    resultForId = sqlite3_step(stmtForId);
+    int id_autor;
+    if (resultForId == SQLITE_ROW) {
+    // Obtener el ID del autor
+        id_autor = sqlite3_column_int(stmtForId, 0);
+    } else if (resultForId != SQLITE_DONE) {
+    // Manejar el error
+        errorMsg("Error obtaining the id\n");
+        printf("Error obtaining the id\n");
+    }
 
     // Liberamos la consulta SELECT
-    result = sqlite3_finalize(stmt);
-    if (result != SQLITE_OK) {
+    resultForId = sqlite3_finalize(stmtForId);
+    if (resultForId != SQLITE_OK) {
         errorMsg("Error finalizing statement (SELECT)\n");
         printf("Error finalizing statement (SELECT)\n");
         printf("%s\n", sqlite3_errmsg(db));
-        return result;
+        return resultForId;
     }
 
-    result = sqlite3_bind_text(stmt, 2, id_autor, sizeof(id_autor), SQLITE_STATIC);
+
+    result = sqlite3_bind_int(stmt, 2, id_autor);
     if (result != SQLITE_OK) {
         errorMsg("Error binding id_autor parameter\n");
         printf("Error binding id_autor parameter\n");
@@ -368,7 +378,7 @@ int agregarLibro(sqlite3 *db, char titulo[], char nom_autor[], char idioma[], ch
         return result;
     }
 
-    result = sqlite3_bind_text(stmt, 3, fecha_publicacion, strlen(fecha_publicacion), SQLITE_STATIC);
+    result = sqlite3_bind_text(stmt, 4, fecha_publicacion, strlen(fecha_publicacion), SQLITE_STATIC);
     if (result != SQLITE_OK) {
         errorMsg("Error binding fecha_publicacion parameter\n");
         printf("Error binding fecha_publicacion parameter\n");
@@ -398,31 +408,31 @@ int agregarLibro(sqlite3 *db, char titulo[], char nom_autor[], char idioma[], ch
 }
 
 
-int main() {
+// int main() {
 
 
-    sqlite3 *db;
+//     sqlite3 *db;
 
-    int rc = sqlite3_open("libreria.db", &db);
-    if (rc != SQLITE_OK) {
-        errorMsg("Error opening database\n");
-        printf("Error opening database\n");
-        return rc;
-    }
+//     int rc = sqlite3_open("libreria.db", &db);
+//     if (rc != SQLITE_OK) {
+//         errorMsg("Error opening database\n");
+//         printf("Error opening database\n");
+//         return rc;
+//     }
 
-    printf("Database opened\n\n") ;
+//     printf("Database opened\n\n") ;
 
-    char nombre[] = "Josu";
-    char email[] = "j@email.com";
-    char pass[] = "contraseña123";
+//     char nombre[] = "Josu";
+//     char email[] = "j@email.com";
+//     char pass[] = "contraseña123";
 
 
-    rc = registrarCliente(db, nombre, email, pass);
-    if (rc != SQLITE_OK) {
-        printf("Error inserting new data\n");
-        printf("%s\n", sqlite3_errmsg(db));
-        return rc;
-    }
+//     rc = registrarCliente(db, nombre, email, pass);
+//     if (rc != SQLITE_OK) {
+//         printf("Error inserting new data\n");
+//         printf("%s\n", sqlite3_errmsg(db));
+//         return rc;
+//     }
 
 //   //  char *nombre_func = iniciarSesion(db, email, pass); 
 //   //  if (nombre_func != NULL) {
@@ -462,4 +472,4 @@ int main() {
 //     return 0;
 
 
-}
+// }

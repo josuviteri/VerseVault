@@ -150,15 +150,20 @@ void imprimirGestion(){
             printf("\ncorrecto 1\n\n");
             printf("\nIntroduce los datos del libro:\nIntroduce el nombre del libro:\n(30 caracteres como maximo)\n");
             fgets(titulo, sizeof(titulo), stdin);
+            strtok(titulo, "\n"); // Elimina el carácter
 
             printf("\nIntroduce el nombre del autor:\n");
             fgets(nom_autor, sizeof(nom_autor), stdin);
+            strtok(nom_autor, "\n"); // Elimina el carácter
+            printf(nom_autor);
 
             printf("\nIntroduce el idioma de una manera reducida:\n(ejemplo: es, en...)\n");
             fgets(idioma, sizeof(idioma), stdin);
+            strtok(idioma, "\n"); // Elimina el carácter
 
-            printf("\nIntroduce la fecha de publicacion del libro: \n(formato: aaaa-mm-dd)");
+            printf("\nIntroduce la fecha de publicacion del libro: \n(formato: aaaa-mm-dd)\n");
             fgets(fecha_publicacion, sizeof(fecha_publicacion), stdin);
+            strtok(fecha_publicacion, "\n"); // Elimina el carácter
 
             agregarLibroMenu(titulo, nom_autor, idioma, fecha_publicacion);
 
