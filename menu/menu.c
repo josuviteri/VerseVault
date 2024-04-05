@@ -10,6 +10,9 @@
 #define QUITAR_NEGRITA "\e[m" // Renombramos el codigo de quitar la negrita a los caracteres para que sea mas entendible
 //"Sin dolor no hay gloria" - Proverbio Romano 
 int id_cliente_actual = -1;
+time_t rawtime;
+struct tm* timeinfo;
+char actualTime[80];
 
 void imprimirInicial(){
     char input[10];
@@ -17,6 +20,10 @@ void imprimirInicial(){
     char email[101];
     char pass[31];
     char sel;
+
+    time(&rawtime);
+    timeinfo = localtime(&rawtime);
+    strftime(actualTime, sizeof(actualTime), "%Y-%m-%d", timeinfo);
 
     printf("\nProyecto Programacion IV | Grupo PVI-04\n\n");
     printf(NEGRITA"Bienvenido al Sistema de Libreria Virtual\nVerseVault\n\n" QUITAR_NEGRITA);
@@ -178,10 +185,7 @@ void imprimirGestion(){
             printf("\nIntroduce el titulo del libro que desea guardar en tu lista: \n");
             fgets(titulo, sizeof(titulo), stdin);
             strtok(titulo, "\n"); // Elimina el carácter
-            //printf("\nIntroduce la fecha actual: \n (formato: aaaa-mm-dd)\n");
-            //fgets(fecha_actual, sizeof(titulo), stdin);
-            //strtok(fecha_actual, "\n"); // Elimina el carácter
-            aportarLibroMenu(titulo, "fecha");
+            aportarLibroMenu(titulo, actualTime);
 
         }else if(sel == '4'){
             printf("\ncorrecto 4\n\n");
@@ -219,10 +223,7 @@ void imprimirGestionInvitado(){
             printf("\nIntroduce el titulo del libro que desea guardar en tu lista: \n");
             fgets(titulo, sizeof(titulo), stdin);
             strtok(titulo, "\n"); // Elimina el carácter
-            printf("\nIntroduce la fecha actual: \n (formato: aaaa-mm-dd)\n");
-            fgets(fecha_actual, sizeof(titulo), stdin);
-            strtok(fecha_actual, "\n"); // Elimina el carácter
-            aportarLibroMenu(titulo, fecha_actual);
+            aportarLibroMenu(titulo, actualTime);
 
         }else if(sel == '2'){
             printf("\ncorrecto 2\n\n");
