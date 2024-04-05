@@ -21,7 +21,8 @@ void registrarClienteMenu(char nom_cl[], char email_cl[], char pass_cl[]);
 //apartado gestion de contenido
 void agregarLibroMenu(char titulo[], char nom_autor[], char idioma[], char fecha_publicacion[]);
 void eliminarLibro();
-void aportarLibro();
+void aportarLibroMenu(char titulo[], char fecha_lec[]);
+void guardarProgresoListaPersonal(int id_cliente, char titulo[], char fecha_lec[], int pag_actual);
 void descargarLibro();
 
 #endif

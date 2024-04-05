@@ -213,16 +213,17 @@ int registrarCliente(sqlite3 *db, char nom_cl[], char email_cl[], char pass_cl[]
 
 
 
-char* iniciarSesion(sqlite3 *db, char email_cl[], char pass_cl[]) {
+int iniciarSesion(sqlite3 *db, char email_cl[], char pass_cl[]) {
     sqlite3_stmt *stmt;
-    char sql[] = "SELECT nom_cl FROM Cliente WHERE email_cl = ? AND pass_cl = ?";
+    char sql[] = "SELECT id_cl FROM Cliente WHERE email_cl = ? AND pass_cl = ?";
+    int id_cliente = -1; // Inicializamos el ID del cliente con un valor negativo que indica un error
     
     // Preparar la consulta SQL
     int result = sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL);
     if (result != SQLITE_OK) {
         printf("Error preparing statement (SELECT)\n");
         printf("%s\n", sqlite3_errmsg(db));
-        return NULL;
+        return -1;
     }
 
     // Enlazar los parámetros de la consulta SQL
@@ -231,7 +232,7 @@ char* iniciarSesion(sqlite3 *db, char email_cl[], char pass_cl[]) {
         printf("Error binding email_cl parameter\n");
         printf("%s\n", sqlite3_errmsg(db));
         sqlite3_finalize(stmt);
-        return NULL;
+        return -1;
     }
 
     result = sqlite3_bind_text(stmt, 2, pass_cl, strlen(pass_cl), SQLITE_STATIC);
@@ -239,23 +240,21 @@ char* iniciarSesion(sqlite3 *db, char email_cl[], char pass_cl[]) {
         printf("Error binding pass_cl parameter\n");
         printf("%s\n", sqlite3_errmsg(db));
         sqlite3_finalize(stmt);
-        return NULL;
+        return -1;
     }
 
     // Ejecutar la consulta
     result = sqlite3_step(stmt);
     if (result == SQLITE_ROW) {
-        // Si se encontraron resultados, devolver el nombre del cliente
-        const unsigned char *nombre = sqlite3_column_text(stmt, 0);
-        char *nombre_cliente = strdup((const char*)nombre);
-        sqlite3_finalize(stmt);
-        return nombre_cliente;
+        // Si se encontraron resultados, obtener el ID del cliente
+        id_cliente = sqlite3_column_int(stmt, 0);
     } else {
         // Si no se encontraron resultados, las credenciales son incorrectas
         printf("Credenciales incorrectas\n");
-        sqlite3_finalize(stmt);
-        return NULL;
     }
+
+    sqlite3_finalize(stmt);
+    return id_cliente;
 }
 
 
@@ -407,6 +406,159 @@ int agregarLibro(sqlite3 *db, char titulo[], char nom_autor[], char idioma[], ch
     
 }
 
+int aportarLibro(sqlite3 *db, int id_cliente, char tituloLibro[], char fecha_lec[]){
+    sqlite3_stmt *stmt;
+
+    // Consulta SQL para seleccionar un libro disponible en la base de datos junto con el nombre del autor
+    char query[] = "SELECT Libro.titulo, Autor.nom_autor, Libro.idioma, Libro.fecha_publicacion FROM Libro INNER JOIN Autor ON Libro.id_autor = Autor.id_autor WHERE Libro.titulo = ?";
+    int result = sqlite3_prepare_v2(db, query, strlen(query), &stmt, NULL);
+    if (result != SQLITE_OK) {
+        errorMsg("Error preparing statement (SELECT)\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        printf("ERRRRROR\n");
+        return result;
+    }
+
+    
+    result = sqlite3_bind_text(stmt, 1, tituloLibro, strlen(tituloLibro), SQLITE_STATIC);
+    if (result != SQLITE_OK) {
+        errorMsg("Error binding title parameter\n");
+        sqlite3_finalize(stmt);
+        return result;
+    }
+
+    
+    result = sqlite3_step(stmt);
+    if (result == SQLITE_ROW) {
+        // Obtain the details of the selected book
+        char *titulo_libro = (char *)sqlite3_column_text(stmt, 0);
+        char *nom_autor = (char *)sqlite3_column_text(stmt, 1);
+        char *idioma = (char *)sqlite3_column_text(stmt, 2);
+        char *fecha_publicacion = (char *)sqlite3_column_text(stmt, 3);
+
+        printf("Libro agregado a la lista personal\n");
+        printf("Título: %s\n", titulo_libro);
+        printf("Autor: %s\n", nom_autor);
+        printf("Idioma: %s\n", idioma);
+        printf("Fecha de publicación: %s\n", fecha_publicacion);
+        
+            
+        guardarProgreso(db, id_cliente, tituloLibro, fecha_lec, 0);;
+        
+    } else {
+        errorMsg("No se encontró un libro con el título proporcionado\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return result;
+    }
+
+    result = sqlite3_finalize(stmt);
+    if (result != SQLITE_OK) {
+        errorMsg("Error finalizing statement (SELECT)\n");
+        printf("Error finalizing statement (SELECT)\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return result;
+    }
+
+
+    return SQLITE_OK;
+}
+
+int guardarProgreso(sqlite3 *db, int id_cliente, const char titulo[], const char fecha_lec[], int pag_actual) {
+    sqlite3_stmt *stmt = NULL;
+    int result;
+
+    // Consulta SQL para obtener el id_libro
+    char query_select[] = "SELECT id_libro FROM Libro WHERE titulo = ?";
+    sqlite3_stmt *stmt_select = NULL;
+    result = sqlite3_prepare_v2(db, query_select, strlen(query_select) + 1, &stmt_select, NULL);
+    if (result != SQLITE_OK) {
+        errorMsg("Error preparing select statement\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return result;
+    }
+
+    result = sqlite3_bind_text(stmt_select, 1, titulo, -1, SQLITE_STATIC);
+    if (result != SQLITE_OK) {
+        errorMsg("Error binding titulo parameter for select\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        sqlite3_finalize(stmt_select);
+        return result;
+    }
+
+    result = sqlite3_step(stmt_select);
+    if (result == SQLITE_ROW) {
+        int id_libro = sqlite3_column_int(stmt_select, 0);
+
+        // Consulta SQL para insertar el progreso del libro en la tabla Progreso
+        char query_insert[] = "INSERT INTO Progreso (id_cl, id_libro, fecha_lec, pag_actual) VALUES (?, ?, ?, ?)";
+        result = sqlite3_prepare_v2(db, query_insert, strlen(query_insert) + 1, &stmt, NULL);
+        if (result != SQLITE_OK) {
+            errorMsg("Error preparing insert statement\n");
+            printf("%s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt_select);
+            return result;
+        }
+
+        result = sqlite3_bind_int(stmt, 1, id_cliente);
+        if (result != SQLITE_OK) {
+            errorMsg("Error binding id_cliente parameter for insert\n");
+            printf("%s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt_select);
+            sqlite3_finalize(stmt);
+            return result;
+        }
+
+        result = sqlite3_bind_int(stmt, 2, id_libro);
+        if (result != SQLITE_OK) {
+            errorMsg("Error binding id_libro parameter for insert\n");
+            printf("%s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt_select);
+            sqlite3_finalize(stmt);
+            return result;
+        }
+
+        result = sqlite3_bind_text(stmt, 3, fecha_lec, -1, SQLITE_STATIC);
+        if (result != SQLITE_OK) {
+            errorMsg("Error binding fecha_lec parameter for insert\n");
+            printf("%s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt_select);
+            sqlite3_finalize(stmt);
+            return result;
+        }
+
+        result = sqlite3_bind_int(stmt, 4, pag_actual);
+        if (result != SQLITE_OK) {
+            errorMsg("Error binding pag_actual parameter for insert\n");
+            printf("%s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt_select);
+            sqlite3_finalize(stmt);
+            return result;
+        }
+
+        // Ejecuta la consulta de inserción
+        result = sqlite3_step(stmt);
+        if (result != SQLITE_DONE) {
+            errorMsg("Error inserting progreso del libro into Progreso table\n");
+            printf("%s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt_select);
+            sqlite3_finalize(stmt);
+            return result;
+        }
+
+        printf("Progreso del libro insertado correctamente en la tabla Progreso\n");
+
+        // Finaliza la declaración preparada
+        sqlite3_finalize(stmt);
+    } else {
+        errorMsg("No se encontró un libro con el título proporcionado\n");
+        printf("%s\n", sqlite3_errmsg(db));
+    }
+
+    // Finaliza la declaración preparada del select
+    sqlite3_finalize(stmt_select);
+
+    return SQLITE_OK;
+}
 
 // int main() {
 

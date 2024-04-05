@@ -9,6 +9,7 @@
 #define NEGRITA "\e[1m" // Renombramos el código de los caracteres en negrita para que sea mas entendible
 #define QUITAR_NEGRITA "\e[m" // Renombramos el codigo de quitar la negrita a los caracteres para que sea mas entendible
 //"Sin dolor no hay gloria" - Proverbio Romano 
+int id_cliente_actual = -1;
 
 void imprimirInicial(){
     char input[10];
@@ -135,6 +136,7 @@ void imprimirGestion(){
     char nom_autor[30];
     char idioma[10];
     char fecha_publicacion[10];
+    char fecha_actual[10];
 
     printf(NEGRITA"Menu de Gestion de Contenido\nUsuario: \n\n" QUITAR_NEGRITA);
 
@@ -173,7 +175,14 @@ void imprimirGestion(){
 
         }else if(sel == '3'){
             printf("\ncorrecto 3\n\n");
-            aportarLibro();
+            printf("\nIntroduce el titulo del libro que desea guardar en tu lista: \n");
+            fgets(titulo, sizeof(titulo), stdin);
+            strtok(titulo, "\n"); // Elimina el carácter
+            //printf("\nIntroduce la fecha actual: \n (formato: aaaa-mm-dd)\n");
+            //fgets(fecha_actual, sizeof(titulo), stdin);
+            //strtok(fecha_actual, "\n"); // Elimina el carácter
+            aportarLibroMenu(titulo, "fecha");
+
         }else if(sel == '4'){
             printf("\ncorrecto 4\n\n");
             descargarLibro();
@@ -192,6 +201,8 @@ void imprimirGestion(){
 void imprimirGestionInvitado(){
     char input[10];
     char sel;
+    char titulo[30];
+    char fecha_actual[30];
 
     printf(NEGRITA"Menu de Gestion de Contenido\nSesion de invitado\n\n" QUITAR_NEGRITA);
 
@@ -205,7 +216,14 @@ void imprimirGestionInvitado(){
 
         if(sel == '1'){
             printf("\ncorrecto 1\n\n");
-            aportarLibro();
+            printf("\nIntroduce el titulo del libro que desea guardar en tu lista: \n");
+            fgets(titulo, sizeof(titulo), stdin);
+            strtok(titulo, "\n"); // Elimina el carácter
+            printf("\nIntroduce la fecha actual: \n (formato: aaaa-mm-dd)\n");
+            fgets(fecha_actual, sizeof(titulo), stdin);
+            strtok(fecha_actual, "\n"); // Elimina el carácter
+            aportarLibroMenu(titulo, fecha_actual);
+
         }else if(sel == '2'){
             printf("\ncorrecto 2\n\n");
             descargarLibro();
@@ -233,11 +251,10 @@ void iniciarSesionMenu(char email_cl[], char pass_cl[]){
         return;
     }
 
-    char *nombre_cliente = iniciarSesion(db, email_cl, pass_cl);
-    if (nombre_cliente != NULL) {
-        printf("Inicio de sesion exitoso. Bienvenido, %s\n", nombre_cliente);
+    id_cliente_actual = iniciarSesion(db, email_cl, pass_cl);
+    if (id_cliente_actual != -1) {
+        printf("Inicio de sesion exitoso. Bienvenido\n");
         imprimirMenu();
-        free(nombre_cliente); // Liberar la memoria asignada
     } else {
         printf("Inicio de sesion fallido. Verifica tus credenciales.\n");
     }
@@ -280,7 +297,7 @@ void registrarClienteMenu(char nom_cl[], char email_cl[], char pass_cl[]){
 
 //apartado gestion de contenido de la db
 void agregarLibroMenu(char titulo[], char nom_autor[], char idioma[], char fecha_publicacion[]){
-    //debria contectarse y agregar un libro de los disponibles en la db a la lista personal
+    //debria contectarse y agregar un libro a la db
     sqlite3 *db;
     int rl = sqlite3_open("libreria.db", &db);
     if (rl != SQLITE_OK) {
@@ -306,9 +323,60 @@ void agregarLibroMenu(char titulo[], char nom_autor[], char idioma[], char fecha
 void eliminarLibro(){
     //debria contectarse a la db y eliminar un libro de la lista personal    
 }
-void aportarLibro(){
-    //debria contectarse y agregar un libro a la db
+void aportarLibroMenu(char titulo[], char fecha_lec[]){
+    //debria contectarse y agregar un libro de los disponibles en la db a la lista personal
+    sqlite3 *db;
+        int al = sqlite3_open("libreria.db", &db);
+    if (al != SQLITE_OK) {
+        errorMsg("Error opening database\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return;
+    }
+
+    // Intenta agregar el libro
+    al = aportarLibro(db, id_cliente_actual ,titulo, fecha_lec);
+    
+    if (al != SQLITE_OK) {
+        printf("Error inserting new data lo siento\n");
+        printf("%s\n", sqlite3_errmsg(db));
+    } else {
+        printf("Libro agregado exitosamente\n");
+    }
+
+    // Cierra la base de datos
+    al = sqlite3_close(db);
+    if (al != SQLITE_OK) {
+        printf("Error closing database\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return;
+    }
 } 
+void guardarProgresoListaPersonal(int id_cliente, char titulo[], char fecha_lec[], int pag_actual) {
+    sqlite3 *db;
+    int al = sqlite3_open("libreria.db", &db);
+    if (al != SQLITE_OK) {
+        errorMsg("Error opening database\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return;
+    }
+
+    al = guardarProgreso(db, id_cliente, titulo, fecha_lec, 0);
+    if (al != SQLITE_OK) {
+        printf("Error inserting new data que pena\n");
+        printf("%s\n", sqlite3_errmsg(db));
+    } else {
+        printf("Progreso del libro guardado exitosamente\n");
+    }
+
+    al = sqlite3_close(db);
+    if (al != SQLITE_OK) {
+        printf("Error closing database\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return;
+    }
+
+    return;
+}
 void descargarLibro(){
     //debria contectarse a la db y descargar un libro en formato txt, o el formato seleccionado    
 }
