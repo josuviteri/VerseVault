@@ -178,7 +178,10 @@ void imprimirGestion(){
 
         }else if(sel == '2'){
             printf("\ncorrecto 2\n\n");
-            eliminarLibro();
+            printf("\nIntroduce nombre del libro que quiera eliminar de su lista: \n");
+            fgets(titulo, sizeof(titulo), stdin);
+            strtok(titulo, "\n"); // Elimina el carácter
+            eliminarLibroMenu(titulo);
 
         }else if(sel == '3'){
             printf("\ncorrecto 3\n\n");
@@ -321,8 +324,33 @@ void agregarLibroMenu(char titulo[], char nom_autor[], char idioma[], char fecha
         return;
     }
 }
-void eliminarLibro(){
-    //debria contectarse a la db y eliminar un libro de la lista personal    
+void eliminarLibroMenu(char titulo[]){
+    //debria contectarse a la db y eliminar un libro de la lista personal
+    sqlite3 *db;
+    int al = sqlite3_open("libreria.db", &db);
+    if (al != SQLITE_OK) {
+        errorMsg("Error opening database\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return;
+    }
+
+    // Intenta agregar el libro
+    al = eliminarLibro(db, titulo);
+    
+    if (al != SQLITE_OK) {
+        printf("Error inserting new datan");
+        printf("%s\n", sqlite3_errmsg(db));
+    } else {
+        printf("Libro eliminado exitosamente\n");
+    }
+
+    // Cierra la base de datos
+    al = sqlite3_close(db);
+    if (al != SQLITE_OK) {
+        printf("Error closing database\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return;
+    }
 }
 void aportarLibroMenu(char titulo[], char fecha_lec[]){
     //debria contectarse y agregar un libro de los disponibles en la db a la lista personal
@@ -338,7 +366,7 @@ void aportarLibroMenu(char titulo[], char fecha_lec[]){
     al = aportarLibro(db, id_cliente_actual ,titulo, fecha_lec);
     
     if (al != SQLITE_OK) {
-        printf("Error inserting new data lo siento\n");
+        printf("Error inserting new data\n");
         printf("%s\n", sqlite3_errmsg(db));
     } else {
         printf("Libro agregado exitosamente\n");
@@ -363,7 +391,7 @@ void guardarProgresoListaPersonal(int id_cliente, char titulo[], char fecha_lec[
 
     al = guardarProgreso(db, id_cliente, titulo, fecha_lec, 0);
     if (al != SQLITE_OK) {
-        printf("Error inserting new data que pena\n");
+        printf("Error inserting new data\n");
         printf("%s\n", sqlite3_errmsg(db));
     } else {
         printf("Progreso del libro guardado exitosamente\n");
