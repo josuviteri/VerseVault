@@ -160,7 +160,7 @@ void imprimirGestion(){
             printf("\nIntroduce el nombre del autor:\n");
             fgets(nom_autor, sizeof(nom_autor), stdin);
             strtok(nom_autor, "\n"); // Elimina el carácter
-            printf(nom_autor);
+            
 
             printf("\nIntroduce el idioma de una manera reducida:\n(ejemplo: es, en...)\n");
             fgets(idioma, sizeof(idioma), stdin);
