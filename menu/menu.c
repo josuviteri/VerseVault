@@ -150,7 +150,7 @@ void imprimirGestion(){
 
     do{
         printf("\nSelecciona una opcion: \n");
-        printf("1. Agregar Libro\n2. Eliminar Libro\n3. Aportar Libro\n4. Descargar Libro\n5. Volver\n");
+        printf("1. Agregar Libro a la BD\n2. Agregar Libro a nuestra Lista\n3. Eliminar Libro de nuestra Lista\n4. Descargar Libro\n5. Volver\n");
 
         fgets(input, sizeof(input), stdin);
         sscanf(input, " %c", &sel); 
@@ -178,17 +178,17 @@ void imprimirGestion(){
 
         }else if(sel == '2'){
             printf("\ncorrecto 2\n\n");
-            printf("\nIntroduce nombre del libro que quiera eliminar de su lista: \n");
-            fgets(titulo, sizeof(titulo), stdin);
-            strtok(titulo, "\n"); // Elimina el carácter
-            eliminarLibroMenu(titulo);
-
-        }else if(sel == '3'){
-            printf("\ncorrecto 3\n\n");
             printf("\nIntroduce el titulo del libro que desea guardar en tu lista: \n");
             fgets(titulo, sizeof(titulo), stdin);
             strtok(titulo, "\n"); // Elimina el carácter
             aportarLibroMenu(titulo, actualTime);
+
+        }else if(sel == '3'){
+            printf("\ncorrecto 3\n\n");
+            printf("\nIntroduce nombre del libro que quiera eliminar de su lista: \n");
+            fgets(titulo, sizeof(titulo), stdin);
+            strtok(titulo, "\n"); // Elimina el carácter
+            eliminarLibroMenu(titulo);
 
         }else if(sel == '4'){
             printf("\ncorrecto 4\n\n");
