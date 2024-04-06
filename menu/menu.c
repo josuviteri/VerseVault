@@ -138,7 +138,7 @@ void imprimirGestion(){
     char titulo[30];
     char nom_autor[30];
     char idioma[10];
-    char fecha_publicacion[10];
+    char fecha_publicacion[11];
     char fecha_actual[10];
 
     printf(NEGRITA"Menu de Gestion de Contenido\nUsuario: \n\n" QUITAR_NEGRITA);
@@ -166,7 +166,7 @@ void imprimirGestion(){
             fgets(idioma, sizeof(idioma), stdin);
             strtok(idioma, "\n"); // Elimina el carácter
 
-            printf("\nIntroduce la fecha de publicacion del libro: \n(formato: aaaa-mm-dd)\n");
+            printf("\nIntroduce la fecha de publicacion del libro: \n(formato:aaaa-mm-dd)\n");
             fgets(fecha_publicacion, sizeof(fecha_publicacion), stdin);
             strtok(fecha_publicacion, "\n"); // Elimina el carácter
 

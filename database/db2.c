@@ -367,6 +367,7 @@ int agregarLibro(sqlite3 *db, char titulo[], char nom_autor[], char idioma[], ch
         return result;
     }
 
+    
     result = sqlite3_bind_text(stmt, 3, idioma, strlen(idioma), SQLITE_STATIC);
     if (result != SQLITE_OK) {
         errorMsg("Error binding idioma parameter\n");
