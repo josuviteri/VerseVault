@@ -387,6 +387,152 @@ int insertar_fecha_publicacion_en_libro(sqlite3* db) {
     return 0;
 }
 
+int actualizarTablaGeneros(sqlite3* db) {
+    const char* sql_select_datos = "SELECT id_libro, Genero, Titulo FROM Datos;";
+    const char* sql_select_genero_id = "SELECT id_genero FROM Genero WHERE nom_genero = ?";
+    const char* sql_select_libro_id = "SELECT id_libro FROM Libro WHERE titulo = ?";
+    const char* sql_insert_generos = "INSERT INTO Generos (id_libro, id_genero) VALUES (?, ?);";
+
+    sqlite3_stmt* stmt;
+    sqlite3_stmt* stmt_genero_id;
+    sqlite3_stmt* stmt_libro_id;
+    int rc;
+
+    // Preparar consulta para seleccionar datos de la tabla Datos
+    rc = sqlite3_prepare_v2(db, sql_select_datos, -1, &stmt, 0);
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "Error preparando la consulta SQL: %s\n", sqlite3_errmsg(db));
+        return 1;
+    }
+
+    // Variables para el resultado de la consulta
+    int id_libro;
+    const char* genero;
+    const char* titulo;
+
+    while (sqlite3_step(stmt) == SQLITE_ROW) {
+        // Obtener los datos de la consulta
+        id_libro = sqlite3_column_int(stmt, 0);
+        genero = (const char*)sqlite3_column_text(stmt, 1);
+        titulo = (const char*)sqlite3_column_text(stmt, 2);
+
+        // Preparar consulta para obtener el id_genero
+        rc = sqlite3_prepare_v2(db, sql_select_genero_id, -1, &stmt_genero_id, 0);
+        if (rc != SQLITE_OK) {
+            fprintf(stderr, "Error preparando la consulta SQL para obtener el id_genero: %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            return 1;
+        }
+
+        // Enlazar el nombre del genero como parametro
+        rc = sqlite3_bind_text(stmt_genero_id, 1, genero, -1, SQLITE_STATIC);
+        if (rc != SQLITE_OK) {
+            fprintf(stderr, "Error al enlazar parametro: %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            sqlite3_finalize(stmt_genero_id);
+            return 1;
+        }
+
+        // Ejecutar la consulta para obtener el id_genero
+        rc = sqlite3_step(stmt_genero_id);
+        if (rc != SQLITE_ROW) {
+            fprintf(stderr, "No se encontro el genero en la tabla Genero: %s\n", genero);
+            sqlite3_finalize(stmt);
+            sqlite3_finalize(stmt_genero_id);
+            return 1;
+        }
+
+        // Obtener el id_genero
+        int id_genero = sqlite3_column_int(stmt_genero_id, 0);
+
+        // Preparar consulta para obtener el id_libro
+        rc = sqlite3_prepare_v2(db, sql_select_libro_id, -1, &stmt_libro_id, 0);
+        if (rc != SQLITE_OK) {
+            fprintf(stderr, "Error preparando la consulta SQL para obtener el id_libro: %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            sqlite3_finalize(stmt_genero_id);
+            return 1;
+        }
+
+        // Enlazar el titulo del libro como parametro
+        rc = sqlite3_bind_text(stmt_libro_id, 1, titulo, -1, SQLITE_STATIC);
+        if (rc != SQLITE_OK) {
+            fprintf(stderr, "Error al enlazar parametro: %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            sqlite3_finalize(stmt_genero_id);
+            sqlite3_finalize(stmt_libro_id);
+            return 1;
+        }
+
+        // Ejecutar la consulta para obtener el id_libro
+        rc = sqlite3_step(stmt_libro_id);
+        if (rc != SQLITE_ROW) {
+            fprintf(stderr, "No se encontro el libro en la tabla Libro: %s\n", titulo);
+            sqlite3_finalize(stmt);
+            sqlite3_finalize(stmt_genero_id);
+            sqlite3_finalize(stmt_libro_id);
+            return 1;
+        }
+
+        // Obtener el id_libro
+        int id_libro_obtenido = sqlite3_column_int(stmt_libro_id, 0);
+
+        // Insertar los datos en la tabla Generos
+        sqlite3_stmt* insert_stmt;
+        rc = sqlite3_prepare_v2(db, sql_insert_generos, -1, &insert_stmt, 0);
+        if (rc != SQLITE_OK) {
+            fprintf(stderr, "Error preparando la insercion: %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            sqlite3_finalize(stmt_genero_id);
+            sqlite3_finalize(stmt_libro_id);
+            return 1;
+        }
+
+        // Enlazar los parametros para la insercion
+        rc = sqlite3_bind_int(insert_stmt, 1, id_libro_obtenido);
+        if (rc != SQLITE_OK) {
+            fprintf(stderr, "Error al enlazar parametro 'id_libro': %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            sqlite3_finalize(stmt_genero_id);
+            sqlite3_finalize(stmt_libro_id);
+            sqlite3_finalize(insert_stmt);
+            return 1;
+        }
+
+        rc = sqlite3_bind_int(insert_stmt, 2, id_genero);
+        if (rc != SQLITE_OK) {
+            fprintf(stderr, "Error al enlazar parametro 'id_genero': %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            sqlite3_finalize(stmt_genero_id);
+            sqlite3_finalize(stmt_libro_id);
+            sqlite3_finalize(insert_stmt);
+            return 1;
+        }
+
+        // Ejecutar la insercion
+        rc = sqlite3_step(insert_stmt);
+        if (rc != SQLITE_DONE) {
+            fprintf(stderr, "Error al insertar en la tabla Generos: %s\n", sqlite3_errmsg(db));
+            sqlite3_finalize(stmt);
+            sqlite3_finalize(stmt_genero_id);
+            sqlite3_finalize(stmt_libro_id);
+            sqlite3_finalize(insert_stmt);
+            return 1;
+        }
+
+        sqlite3_finalize(insert_stmt);
+        sqlite3_finalize(stmt_libro_id);
+        sqlite3_finalize(stmt_genero_id);
+    }
+
+    sqlite3_finalize(stmt);
+
+    printf("Datos insertados exitosamente en la tabla Generos.\n");
+
+    return 0;
+}
+
+
 
 int main() {
     sqlite3* db;
@@ -421,6 +567,11 @@ int main() {
     // if (rc != 0) {
     //     fprintf(stderr, "Error al insertar géneros en la tabla Genero.\n");
     // }
+
+     rc = actualizarTablaGeneros(db);
+     if (rc != 0) {
+         fprintf(stderr, "Error al insertar géneros en la tabla Genero.\n");
+     }
 
     sqlite3_close(db);
 

@@ -24,5 +24,6 @@ void eliminarLibroMenu(char titulo[]);
 void aportarLibroMenu(char titulo[], char fecha_lec[]);
 void guardarProgresoListaPersonal(int id_cliente, char titulo[], char fecha_lec[], int pag_actual);
 void descargarLibro();
+void buscarLibro();
 
 #endif

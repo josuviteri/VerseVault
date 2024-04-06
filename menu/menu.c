@@ -3,7 +3,8 @@
 #include <string.h>
 #include "menu.h"
 #include "../sqlite/sqlite3.h"
-#include "../database/db2.c"
+#include "../database/db2.h"
+#include "../database/dbBusqueda.h"
 
 
 #define NEGRITA "\e[1m" // Renombramos el código de los caracteres en negrita para que sea mas entendible
@@ -111,27 +112,22 @@ void imprimirMenuInvitado(){
 
     do{
         printf("\nSelecciona una opcion: \n");
-        printf("1. Seleccionar libro\n2. Gestionar Contenido\n3. Cerrar Sesion\n");
+        printf("1.Gestionar Contenido\n2. Cerrar Sesion\n");
 
         fgets(input, sizeof(input), stdin);
         sscanf(input, " %c", &sel); 
 
         if(sel == '1'){
-            printf("\ncorrecto 1\n\n");
-            //cargar los libros de ese usuario en la db y mostrarlos
-
-        }else if(sel == '2'){
             printf("\ncorrecto 2\n\n");
             imprimirGestionInvitado();
-
-        }else if(sel == '3'){
+        }else if(sel == '2'){
             printf("\ncerrando sesion...\n\n");
             imprimirInicial();
         }else{
             printf("\nIntroduce un valor valido\n\n");
     }
 
-    }while(sel != '3' && sel != '2' && sel != '1');
+    }while(sel != '2' && sel != '1');
 
 
 }
@@ -201,7 +197,7 @@ void imprimirGestion(){
             printf("\nIntroduce un valor valido\n\n");
     }
 
-    }while(sel != '4' && sel != '3' && sel != '2' && sel != '1' && sel != '5');
+    }while(sel != '3' && sel != '2' && sel != '1');
 
 }
 
@@ -216,21 +212,20 @@ void imprimirGestionInvitado(){
 
     do{
         printf("\nSelecciona una opcion: \n");
-        printf("1. Aportar Libro\n2. Descargar Libro\n3. Volver\n");
+        printf("1. Buscar Libro\n2. Aportar Libro\n3. Volver\n");
 
         fgets(input, sizeof(input), stdin);
         sscanf(input, " %c", &sel); 
 
         if(sel == '1'){
             printf("\ncorrecto 1\n\n");
+            buscarLibro();
+        }else if(sel == '2'){
+            printf("\ncorrecto 2\n\n");
             printf("\nIntroduce el titulo del libro que desea guardar en tu lista: \n");
             fgets(titulo, sizeof(titulo), stdin);
             strtok(titulo, "\n"); // Elimina el carácter
             aportarLibroMenu(titulo, actualTime);
-
-        }else if(sel == '2'){
-            printf("\ncorrecto 2\n\n");
-            descargarLibro();
         }else if(sel == '3'){
             printf("\nvolviendo...\n\n");
             imprimirMenuInvitado();  
@@ -407,5 +402,35 @@ void guardarProgresoListaPersonal(int id_cliente, char titulo[], char fecha_lec[
     return;
 }
 void descargarLibro(){
-    //debria contectarse a la db y descargar un libro en formato txt, o el formato seleccionado    
+    //deberia contectarse a la db y descargar un libro en formato txt, o el formato seleccionado    
+}
+
+void buscarLibro(){
+   char opcion[10]; // Opción seleccionada por el usuario
+
+    // Solicitar al usuario que ingrese el tipo de búsqueda
+    printf("Selecciona el tipo de busqueda:\n");
+    printf("1. Por titulo\n");
+    printf("2. Por autor\n");
+    printf("Opcion: ");
+    fgets(opcion, sizeof(opcion), stdin);
+    opcion[strcspn(opcion, "\n")] = 0; // Eliminar el salto de línea
+
+    if (strcmp(opcion, "1") == 0) {
+        // Búsqueda por título
+        char titulo[100];
+        printf("Ingresa el titulo del libro a buscar: ");
+        fgets(titulo, sizeof(titulo), stdin);
+        titulo[strcspn(titulo, "\n")] = 0; // Eliminar el salto de línea
+        peticionTitulo(titulo);
+    } else if (strcmp(opcion, "2") == 0) {
+        // Búsqueda por autor
+        char autor[100];
+        printf("Ingresa el nombre del autor a buscar: ");
+        fgets(autor, sizeof(autor), stdin);
+        autor[strcspn(autor, "\n")] = 0; // Eliminar el salto de línea
+        peticionAutor(autor);
+    } else {
+        printf("Opcion no válida.\n");
+    }
 }
