@@ -146,7 +146,7 @@ void imprimirGestion(){
 
     do{
         printf("\nSelecciona una opcion: \n");
-        printf("1. Agregar Libro a la BD\n2. Agregar Libro a nuestra Lista\n3. Eliminar Libro de nuestra Lista\n4. Descargar Libro\n5. Volver\n");
+        printf("1. Agregar Libro a la BD\n2. Agregar Libro a nuestra Lista\n3. Eliminar Libro de nuestra Lista\n4. Descargar Libro\nBuscar Libro\n5. Volver\n");
 
         fgets(input, sizeof(input), stdin);
         sscanf(input, " %c", &sel); 
@@ -190,6 +190,9 @@ void imprimirGestion(){
             printf("\ncorrecto 4\n\n");
             descargarLibro();
         }else if(sel == '5'){
+            printf("\nvolviendo...\n\n");
+            buscarLibro();
+        }else if(sel == '6'){
             printf("\nvolviendo...\n\n");
             imprimirMenu();
         }

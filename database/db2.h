@@ -2,6 +2,8 @@
 #define DB2_H
 
 #include "../sqlite/sqlite3.h"
+#include <string.h>
+#include <time.h>
 
 void errorMsg(char mensaje[]);
 int showAllClientes(sqlite3 *db);
