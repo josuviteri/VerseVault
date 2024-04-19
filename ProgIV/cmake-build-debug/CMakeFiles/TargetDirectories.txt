@@ -1,0 +1,3 @@
+C:/Users/asier/OneDrive/Escritorio/VerseVault/VerseVault/ProgIV/cmake-build-debug/CMakeFiles/ProgIV.dir
+C:/Users/asier/OneDrive/Escritorio/VerseVault/VerseVault/ProgIV/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/asier/OneDrive/Escritorio/VerseVault/VerseVault/ProgIV/cmake-build-debug/CMakeFiles/rebuild_cache.dir
