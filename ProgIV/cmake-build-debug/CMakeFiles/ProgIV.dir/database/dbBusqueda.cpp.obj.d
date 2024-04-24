@@ -1,5 +1,5 @@
 CMakeFiles/ProgIV.dir/database/dbBusqueda.cpp.obj: \
- D:\Archivos\ Uni\VerseVault-Curl\VerseVault-Curl\ProgIV\database\dbBusqueda.cpp \
+ D:\Archivos\ Uni\2\ anio\Programacion\ IV\Proyecto\ProgIV\database\dbBusqueda.cpp \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/stdio.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/corecrt_stdio_config.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/corecrt.h \
@@ -30,7 +30,7 @@ CMakeFiles/ProgIV.dir/database/dbBusqueda.cpp.obj: \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/std_abs.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/string.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/sec_api/string_s.h \
- D:/Archivos\ Uni/VerseVault-Curl/VerseVault-Curl/ProgIV/sqlite/sqlite3.h \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/sqlite/sqlite3.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdarg.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/stdarg.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/_mingw_stdarg.h
