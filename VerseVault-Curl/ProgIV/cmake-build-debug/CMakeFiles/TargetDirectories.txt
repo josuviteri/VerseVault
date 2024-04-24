@@ -1,0 +1,3 @@
+D:/Archivos Uni/VerseVault-Curl/VerseVault-Curl/ProgIV/cmake-build-debug/CMakeFiles/ProgIV.dir
+D:/Archivos Uni/VerseVault-Curl/VerseVault-Curl/ProgIV/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/Archivos Uni/VerseVault-Curl/VerseVault-Curl/ProgIV/cmake-build-debug/CMakeFiles/rebuild_cache.dir

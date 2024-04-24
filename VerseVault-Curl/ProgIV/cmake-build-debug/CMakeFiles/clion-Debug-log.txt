@@ -1,0 +1,13 @@
+"D:\Archivos Uni\Programas Raros\CLion 2023.3.4\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" -S "D:\Archivos Uni\VerseVault-Curl\VerseVault-Curl\ProgIV" -B "D:\Archivos Uni\VerseVault-Curl\VerseVault-Curl\ProgIV\cmake-build-debug"
+CMake Deprecation Warning:
+  Support for "Extra Generators" like
+
+    CodeBlocks
+
+  is deprecated and will be removed from a future version of CMake.  IDEs may
+  use the cmake-file-api(7) to view CMake-generated project build trees.
+
+
+-- Configuring done (0.2s)
+-- Generating done (0.1s)
+-- Build files have been written to: D:/Archivos Uni/VerseVault-Curl/VerseVault-Curl/ProgIV/cmake-build-debug
