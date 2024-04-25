@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/ProgIV.dir/curly.cpp.obj"
-  "CMakeFiles/ProgIV.dir/curly.cpp.obj.d"
+  "CMakeFiles/ProgIV.dir/curly/descargaArchivos.cpp.obj"
+  "CMakeFiles/ProgIV.dir/curly/descargaArchivos.cpp.obj.d"
   "CMakeFiles/ProgIV.dir/database/db2.cpp.obj"
   "CMakeFiles/ProgIV.dir/database/db2.cpp.obj.d"
   "CMakeFiles/ProgIV.dir/database/dbBusqueda.cpp.obj"

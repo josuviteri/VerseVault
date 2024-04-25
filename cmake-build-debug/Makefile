@@ -56,10 +56,10 @@ RM = "D:\Archivos Uni\Programas Raros\CLion 2023.3.4\bin\cmake\win\x64\bin\cmake
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "D:\Archivos Uni\2 anio\Programacion IV\Proyecto\ProgIV"
+CMAKE_SOURCE_DIR = "D:\Archivos Uni\2 anio\Programacion IV\VerseVault"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "D:\Archivos Uni\2 anio\Programacion IV\Proyecto\ProgIV\cmake-build-debug"
+CMAKE_BINARY_DIR = "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\cmake-build-debug"
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -86,9 +86,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "D:\Archivos Uni\2 anio\Programacion IV\Proyecto\ProgIV\cmake-build-debug\CMakeFiles" "D:\Archivos Uni\2 anio\Programacion IV\Proyecto\ProgIV\cmake-build-debug\\CMakeFiles\progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\cmake-build-debug\CMakeFiles" "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\cmake-build-debug\\CMakeFiles\progress.marks"
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "D:\Archivos Uni\2 anio\Programacion IV\Proyecto\ProgIV\cmake-build-debug\CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\cmake-build-debug\CMakeFiles" 0
 .PHONY : all
 
 # The main clean target
@@ -128,29 +128,29 @@ ProgIV/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/build
 .PHONY : ProgIV/fast
 
-curly.obj: curly.cpp.obj
-.PHONY : curly.obj
+curly/descargaArchivos.obj: curly/descargaArchivos.cpp.obj
+.PHONY : curly/descargaArchivos.obj
 
 # target to build an object file
-curly.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/curly.cpp.obj
-.PHONY : curly.cpp.obj
+curly/descargaArchivos.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/curly/descargaArchivos.cpp.obj
+.PHONY : curly/descargaArchivos.cpp.obj
 
-curly.i: curly.cpp.i
-.PHONY : curly.i
+curly/descargaArchivos.i: curly/descargaArchivos.cpp.i
+.PHONY : curly/descargaArchivos.i
 
 # target to preprocess a source file
-curly.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/curly.cpp.i
-.PHONY : curly.cpp.i
+curly/descargaArchivos.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/curly/descargaArchivos.cpp.i
+.PHONY : curly/descargaArchivos.cpp.i
 
-curly.s: curly.cpp.s
-.PHONY : curly.s
+curly/descargaArchivos.s: curly/descargaArchivos.cpp.s
+.PHONY : curly/descargaArchivos.s
 
 # target to generate assembly for a file
-curly.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/curly.cpp.s
-.PHONY : curly.cpp.s
+curly/descargaArchivos.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/curly/descargaArchivos.cpp.s
+.PHONY : curly/descargaArchivos.cpp.s
 
 database/db2.obj: database/db2.cpp.obj
 .PHONY : database/db2.obj
@@ -281,9 +281,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... ProgIV
-	@echo ... curly.obj
-	@echo ... curly.i
-	@echo ... curly.s
+	@echo ... curly/descargaArchivos.obj
+	@echo ... curly/descargaArchivos.i
+	@echo ... curly/descargaArchivos.s
 	@echo ... database/db2.obj
 	@echo ... database/db2.i
 	@echo ... database/db2.s

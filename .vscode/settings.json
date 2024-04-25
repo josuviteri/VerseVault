@@ -9,5 +9,6 @@
         "stdio.h": "c",
         "db2.h": "c",
         "dbbusqueda.h": "c"
-    }
+    },
+    "cmake.sourceDirectory": "D:/Archivos Uni/2 anio/Programacion IV/VerseVault"
 }

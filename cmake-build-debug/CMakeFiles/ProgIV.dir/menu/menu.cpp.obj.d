@@ -1,5 +1,5 @@
 CMakeFiles/ProgIV.dir/menu/menu.cpp.obj: \
- D:\Archivos\ Uni\2\ anio\Programacion\ IV\Proyecto\ProgIV\menu\menu.cpp \
+ D:\Archivos\ Uni\2\ anio\Programacion\ IV\VerseVault\menu\menu.cpp \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/stdlib.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstdlib \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
@@ -30,20 +30,20 @@ CMakeFiles/ProgIV.dir/menu/menu.cpp.obj: \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/sec_api/stdio_s.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/string.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/sec_api/string_s.h \
- D:\Archivos\ Uni\2\ anio\Programacion\ IV\Proyecto\ProgIV\menu\menu.h \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/sqlite/sqlite3.h \
+ D:\Archivos\ Uni\2\ anio\Programacion\ IV\VerseVault\menu\menu.h \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/sqlite/sqlite3.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdarg.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/stdarg.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/_mingw_stdarg.h \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/database/db2.h \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/sqlite/sqlite3.h \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/database/db2.h \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/sqlite/sqlite3.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/time.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/sys/timeb.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/sec_api/sys/timeb_s.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/_timeval.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/pthread_time.h \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/database/dbBusqueda.h \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/descargaArchivos.h \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/database/dbBusqueda.h \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/curly/descargaArchivos.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iostream \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/requires_hosted.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ostream \
@@ -166,9 +166,9 @@ CMakeFiles/ProgIV.dir/menu/menu.cpp.obj: \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/basic_file.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/c++io.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/fstream.tcc \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/curl/curl.h \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/curl/curlver.h \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/curl/system.h \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/curl/curl.h \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/curl/curlver.h \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/curl/system.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/inttypes.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdint.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/stdint.h \
@@ -419,15 +419,15 @@ CMakeFiles/ProgIV.dir/menu/menu.cpp.obj: \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/in6addr.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/psdk_inc/_ip_mreq1.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/mstcpip.h \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/curl/easy.h \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/curl/multi.h \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/curl/curl.h \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/curl/urlapi.h \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/curl/options.h \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/curl/header.h \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/curl/websockets.h \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/curl/mprintf.h \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/json.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/curl/easy.h \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/curl/multi.h \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/curl/curl.h \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/curl/urlapi.h \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/curl/options.h \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/curl/header.h \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/curl/websockets.h \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/curl/mprintf.h \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/json.hpp \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/algorithm \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_algo.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/algorithmfwd.h \
@@ -477,9 +477,9 @@ CMakeFiles/ProgIV.dir/menu/menu.cpp.obj: \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/glue_memory_defs.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/utility \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_relops.h \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/adl_serializer.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/abi_macros.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/conversions/from_json.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/adl_serializer.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/abi_macros.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/conversions/from_json.hpp \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/forward_list \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/forward_list.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/forward_list.tcc \
@@ -513,28 +513,28 @@ CMakeFiles/ProgIV.dir/menu/menu.cpp.obj: \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/gslice_array.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/mask_array.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/indirect_array.h \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/exceptions.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/value_t.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/exceptions.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/value_t.hpp \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstdint \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/macro_scope.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/meta/detected.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/meta/void_t.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/thirdparty/hedley/hedley.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/macro_scope.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/meta/detected.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/meta/void_t.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/thirdparty/hedley/hedley.hpp \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/version \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cassert \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/assert.h \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/string_escape.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/input/position_t.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/meta/cpp_future.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/meta/type_traits.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/iterators/iterator_traits.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/meta/call_std/begin.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/meta/call_std/end.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/json_fwd.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/string_concat.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/string_escape.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/input/position_t.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/meta/cpp_future.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/meta/type_traits.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/iterators/iterator_traits.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/meta/call_std/begin.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/meta/call_std/end.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/json_fwd.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/string_concat.hpp \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstring \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/meta/identity_tag.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/meta/std_fs.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/meta/identity_tag.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/meta/std_fs.hpp \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/filesystem \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/fs_fwd.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/chrono.h \
@@ -555,34 +555,34 @@ CMakeFiles/ProgIV.dir/menu/menu.cpp.obj: \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/codecvt \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/fs_dir.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/fs_ops.h \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/conversions/to_json.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/iterators/iteration_proxy.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/conversions/to_json.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/iterators/iteration_proxy.hpp \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ranges \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/span \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/variant \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/byte_container_with_subtype.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/hash.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/input/binary_reader.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/input/input_adapters.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/byte_container_with_subtype.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/hash.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/input/binary_reader.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/input/input_adapters.hpp \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/numeric \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_numeric.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/glue_numeric_defs.h \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/input/json_sax.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/input/lexer.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/meta/is_sax.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/input/parser.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/iterators/internal_iterator.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/iterators/primitive_iterator.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/iterators/iter_impl.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/iterators/json_reverse_iterator.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/json_custom_base_class.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/json_pointer.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/json_ref.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/output/binary_writer.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/output/output_adapters.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/output/serializer.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/conversions/to_chars.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/ordered_map.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/input/json_sax.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/input/lexer.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/meta/is_sax.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/input/parser.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/iterators/internal_iterator.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/iterators/primitive_iterator.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/iterators/iter_impl.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/iterators/json_reverse_iterator.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/json_custom_base_class.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/json_pointer.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/json_ref.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/output/binary_writer.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/output/output_adapters.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/output/serializer.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/conversions/to_chars.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/ordered_map.hpp \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/any \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/detail/macro_unscope.hpp \
- D:/Archivos\ Uni/2\ anio/Programacion\ IV/Proyecto/ProgIV/include/nlohmann/thirdparty/hedley/hedley_undef.hpp
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/detail/macro_unscope.hpp \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/include/nlohmann/thirdparty/hedley/hedley_undef.hpp

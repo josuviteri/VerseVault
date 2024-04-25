@@ -1,5 +1,5 @@
 CMakeFiles/ProgIV.dir/sqlite/sqlite3.c.obj: \
- D:\Archivos\ Uni\2\ anio\Programacion\ IV\Proyecto\ProgIV\sqlite\sqlite3.c \
+ D:\Archivos\ Uni\2\ anio\Programacion\ IV\VerseVault\sqlite\sqlite3.c \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdarg.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/stdarg.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/_mingw_stdarg.h \

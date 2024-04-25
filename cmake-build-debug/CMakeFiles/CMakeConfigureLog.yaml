@@ -28,7 +28,7 @@ events:
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
       
       The C compiler identification is GNU, found in:
-        D:/Archivos Uni/2 anio/Programacion IV/Proyecto/ProgIV/cmake-build-debug/CMakeFiles/3.28.1/CompilerIdC/a.exe
+        D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/CMakeFiles/3.28.1/CompilerIdC/a.exe
       
   -
     kind: "message-v1"
@@ -50,7 +50,7 @@ events:
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.exe"
       
       The CXX compiler identification is GNU, found in:
-        D:/Archivos Uni/2 anio/Programacion IV/Proyecto/ProgIV/cmake-build-debug/CMakeFiles/3.28.1/CompilerIdCXX/a.exe
+        D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/CMakeFiles/3.28.1/CompilerIdCXX/a.exe
       
   -
     kind: "try_compile-v1"
@@ -61,8 +61,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "D:/Archivos Uni/2 anio/Programacion IV/Proyecto/ProgIV/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-tm1dv6"
-      binary: "D:/Archivos Uni/2 anio/Programacion IV/Proyecto/ProgIV/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-tm1dv6"
+      source: "D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-u05hxu"
+      binary: "D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-u05hxu"
     cmakeVariables:
       CMAKE_C_FLAGS: ""
       CMAKE_C_FLAGS_DEBUG: "-g"
@@ -71,13 +71,13 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'D:/Archivos Uni/2 anio/Programacion IV/Proyecto/ProgIV/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-tm1dv6'
+        Change Dir: 'D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-u05hxu'
         
-        Run Build Command(s): "D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/cmake/win/x64/bin/cmake.exe" -E env VERBOSE=1 "D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/mingw32-make.exe" -f Makefile cmTC_d179a/fast
-        D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_d179a.dir\\build.make CMakeFiles/cmTC_d179a.dir/build
-        mingw32-make[1]: Entering directory 'D:/Archivos Uni/2 anio/Programacion IV/Proyecto/ProgIV/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-tm1dv6'
-        Building C object CMakeFiles/cmTC_d179a.dir/CMakeCCompilerABI.c.obj
-        "D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\gcc.exe"   -fdiagnostics-color=always   -v -o CMakeFiles\\cmTC_d179a.dir\\CMakeCCompilerABI.c.obj -c "D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\share\\cmake-3.28\\Modules\\CMakeCCompilerABI.c"
+        Run Build Command(s): "D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/cmake/win/x64/bin/cmake.exe" -E env VERBOSE=1 "D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/mingw32-make.exe" -f Makefile cmTC_e7250/fast
+        D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_e7250.dir\\build.make CMakeFiles/cmTC_e7250.dir/build
+        mingw32-make[1]: Entering directory 'D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-u05hxu'
+        Building C object CMakeFiles/cmTC_e7250.dir/CMakeCCompilerABI.c.obj
+        "D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\gcc.exe"   -fdiagnostics-color=always   -v -o CMakeFiles\\cmTC_e7250.dir\\CMakeCCompilerABI.c.obj -c "D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\share\\cmake-3.28\\Modules\\CMakeCCompilerABI.c"
         Using built-in specs.
         COLLECT_GCC=D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\gcc.exe
         Target: x86_64-w64-mingw32
@@ -85,8 +85,8 @@ events:
         Thread model: posix
         Supported LTO compression algorithms: zlib
         gcc version 13.1.0 (GCC) 
-        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_d179a.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_d179a.dir\\'
-         D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/cc1.exe -quiet -v -iprefix D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/ -D_REENTRANT D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\share\\cmake-3.28\\Modules\\CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles\\cmTC_d179a.dir\\ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=nocona -version -fdiagnostics-color=always -o C:\\Users\\gipas\\AppData\\Local\\Temp\\cc0rLjxZ.s
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_e7250.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_e7250.dir\\'
+         D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/cc1.exe -quiet -v -iprefix D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/ -D_REENTRANT D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\share\\cmake-3.28\\Modules\\CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles\\cmTC_e7250.dir\\ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=nocona -version -fdiagnostics-color=always -o C:\\Users\\gipas\\AppData\\Local\\Temp\\ccJjkvWJ.s
         GNU C17 (GCC) version 13.1.0 (x86_64-w64-mingw32)
         	compiled by GNU C version 13.1.0, GMP version 6.2.1, MPFR version 4.2.0-p4, MPC version 1.3.1, isl version none
         GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
@@ -104,17 +104,17 @@ events:
          D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/include
         End of search list.
         Compiler executable checksum: 2aa4fcf5c9208168c5e2d38a58fc2a97
-        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_d179a.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_d179a.dir\\'
-         as -v -o CMakeFiles\\cmTC_d179a.dir\\CMakeCCompilerABI.c.obj C:\\Users\\gipas\\AppData\\Local\\Temp\\cc0rLjxZ.s
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_e7250.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_e7250.dir\\'
+         as -v -o CMakeFiles\\cmTC_e7250.dir\\CMakeCCompilerABI.c.obj C:\\Users\\gipas\\AppData\\Local\\Temp\\ccJjkvWJ.s
         GNU assembler version 2.40 (x86_64-w64-mingw32) using BFD version (GNU Binutils) 2.40
         COMPILER_PATH=D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/;D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../libexec/gcc/
         LIBRARY_PATH=D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/;D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/;D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/;D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib/;D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/;D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../
-        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_d179a.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_d179a.dir\\CMakeCCompilerABI.c.'
-        Linking C executable cmTC_d179a.exe
-        "D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_d179a.dir\\link.txt --verbose=1
-        "D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_d179a.dir/objects.a
-        "D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\ar.exe" qc CMakeFiles\\cmTC_d179a.dir/objects.a @CMakeFiles\\cmTC_d179a.dir\\objects1.rsp
-        "D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\gcc.exe"  -v -Wl,--whole-archive CMakeFiles\\cmTC_d179a.dir/objects.a -Wl,--no-whole-archive -o cmTC_d179a.exe -Wl,--out-implib,libcmTC_d179a.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_e7250.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_e7250.dir\\CMakeCCompilerABI.c.'
+        Linking C executable cmTC_e7250.exe
+        "D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_e7250.dir\\link.txt --verbose=1
+        "D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_e7250.dir/objects.a
+        "D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\ar.exe" qc CMakeFiles\\cmTC_e7250.dir/objects.a @CMakeFiles\\cmTC_e7250.dir\\objects1.rsp
+        "D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\gcc.exe"  -v -Wl,--whole-archive CMakeFiles\\cmTC_e7250.dir/objects.a -Wl,--no-whole-archive -o cmTC_e7250.exe -Wl,--out-implib,libcmTC_e7250.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
         Using built-in specs.
         COLLECT_GCC=D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\gcc.exe
         COLLECT_LTO_WRAPPER=D:/Archivos\\ Uni/Programas\\ Raros/CLion\\ 2023.3.4/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/lto-wrapper.exe
@@ -125,10 +125,10 @@ events:
         gcc version 13.1.0 (GCC) 
         COMPILER_PATH=D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/;D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../libexec/gcc/
         LIBRARY_PATH=D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/;D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/;D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/;D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib/;D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/;D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_d179a.exe' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_d179a.'
-         D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/collect2.exe -m i386pep -Bdynamic -o cmTC_d179a.exe D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtbegin.o -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0 -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../.. --whole-archive CMakeFiles\\cmTC_d179a.dir/objects.a --no-whole-archive --out-implib libcmTC_d179a.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -liconv -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -lkernel32 D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtend.o
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_d179a.exe' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_d179a.'
-        mingw32-make[1]: Leaving directory 'D:/Archivos Uni/2 anio/Programacion IV/Proyecto/ProgIV/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-tm1dv6'
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_e7250.exe' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_e7250.'
+         D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/collect2.exe -m i386pep -Bdynamic -o cmTC_e7250.exe D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtbegin.o -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0 -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../.. --whole-archive CMakeFiles\\cmTC_e7250.dir/objects.a --no-whole-archive --out-implib libcmTC_e7250.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -liconv -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -lkernel32 D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtend.o
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_e7250.exe' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_e7250.'
+        mingw32-make[1]: Leaving directory 'D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-u05hxu'
         
       exitCode: 0
   -
@@ -162,13 +162,13 @@ events:
     message: |
       Parsed C implicit link information:
         link line regex: [^( *|.*[/\\])(ld\\.exe|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
-        ignore line: [Change Dir: 'D:/Archivos Uni/2 anio/Programacion IV/Proyecto/ProgIV/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-tm1dv6']
+        ignore line: [Change Dir: 'D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-u05hxu']
         ignore line: []
-        ignore line: [Run Build Command(s): "D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/cmake/win/x64/bin/cmake.exe" -E env VERBOSE=1 "D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/mingw32-make.exe" -f Makefile cmTC_d179a/fast]
-        ignore line: [D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_d179a.dir\\build.make CMakeFiles/cmTC_d179a.dir/build]
-        ignore line: [mingw32-make[1]: Entering directory 'D:/Archivos Uni/2 anio/Programacion IV/Proyecto/ProgIV/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-tm1dv6']
-        ignore line: [Building C object CMakeFiles/cmTC_d179a.dir/CMakeCCompilerABI.c.obj]
-        ignore line: ["D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\gcc.exe"   -fdiagnostics-color=always   -v -o CMakeFiles\\cmTC_d179a.dir\\CMakeCCompilerABI.c.obj -c "D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\share\\cmake-3.28\\Modules\\CMakeCCompilerABI.c"]
+        ignore line: [Run Build Command(s): "D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/cmake/win/x64/bin/cmake.exe" -E env VERBOSE=1 "D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/mingw32-make.exe" -f Makefile cmTC_e7250/fast]
+        ignore line: [D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_e7250.dir\\build.make CMakeFiles/cmTC_e7250.dir/build]
+        ignore line: [mingw32-make[1]: Entering directory 'D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-u05hxu']
+        ignore line: [Building C object CMakeFiles/cmTC_e7250.dir/CMakeCCompilerABI.c.obj]
+        ignore line: ["D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\gcc.exe"   -fdiagnostics-color=always   -v -o CMakeFiles\\cmTC_e7250.dir\\CMakeCCompilerABI.c.obj -c "D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\share\\cmake-3.28\\Modules\\CMakeCCompilerABI.c"]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\gcc.exe]
         ignore line: [Target: x86_64-w64-mingw32]
@@ -176,8 +176,8 @@ events:
         ignore line: [Thread model: posix]
         ignore line: [Supported LTO compression algorithms: zlib]
         ignore line: [gcc version 13.1.0 (GCC) ]
-        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_d179a.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_d179a.dir\\']
-        ignore line: [ D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/cc1.exe -quiet -v -iprefix D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/ -D_REENTRANT D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\share\\cmake-3.28\\Modules\\CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles\\cmTC_d179a.dir\\ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=nocona -version -fdiagnostics-color=always -o C:\\Users\\gipas\\AppData\\Local\\Temp\\cc0rLjxZ.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_e7250.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_e7250.dir\\']
+        ignore line: [ D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/cc1.exe -quiet -v -iprefix D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/ -D_REENTRANT D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\share\\cmake-3.28\\Modules\\CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles\\cmTC_e7250.dir\\ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=nocona -version -fdiagnostics-color=always -o C:\\Users\\gipas\\AppData\\Local\\Temp\\ccJjkvWJ.s]
         ignore line: [GNU C17 (GCC) version 13.1.0 (x86_64-w64-mingw32)]
         ignore line: [	compiled by GNU C version 13.1.0  GMP version 6.2.1  MPFR version 4.2.0-p4  MPC version 1.3.1  isl version none]
         ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
@@ -195,8 +195,8 @@ events:
         ignore line: [ D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/include]
         ignore line: [End of search list.]
         ignore line: [Compiler executable checksum: 2aa4fcf5c9208168c5e2d38a58fc2a97]
-        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_d179a.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_d179a.dir\\']
-        ignore line: [ as -v -o CMakeFiles\\cmTC_d179a.dir\\CMakeCCompilerABI.c.obj C:\\Users\\gipas\\AppData\\Local\\Temp\\cc0rLjxZ.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_e7250.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_e7250.dir\\']
+        ignore line: [ as -v -o CMakeFiles\\cmTC_e7250.dir\\CMakeCCompilerABI.c.obj C:\\Users\\gipas\\AppData\\Local\\Temp\\ccJjkvWJ.s]
         ignore line: [GNU assembler version 2.40 (x86_64-w64-mingw32) using BFD version (GNU Binutils) 2.40]
         ignore line: [COMPILER_PATH=D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/]
         ignore line: [D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../libexec/gcc/]
@@ -206,12 +206,12 @@ events:
         ignore line: [D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib/]
         ignore line: [D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/]
         ignore line: [D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../]
-        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_d179a.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_d179a.dir\\CMakeCCompilerABI.c.']
-        ignore line: [Linking C executable cmTC_d179a.exe]
-        ignore line: ["D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_d179a.dir\\link.txt --verbose=1]
-        ignore line: ["D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_d179a.dir/objects.a]
-        ignore line: ["D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\ar.exe" qc CMakeFiles\\cmTC_d179a.dir/objects.a @CMakeFiles\\cmTC_d179a.dir\\objects1.rsp]
-        ignore line: ["D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\gcc.exe"  -v -Wl --whole-archive CMakeFiles\\cmTC_d179a.dir/objects.a -Wl --no-whole-archive -o cmTC_d179a.exe -Wl --out-implib libcmTC_d179a.dll.a -Wl --major-image-version 0 --minor-image-version 0 ]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_e7250.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_e7250.dir\\CMakeCCompilerABI.c.']
+        ignore line: [Linking C executable cmTC_e7250.exe]
+        ignore line: ["D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_e7250.dir\\link.txt --verbose=1]
+        ignore line: ["D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_e7250.dir/objects.a]
+        ignore line: ["D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\ar.exe" qc CMakeFiles\\cmTC_e7250.dir/objects.a @CMakeFiles\\cmTC_e7250.dir\\objects1.rsp]
+        ignore line: ["D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\gcc.exe"  -v -Wl --whole-archive CMakeFiles\\cmTC_e7250.dir/objects.a -Wl --no-whole-archive -o cmTC_e7250.exe -Wl --out-implib libcmTC_e7250.dll.a -Wl --major-image-version 0 --minor-image-version 0 ]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\gcc.exe]
         ignore line: [COLLECT_LTO_WRAPPER=D:/Archivos\\ Uni/Programas\\ Raros/CLion\\ 2023.3.4/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/lto-wrapper.exe]
@@ -228,10 +228,10 @@ events:
         ignore line: [D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib/]
         ignore line: [D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/]
         ignore line: [D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_d179a.exe' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_d179a.']
-        ignore line: [ D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/collect2.exe -m i386pep -Bdynamic -o cmTC_d179a.exe D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtbegin.o -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0 -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../.. --whole-archive CMakeFiles\\cmTC_d179a.dir/objects.a --no-whole-archive --out-implib libcmTC_d179a.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -liconv -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -lkernel32 D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtend.o]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_d179a.exe' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_d179a.']
-        ignore line: [mingw32-make[1]: Leaving directory 'D:/Archivos Uni/2 anio/Programacion IV/Proyecto/ProgIV/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-tm1dv6']
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_e7250.exe' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_e7250.']
+        ignore line: [ D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/collect2.exe -m i386pep -Bdynamic -o cmTC_e7250.exe D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtbegin.o -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0 -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../.. --whole-archive CMakeFiles\\cmTC_e7250.dir/objects.a --no-whole-archive --out-implib libcmTC_e7250.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -liconv -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -lkernel32 D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtend.o]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_e7250.exe' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_e7250.']
+        ignore line: [mingw32-make[1]: Leaving directory 'D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-u05hxu']
         ignore line: []
         ignore line: []
         implicit libs: []
@@ -249,8 +249,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "D:/Archivos Uni/2 anio/Programacion IV/Proyecto/ProgIV/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-6ot8ck"
-      binary: "D:/Archivos Uni/2 anio/Programacion IV/Proyecto/ProgIV/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-6ot8ck"
+      source: "D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-kaz6ek"
+      binary: "D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-kaz6ek"
     cmakeVariables:
       CMAKE_CXX_FLAGS: ""
       CMAKE_CXX_FLAGS_DEBUG: "-g"
@@ -259,13 +259,13 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'D:/Archivos Uni/2 anio/Programacion IV/Proyecto/ProgIV/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-6ot8ck'
+        Change Dir: 'D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-kaz6ek'
         
-        Run Build Command(s): "D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/cmake/win/x64/bin/cmake.exe" -E env VERBOSE=1 "D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/mingw32-make.exe" -f Makefile cmTC_5aa72/fast
-        D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_5aa72.dir\\build.make CMakeFiles/cmTC_5aa72.dir/build
-        mingw32-make[1]: Entering directory 'D:/Archivos Uni/2 anio/Programacion IV/Proyecto/ProgIV/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-6ot8ck'
-        Building CXX object CMakeFiles/cmTC_5aa72.dir/CMakeCXXCompilerABI.cpp.obj
-        "D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\g++.exe"   -fdiagnostics-color=always   -v -o CMakeFiles\\cmTC_5aa72.dir\\CMakeCXXCompilerABI.cpp.obj -c "D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\share\\cmake-3.28\\Modules\\CMakeCXXCompilerABI.cpp"
+        Run Build Command(s): "D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/cmake/win/x64/bin/cmake.exe" -E env VERBOSE=1 "D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/mingw32-make.exe" -f Makefile cmTC_9c508/fast
+        D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_9c508.dir\\build.make CMakeFiles/cmTC_9c508.dir/build
+        mingw32-make[1]: Entering directory 'D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-kaz6ek'
+        Building CXX object CMakeFiles/cmTC_9c508.dir/CMakeCXXCompilerABI.cpp.obj
+        "D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\g++.exe"   -fdiagnostics-color=always   -v -o CMakeFiles\\cmTC_9c508.dir\\CMakeCXXCompilerABI.cpp.obj -c "D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\share\\cmake-3.28\\Modules\\CMakeCXXCompilerABI.cpp"
         Using built-in specs.
         COLLECT_GCC=D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\g++.exe
         Target: x86_64-w64-mingw32
@@ -273,8 +273,8 @@ events:
         Thread model: posix
         Supported LTO compression algorithms: zlib
         gcc version 13.1.0 (GCC) 
-        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_5aa72.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_5aa72.dir\\'
-         D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/cc1plus.exe -quiet -v -iprefix D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/ -D_REENTRANT D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\share\\cmake-3.28\\Modules\\CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles\\cmTC_5aa72.dir\\ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=nocona -version -fdiagnostics-color=always -o C:\\Users\\gipas\\AppData\\Local\\Temp\\ccTpHCJS.s
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_9c508.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_9c508.dir\\'
+         D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/cc1plus.exe -quiet -v -iprefix D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/ -D_REENTRANT D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\share\\cmake-3.28\\Modules\\CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles\\cmTC_9c508.dir\\ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=nocona -version -fdiagnostics-color=always -o C:\\Users\\gipas\\AppData\\Local\\Temp\\ccyXixyZ.s
         GNU C++17 (GCC) version 13.1.0 (x86_64-w64-mingw32)
         	compiled by GNU C version 13.1.0, GMP version 6.2.1, MPFR version 4.2.0-p4, MPC version 1.3.1, isl version none
         GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
@@ -298,17 +298,17 @@ events:
          D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/include
         End of search list.
         Compiler executable checksum: e75de627edc3c57e31324b930b15b056
-        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_5aa72.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_5aa72.dir\\'
-         as -v -o CMakeFiles\\cmTC_5aa72.dir\\CMakeCXXCompilerABI.cpp.obj C:\\Users\\gipas\\AppData\\Local\\Temp\\ccTpHCJS.s
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_9c508.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_9c508.dir\\'
+         as -v -o CMakeFiles\\cmTC_9c508.dir\\CMakeCXXCompilerABI.cpp.obj C:\\Users\\gipas\\AppData\\Local\\Temp\\ccyXixyZ.s
         GNU assembler version 2.40 (x86_64-w64-mingw32) using BFD version (GNU Binutils) 2.40
         COMPILER_PATH=D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/;D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../libexec/gcc/
         LIBRARY_PATH=D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/;D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/;D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/;D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib/;D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/;D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../
-        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_5aa72.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_5aa72.dir\\CMakeCXXCompilerABI.cpp.'
-        Linking CXX executable cmTC_5aa72.exe
-        "D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_5aa72.dir\\link.txt --verbose=1
-        "D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_5aa72.dir/objects.a
-        "D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\ar.exe" qc CMakeFiles\\cmTC_5aa72.dir/objects.a @CMakeFiles\\cmTC_5aa72.dir\\objects1.rsp
-        "D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\g++.exe"  -v -Wl,--whole-archive CMakeFiles\\cmTC_5aa72.dir/objects.a -Wl,--no-whole-archive -o cmTC_5aa72.exe -Wl,--out-implib,libcmTC_5aa72.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_9c508.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_9c508.dir\\CMakeCXXCompilerABI.cpp.'
+        Linking CXX executable cmTC_9c508.exe
+        "D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_9c508.dir\\link.txt --verbose=1
+        "D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_9c508.dir/objects.a
+        "D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\ar.exe" qc CMakeFiles\\cmTC_9c508.dir/objects.a @CMakeFiles\\cmTC_9c508.dir\\objects1.rsp
+        "D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\g++.exe"  -v -Wl,--whole-archive CMakeFiles\\cmTC_9c508.dir/objects.a -Wl,--no-whole-archive -o cmTC_9c508.exe -Wl,--out-implib,libcmTC_9c508.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
         Using built-in specs.
         COLLECT_GCC=D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\g++.exe
         COLLECT_LTO_WRAPPER=D:/Archivos\\ Uni/Programas\\ Raros/CLion\\ 2023.3.4/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/lto-wrapper.exe
@@ -319,10 +319,10 @@ events:
         gcc version 13.1.0 (GCC) 
         COMPILER_PATH=D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/;D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../libexec/gcc/
         LIBRARY_PATH=D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/;D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/;D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/;D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib/;D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/;D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_5aa72.exe' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_5aa72.'
-         D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/collect2.exe -m i386pep -Bdynamic -o cmTC_5aa72.exe D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtbegin.o -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0 -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../.. --whole-archive CMakeFiles\\cmTC_5aa72.dir/objects.a --no-whole-archive --out-implib libcmTC_5aa72.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -liconv -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lkernel32 D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtend.o
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_5aa72.exe' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_5aa72.'
-        mingw32-make[1]: Leaving directory 'D:/Archivos Uni/2 anio/Programacion IV/Proyecto/ProgIV/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-6ot8ck'
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_9c508.exe' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_9c508.'
+         D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/collect2.exe -m i386pep -Bdynamic -o cmTC_9c508.exe D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtbegin.o -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0 -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../.. --whole-archive CMakeFiles\\cmTC_9c508.dir/objects.a --no-whole-archive --out-implib libcmTC_9c508.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -liconv -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lkernel32 D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtend.o
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_9c508.exe' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_9c508.'
+        mingw32-make[1]: Leaving directory 'D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-kaz6ek'
         
       exitCode: 0
   -
@@ -362,13 +362,13 @@ events:
     message: |
       Parsed CXX implicit link information:
         link line regex: [^( *|.*[/\\])(ld\\.exe|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
-        ignore line: [Change Dir: 'D:/Archivos Uni/2 anio/Programacion IV/Proyecto/ProgIV/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-6ot8ck']
+        ignore line: [Change Dir: 'D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-kaz6ek']
         ignore line: []
-        ignore line: [Run Build Command(s): "D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/cmake/win/x64/bin/cmake.exe" -E env VERBOSE=1 "D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/mingw32-make.exe" -f Makefile cmTC_5aa72/fast]
-        ignore line: [D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_5aa72.dir\\build.make CMakeFiles/cmTC_5aa72.dir/build]
-        ignore line: [mingw32-make[1]: Entering directory 'D:/Archivos Uni/2 anio/Programacion IV/Proyecto/ProgIV/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-6ot8ck']
-        ignore line: [Building CXX object CMakeFiles/cmTC_5aa72.dir/CMakeCXXCompilerABI.cpp.obj]
-        ignore line: ["D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\g++.exe"   -fdiagnostics-color=always   -v -o CMakeFiles\\cmTC_5aa72.dir\\CMakeCXXCompilerABI.cpp.obj -c "D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\share\\cmake-3.28\\Modules\\CMakeCXXCompilerABI.cpp"]
+        ignore line: [Run Build Command(s): "D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/cmake/win/x64/bin/cmake.exe" -E env VERBOSE=1 "D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/mingw32-make.exe" -f Makefile cmTC_9c508/fast]
+        ignore line: [D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_9c508.dir\\build.make CMakeFiles/cmTC_9c508.dir/build]
+        ignore line: [mingw32-make[1]: Entering directory 'D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-kaz6ek']
+        ignore line: [Building CXX object CMakeFiles/cmTC_9c508.dir/CMakeCXXCompilerABI.cpp.obj]
+        ignore line: ["D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\g++.exe"   -fdiagnostics-color=always   -v -o CMakeFiles\\cmTC_9c508.dir\\CMakeCXXCompilerABI.cpp.obj -c "D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\share\\cmake-3.28\\Modules\\CMakeCXXCompilerABI.cpp"]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\g++.exe]
         ignore line: [Target: x86_64-w64-mingw32]
@@ -376,8 +376,8 @@ events:
         ignore line: [Thread model: posix]
         ignore line: [Supported LTO compression algorithms: zlib]
         ignore line: [gcc version 13.1.0 (GCC) ]
-        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_5aa72.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_5aa72.dir\\']
-        ignore line: [ D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/cc1plus.exe -quiet -v -iprefix D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/ -D_REENTRANT D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\share\\cmake-3.28\\Modules\\CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles\\cmTC_5aa72.dir\\ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=nocona -version -fdiagnostics-color=always -o C:\\Users\\gipas\\AppData\\Local\\Temp\\ccTpHCJS.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_9c508.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_9c508.dir\\']
+        ignore line: [ D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/cc1plus.exe -quiet -v -iprefix D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/ -D_REENTRANT D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\share\\cmake-3.28\\Modules\\CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles\\cmTC_9c508.dir\\ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=nocona -version -fdiagnostics-color=always -o C:\\Users\\gipas\\AppData\\Local\\Temp\\ccyXixyZ.s]
         ignore line: [GNU C++17 (GCC) version 13.1.0 (x86_64-w64-mingw32)]
         ignore line: [	compiled by GNU C version 13.1.0  GMP version 6.2.1  MPFR version 4.2.0-p4  MPC version 1.3.1  isl version none]
         ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
@@ -401,8 +401,8 @@ events:
         ignore line: [ D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/include]
         ignore line: [End of search list.]
         ignore line: [Compiler executable checksum: e75de627edc3c57e31324b930b15b056]
-        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_5aa72.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_5aa72.dir\\']
-        ignore line: [ as -v -o CMakeFiles\\cmTC_5aa72.dir\\CMakeCXXCompilerABI.cpp.obj C:\\Users\\gipas\\AppData\\Local\\Temp\\ccTpHCJS.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_9c508.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_9c508.dir\\']
+        ignore line: [ as -v -o CMakeFiles\\cmTC_9c508.dir\\CMakeCXXCompilerABI.cpp.obj C:\\Users\\gipas\\AppData\\Local\\Temp\\ccyXixyZ.s]
         ignore line: [GNU assembler version 2.40 (x86_64-w64-mingw32) using BFD version (GNU Binutils) 2.40]
         ignore line: [COMPILER_PATH=D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/]
         ignore line: [D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../libexec/gcc/]
@@ -412,12 +412,12 @@ events:
         ignore line: [D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib/]
         ignore line: [D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/]
         ignore line: [D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../]
-        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_5aa72.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_5aa72.dir\\CMakeCXXCompilerABI.cpp.']
-        ignore line: [Linking CXX executable cmTC_5aa72.exe]
-        ignore line: ["D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_5aa72.dir\\link.txt --verbose=1]
-        ignore line: ["D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_5aa72.dir/objects.a]
-        ignore line: ["D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\ar.exe" qc CMakeFiles\\cmTC_5aa72.dir/objects.a @CMakeFiles\\cmTC_5aa72.dir\\objects1.rsp]
-        ignore line: ["D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\g++.exe"  -v -Wl --whole-archive CMakeFiles\\cmTC_5aa72.dir/objects.a -Wl --no-whole-archive -o cmTC_5aa72.exe -Wl --out-implib libcmTC_5aa72.dll.a -Wl --major-image-version 0 --minor-image-version 0 ]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_9c508.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_9c508.dir\\CMakeCXXCompilerABI.cpp.']
+        ignore line: [Linking CXX executable cmTC_9c508.exe]
+        ignore line: ["D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_9c508.dir\\link.txt --verbose=1]
+        ignore line: ["D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_9c508.dir/objects.a]
+        ignore line: ["D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\ar.exe" qc CMakeFiles\\cmTC_9c508.dir/objects.a @CMakeFiles\\cmTC_9c508.dir\\objects1.rsp]
+        ignore line: ["D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\g++.exe"  -v -Wl --whole-archive CMakeFiles\\cmTC_9c508.dir/objects.a -Wl --no-whole-archive -o cmTC_9c508.exe -Wl --out-implib libcmTC_9c508.dll.a -Wl --major-image-version 0 --minor-image-version 0 ]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=D:\\Archivos Uni\\Programas Raros\\CLion 2023.3.4\\bin\\mingw\\bin\\g++.exe]
         ignore line: [COLLECT_LTO_WRAPPER=D:/Archivos\\ Uni/Programas\\ Raros/CLion\\ 2023.3.4/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/lto-wrapper.exe]
@@ -434,10 +434,10 @@ events:
         ignore line: [D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib/]
         ignore line: [D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/]
         ignore line: [D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_5aa72.exe' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_5aa72.']
-        ignore line: [ D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/collect2.exe -m i386pep -Bdynamic -o cmTC_5aa72.exe D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtbegin.o -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0 -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../.. --whole-archive CMakeFiles\\cmTC_5aa72.dir/objects.a --no-whole-archive --out-implib libcmTC_5aa72.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -liconv -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lkernel32 D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtend.o]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_5aa72.exe' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_5aa72.']
-        ignore line: [mingw32-make[1]: Leaving directory 'D:/Archivos Uni/2 anio/Programacion IV/Proyecto/ProgIV/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-6ot8ck']
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_9c508.exe' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_9c508.']
+        ignore line: [ D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../libexec/gcc/x86_64-w64-mingw32/13.1.0/collect2.exe -m i386pep -Bdynamic -o cmTC_9c508.exe D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtbegin.o -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0 -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../lib -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib -LD:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../.. --whole-archive CMakeFiles\\cmTC_9c508.dir/objects.a --no-whole-archive --out-implib libcmTC_9c508.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -liconv -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lkernel32 D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/crtend.o]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_9c508.exe' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_9c508.']
+        ignore line: [mingw32-make[1]: Leaving directory 'D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-kaz6ek']
         ignore line: []
         ignore line: []
         implicit libs: []

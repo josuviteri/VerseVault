@@ -5,7 +5,7 @@
 #include "../sqlite/sqlite3.h"
 #include "../database/db2.h"
 #include "../database/dbBusqueda.h"
-#include "../descargaArchivos.h"
+#include "../curly/descargaArchivos.h"
 
 #define NEGRITA "\e[1m" // Renombramos el código de los caracteres en negrita para que sea mas entendible
 #define QUITAR_NEGRITA "\e[m" // Renombramos el codigo de quitar la negrita a los caracteres para que sea mas entendible

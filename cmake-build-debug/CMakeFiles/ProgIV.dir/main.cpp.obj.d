@@ -1,5 +1,5 @@
 CMakeFiles/ProgIV.dir/main.cpp.obj: \
- D:\Archivos\ Uni\2\ anio\Programacion\ IV\Proyecto\ProgIV\main.cpp \
+ D:\Archivos\ Uni\2\ anio\Programacion\ IV\VerseVault\main.cpp \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstdlib \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/os_defines.h \
@@ -29,4 +29,4 @@ CMakeFiles/ProgIV.dir/main.cpp.obj: \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/_mingw_off_t.h \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/swprintf.inl \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/sec_api/stdio_s.h \
- D:\Archivos\ Uni\2\ anio\Programacion\ IV\Proyecto\ProgIV\menu/menu.h
+ D:\Archivos\ Uni\2\ anio\Programacion\ IV\VerseVault\menu/menu.h
