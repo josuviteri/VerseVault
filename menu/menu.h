@@ -1,6 +1,8 @@
 #ifndef _MENU_H_
 #define _MENU_H_
 
+
+
 #define MAX 20 //max passwd length
 
 typedef struct User{
@@ -8,6 +10,10 @@ typedef struct User{
     char passw[MAX];
 } User;
 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 //apartado de menus
 void imprimirInicial();
 void imprimirMenu();
@@ -26,4 +32,8 @@ void guardarProgresoListaPersonal(int id_cliente, char titulo[], char fecha_lec[
 void descargarLibro();
 void buscarLibro();
 
+
+#ifdef __cplusplus
+}
+#endif
 #endif

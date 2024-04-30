@@ -1,7 +1,7 @@
 #ifndef _LIBRERIA_H
 #define _LIBRERIA_H
 
-#include "Libro.h"
+#include "libro.h"
 
 
 typedef struct Libreria{
