@@ -4,7 +4,9 @@
 #include "curl/curl.h"
 #include "nlohmann/json.hpp"
 #include "descargaArchivos.h"
+#include <filesystem> // Para obtener la ruta del directorio actual
 using json = nlohmann::json;
+namespace fs = std::filesystem;
 
 static size_t WriteCallback(void *contents, size_t size, size_t nmemb, std::string *userp) {
     size_t realsize = size * nmemb;
@@ -49,6 +51,7 @@ std::string extractBookTitle(const std::string& jsonStr) {
 
     return title;
 }
+
 void descargaArchivos() {
     CURL *curl;
     CURLcode res;
@@ -78,7 +81,11 @@ void descargaArchivos() {
 
                 std::string bookTitle = extractBookTitle(readBuffer);
                 if (!bookTitle.empty()) {
-                    std::string fileName = bookTitle + ".txt";
+                    std::string directory = "../libros/";
+                    std::string fileName = directory + bookTitle + ".txt"; // Ruta del archivo
+
+                    // Crear la carpeta si no existe
+                    fs::create_directories(directory);
 
                     // Leer el contenido del enlace y guardarlo en un archivo
                     curl_easy_setopt(curl, CURLOPT_URL, txtUtf8Link.c_str());
@@ -109,4 +116,3 @@ void descargaArchivos() {
     curl_global_cleanup();
 
 }
-
