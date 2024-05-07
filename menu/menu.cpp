@@ -72,35 +72,109 @@ void imprimirInicial(){
 void imprimirMenu(){
     char input[10];
     char sel;
+    char titulo[30];
+    char nom_autor[30];
+    char idioma[10];
+    char fecha_publicacion[11];
+    char fecha_actual[10];
 
     printf(NEGRITA"Menu Principal\n\n" QUITAR_NEGRITA);
 
 
     do{
         printf("\nSelecciona una opcion: \n");
-        printf("1. Seleccionar libro de mi lista\n2. Gestionar Contenido\n3. Cerrar Sesion\n");
+        printf("1. Mi Lista\n2.Buscar Libro\n3.Agregar Libro BD (admin only)\n4.Eliminar Libro BD (admin only)\n5.Volver\n");
 
         fgets(input, sizeof(input), stdin);
         sscanf(input, " %c", &sel);
 
         if(sel == '1'){
             printf("\ncorrecto 1\n\n");
-            //cargar los libros de ese usuario en la db y mostrarlos
+            menuMiLista();
 
         }else if(sel == '2'){
             printf("\ncorrecto 2\n\n");
-            imprimirGestion();
+            buscarLibro();
 
         }else if(sel == '3'){
+            printf("\ncorrecto 4\n\n");
+            printf("\nIntroduce los datos del libro:\nIntroduce el nombre del libro:\n(30 caracteres como maximo)\n");
+            fgets(titulo, sizeof(titulo), stdin);
+            strtok(titulo, "\n"); // Elimina el carácter
+
+            printf("\nIntroduce el nombre del autor:\n");
+            fgets(nom_autor, sizeof(nom_autor), stdin);
+            strtok(nom_autor, "\n"); // Elimina el carácter
+
+
+            printf("\nIntroduce el idioma de una manera reducida:\n(ejemplo: es, en...)\n");
+            fgets(idioma, sizeof(idioma), stdin);
+            strtok(idioma, "\n"); // Elimina el carácter
+
+            printf("\nIntroduce la fecha de publicacion del libro: \n(formato:aaaa-mm-dd)\n");
+            fgets(fecha_publicacion, sizeof(fecha_publicacion), stdin);
+            strtok(fecha_publicacion, "\n"); // Elimina el carácter
+
+            agregarLibroMenu(titulo, nom_autor, idioma, fecha_publicacion);
+        }else if(sel == '4'){
+
+        }else if(sel == '5'){
             printf("\ncerrando sesion...\n\n");
             imprimirInicial();
         }else{
             printf("\nIntroduce un valor valido\n\n");
     }
 
-    }while(sel != '3' && sel != '2' && sel != '1');
+    }while(sel != '5' && sel != '4' && sel != '3' && sel != '2' && sel != '1' && sel != '1');
+}
+
+void menuMiLista() {
+    char input[10];
+    char sel;
+    char titulo[30];
+    char nom_autor[30];
+    char idioma[10];
+    char fecha_publicacion[11];
+    char fecha_actual[10];
+    printf(NEGRITA"Menu Mi Lista\n\n" QUITAR_NEGRITA);
+    do{
+        printf("\nSelecciona una opcion: \n");
+
+        //Falta mostrar la lista actual del cliente
+
+        printf("1.Agregar Libro a Mi Lista\n2.Eliminar Libro de Mi Lista\n3.Descargar Libro\n4.Leer Libro\n5.Volver");
+
+        fgets(input, sizeof(input), stdin);
+        sscanf(input, " %c", &sel);
 
 
+        if(sel == '1'){
+            printf("\ncorrecto 1\n\n");
+            printf("\nIntroduce el titulo del libro que desea guardar en tu lista: \n");
+            fgets(titulo, sizeof(titulo), stdin);
+            strtok(titulo, "\n"); // Elimina el carácter
+            aportarLibroMenu(titulo, actualTime);
+        }else if(sel == '2'){
+            printf("\ncorrecto 2\n\n");
+            printf("\nIntroduce nombre del libro que quiera eliminar de su lista: \n");
+            fgets(titulo, sizeof(titulo), stdin);
+            strtok(titulo, "\n"); // Elimina el carácter
+            eliminarLibroMenu(titulo);
+        }else if(sel == '3'){
+            printf("\ncorrecto 2\n\n");
+            descargarLibro();
+
+        }else if(sel == '4'){
+            printf("\ncorrecto 4\n\n");
+            //leer libro
+        }else if(sel == '5'){
+            printf("\nvolviendo...\n\n");
+            imprimirMenu();
+        }else{
+            printf("\nIntroduce un valor valido\n\n");
+        }
+
+    }while(sel != '5' && sel != '4' && sel != '3' && sel != '2' && sel != '1');
 }
 
 void imprimirMenuInvitado(){
@@ -132,7 +206,7 @@ void imprimirMenuInvitado(){
 
 }
 
-void imprimirGestion(){
+/*void imprimirGestion(){
     char input[10];
     char sel;
     char titulo[30];
@@ -203,6 +277,7 @@ void imprimirGestion(){
     }while(sel != '3' && sel != '2' && sel != '1');
 
 }
+*/
 
 void imprimirGestionInvitado(){
     char input[10];
