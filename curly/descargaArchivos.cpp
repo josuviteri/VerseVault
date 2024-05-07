@@ -60,7 +60,7 @@ void descargaArchivos() {
     curl_global_init(CURL_GLOBAL_ALL);
     curl = curl_easy_init();
     if(curl) {
-        curl_easy_setopt(curl, CURLOPT_URL, "http://gutendex.com/books/?search=j.%20m.%20barrie%20peter%20pan");
+        curl_easy_setopt(curl, CURLOPT_URL, "http://gutendex.com/books/?search=elizabeth%20cleghorn%20gaskell%20cranford");
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
 
