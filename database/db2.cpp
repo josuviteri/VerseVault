@@ -602,70 +602,65 @@ int eliminarLibro(sqlite3 *db, char titulo[]){
     return SQLITE_OK;
 }
 
+void mostrarMiLista(int id_cliente_actual) {
+    sqlite3 *db;
+    char query[200]; // Ajusta el tamaño según tus necesidades
+    sqlite3_stmt *stmt;
+    int resultado;
 
+    // Abrir la base de datos
+    resultado = sqlite3_open("libreria.db", &db);
+    if (resultado) {
+        fprintf(stderr, "Error al abrir la base de datos: %s\n", sqlite3_errmsg(db));
+        return;
+    }
 
-// int main() {
+    // Construir la consulta SQL para buscar los libros del cliente actual en la tabla Progreso
+    snprintf(query, sizeof(query), "SELECT id_libro, fecha_lec, pag_actual FROM Progreso WHERE id_cl = %d", id_cliente_actual);
 
+    // Preparar la consulta SQL
+    resultado = sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
+    if (resultado != SQLITE_OK) {
+        fprintf(stderr, "Error al preparar la consulta SQL: %s\n", sqlite3_errmsg(db));
+        sqlite3_close(db);
+        return;
+    }
 
-//     sqlite3 *db;
+    // Ejecutar la consulta SQL y manejar los resultados
+    printf("\nMi Lista:\n");
+    int contador_libros = 0;
+    while ((resultado = sqlite3_step(stmt)) == SQLITE_ROW) {
+        contador_libros++;
+        int id_libro = sqlite3_column_int(stmt, 0); // ID del libro
+        char fecha_lectura[100];
+        strcpy(fecha_lectura, (const char*)sqlite3_column_text(stmt, 1)); // Fecha de lectura
+        int pagina_actual = sqlite3_column_int(stmt, 2); // Página actual
 
-//     int rc = sqlite3_open("libreria.db", &db);
-//     if (rc != SQLITE_OK) {
-//         errorMsg("Error opening database\n");
-//         printf("Error opening database\n");
-//         return rc;
-//     }
+        // Realizar una segunda consulta para obtener el título del libro
+        char titulo_query[200];
+        snprintf(titulo_query, sizeof(titulo_query), "SELECT titulo FROM Libro WHERE id_libro = %d", id_libro);
+        sqlite3_stmt *titulo_stmt;
+        int titulo_resultado = sqlite3_prepare_v2(db, titulo_query, -1, &titulo_stmt, NULL);
+        if (titulo_resultado == SQLITE_OK && sqlite3_step(titulo_stmt) == SQLITE_ROW) {
+            const unsigned char *titulo = sqlite3_column_text(titulo_stmt, 0);
+            printf("\t%d.Titulo: %s, Fecha Lectura: %s, Pagina Actual: %d\n",contador_libros, titulo, fecha_lectura, pagina_actual);
+        }
 
-//     printf("Database opened\n\n") ;
+        // Finalizar la consulta del título del libro
+        sqlite3_finalize(titulo_stmt);
+    }
 
-//     char nombre[] = "Josu";
-//     char email[] = "j@email.com";
-//     char pass[] = "contraseña123";
+    // Verificar si no se encontraron libros
+    if (contador_libros == 0) {
+        printf("\tNo se encontraron libros en tu lista.\n");
+    }
+    printf("\n");
+    // Verificar si hubo un error al ejecutar la consulta
+    if (resultado != SQLITE_DONE) {
+        fprintf(stderr, "Error al ejecutar la consulta SQL: %s\n", sqlite3_errmsg(db));
+    }
 
-
-//     rc = registrarCliente(db, nombre, email, pass);
-//     if (rc != SQLITE_OK) {
-//         printf("Error inserting new data\n");
-//         printf("%s\n", sqlite3_errmsg(db));
-//         return rc;
-//     }
-
-//   //  char *nombre_func = iniciarSesion(db, email, pass); 
-//   //  if (nombre_func != NULL) {
-//   //      printf("Inicio de sesion exitoso. Bienvenido, %s\n", nombre_func);
-//  //      free(nombre_func); // Liberar la memoria asignada
-//   //  } else {
-//       printf("Inicio de sesión fallido. Verifica tus credenciales.\n");
-//   }
-
-
-//     rc = showAllClientes(db);
-//     if (rc != SQLITE_OK) {
-//         printf("Error getting all clients\n");
-//         printf("%s\n", sqlite3_errmsg(db));
-//        return rc;
-//     }
-
-
-// //   rc = deleteAllClients(db);
-// //   if (rc != SQLITE_OK) {
-// //        printf("Error deleting all clients\n");
-// //       printf("%s\n", sqlite3_errmsg(db));
-// //       return rc;
-// //  }
-
-
-
-//     rc = sqlite3_close(db);
-//     if (rc != SQLITE_OK) {
-//         printf("Error opening database\n");
-//         printf("%s\n", sqlite3_errmsg(db));
-//         return rc;
-//     }
-
-//     printf("Database closed\n") ;
-
-//     return 0;
-
-
-// }
+    // Finalizar la consulta y cerrar la base de datos
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
+}

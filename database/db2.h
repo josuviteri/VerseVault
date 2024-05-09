@@ -20,5 +20,6 @@ int guardarProgreso(sqlite3 *db, int id_cliente, const char titulo[], const char
 
 int eliminarLibro(sqlite3 *db, char titulo[]);
 
+void mostrarMiLista(int id_cliente_actual);
 
 #endif /* MENU_H */

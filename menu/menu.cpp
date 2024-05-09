@@ -141,6 +141,7 @@ void menuMiLista() {
         printf("\nSelecciona una opcion: \n");
 
         //Falta mostrar la lista actual del cliente
+        mostrarMiLista(id_cliente_actual);
 
         printf("1.Agregar Libro a Mi Lista\n2.Eliminar Libro de Mi Lista\n3.Descargar Libro\n4.Leer Libro\n5.Volver\n");
 
