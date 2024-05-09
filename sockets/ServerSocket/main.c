@@ -72,24 +72,43 @@ int main(int argc, char *argv[]) {
 	// Closing the listening sockets (is not going to be used anymore)
 	closesocket(conn_socket);
 
-	//SEND and RECEIVE data
-	printf("Waiting for incoming messages from client... \n");
-	do {
-		int bytes = recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
-		if (bytes > 0) {
-			printf("Receiving message... \n");
-			printf("Data received: %s \n", recvBuff);
+//SEND and RECEIVE data
+printf("Waiting for incoming messages from client... \n");
+do {
+    // Enviar el mensaje del menú al cliente
+    char menuMsg[512] = "1. Option 1\n2. Option 2\n3. Option 3\nSelect an option: ";
+    send(comm_socket, menuMsg, strlen(menuMsg), 0);
 
-			printf("Sending reply... \n");
-			strcpy(sendBuff, "ACK -> ");
-			strcat(sendBuff, recvBuff);
-			send(comm_socket, sendBuff, sizeof(sendBuff), 0);
-			printf("Data sent: %s \n", sendBuff);
+    // Recibir la selección del cliente
+    int bytes = recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
+    if (bytes > 0) {
+        printf("Receiving message... \n");
+        printf("Data received: %s \n", recvBuff);
 
-			if (strcmp(recvBuff, "Bye") == 0)
-				break;
-		}
-	} while (1);
+        // Procesar la selección del cliente y enviar una respuesta
+        int selection = atoi(recvBuff);
+        switch (selection) {
+            case 1:
+                strcpy(sendBuff, "You selected Option 1");
+                break;
+            case 2:
+                strcpy(sendBuff, "You selected Option 2");
+                break;
+            case 3:
+                strcpy(sendBuff, "You selected Option 3");
+                break;
+            default:
+                strcpy(sendBuff, "Invalid selection");
+                break;
+        }
+        send(comm_socket, sendBuff, strlen(sendBuff), 0);
+        printf("Data sent: %s \n", sendBuff);
+
+        if (selection == 0) // Si el cliente envía "0", salir del bucle
+            break;
+    }
+} while (1);
+
 
 	// CLOSING the sockets and cleaning Winsock...
 	closesocket(comm_socket);
