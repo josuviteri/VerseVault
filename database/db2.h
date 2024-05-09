@@ -21,4 +21,8 @@ int guardarProgreso(sqlite3 *db, int id_cliente, const char titulo[], const char
 int eliminarLibro(sqlite3 *db, char titulo[]);
 
 
+void actualizarProgreso(int id_libro, int pagina_actual, char time[]);
+int cargarProgreso(int id_libro);
+
+
 #endif /* MENU_H */

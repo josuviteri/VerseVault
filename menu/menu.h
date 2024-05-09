@@ -1,6 +1,10 @@
 #ifndef _MENU_H_
 #define _MENU_H_
 
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
 
 
 #define MAX 20 //max passwd length
@@ -34,6 +38,8 @@ void guardarProgresoListaPersonal(int id_cliente, char titulo[], char fecha_lec[
 void descargarLibro(char *titulo);
 void buscarLibro();
 
+void imprimirLineas(const std::vector<std::string>& lines, int start);
+void leerLibro(std::string titulo);
 
 #ifdef __cplusplus
 }
