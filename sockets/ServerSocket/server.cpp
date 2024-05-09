@@ -1,5 +1,8 @@
 #include <iostream>
 #include <winsock2.h>
+#include <cstdlib>
+#include <cstdio>
+#include "menu/menu.h"
 
 #define SERVER_IP "127.0.0.1"
 #define SERVER_PORT 6000
@@ -85,8 +88,10 @@ int main(int argc, char *argv[]) {
             // Procesar la selección del cliente y enviar una respuesta
             int selection = atoi(recvBuff);
             switch (selection) {
-                case 1:
-                    strcpy(sendBuff, "You selected Option 1");
+                 case 1:
+                    
+                    imprimirInicial(); // Llama a la función 
+                    strcpy(sendBuff, "Returned from menu"); // Mensaje de respuesta
                     break;
                 case 2:
                     strcpy(sendBuff, "You selected Option 2");
