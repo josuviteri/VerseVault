@@ -408,7 +408,7 @@ int agregarLibro(sqlite3 *db, char titulo[], char nom_autor[], char idioma[], ch
     
 }
 
-int aportarLibro(sqlite3 *db, int id_cliente, char tituloLibro[], char fecha_lec[]){
+int agregarLibroMiLista(sqlite3 *db, int id_cliente, char tituloLibro[], char fecha_lec[]){
     sqlite3_stmt *stmt;
 
     // Consulta SQL para seleccionar un libro disponible en la base de datos junto con el nombre del autor
@@ -439,10 +439,10 @@ int aportarLibro(sqlite3 *db, int id_cliente, char tituloLibro[], char fecha_lec
         char *fecha_publicacion = (char *)sqlite3_column_text(stmt, 3);
 
         printf("Libro agregado a la lista personal\n");
-        printf("Título: %s\n", titulo_libro);
+        printf("Titulo: %s\n", titulo_libro);
         printf("Autor: %s\n", nom_autor);
         printf("Idioma: %s\n", idioma);
-        printf("Fecha de publicación: %s\n", fecha_publicacion);
+        printf("Fecha de publicacion: %s\n", fecha_publicacion);
         
             
         guardarProgreso(db, id_cliente, tituloLibro, fecha_lec, 0);;
@@ -654,7 +654,6 @@ void mostrarMiLista(int id_cliente_actual) {
     if (contador_libros == 0) {
         printf("\tNo se encontraron libros en tu lista.\n");
     }
-    printf("\n");
     // Verificar si hubo un error al ejecutar la consulta
     if (resultado != SQLITE_DONE) {
         fprintf(stderr, "Error al ejecutar la consulta SQL: %s\n", sqlite3_errmsg(db));

@@ -138,10 +138,11 @@ void menuMiLista() {
     char fecha_actual[10];
     printf(NEGRITA"Menu Mi Lista\n\n" QUITAR_NEGRITA);
     do{
+
+        mostrarMiLista(id_cliente_actual);
         printf("\nSelecciona una opcion: \n");
 
         //Falta mostrar la lista actual del cliente
-        mostrarMiLista(id_cliente_actual);
 
         printf("1.Agregar Libro a Mi Lista\n2.Eliminar Libro de Mi Lista\n3.Descargar Libro\n4.Leer Libro\n5.Volver\n");
 
@@ -440,7 +441,7 @@ void aportarLibroMenu(char titulo[], char fecha_lec[]){
     }
 
     // Intenta agregar el libro
-    al = aportarLibro(db, id_cliente_actual ,titulo, fecha_lec);
+    al = agregarLibroMiLista(db, id_cliente_actual ,titulo, fecha_lec);
 
     if (al != SQLITE_OK) {
         printf("Error inserting new data\n");
