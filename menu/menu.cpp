@@ -66,7 +66,7 @@ void imprimirInicial(){
             printf("\nIntroduce un valor valido\n\n");
     }
 
-    }while(sel != '4' && sel != '3' && sel != '2' && sel != '1');
+    }while(sel != '4');
 }
 
 void imprimirMenu(){
@@ -125,7 +125,7 @@ void imprimirMenu(){
             printf("\nIntroduce un valor valido\n\n");
     }
 
-    }while(sel != '5' && sel != '4' && sel != '3' && sel != '2' && sel != '1' && sel != '1');
+    }while(sel != '5');
 }
 
 void menuMiLista() {
@@ -178,7 +178,7 @@ void menuMiLista() {
             printf("\nIntroduce un valor valido\n\n");
         }
 
-    }while(sel != '5' && sel != '4' && sel != '3' && sel != '2' && sel != '1');
+    }while(sel != '5');
 }
 
 void imprimirMenuInvitado(){
