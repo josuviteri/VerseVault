@@ -120,3 +120,42 @@ void peticionAutorPorTitulo(char *titulo){
     sqlite3_close(db);
 }
 
+int peticionIdLibroPorTitulo(const std::string& titulo) {
+    sqlite3 *db;
+    char query[200]; // Ajusta el tamaño según tus necesidades
+    sqlite3_stmt *stmt;
+    int rc;
+    int idLibro = -1; // Valor predeterminado en caso de que no se encuentre el libro
+
+    // Abrir la base de datos
+    rc = sqlite3_open("libreria.db", &db);
+    if (rc) {
+        fprintf(stderr, "Error al abrir la base de datos: %s\n", sqlite3_errmsg(db));
+        return idLibro;
+    }
+
+    // Construir la consulta SQL para buscar el ID del libro por título
+    snprintf(query, sizeof(query), "SELECT id_libro FROM Libro WHERE titulo = '%s'", titulo.c_str());
+
+    // Preparar la consulta SQL
+    rc = sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "Error al preparar la consulta SQL: %s\n", sqlite3_errmsg(db));
+        sqlite3_close(db);
+        return idLibro;
+    }
+
+    // Ejecutar la consulta SQL y manejar los resultados
+    if ((rc = sqlite3_step(stmt)) == SQLITE_ROW) {
+        idLibro = sqlite3_column_int(stmt, 0);
+    }
+
+    // Finalizar la consulta y cerrar la base de datos
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
+
+    return idLibro;
+}
+
+
+

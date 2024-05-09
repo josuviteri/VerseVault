@@ -5,5 +5,6 @@
 void peticionTitulo(const char *titulo);
 void peticionAutor(const char *autor);
 void peticionAutorPorTitulo(char* titulo);
+int peticionIdLibroPorTitulo(const std::string& titulo);
 
 #endif /* DBBUSQUEDA_H */

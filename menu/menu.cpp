@@ -6,6 +6,14 @@
 #include "../database/db2.h"
 #include "../database/dbBusqueda.h"
 #include "../curly/descargaArchivos.h"
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+#define convPag 20
 
 #define NEGRITA "\e[1m" // Renombramos el código de los caracteres en negrita para que sea mas entendible
 #define QUITAR_NEGRITA "\e[m" // Renombramos el codigo de quitar la negrita a los caracteres para que sea mas entendible
@@ -171,6 +179,10 @@ void menuMiLista() {
 
         }else if(sel == '4'){
             printf("\ncorrecto 4\n\n");
+            printf("\nIntroduce nombre del libro que quieras descargar en su lista: \n");
+            fgets(titulo, sizeof(titulo), stdin);
+            strtok(titulo, "\n"); // Elimina el carácter
+            leerLibro(titulo);
             //leer libro
         }else if(sel == '5'){
             printf("\nvolviendo...\n\n");
@@ -518,3 +530,50 @@ void buscarLibro(){
         printf("Opcion no válida.\n");
     }
 }
+
+
+void imprimirLineas(const vector<string>& lines, int start) {
+    int end = min(start + 20, static_cast<int>(lines.size()));
+    for (int i = start; i < end; ++i) {
+        cout << lines[i] << endl;
+    }
+}
+void leerLibro(string titulo) {
+    ifstream archivo("../libros/"+ titulo +".txt");
+    if (!archivo) {
+        cerr << "No se pudo abrir el archivo." << endl;
+        return;
+    }
+    int id_titulo = peticionIdLibroPorTitulo(titulo);
+    vector<string> lineas;
+    string linea;
+    while (getline(archivo, linea)) {
+        lineas.push_back(linea);
+    }
+
+    int inicio = cargarProgreso(id_titulo) * convPag; // Cargar progreso almacenado
+    int opcion;
+    do {
+        imprimirLineas(lineas, inicio);
+        cout << "Opciones: 1. Continuar, 2. Retroceder, 3. Salir: ";
+        cin >> opcion;
+
+        switch (opcion) {
+            case 1:
+                inicio += convPag;
+                break;
+            case 2:
+                inicio = max(0, inicio - convPag);
+                break;
+            case 3:
+                cout << "Guardando progreso..." << endl;
+                actualizarProgreso(id_titulo,inicio/convPag, actualTime); // Guardar progreso antes de salir
+                cout << "Saliendo del programa." << endl;
+                break;
+            default:
+                cout << "Opción inválida. Inténtalo de nuevo." << endl;
+        }
+    } while (opcion != 3);
+}
+
+

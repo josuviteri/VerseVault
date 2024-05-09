@@ -22,4 +22,8 @@ int eliminarLibro(sqlite3 *db, char titulo[]);
 
 void mostrarMiLista(int id_cliente_actual);
 
+void actualizarProgreso(int id_libro, int pagina_actual, char time[]);
+int cargarProgreso(int id_libro);
+
+
 #endif /* MENU_H */

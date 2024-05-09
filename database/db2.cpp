@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "db2.h"
 #include <string>
+#include <iostream>
 
 void errorMsg(char mensaje[]) {
     FILE* f;
@@ -661,5 +662,70 @@ void mostrarMiLista(int id_cliente_actual) {
 
     // Finalizar la consulta y cerrar la base de datos
     sqlite3_finalize(stmt);
+    sqlite3_close(db);
+}
+int cargarProgreso(int id_libro) {
+    sqlite3 *db;
+    sqlite3_stmt *stmt;
+    int rc;
+    int pagina_actual = 0;
+
+    // Abrir la base de datos
+    rc = sqlite3_open("libreria.db", &db);
+    if (rc) {
+        std::cerr << "Error al abrir la base de datos: " << sqlite3_errmsg(db) << std::endl;
+        sqlite3_close(db);
+        return 0; // Si hay un error, devuelve 0
+    }
+
+    // Construir la consulta SQL para obtener el progreso del libro
+    std::string query = "SELECT pag_actual FROM Progreso WHERE id_libro = " + std::to_string(id_libro);
+
+    // Preparar la consulta SQL
+    rc = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+    if (rc != SQLITE_OK) {
+        std::cerr << "Error al preparar la consulta SQL: " << sqlite3_errmsg(db) << std::endl;
+        sqlite3_close(db);
+        return 0; // Si hay un error, devuelve 0
+    }
+
+    // Ejecutar la consulta SQL y obtener el progreso
+    if (sqlite3_step(stmt) == SQLITE_ROW) {
+        pagina_actual = sqlite3_column_int(stmt, 0);
+    }
+
+    // Finalizar la consulta y cerrar la base de datos
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
+
+    return pagina_actual;
+}
+
+void actualizarProgreso(int id_libro, int pagina_actual, char time[]) {
+    sqlite3 *db;
+    char *error_message = nullptr;
+    int rc;
+
+    // Abrir la base de datos
+    rc = sqlite3_open("libreria.db", &db);
+    if (rc) {
+        std::cerr << "Error al abrir la base de datos: " << sqlite3_errmsg(db) << std::endl;
+        sqlite3_close(db);
+        return;
+    }
+
+    // Construir la consulta SQL para actualizar la página actual del libro
+    std::string query = "UPDATE Progreso SET pag_actual = " + std::to_string(pagina_actual) + ", fecha_lec = '" + std::string(time) + "' WHERE id_libro = " + std::to_string(id_libro);
+
+    // Ejecutar la consulta SQL
+    rc = sqlite3_exec(db, query.c_str(), nullptr, 0, &error_message);
+    if (rc != SQLITE_OK) {
+        std::cerr << "Error al ejecutar la consulta SQL: " << error_message << std::endl;
+        sqlite3_free(error_message);
+    } else {
+        std::cout << "Progreso actualizado correctamente." << std::endl;
+    }
+
+    // Cerrar la base de datos
     sqlite3_close(db);
 }
