@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "db2.h"
+#include <string>
 
 void errorMsg(char mensaje[]) {
     FILE* f;
@@ -600,6 +601,8 @@ int eliminarLibro(sqlite3 *db, char titulo[]){
 
     return SQLITE_OK;
 }
+
+
 
 // int main() {
 

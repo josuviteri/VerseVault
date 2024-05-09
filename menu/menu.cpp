@@ -142,7 +142,7 @@ void menuMiLista() {
 
         //Falta mostrar la lista actual del cliente
 
-        printf("1.Agregar Libro a Mi Lista\n2.Eliminar Libro de Mi Lista\n3.Descargar Libro\n4.Leer Libro\n5.Volver");
+        printf("1.Agregar Libro a Mi Lista\n2.Eliminar Libro de Mi Lista\n3.Descargar Libro\n4.Leer Libro\n5.Volver\n");
 
         fgets(input, sizeof(input), stdin);
         sscanf(input, " %c", &sel);
@@ -161,8 +161,11 @@ void menuMiLista() {
             strtok(titulo, "\n"); // Elimina el carácter
             eliminarLibroMenu(titulo);
         }else if(sel == '3'){
-            printf("\ncorrecto 2\n\n");
-            descargarLibro();
+            printf("\ncorrecto 3\n\n");
+            printf("\nIntroduce nombre del libro que quieras descargar en su lista: \n");
+            fgets(titulo, sizeof(titulo), stdin);
+            strtok(titulo, "\n"); // Elimina el carácter
+            descargarLibro(titulo);
 
         }else if(sel == '4'){
             printf("\ncorrecto 4\n\n");
@@ -479,8 +482,9 @@ void guardarProgresoListaPersonal(int id_cliente, char titulo[], char fecha_lec[
 
     return;
 }
-void descargarLibro(){
-    descargaArchivos();
+void descargarLibro(char *titulo){
+
+    peticionAutorPorTitulo(titulo);
 }
 
 void buscarLibro(){

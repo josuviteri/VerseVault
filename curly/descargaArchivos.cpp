@@ -5,6 +5,7 @@
 #include "nlohmann/json.hpp"
 #include "descargaArchivos.h"
 #include <filesystem> // Para obtener la ruta del directorio actual
+#include "../database/db2.h"
 using json = nlohmann::json;
 namespace fs = std::filesystem;
 
@@ -52,7 +53,7 @@ std::string extractBookTitle(const std::string& jsonStr) {
     return title;
 }
 
-void descargaArchivos() {
+void descargaArchivos(char* titulo, char* nombreAutor) {
     CURL *curl;
     CURLcode res;
     std::string readBuffer;
@@ -60,7 +61,31 @@ void descargaArchivos() {
     curl_global_init(CURL_GLOBAL_ALL);
     curl = curl_easy_init();
     if(curl) {
-        curl_easy_setopt(curl, CURLOPT_URL, "http://gutendex.com/books/?search=elizabeth%20cleghorn%20gaskell%20cranford");
+        std::stringstream urlBuilder;
+        urlBuilder << "http://gutendex.com/books/?search=";
+
+        // Formatear el autor
+        for (int i = 0; nombreAutor[i]; i++) {
+            if (nombreAutor[i] == ' ') {
+                urlBuilder << "%20";
+            } else {
+                urlBuilder << nombreAutor[i];
+            }
+        }
+
+        // Formatear el título
+        urlBuilder << "%20";
+        for (int i = 0; titulo[i]; i++) {
+            if (titulo[i] == ' ') {
+                urlBuilder << "%20";
+            } else {
+                urlBuilder << titulo[i];
+            }
+        }
+
+        std::string url = urlBuilder.str();
+
+        curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
 
@@ -85,7 +110,7 @@ void descargaArchivos() {
                     std::string fileName = directory + bookTitle + ".txt"; // Ruta del archivo
 
                     // Crear la carpeta si no existe
-                    fs::create_directories(directory);
+                    std::filesystem::create_directories(directory);
 
                     // Leer el contenido del enlace y guardarlo en un archivo
                     curl_easy_setopt(curl, CURLOPT_URL, txtUtf8Link.c_str());
@@ -108,11 +133,10 @@ void descargaArchivos() {
                     std::cerr << "No se encontró el título del libro en el JSON." << std::endl;
                 }
             } else {
-                std::cerr << "No se encontró un enlace de texto UTF-8 en el JSON." << std::endl;
+                std::cerr << "No se encontró el enlace de texto UTF-8." << std::endl;
             }
         }
         curl_easy_cleanup(curl);
     }
     curl_global_cleanup();
-
 }
