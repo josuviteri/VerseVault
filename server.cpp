@@ -90,8 +90,7 @@ int main(int argc, char *argv[]) {
             switch (selection) {
                  case 1:
                     
-                    imprimirInicial(); // Llama a la función 
-                    strcpy(sendBuff, "Returned from menu"); // Mensaje de respuesta
+                    strcpy(sendBuff, "Opt 1"); // Mensaje de respuesta
                     break;
                 case 2:
                     strcpy(sendBuff, "You selected Option 2");
