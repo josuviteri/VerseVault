@@ -45,28 +45,29 @@ int main(int argc, char *argv[]) {
 	printf("Connection stablished with: %s (%d)\n", inet_ntoa(server.sin_addr),
 			ntohs(server.sin_port));
 
-	// SEND and RECEIVE data
-	printf("Sending message 1... \n");
-	strcpy(sendBuff, "Hello, server.");
-	send(s, sendBuff, sizeof(sendBuff), 0);
+// RECEIVE and SEND data
+    do {
+        // RECEIVE menu message from server
+        int bytes = recv(s, recvBuff, sizeof(recvBuff), 0);
+        if (bytes > 0) {
+            // Show menu to user
+            printf("Menu received from server: \n%s\n", recvBuff);
 
-	printf("Receiving message 1... \n");
-	recv(s, recvBuff, sizeof(recvBuff), 0);
-	printf("Data received: %s \n", recvBuff);
+            // Get user selection
+            printf("Enter your selection: ");
+            fgets(sendBuff, sizeof(sendBuff), stdin);
+            sendBuff[strcspn(sendBuff, "\n")] = '\0'; // Remove newline character
 
-	printf("Sending message 2... \n");
-	strcpy(sendBuff, "Hello again.");
-	send(s, sendBuff, sizeof(sendBuff), 0);
-	printf("Data sent: %s \n", sendBuff);
+            // Send user selection to server
+            send(s, sendBuff, strlen(sendBuff), 0);
 
-	printf("Receiving message 2... \n");
-	recv(s, recvBuff, sizeof(recvBuff), 0);
-	printf("Data received: %s \n", recvBuff);
-
-	printf("Sending last message... \n");
-	strcpy(sendBuff, "Bye");
-	send(s, sendBuff, sizeof(sendBuff), 0);
-	printf("Data sent: %s \n", sendBuff);
+            // Receive and display server response
+            bytes = recv(s, recvBuff, sizeof(recvBuff), 0);
+            if (bytes > 0) {
+                printf("Server response: %s\n", recvBuff);
+            }
+        }
+    } while (strcmp(sendBuff, "0") != 0); // Exit loop if user enters "0"
 
 	// CLOSING the socket and cleaning Winsock...
 	closesocket(s);
