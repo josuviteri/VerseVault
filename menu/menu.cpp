@@ -22,6 +22,7 @@ int id_cliente_actual = -1;
 time_t rawtime;
 struct tm* timeinfo;
 char actualTime[80];
+int es_admin = 0;
 
 void imprimirInicial(){
     char input[10];
@@ -47,22 +48,32 @@ void imprimirInicial(){
         if(sel == '1'){
             printf("\nIntroduce tus datos para iniciar sesion:\nIntroduce tu correo electronico:\n");
             fgets(email, sizeof(email), stdin);
+            strtok(email, "\n"); // Elimina el carácter
 
+            // Verificar si el correo electrónico termina con "@opendeusto.es"
+            if (endsWith(email, "@opendeusto.es") || endsWith(email, "@deusto.es")) {
+                es_admin = 1;
+            }else {
+                es_admin = 0;
+            }
             printf("\nIntroduce tu contrasenya:\n");
             fgets(pass, sizeof(pass), stdin);
+            strtok(pass, "\n"); // Elimina el carácter
 
             iniciarSesionMenu(email,pass);
 
         }else if(sel == '2'){
             printf("\nIntroduce tus datos para registrarte:\nIntroduce tu nombre:\n(30 caracteres como maximo)\n");
             fgets(nombre, sizeof(nombre), stdin);
+            strtok(nombre, "\n"); // Elimina el carácter
 
             printf("\nIntroduce tu correo electronico:\n");
             fgets(email, sizeof(email), stdin);
+            strtok(email, "\n"); // Elimina el carácter
 
             printf("\nIntroduce tu contrasenya:\n(30 caracteres como maximo)\n");
             fgets(pass, sizeof(pass), stdin);
-
+            strtok(pass, "\n"); // Elimina el carácter
 
             registrarClienteMenu(nombre,email,pass);
 
@@ -86,54 +97,81 @@ void imprimirMenu(){
     char fecha_publicacion[11];
     char fecha_actual[10];
 
+
     printf(NEGRITA"Menu Principal\n\n" QUITAR_NEGRITA);
 
+    if(es_admin == 1) {
+        do{
+            printf("\nSelecciona una opcion: \n");
+            printf("1. Mi Lista\n2.Buscar Libro\n3.Agregar Libro BD (admin only)\n4.Eliminar Libro BD (admin only)\n5.Volver\n");
 
-    do{
-        printf("\nSelecciona una opcion: \n");
-        printf("1. Mi Lista\n2.Buscar Libro\n3.Agregar Libro BD (admin only)\n4.Eliminar Libro BD (admin only)\n5.Volver\n");
+            fgets(input, sizeof(input), stdin);
+            sscanf(input, " %c", &sel);
 
-        fgets(input, sizeof(input), stdin);
-        sscanf(input, " %c", &sel);
+            if(sel == '1'){
+                printf("\ncorrecto 1\n\n");
+                menuMiLista();
 
-        if(sel == '1'){
-            printf("\ncorrecto 1\n\n");
-            menuMiLista();
+            }else if(sel == '2'){
+                printf("\ncorrecto 2\n\n");
+                buscarLibro();
 
-        }else if(sel == '2'){
-            printf("\ncorrecto 2\n\n");
-            buscarLibro();
+            }else if(sel == '3'){
+                printf("\ncorrecto 4\n\n");
+                printf("\nIntroduce los datos del libro:\nIntroduce el nombre del libro:\n(30 caracteres como maximo)\n");
+                fgets(titulo, sizeof(titulo), stdin);
+                strtok(titulo, "\n"); // Elimina el carácter
 
-        }else if(sel == '3'){
-            printf("\ncorrecto 4\n\n");
-            printf("\nIntroduce los datos del libro:\nIntroduce el nombre del libro:\n(30 caracteres como maximo)\n");
-            fgets(titulo, sizeof(titulo), stdin);
-            strtok(titulo, "\n"); // Elimina el carácter
-
-            printf("\nIntroduce el nombre del autor:\n");
-            fgets(nom_autor, sizeof(nom_autor), stdin);
-            strtok(nom_autor, "\n"); // Elimina el carácter
+                printf("\nIntroduce el nombre del autor:\n");
+                fgets(nom_autor, sizeof(nom_autor), stdin);
+                strtok(nom_autor, "\n"); // Elimina el carácter
 
 
-            printf("\nIntroduce el idioma de una manera reducida:\n(ejemplo: es, en...)\n");
-            fgets(idioma, sizeof(idioma), stdin);
-            strtok(idioma, "\n"); // Elimina el carácter
+                printf("\nIntroduce el idioma de una manera reducida:\n(ejemplo: es, en...)\n");
+                fgets(idioma, sizeof(idioma), stdin);
+                strtok(idioma, "\n"); // Elimina el carácter
 
-            printf("\nIntroduce la fecha de publicacion del libro: \n(formato:aaaa-mm-dd)\n");
-            fgets(fecha_publicacion, sizeof(fecha_publicacion), stdin);
-            strtok(fecha_publicacion, "\n"); // Elimina el carácter
+                printf("\nIntroduce la fecha de publicacion del libro: \n(formato:aaaa-mm-dd)\n");
+                fgets(fecha_publicacion, sizeof(fecha_publicacion), stdin);
+                strtok(fecha_publicacion, "\n"); // Elimina el carácter
 
-            agregarLibroMenu(titulo, nom_autor, idioma, fecha_publicacion);
-        }else if(sel == '4'){
+                agregarLibroMenu(titulo, nom_autor, idioma, fecha_publicacion);
+            }else if(sel == '4'){
 
-        }else if(sel == '5'){
-            printf("\ncerrando sesion...\n\n");
-            imprimirInicial();
-        }else{
-            printf("\nIntroduce un valor valido\n\n");
+            }else if(sel == '5'){
+                printf("\ncerrando sesion...\n\n");
+                imprimirInicial();
+            }else{
+                printf("\nIntroduce un valor valido\n\n");
+            }
+
+        }while(sel != '5');
+    }else {
+        do{
+            printf("\nSelecciona una opcion: \n");
+            printf("1. Mi Lista\n2.Buscar Libro\n3.Volver\n");
+
+            fgets(input, sizeof(input), stdin);
+            sscanf(input, " %c", &sel);
+
+            if(sel == '1'){
+                printf("\ncorrecto 1\n\n");
+                menuMiLista();
+
+            }else if(sel == '2'){
+                printf("\ncorrecto 2\n\n");
+                buscarLibro();
+
+            }else if(sel == '3'){
+                printf("\ncerrando sesion...\n\n");
+                imprimirInicial();
+            }else{
+                printf("\nIntroduce un valor valido\n\n");
+            }
+
+        }while(sel != '3');
     }
 
-    }while(sel != '5');
 }
 
 void menuMiLista() {
@@ -179,10 +217,11 @@ void menuMiLista() {
 
         }else if(sel == '4'){
             printf("\ncorrecto 4\n\n");
-            printf("\nIntroduce nombre del libro que quieras descargar en su lista: \n");
+            printf("\nIntroduce nombre del libro que quieras leer: \n");
             fgets(titulo, sizeof(titulo), stdin);
             strtok(titulo, "\n"); // Elimina el carácter
             leerLibro(titulo);
+            menuMiLista();
             //leer libro
         }else if(sel == '5'){
             printf("\nvolviendo...\n\n");
@@ -575,5 +614,6 @@ void leerLibro(string titulo) {
         }
     } while (opcion != 3);
 }
+
 
 

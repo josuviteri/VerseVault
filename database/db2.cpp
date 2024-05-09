@@ -156,8 +156,15 @@ int registrarCliente(sqlite3 *db, char nom_cl[], char email_cl[], char pass_cl[]
         return result;
     }
 
+    int es_admin = 0;
+
+    // Verificar si el correo electrónico termina con "@opendeusto.es"
+    if (endsWith(email_cl, "@opendeusto.es") || endsWith(email_cl, "@deusto.es")) {
+        es_admin = 1;
+    }
+
     // Si el correo electrónico no existe, proceder con la inserción
-    char sql[] = "INSERT INTO Cliente (nom_cl, email_cl, pass_cl) VALUES (?,?,?)";
+    char sql[] = "INSERT INTO Cliente (nom_cl, email_cl, es_admin, pass_cl) VALUES (?,?,?,?)";
     result = sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL);
     if (result != SQLITE_OK) {
         errorMsg("Error preparing statement (INSERT)\n");
@@ -183,8 +190,15 @@ int registrarCliente(sqlite3 *db, char nom_cl[], char email_cl[], char pass_cl[]
         printf("%s\n", sqlite3_errmsg(db));
         return result;
     }
+    result = sqlite3_bind_int(stmt, 3, es_admin);
+    if (result != SQLITE_OK) {
+        errorMsg("Error binding pass_cl parameter\n");
+        printf("Error binding pass_cl parameter\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return result;
+    }
 
-    result = sqlite3_bind_text(stmt, 3, pass_cl, strlen(pass_cl), SQLITE_STATIC);
+    result = sqlite3_bind_text(stmt, 4, pass_cl, strlen(pass_cl), SQLITE_STATIC);
     if (result != SQLITE_OK) {
         errorMsg("Error binding pass_cl parameter\n");
         printf("Error binding pass_cl parameter\n");
@@ -212,6 +226,12 @@ int registrarCliente(sqlite3 *db, char nom_cl[], char email_cl[], char pass_cl[]
     return SQLITE_OK;
 }
 
+bool endsWith(const std::string &str, const std::string &suffix) {
+    if (str.length() < suffix.length()) {
+        return false;
+    }
+    return str.compare(str.length() - suffix.length(), suffix.length(), suffix) == 0;
+}
 
 
 
