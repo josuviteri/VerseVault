@@ -4,6 +4,7 @@
 #include "../sqlite/sqlite3.h"
 #include <string.h>
 #include <time.h>
+#include <string>
 
 void errorMsg(char mensaje[]);
 int showAllClientes(sqlite3 *db);
@@ -18,5 +19,6 @@ int aportarLibro(sqlite3 *db, int id_cliente, char titulo[], char fecha_lec[]);
 int guardarProgreso(sqlite3 *db, int id_cliente, const char titulo[], const char fecha_lec[], int pag_actual);
 
 int eliminarLibro(sqlite3 *db, char titulo[]);
+
 
 #endif /* MENU_H */

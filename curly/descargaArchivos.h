@@ -17,7 +17,7 @@ std::string extractTxtUtf8Link(const std::string& jsonStr);
 
 std::string extractBookTitle(const std::string& jsonStr);
 
-void descargaArchivos();
+void descargaArchivos(char* titulo, char* nombreAutor);
 
 
 
