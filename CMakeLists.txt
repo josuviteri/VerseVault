@@ -3,12 +3,12 @@ project(VerseVault)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(ProgIV curly/descargaArchivos.cpp
+add_executable(cliente curly/descargaArchivos.cpp
         menu/menu.cpp
         sqlite/sqlite3.c
         database/db2.cpp
         database/dbBusqueda.cpp
-        main.cpp)
+        client.cpp)
 
 
 
@@ -19,6 +19,6 @@ link_directories(${CMAKE_SOURCE_DIR}/lib)
 
 set(SOURCE_FILES curly/descargaArchivos.cpp)
 
-target_link_libraries(ProgIV ${CMAKE_SOURCE_DIR}/lib/libcurl.dll.a)
+target_link_libraries(cliente ${CMAKE_SOURCE_DIR}/lib/libcurl.dll.a ws2_32)
 
 

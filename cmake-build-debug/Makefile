@@ -47,19 +47,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "D:\Archivos Uni\Programas Raros\CLion 2023.3.4\bin\cmake\win\x64\bin\cmake.exe"
+CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2024.1.1\bin\cmake\win\x64\bin\cmake.exe"
 
 # The command to remove a file.
-RM = "D:\Archivos Uni\Programas Raros\CLion 2023.3.4\bin\cmake\win\x64\bin\cmake.exe" -E rm -f
+RM = "C:\Program Files\JetBrains\CLion 2024.1.1\bin\cmake\win\x64\bin\cmake.exe" -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "D:\Archivos Uni\2 anio\Programacion IV\VerseVault"
+CMAKE_SOURCE_DIR = C:\Users\josiw\CLionProjects\VerseVault
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\cmake-build-debug"
+CMAKE_BINARY_DIR = C:\Users\josiw\CLionProjects\VerseVault\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -67,7 +67,7 @@ CMAKE_BINARY_DIR = "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\cmake-buil
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "No interactive CMake dialog available..."
-	"D:\Archivos Uni\Programas Raros\CLion 2023.3.4\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available."
+	"C:\Program Files\JetBrains\CLion 2024.1.1\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available."
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -77,7 +77,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake to regenerate build system..."
-	"D:\Archivos Uni\Programas Raros\CLion 2023.3.4\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	"C:\Program Files\JetBrains\CLion 2024.1.1\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -86,9 +86,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\cmake-build-debug\CMakeFiles" "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\cmake-build-debug\\CMakeFiles\progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\josiw\CLionProjects\VerseVault\cmake-build-debug\CMakeFiles C:\Users\josiw\CLionProjects\VerseVault\cmake-build-debug\\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\cmake-build-debug\CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\josiw\CLionProjects\VerseVault\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -116,24 +116,48 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named ProgIV
+# Target rules for targets named cliente
 
 # Build rule for target.
-ProgIV: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 ProgIV
-.PHONY : ProgIV
+cliente: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 cliente
+.PHONY : cliente
 
 # fast build rule for target.
-ProgIV/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/build
-.PHONY : ProgIV/fast
+cliente/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\cliente.dir\build.make CMakeFiles/cliente.dir/build
+.PHONY : cliente/fast
+
+client.obj: client.cpp.obj
+.PHONY : client.obj
+
+# target to build an object file
+client.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\cliente.dir\build.make CMakeFiles/cliente.dir/client.cpp.obj
+.PHONY : client.cpp.obj
+
+client.i: client.cpp.i
+.PHONY : client.i
+
+# target to preprocess a source file
+client.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\cliente.dir\build.make CMakeFiles/cliente.dir/client.cpp.i
+.PHONY : client.cpp.i
+
+client.s: client.cpp.s
+.PHONY : client.s
+
+# target to generate assembly for a file
+client.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\cliente.dir\build.make CMakeFiles/cliente.dir/client.cpp.s
+.PHONY : client.cpp.s
 
 curly/descargaArchivos.obj: curly/descargaArchivos.cpp.obj
 .PHONY : curly/descargaArchivos.obj
 
 # target to build an object file
 curly/descargaArchivos.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/curly/descargaArchivos.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\cliente.dir\build.make CMakeFiles/cliente.dir/curly/descargaArchivos.cpp.obj
 .PHONY : curly/descargaArchivos.cpp.obj
 
 curly/descargaArchivos.i: curly/descargaArchivos.cpp.i
@@ -141,7 +165,7 @@ curly/descargaArchivos.i: curly/descargaArchivos.cpp.i
 
 # target to preprocess a source file
 curly/descargaArchivos.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/curly/descargaArchivos.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\cliente.dir\build.make CMakeFiles/cliente.dir/curly/descargaArchivos.cpp.i
 .PHONY : curly/descargaArchivos.cpp.i
 
 curly/descargaArchivos.s: curly/descargaArchivos.cpp.s
@@ -149,7 +173,7 @@ curly/descargaArchivos.s: curly/descargaArchivos.cpp.s
 
 # target to generate assembly for a file
 curly/descargaArchivos.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/curly/descargaArchivos.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\cliente.dir\build.make CMakeFiles/cliente.dir/curly/descargaArchivos.cpp.s
 .PHONY : curly/descargaArchivos.cpp.s
 
 database/db2.obj: database/db2.cpp.obj
@@ -157,7 +181,7 @@ database/db2.obj: database/db2.cpp.obj
 
 # target to build an object file
 database/db2.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/database/db2.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\cliente.dir\build.make CMakeFiles/cliente.dir/database/db2.cpp.obj
 .PHONY : database/db2.cpp.obj
 
 database/db2.i: database/db2.cpp.i
@@ -165,7 +189,7 @@ database/db2.i: database/db2.cpp.i
 
 # target to preprocess a source file
 database/db2.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/database/db2.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\cliente.dir\build.make CMakeFiles/cliente.dir/database/db2.cpp.i
 .PHONY : database/db2.cpp.i
 
 database/db2.s: database/db2.cpp.s
@@ -173,7 +197,7 @@ database/db2.s: database/db2.cpp.s
 
 # target to generate assembly for a file
 database/db2.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/database/db2.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\cliente.dir\build.make CMakeFiles/cliente.dir/database/db2.cpp.s
 .PHONY : database/db2.cpp.s
 
 database/dbBusqueda.obj: database/dbBusqueda.cpp.obj
@@ -181,7 +205,7 @@ database/dbBusqueda.obj: database/dbBusqueda.cpp.obj
 
 # target to build an object file
 database/dbBusqueda.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/database/dbBusqueda.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\cliente.dir\build.make CMakeFiles/cliente.dir/database/dbBusqueda.cpp.obj
 .PHONY : database/dbBusqueda.cpp.obj
 
 database/dbBusqueda.i: database/dbBusqueda.cpp.i
@@ -189,7 +213,7 @@ database/dbBusqueda.i: database/dbBusqueda.cpp.i
 
 # target to preprocess a source file
 database/dbBusqueda.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/database/dbBusqueda.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\cliente.dir\build.make CMakeFiles/cliente.dir/database/dbBusqueda.cpp.i
 .PHONY : database/dbBusqueda.cpp.i
 
 database/dbBusqueda.s: database/dbBusqueda.cpp.s
@@ -197,39 +221,15 @@ database/dbBusqueda.s: database/dbBusqueda.cpp.s
 
 # target to generate assembly for a file
 database/dbBusqueda.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/database/dbBusqueda.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\cliente.dir\build.make CMakeFiles/cliente.dir/database/dbBusqueda.cpp.s
 .PHONY : database/dbBusqueda.cpp.s
-
-main.obj: main.cpp.obj
-.PHONY : main.obj
-
-# target to build an object file
-main.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/main.cpp.obj
-.PHONY : main.cpp.obj
-
-main.i: main.cpp.i
-.PHONY : main.i
-
-# target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/main.cpp.i
-.PHONY : main.cpp.i
-
-main.s: main.cpp.s
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/main.cpp.s
-.PHONY : main.cpp.s
 
 menu/menu.obj: menu/menu.cpp.obj
 .PHONY : menu/menu.obj
 
 # target to build an object file
 menu/menu.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/menu/menu.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\cliente.dir\build.make CMakeFiles/cliente.dir/menu/menu.cpp.obj
 .PHONY : menu/menu.cpp.obj
 
 menu/menu.i: menu/menu.cpp.i
@@ -237,7 +237,7 @@ menu/menu.i: menu/menu.cpp.i
 
 # target to preprocess a source file
 menu/menu.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/menu/menu.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\cliente.dir\build.make CMakeFiles/cliente.dir/menu/menu.cpp.i
 .PHONY : menu/menu.cpp.i
 
 menu/menu.s: menu/menu.cpp.s
@@ -245,7 +245,7 @@ menu/menu.s: menu/menu.cpp.s
 
 # target to generate assembly for a file
 menu/menu.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/menu/menu.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\cliente.dir\build.make CMakeFiles/cliente.dir/menu/menu.cpp.s
 .PHONY : menu/menu.cpp.s
 
 sqlite/sqlite3.obj: sqlite/sqlite3.c.obj
@@ -253,7 +253,7 @@ sqlite/sqlite3.obj: sqlite/sqlite3.c.obj
 
 # target to build an object file
 sqlite/sqlite3.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/sqlite/sqlite3.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\cliente.dir\build.make CMakeFiles/cliente.dir/sqlite/sqlite3.c.obj
 .PHONY : sqlite/sqlite3.c.obj
 
 sqlite/sqlite3.i: sqlite/sqlite3.c.i
@@ -261,7 +261,7 @@ sqlite/sqlite3.i: sqlite/sqlite3.c.i
 
 # target to preprocess a source file
 sqlite/sqlite3.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/sqlite/sqlite3.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\cliente.dir\build.make CMakeFiles/cliente.dir/sqlite/sqlite3.c.i
 .PHONY : sqlite/sqlite3.c.i
 
 sqlite/sqlite3.s: sqlite/sqlite3.c.s
@@ -269,7 +269,7 @@ sqlite/sqlite3.s: sqlite/sqlite3.c.s
 
 # target to generate assembly for a file
 sqlite/sqlite3.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/sqlite/sqlite3.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\cliente.dir\build.make CMakeFiles/cliente.dir/sqlite/sqlite3.c.s
 .PHONY : sqlite/sqlite3.c.s
 
 # Help Target
@@ -280,7 +280,10 @@ help:
 	@echo ... depend
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... ProgIV
+	@echo ... cliente
+	@echo ... client.obj
+	@echo ... client.i
+	@echo ... client.s
 	@echo ... curly/descargaArchivos.obj
 	@echo ... curly/descargaArchivos.i
 	@echo ... curly/descargaArchivos.s
@@ -290,9 +293,6 @@ help:
 	@echo ... database/dbBusqueda.obj
 	@echo ... database/dbBusqueda.i
 	@echo ... database/dbBusqueda.s
-	@echo ... main.obj
-	@echo ... main.i
-	@echo ... main.s
 	@echo ... menu/menu.obj
 	@echo ... menu/menu.i
 	@echo ... menu/menu.s
