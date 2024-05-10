@@ -110,7 +110,7 @@ void peticionAutorPorTitulo(char *titulo){
         nombreAutor = (char *)sqlite3_column_text(stmt, 0);
         printf("%s\n",titulo);
         printf("%s\n",nombreAutor);
-        descargaArchivos(titulo, nombreAutor);
+        descargaArchivos(titulo, nombreAutor); //Llamamos a la funcion para descargar
     } else {
         printf("\nLibro no encontrado.\n");
     }

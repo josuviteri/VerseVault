@@ -39,7 +39,8 @@ void descargarLibro(char *titulo);
 void buscarLibro();
 
 void imprimirLineas(const std::vector<std::string>& lines, int start);
-void leerLibro(std::string titulo);
+bool CheckleerLibro(std::string titulo);
+void leer(std::string titulo, std::ifstream& archivo); //Usamos referencia para pasar archivo
 
 #ifdef __cplusplus
 }
