@@ -45,6 +45,9 @@ int main() {
     std::cout << "Connection established with: " << inet_ntoa(server.sin_addr)
               << " (" << ntohs(server.sin_port) << ")\n";
 
+    // Call imprimirInicial() to display initial menu
+    imprimirInicial();
+
     // RECEIVE and SEND data
     do {
         // RECEIVE menu message from server
