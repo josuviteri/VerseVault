@@ -43,6 +43,8 @@ void imprimirLineas(const std::vector<std::string>& lines, int start);
 bool CheckleerLibro(std::string titulo);
 void leer(std::string titulo, std::ifstream& archivo); //Usamos referencia para pasar archivo
 
+void limpiarBuffer();
+
 #ifdef __cplusplus
 }
 #endif

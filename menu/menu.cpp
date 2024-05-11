@@ -93,6 +93,10 @@ void imprimirInicial() {
 
     } while (sel != '4' && !salir);
 }
+void limpiarBuffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
 
 void imprimirMenu() {
     char input[10];
@@ -149,16 +153,18 @@ void imprimirMenu() {
                     fgets(titulo, sizeof(titulo), stdin);
                     strtok(titulo, "\n"); // Elimina el carácter
                     eliminarLibroBD(titulo);
+                    imprimirMenu();
                     break;
                 case '5':
                     printf("\ncerrando sesion...\n\n");
                     salir = true;
+                    imprimirInicial();
                     break;
                 default:
                     printf("\nIntroduce un valor valido\n\n");
                     break;
             }
-
+            limpiarBuffer();
         } while (!salir);
     } else {
         do {
