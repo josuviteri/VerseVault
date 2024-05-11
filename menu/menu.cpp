@@ -361,42 +361,61 @@ void imprimirMenuInvitado() {
 }
 */
 
-void imprimirGestionInvitado(){
+void imprimirGestionInvitado() {
     char input[10];
     char sel;
     char titulo[30];
-    char fecha_actual[30];
+    char nom_autor[30];
+    char idioma[10];
+    char fecha_publicacion[11];
 
-    printf(NEGRITA"Menu de Gestion de Contenido\nSesion de invitado\n\n" QUITAR_NEGRITA);
+    printf(NEGRITA "Menu de Gestion de Contenido\nSesion de invitado\n\n" QUITAR_NEGRITA);
 
-
-    do{
+    do {
         printf("\nSelecciona una opcion: \n");
-        printf("1. Buscar Libro\n2. Aportar Libro\n3. Volver\n");
+        printf("1. Buscar Libro\n2. Aportar Libro a la BD\n3. Volver\n");
 
         fgets(input, sizeof(input), stdin);
         sscanf(input, " %c", &sel);
 
-        if(sel == '1'){
-            printf("\ncorrecto 1\n\n");
-            buscarLibro();
-        }else if(sel == '2'){
-            printf("\ncorrecto 2\n\n");
-            printf("\nIntroduce el titulo del libro que desea guardar en tu lista: \n");
-            fgets(titulo, sizeof(titulo), stdin);
-            strtok(titulo, "\n"); // Elimina el carácter
-            aportarLibroMenu(titulo, actualTime);
-        }else if(sel == '3'){
-            printf("\nvolviendo...\n\n");
-            imprimirMenuInvitado();
+        switch (sel) {
+            case '1':
+                printf("\ncorrecto 1\n\n");
+                buscarLibro();
+                break;
+            case '2':
+                printf("\ncorrecto 2\n\n");
+                printf("\ncorrecto 4\n\n");
+                printf("\nIntroduce los datos del libro:\nIntroduce el nombre del libro:\n(30 caracteres como maximo)\n");
+                fgets(titulo, sizeof(titulo), stdin);
+                strtok(titulo, "\n"); // Elimina el carácter
+
+                printf("\nIntroduce el nombre del autor:\n");
+                fgets(nom_autor, sizeof(nom_autor), stdin);
+                strtok(nom_autor, "\n"); // Elimina el carácter
+
+                printf("\nIntroduce el idioma de una manera reducida:\n(ejemplo: es, en...)\n");
+                fgets(idioma, sizeof(idioma), stdin);
+                strtok(idioma, "\n"); // Elimina el carácter
+
+                printf("\nIntroduce la fecha de publicacion del libro: \n(formato:aaaa-mm-dd)\n");
+                fgets(fecha_publicacion, sizeof(fecha_publicacion), stdin);
+                strtok(fecha_publicacion, "\n"); // Elimina el carácter
+
+                agregarLibroMenu(titulo, nom_autor, idioma, fecha_publicacion);
+                break;
+            case '3':
+                printf("\nvolviendo...\n\n");
+                imprimirMenuInvitado();
+                break;
+            default:
+                printf("\nIntroduce un valor valido\n\n");
+                break;
         }
-        else{
-            printf("\nIntroduce un valor valido\n\n");
-    }
-
-    }while(sel != '3' && sel != '2' && sel != '1');
-
+    limpiarBuffer();
+    } while (sel != '3');
 }
+
 
 
 
@@ -493,7 +512,7 @@ void eliminarLibroMenu(char titulo[]){
     al = eliminarLibro(db, titulo);
 
     if (al != SQLITE_OK) {
-        printf("Error inserting new datan");
+        printf("Error deleting data");
         printf("%s\n", sqlite3_errmsg(db));
     } else {
         printf("Libro eliminado exitosamente\n");
@@ -518,7 +537,7 @@ void aportarLibroMenu(char titulo[], char fecha_lec[]){
     }
 
     // Intenta agregar el libro
-    al = agregarLibroMiLista(db, id_cliente_actual ,titulo, fecha_lec);
+    //al = agregarLibro(db, id_cliente_actual ,titulo, fecha_lec);
 
     if (al != SQLITE_OK) {
         printf("Error inserting new data\n");
