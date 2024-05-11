@@ -20,6 +20,7 @@ int agregarLibroMiLista(sqlite3 *db, int id_cliente, char titulo[], char fecha_l
 int guardarProgreso(sqlite3 *db, int id_cliente, const char titulo[], const char fecha_lec[], int pag_actual);
 
 int eliminarLibro(sqlite3 *db, char titulo[]);
+int eliminarLibroBD1(sqlite3 *db, char titulo[]);
 
 void mostrarMiLista(int id_cliente_actual);
 

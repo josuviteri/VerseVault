@@ -145,6 +145,10 @@ void imprimirMenu() {
                     break;
                 case '4':
                     // Agregar código para eliminar libro BD
+                    printf("\nIntroduce nombre del libro que quiera eliminar de la BD: \n");
+                    fgets(titulo, sizeof(titulo), stdin);
+                    strtok(titulo, "\n"); // Elimina el carácter
+                    eliminarLibroBD(titulo);
                     break;
                 case '5':
                     printf("\ncerrando sesion...\n\n");
@@ -515,6 +519,35 @@ void aportarLibroMenu(char titulo[], char fecha_lec[]){
         printf("%s\n", sqlite3_errmsg(db));
     } else {
         printf("Libro agregado exitosamente\n");
+    }
+
+    // Cierra la base de datos
+    al = sqlite3_close(db);
+    if (al != SQLITE_OK) {
+        printf("Error closing database\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return;
+    }
+}
+
+void eliminarLibroBD(char titulo[]){
+    //debria contectarse a la db y eliminar un libro de la lista personal
+    sqlite3 *db;
+    int al = sqlite3_open("libreria.db", &db);
+    if (al != SQLITE_OK) {
+        //////errorMsgg("Error opening database\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return;
+    }
+
+    // Intenta agregar el libro
+    al = eliminarLibroBD1(db, titulo);
+
+    if (al != SQLITE_OK) {
+        printf("Error deleting data");
+        printf("%s\n", sqlite3_errmsg(db));
+    } else {
+        printf("Libro eliminado exitosamente\n");
     }
 
     // Cierra la base de datos

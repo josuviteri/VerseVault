@@ -622,7 +622,45 @@ int eliminarLibro(sqlite3 *db, char titulo[]){
 
     return SQLITE_OK;
 }
+int eliminarLibroBD1(sqlite3 *db, char titulo[]){
+    sqlite3_stmt *stmt = NULL;
+    int result;
 
+    // Consulta SQL para obtener el id_libro
+    char query[] = "DELETE FROM Libro WHERE titulo = ?";
+
+    result = sqlite3_prepare_v2(db, query, strlen(query) + 1, &stmt, NULL);
+    if (result != SQLITE_OK) {
+        errorMsg("Error preparing delete statement\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return result;
+    }
+
+    result = sqlite3_bind_text(stmt, 1, titulo, strlen(titulo), SQLITE_STATIC);
+    if (result != SQLITE_OK) {
+        errorMsg("Error binding titulo parameter for delet\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        sqlite3_finalize(stmt);
+        return result;
+    }
+
+    result = sqlite3_step(stmt);
+    if (result != SQLITE_DONE) {
+        errorMsg("Error deleting data from LIBRO table\n");
+        printf("Error deleting data from LIBRO table\n");
+        return result;
+    }
+
+    result = sqlite3_finalize(stmt);
+    if (result != SQLITE_OK) {
+        errorMsg("Error finalizing statement (INSERT)\n");
+        printf("Error finalizing statement (INSERT)\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return result;
+    }
+
+    return SQLITE_OK;
+}
 void mostrarMiLista(int id_cliente_actual) {
     sqlite3 *db;
     char query[200]; // Ajusta el tamaño según tus necesidades
