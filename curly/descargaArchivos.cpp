@@ -124,16 +124,16 @@ void descargaArchivos(char* titulo, char* nombreAutor) {
                         if (outputFile.is_open()) {
                             outputFile << readBuffer;
                             outputFile.close();
-                            std::cout << "Contenido guardado en " << fileName << std::endl;
+                            std::cout << "\nContenido guardado en " << fileName << std::endl;
                         } else {
-                            std::cerr << "No se pudo abrir el archivo para escritura." << std::endl;
+                            std::cerr << "\nNo se pudo abrir el archivo para escritura." << std::endl;
                         }
                     }
                 } else {
-                    std::cerr << "No se encontró el título del libro en el JSON." << std::endl;
+                    std::cerr << "\nNo se encontro el título del libro en el JSON." << std::endl;
                 }
             } else {
-                std::cerr << "No se encontró el enlace de texto UTF-8." << std::endl;
+                std::cerr << "\nNo se encontro el enlace de texto UTF-8." << std::endl;
             }
         }
         curl_easy_cleanup(curl);

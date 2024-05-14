@@ -199,7 +199,7 @@ void imprimirMenu() {
 void menuMiLista() {
     char input[10];
     char sel;
-    char titulo[30];
+    char titulo[200];
     char nom_autor[30];
     char idioma[10];
     char fecha_publicacion[11];
@@ -220,6 +220,7 @@ void menuMiLista() {
         switch (sel) {
             case '1':
                 printf("\ncorrecto 1\n\n");
+                mostrarRecomendaciones();
                 printf("\nIntroduce el titulo del libro que desea guardar en tu lista: \n");
                 fgets(titulo, sizeof(titulo), stdin);
                 strtok(titulo, "\n"); // Elimina el carácter
@@ -413,7 +414,7 @@ void imprimirGestionInvitado() {
                 break;
         }
     limpiarBuffer();
-    } while (sel != '3');
+    } while (sel != '3' && sel != '2' && sel != '1');
 }
 
 
@@ -537,7 +538,7 @@ void aportarLibroMenu(char titulo[], char fecha_lec[]){
     }
 
     // Intenta agregar el libro
-    //al = agregarLibro(db, id_cliente_actual ,titulo, fecha_lec);
+    al = agregarLibroMiLista(db, id_cliente_actual ,titulo, fecha_lec);
 
     if (al != SQLITE_OK) {
         printf("Error inserting new data\n");

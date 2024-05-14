@@ -621,7 +621,7 @@ int eliminarLibroBD1(sqlite3 *db, char titulo[]){
 }
 void mostrarMiLista(int id_cliente_actual) {
     sqlite3 *db;
-    char query[200]; // Ajusta el tamaño según tus necesidades
+    char query[400]; // Ajusta el tamaño según tus necesidades
     sqlite3_stmt *stmt;
     int resultado;
 
@@ -654,7 +654,7 @@ void mostrarMiLista(int id_cliente_actual) {
         int pagina_actual = sqlite3_column_int(stmt, 2); // Página actual
 
         // Realizar una segunda consulta para obtener el título del libro
-        char titulo_query[200];
+        char titulo_query[300];
         snprintf(titulo_query, sizeof(titulo_query), "SELECT titulo FROM Libro WHERE id_libro = %d", id_libro);
         sqlite3_stmt *titulo_stmt;
         int titulo_resultado = sqlite3_prepare_v2(db, titulo_query, -1, &titulo_stmt, NULL);
@@ -745,3 +745,48 @@ void actualizarProgreso(int id_libro, int pagina_actual, char time[]) {
     // Cerrar la base de datos
     sqlite3_close(db);
 }
+
+void mostrarRecomendaciones(){
+    sqlite3 *db;
+    char query[200]; // Ajusta el tamaño según tus necesidades
+    sqlite3_stmt *stmt;
+    int resultado;
+
+    // Abrir la base de datos
+    resultado = sqlite3_open("libreria.db", &db);
+    if (resultado) {
+        fprintf(stderr, "Error al abrir la base de datos: %s\n", sqlite3_errmsg(db));
+        return;
+    }
+
+    // Construir la consulta SQL utilizando un JOIN para combinar los datos de las tablas Libro y Autor
+    snprintf(query, sizeof(query), "SELECT Libro.titulo, Autor.nom_autor FROM Libro INNER JOIN Autor ON Libro.id_autor = Autor.id_autor ORDER BY random() LIMIT 5");
+
+    // Preparar la consulta SQL
+    resultado = sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
+    if (resultado != SQLITE_OK) {
+        fprintf(stderr, "Error al preparar la consulta SQL: %s\n", sqlite3_errmsg(db));
+        sqlite3_close(db);
+        return;
+    }
+
+    // Ejecutar la consulta SQL y manejar los resultados
+    printf("\nRecomendaciones:\n");
+    int contador_libros = 0;
+    while ((resultado = sqlite3_step(stmt)) == SQLITE_ROW) {
+        contador_libros++;
+        const unsigned char *titulo = sqlite3_column_text(stmt, 0); // Título del libro
+        const unsigned char *nombre_autor = sqlite3_column_text(stmt, 1); // Nombre del autor
+        printf("\t%d.Titulo: %s  Autor: %s\n", contador_libros, titulo, nombre_autor);
+    }
+
+    // Verificar si hubo un error al ejecutar la consulta
+    if (resultado != SQLITE_DONE) {
+        fprintf(stderr, "Error al ejecutar la consulta SQL: %s\n", sqlite3_errmsg(db));
+    }
+
+    // Finalizar la consulta y cerrar la base de datos
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
+}
+

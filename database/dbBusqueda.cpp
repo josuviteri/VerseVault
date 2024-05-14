@@ -94,7 +94,7 @@ void peticionAutorPorTitulo(char *titulo){
     }
 
     // Construir la consulta SQL para buscar el libro por título
-    snprintf(query, sizeof(query), "SELECT nom_autor FROM Autor WHERE id_autor = (SELECT id_autor FROM Libro WHERE titulo LIKE '%%%s%%')", titulo);
+    snprintf(query, sizeof(query), "SELECT nom_autor FROM Autor WHERE id_autor = (SELECT id_autor FROM Libro WHERE titulo = '%s')", titulo);
 
     // Preparar la consulta SQL
     rc = sqlite3_prepare_v2(db, query, -1, &stmt, NULL);

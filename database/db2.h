@@ -27,5 +27,7 @@ void mostrarMiLista(int id_cliente_actual);
 void actualizarProgreso(int id_libro, int pagina_actual, char time[]);
 int cargarProgreso(int id_libro);
 
+void mostrarRecomendaciones();
+
 
 #endif /* MENU_H */
