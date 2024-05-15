@@ -4,6 +4,9 @@
 #include <winsock2.h>
 #include <math.h>
 
+#include "../sqlite/sqlite3.h"
+#include "../database/db2.h"
+
 #define SERVER_IP "127.0.0.1"
 #define SERVER_PORT 6000
 
@@ -86,20 +89,42 @@ int main(int argc, char *argv[]) {
 
 		printf("Command received: %s \n", recvBuff);
 
-		if (strcmp(recvBuff, "SUMAR") == 0)
-		{
-			int suma = 0;
-			recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
-			while (strcmp(recvBuff, "SUMAR-END") != 0)
-			{
-				int n = atoi(recvBuff);
-				suma += n;
-				recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
-			}
-			sprintf(sendBuff, "%d", suma);
-			send(comm_socket, sendBuff, sizeof(sendBuff), 0);
-			printf("Response sent: %s \n", sendBuff);
+
+		if (strcmp(recvBuff, "INICIAR-SESION") == 0){
+		sqlite3 *db;
+		int rc = sqlite3_open("libreria.db", &db);
+		if (rc != SQLITE_OK) {
+			printf("Error opening database\n");
+			return;
 		}
+
+		char email[256];
+		char password[256];
+
+		// Recibir email como cadena
+		recv(comm_socket, email, sizeof(email), 0);
+		
+		// Recibir contraseña como cadena
+		recv(comm_socket, password, sizeof(password), 0);
+		
+		// Recibir INICIAR-SESION-END
+		recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
+
+		// Llamar a la función iniciarSesion con el email y la contraseña
+		int resultado = iniciarSesion(db, email, password);
+		
+		// Enviar el resultado al cliente
+		sprintf(sendBuff, "%d", resultado);
+		send(comm_socket, sendBuff, strlen(sendBuff) + 1, 0);
+		printf("Response sent: %s \n", sendBuff);
+
+		rc = sqlite3_close(db);
+		if (rc != SQLITE_OK) {
+			printf("Error closing database\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return;
+		}
+	}
 
 		if (strcmp(recvBuff, "RAIZ") == 0)
 		{

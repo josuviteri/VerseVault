@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <winsock2.h>
 
+
 #define SERVER_IP "127.0.0.1"
 #define SERVER_PORT 6000
 
@@ -168,23 +169,28 @@ int main(int argc, char *argv[])
 		c = imprimirInicial1();
 		if (c == '1')
 		{
-			char c2_1 = imprimirInicial2_1();
-			char c2_2 = imprimirInicial2_2();
+			char c2_1 = imprimirInicial2_1(); // usuario
+			char c2_2 = imprimirInicial2_2(); // contraseña
 
-			// SENDING command SUMAR and parameters to the server
+			// Enviar comando INICIAR-SESION
 			strcpy(sendBuff, "INICIAR-SESION");
-			send(s, sendBuff, sizeof(sendBuff), 0);
-			//strcpy(sendBuff, c2_1);
-			//send(s, sendBuff, sizeof(sendBuff), 0);
-			//strcpy(sendBuff, c2_2);
-			//send(s, sendBuff, sizeof(sendBuff), 0);
-			strcpy(sendBuff, "INICIAR-SESION-END");
-			send(s, sendBuff, sizeof(sendBuff), 0);
+			send(s, sendBuff, strlen(sendBuff) + 1, 0); // +1 para incluir el terminador nulo
 
-			// RECEIVING response to command INICIAR SESION from the server
+			// Enviar usuario como carácter
+			send(s, &c2_1, sizeof(c2_1), 0);
+
+			// Enviar contraseña como carácter
+			send(s, &c2_2, sizeof(c2_2), 0);
+
+			// Enviar comando INICIAR-SESION-END
+			strcpy(sendBuff, "INICIAR-SESION-END");
+			send(s, sendBuff, strlen(sendBuff) + 1, 0);
+
+			// Recibir respuesta del servidor
 			recv(s, recvBuff, sizeof(recvBuff), 0);
-			printf("Suma = %s \n", recvBuff);
-			//pasar al menu iniciar sesion menu
+			printf("Usuario: %s \n", recvBuff);
+
+			// Pasar al menú de iniciar sesión
 		}
 
 		if (c == '2')
