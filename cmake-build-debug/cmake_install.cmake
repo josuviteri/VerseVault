@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/josiw/CLionProjects/VerseVault
+# Install script for directory: D:/Unibertsitatea/Segundo/prog4/VerseVault/VerseVault
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/josiw/CLionProjects/VerseVault/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/Unibertsitatea/Segundo/prog4/VerseVault/VerseVault/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

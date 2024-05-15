@@ -1,7 +1,13 @@
 # ninja log v5
-5	3716	7352467624424411	CMakeFiles/ProgIV.dir/main.cpp.obj	31edc5a9cf540096
-7	326	7352479132717157	build.ninja	1829b412fce2befc
-3717	4354	7352467630778869	ProgIV.exe	d65d4ee8244cec0d
-3	311	7352479132717157	build.ninja	ae9e9adf2d4bd31c
-3	3917	7352479172166372	CMakeFiles/ProgIV.dir/main.cpp.obj	31edc5a9cf540096
+3	311	7375052752836303	build.ninja	ae9e9adf2d4bd31c
+15	5122	7375048982988626	CMakeFiles/cliente.dir/sqlite/sqlite3.c.obj	6ae230e7279c30b9
 3918	4590	7352479178886242	ProgIV.exe	d65d4ee8244cec0d
+7	4625	7375051982256822	CMakeFiles/cliente.dir/curly/descargaArchivos.cpp.obj	93f9471729b0dac5
+18	172	7375051937794319	CMakeFiles/cliente.dir/database/db2.cpp.obj	1487d5cd8034fc56
+13	3430	7375051970366016	CMakeFiles/cliente.dir/menu/menu.cpp.obj	5bd033423b3d127e
+54	2407	7375048955883998	CMakeFiles/cliente.dir/client.cpp.obj	3cf2af5aa5a7dfbb
+35	4421	7375048976032293	CMakeFiles/cliente.dir/database/dbBusqueda.cpp.obj	71d230e046084fbd
+23	983	7375051945891673	CMakeFiles/cliente.dir/sockets2/ServerWithProtocol/main.c.obj	a830aa8385172600
+19	507	7375052820515828	CMakeFiles/cliente.dir/database/db2.cpp.obj	1487d5cd8034fc56
+13	3547	7375052850903586	CMakeFiles/cliente.dir/menu/menu.cpp.obj	5bd033423b3d127e
+7	4705	7375052862444077	CMakeFiles/cliente.dir/curly/descargaArchivos.cpp.obj	93f9471729b0dac5
