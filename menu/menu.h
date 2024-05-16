@@ -22,7 +22,7 @@ void imprimirGestion();
 void imprimirGestionInvitado();
 //apartado gestion usuarios
 int iniciarSesionMenu(char email_cl[], char pass_cl[]);
-void registrarClienteMenu(char nom_cl[], char email_cl[], char pass_cl[]);
+int registrarClienteMenu(char nom_cl[], char email_cl[], char pass_cl[]);
 
 void menuMiLista();
 
