@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <winsock2.h>
+#include <string.h>
 
 
 #define SERVER_IP "127.0.0.1"
@@ -11,6 +12,8 @@
 #define NEGRITA "\e[1m" // Renombramos el código de los caracteres en negrita para que sea mas entendible
 #define QUITAR_NEGRITA "\e[m" // Renombramos el codigo de quitar la negrita a los caracteres para que sea mas entendible
 //"Sin dolor no hay gloria" - Proverbio Romano
+SOCKET s;
+char sendBuff[512], recvBuff[512];
 
 char imprimirInicial1(){
 	printf("\nProyecto Programacion IV | Grupo PVI-04\n\n");
@@ -26,26 +29,26 @@ char imprimirInicial1(){
 	return opcion;
 }
 
-char imprimirInicial2_1(){
+char* imprimirInicial2_1(){
 	printf("\nIntroduce tus datos para iniciar sesion:\nIntroduce tu correo electronico:\n");
 
     //iniciarSesionMenu(email,pass);
-	char opcion = getchar();
+	char* correo;
+    fgets(correo, sizeof(correo), stdin);
+    strtok(correo, "\n"); // Elimina el carácter
 
-	char c; while ((c = getchar()) != '\n' && c != EOF); // Vacía el buffer de entrada
-
-	return opcion;
+    return correo;
 }
 
-char imprimirInicial2_2(){
+char* imprimirInicial2_2(){
     printf("\nIntroduce tu contrasenya:\n");
     
 	//iniciarSesionMenu(email,pass);
-	char opcion = getchar();
+    char* contra;
+    fgets(contra, sizeof(contra), stdin);
+    strtok(contra, "\n"); // Elimina el carácter
 
-	char c; while ((c = getchar()) != '\n' && c != EOF); // Vacía el buffer de entrada
-
-	return opcion;
+    return contra;
 }
 
 void imprimirInicial(){
@@ -67,11 +70,34 @@ void imprimirInicial(){
         sscanf(input, " %c", &sel);
 
         if(sel == '1'){
+            strcpy(sendBuff, "INICIAR-SESION");
+            send(s, sendBuff, strlen(sendBuff) + 1, 0); // +1 para incluir el terminador nulo
+
             printf("\nIntroduce tus datos para iniciar sesion:\nIntroduce tu correo electronico:\n");
             fgets(email, sizeof(email), stdin);
+            strtok(email, "\n");
+            // Enviar usuario como carácter
+            send(s, email, sizeof(email), 0);
+
+
 
             printf("\nIntroduce tu contrasenya:\n");
             fgets(pass, sizeof(pass), stdin);
+            strtok(pass, "\n");
+
+            // Enviar contraseña como carácter
+            send(s, pass, sizeof(pass), 0);
+
+
+            // Recibir respuesta del servidor
+            recv(s, recvBuff, sizeof(recvBuff), 0);
+            printf("Usuario: %s \n", recvBuff);
+
+
+            // Enviar comando INICIAR-SESION-END
+            strcpy(sendBuff, "INICIAR-SESION-END");
+            send(s, sendBuff, strlen(sendBuff) + 1, 0);
+
 
             //iniciarSesionMenu(email,pass);
 
@@ -123,9 +149,7 @@ int main(int argc, char *argv[])
 {
 
 	WSADATA wsaData;
-	SOCKET s;
 	struct sockaddr_in server;
-	char sendBuff[512], recvBuff[512];
 
 	printf("\nInitialising Winsock...\n");
 	if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
@@ -163,24 +187,37 @@ int main(int argc, char *argv[])
 			ntohs(server.sin_port));
 
 	//SEND and RECEIVE data (CLIENT/SERVER PROTOCOL)
-	char c;
+    imprimirInicial();
+	/*char c;
 	do
 	{
 		c = imprimirInicial1();
 		if (c == '1')
 		{
-			char c2_1 = imprimirInicial2_1(); // usuario
-			char c2_2 = imprimirInicial2_2(); // contraseña
+            // Enviar comando INICIAR-SESION
+            strcpy(sendBuff, "INICIAR-SESION");
+            send(s, sendBuff, strlen(sendBuff) + 1, 0); // +1 para incluir el terminador nulo
 
-			// Enviar comando INICIAR-SESION
-			strcpy(sendBuff, "INICIAR-SESION");
-			send(s, sendBuff, strlen(sendBuff) + 1, 0); // +1 para incluir el terminador nulo
+            printf("\nIntroduce tus datos para iniciar sesion:\nIntroduce tu correo electronico:\n");
 
-			// Enviar usuario como carácter
-			send(s, &c2_1, sizeof(c2_1), 0);
+            //iniciarSesionMenu(email,pass);
+            char* correo;
+            fgets(correo, sizeof(correo), stdin);
+            strtok(correo, "\n"); // Elimina el carácter
+
+            printf("\nIntroduce tu contrasenya:\n");
+
+            //iniciarSesionMenu(email,pass);
+            char* contra;
+            fgets(contra, sizeof(contra), stdin);
+            strtok(contra, "\n"); // Elimina el carácter
+
+
+            // Enviar usuario como carácter
+			send(s, correo, sizeof(correo), 0);
 
 			// Enviar contraseña como carácter
-			send(s, &c2_2, sizeof(c2_2), 0);
+			send(s, contra, sizeof(contra), 0);
 
 			// Enviar comando INICIAR-SESION-END
 			strcpy(sendBuff, "INICIAR-SESION-END");
@@ -228,7 +265,7 @@ int main(int argc, char *argv[])
 			send(s, sendBuff, sizeof(sendBuff), 0);
 		}
 	}while(c != '4');
-
+*/
 	// CLOSING the socket and cleaning Winsock...
 	closesocket(s);
 	WSACleanup();

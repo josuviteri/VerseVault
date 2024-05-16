@@ -6,6 +6,7 @@
 #include "../../structs/cliente.h"
 #include "../sqlite/sqlite3.h"
 #include "../database/db2.h"
+#include "../menu/menu.h"
 
 #define SERVER_IP "127.0.0.1"
 #define SERVER_PORT 6000
@@ -91,13 +92,12 @@ int main(int argc, char *argv[]) {
 
 
 		if (strcmp(recvBuff, "INICIAR-SESION") == 0){
-		sqlite3 *db;
+		/*sqlite3 *db;
 		int rc = sqlite3_open("libreria.db", &db);
 		if (rc != SQLITE_OK) {
 			printf("Error opening database\n");
-			return;
-		}
-
+			return-1;
+		}*/
 
 		Cliente cl;
 		
@@ -106,11 +106,16 @@ int main(int argc, char *argv[]) {
 		
 		// Recibir contraseña como cadena
 		recv(comm_socket, cl.passw, sizeof(cl.passw), 0);
-		
+
+        cl.id_Cliente = iniciarSesionMenu(cl.email_cl,cl.passw);
+
+        sprintf(sendBuff, "%d", cl.id_Cliente);
+        send(comm_socket, sendBuff, strlen(sendBuff) + 1, 0);
+
 		// Recibir INICIAR-SESION-END
 		recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
 
-		// Llamar a la función iniciarSesion con el email y la contraseña
+		/*// Llamar a la función iniciarSesion con el email y la contraseña
 		cl.id_Cliente = iniciarSesion(db, cl.email_cl, cl.passw);
 		
 		// Enviar el resultado al cliente
@@ -122,8 +127,8 @@ int main(int argc, char *argv[]) {
 		if (rc != SQLITE_OK) {
 			printf("Error closing database\n");
 			printf("%s\n", sqlite3_errmsg(db));
-			return;
-		}
+			return -1;
+		}*/
 	}
 
 		if (strcmp(recvBuff, "RAIZ") == 0)
@@ -152,8 +157,9 @@ int main(int argc, char *argv[]) {
 
 		if (strcmp(recvBuff, "EXIT") == 0)
 			break;
+        printf("adios");
 
-	} while (1);
+    } while (1);
 
 	// CLOSING the sockets and cleaning Winsock...
 	closesocket(comm_socket);

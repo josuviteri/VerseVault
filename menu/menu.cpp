@@ -322,13 +322,13 @@ void imprimirGestionInvitado(){
 
 
 //apartado gestion usuarios
-void iniciarSesionMenu(char email_cl[], char pass_cl[]){
+int iniciarSesionMenu(char email_cl[], char pass_cl[]){
     sqlite3 *db;
     int rc = sqlite3_open("libreria.db", &db);
     if (rc != SQLITE_OK) {
         //errorMsgg("Error opening database\n");
         printf("Error opening database\n");
-        return;
+        return -1;
     }
 
     id_cliente_actual = iniciarSesion(db, email_cl, pass_cl);
@@ -343,8 +343,9 @@ void iniciarSesionMenu(char email_cl[], char pass_cl[]){
     if (rc != SQLITE_OK) {
         printf("Error opening database\n");
         printf("%s\n", sqlite3_errmsg(db));
-        return;
+        return -1;
     }
+    return id_cliente_actual;
 }
 
 
