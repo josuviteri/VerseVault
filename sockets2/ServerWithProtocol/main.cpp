@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <winsock2.h>
 #include <math.h>
-
+#include "../../structs/cliente.h"
 #include "../sqlite/sqlite3.h"
 #include "../database/db2.h"
 
@@ -98,23 +98,23 @@ int main(int argc, char *argv[]) {
 			return;
 		}
 
-		char email[256];
-		char password[256];
 
+		Cliente cl;
+		
 		// Recibir email como cadena
-		recv(comm_socket, email, sizeof(email), 0);
+		recv(comm_socket, cl.email_cl, sizeof(cl.email_cl), 0);
 		
 		// Recibir contraseña como cadena
-		recv(comm_socket, password, sizeof(password), 0);
+		recv(comm_socket, cl.passw, sizeof(cl.passw), 0);
 		
 		// Recibir INICIAR-SESION-END
 		recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
 
 		// Llamar a la función iniciarSesion con el email y la contraseña
-		int resultado = iniciarSesion(db, email, password);
+		cl.id_Cliente = iniciarSesion(db, cl.email_cl, cl.passw);
 		
 		// Enviar el resultado al cliente
-		sprintf(sendBuff, "%d", resultado);
+		sprintf(sendBuff, "%d", cl.id_Cliente);
 		send(comm_socket, sendBuff, strlen(sendBuff) + 1, 0);
 		printf("Response sent: %s \n", sendBuff);
 
