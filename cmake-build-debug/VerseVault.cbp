@@ -17,8 +17,8 @@
 					<DistClean command="D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="ProgIV">
-				<Option output="D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/ProgIV.exe" prefix_auto="0" extension_auto="0"/>
+			<Target title="Server">
+				<Option output="D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/Server.exe" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -34,14 +34,14 @@
 					<Add directory="D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/Makefile&quot;  VERBOSE=1 ProgIV"/>
+					<Build command="D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/Makefile&quot;  VERBOSE=1 Server"/>
 					<CompileFile command="D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="ProgIV/fast">
-				<Option output="D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/ProgIV.exe" prefix_auto="0" extension_auto="0"/>
+			<Target title="Server/fast">
+				<Option output="D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/Server.exe" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -57,7 +57,7 @@
 					<Add directory="D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/Makefile&quot;  VERBOSE=1 ProgIV/fast"/>
+					<Build command="D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/Makefile&quot;  VERBOSE=1 Server/fast"/>
 					<CompileFile command="D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="D:/Archivos Uni/Programas Raros/CLion 2023.3.4/bin/mingw/bin/mingw32-make.exe -f &quot;D:/Archivos Uni/2 anio/Programacion IV/VerseVault/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -85,37 +85,37 @@
 			</Target>
 		</Build>
 		<Unit filename="D:/Archivos Uni/2 anio/Programacion IV/VerseVault/curly/descargaArchivos.cpp">
-			<Option target="ProgIV"/>
+			<Option target="Server"/>
 		</Unit>
 		<Unit filename="D:/Archivos Uni/2 anio/Programacion IV/VerseVault/curly/descargaArchivos.h">
-			<Option target="ProgIV"/>
+			<Option target="Server"/>
 		</Unit>
 		<Unit filename="D:/Archivos Uni/2 anio/Programacion IV/VerseVault/database/db2.cpp">
-			<Option target="ProgIV"/>
+			<Option target="Server"/>
 		</Unit>
 		<Unit filename="D:/Archivos Uni/2 anio/Programacion IV/VerseVault/database/db2.h">
-			<Option target="ProgIV"/>
+			<Option target="Server"/>
 		</Unit>
 		<Unit filename="D:/Archivos Uni/2 anio/Programacion IV/VerseVault/database/dbBusqueda.cpp">
-			<Option target="ProgIV"/>
+			<Option target="Server"/>
 		</Unit>
 		<Unit filename="D:/Archivos Uni/2 anio/Programacion IV/VerseVault/database/dbBusqueda.h">
-			<Option target="ProgIV"/>
-		</Unit>
-		<Unit filename="D:/Archivos Uni/2 anio/Programacion IV/VerseVault/main.cpp">
-			<Option target="ProgIV"/>
+			<Option target="Server"/>
 		</Unit>
 		<Unit filename="D:/Archivos Uni/2 anio/Programacion IV/VerseVault/menu/menu.cpp">
-			<Option target="ProgIV"/>
+			<Option target="Server"/>
 		</Unit>
 		<Unit filename="D:/Archivos Uni/2 anio/Programacion IV/VerseVault/menu/menu.h">
-			<Option target="ProgIV"/>
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="D:/Archivos Uni/2 anio/Programacion IV/VerseVault/sockets2/ServerWithProtocol/main.cpp">
+			<Option target="Server"/>
 		</Unit>
 		<Unit filename="D:/Archivos Uni/2 anio/Programacion IV/VerseVault/sqlite/sqlite3.c">
-			<Option target="ProgIV"/>
+			<Option target="Server"/>
 		</Unit>
 		<Unit filename="D:/Archivos Uni/2 anio/Programacion IV/VerseVault/sqlite/sqlite3.h">
-			<Option target="ProgIV"/>
+			<Option target="Server"/>
 		</Unit>
 		<Unit filename="D:/Archivos Uni/2 anio/Programacion IV/VerseVault/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>

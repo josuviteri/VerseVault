@@ -421,19 +421,19 @@ void imprimirGestionInvitado() {
 
 
 //apartado gestion usuarios
-void iniciarSesionMenu(char email_cl[], char pass_cl[]){
+int iniciarSesionMenu(char email_cl[], char pass_cl[]){
     sqlite3 *db;
     int rc = sqlite3_open("libreria.db", &db);
     if (rc != SQLITE_OK) {
         //errorMsgg("Error opening database\n");
         printf("Error opening database\n");
-        return;
+        return -1;
     }
-
-    id_cliente_actual = iniciarSesion(db, email_cl, pass_cl);
-    if (id_cliente_actual != -1) {
+    int id_cliente_actu = -1;
+    id_cliente_actu = iniciarSesion(db, email_cl, pass_cl);
+    if (id_cliente_actu != -1) {
         printf("Inicio de sesion exitoso. Bienvenido\n");
-        imprimirMenu();
+        //imprimirMenu();
     } else {
         printf("Inicio de sesion fallido. Verifica tus credenciales.\n");
     }
@@ -442,20 +442,21 @@ void iniciarSesionMenu(char email_cl[], char pass_cl[]){
     if (rc != SQLITE_OK) {
         printf("Error opening database\n");
         printf("%s\n", sqlite3_errmsg(db));
-        return;
+        return -1;
     }
+    return id_cliente_actu;
 }
 
 
 
 
-void registrarClienteMenu(char nom_cl[], char email_cl[], char pass_cl[]){
+int registrarClienteMenu(char nom_cl[], char email_cl[], char pass_cl[]){
     sqlite3 *db;
     int rc = sqlite3_open("libreria.db", &db);
     if (rc != SQLITE_OK) {
         //////errorMsgg("Error opening database\n");
         printf("Error opening database\n");
-        return;
+        return -1;
     }
 
     rc = registrarCliente(db, nom_cl, email_cl, pass_cl);
@@ -470,8 +471,9 @@ void registrarClienteMenu(char nom_cl[], char email_cl[], char pass_cl[]){
     if (rc != SQLITE_OK) {
         printf("Error closing database\n");
         printf("%s\n", sqlite3_errmsg(db));
-        return;
+        return -1;
     }
+    return rc;
 }
 
 //apartado gestion de contenido de la db
