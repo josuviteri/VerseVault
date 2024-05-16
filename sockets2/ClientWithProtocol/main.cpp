@@ -141,6 +141,33 @@ void imprimirMenu(){
     }while(sel != '5' && sel != '4' && sel != '3' && sel != '2' && sel != '1' && sel != '1');
 }
 
+
+void imprimirMenuInvitado() {
+    char input[10];
+    char sel;
+
+    printf(NEGRITA "Menu Principal\nSesion de invitado\n\n" QUITAR_NEGRITA);
+
+    do {
+        printf("\nSelecciona una opcion: \n");
+        printf("1. Gestionar Contenido\n2. Cerrar Sesion\n");
+
+        fgets(input, sizeof(input), stdin);
+        sscanf(input, " %c", &sel);
+
+        if (sel == '1') {
+            printf("\ncorrecto 2\n\n");
+            // imprimirGestionInvitado();
+        } else if (sel == '2') {
+            printf("\ncerrando sesion...\n\n");
+            return; // Salir del menú de invitado
+        } else {
+            printf("\nIntroduce un valor valido\n\n");
+        }
+
+    } while (sel != '2' && sel != '1');
+}
+
 void imprimirInicial() {
     char input[10];
     char nombre[31];
@@ -216,7 +243,14 @@ void imprimirInicial() {
             //registrarClienteMenu(nombre,email,pass);
 
         }else if(sel == '3'){
-           // imprimirMenuInvitado();
+            strcpy(sendBuff, "INVITADO");
+            send(s, sendBuff, strlen(sendBuff) + 1, 0);
+
+            imprimirMenuInvitado();
+
+            strcpy(sendBuff, "INVITADO-END");
+            send(s, sendBuff, strlen(sendBuff) + 1, 0);
+
         }else if(sel == '4'){
             printf("\ncerrando...\n");
         }else{

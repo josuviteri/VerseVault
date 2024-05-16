@@ -172,6 +172,24 @@ int main(int argc, char *argv[]) {
             }
         }
 
+        if (strcmp(recvBuff, "INVITADO") == 0) {
+            printf("Mensaje INVITADO recibido.\n");
+            memset(recvBuff, 0, sizeof(recvBuff));
+            recv_size = recv(comm_socket, recvBuff, sizeof(recvBuff) - 1, 0);
+            if (recv_size <= 0) {
+                perror("Error al recibir INVITADO-END");
+            } else {
+                recvBuff[recv_size] = '\0';
+                if (strcmp(recvBuff, "INVITADO-END") == 0) {
+                    printf("Sesión de invitado manejada correctamente\n");
+                } else {
+                    printf("Error: Comando INVITADO-END no recibido correctamente\n");
+                }
+            }
+
+        }
+
+        
         if (strcmp(recvBuff, "RAIZ") == 0) {
             memset(recvBuff, 0, sizeof(recvBuff));
             recv_size = recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
