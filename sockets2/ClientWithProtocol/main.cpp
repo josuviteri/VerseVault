@@ -71,6 +71,8 @@ void menuMiLista() {
         	strcpy(sendBuff, "AGREGAR-LIBRO-LISTA-END");
         	send(s, sendBuff, strlen(sendBuff) + 1, 0);
 
+        	menuMiLista();
+
             //aportarLibroMenu(titulo, actualTime);
         }else if(sel == '2'){
             printf("\ncorrecto 2\n\n");

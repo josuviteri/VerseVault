@@ -208,9 +208,9 @@ int main(int argc, char *argv[]) {
 
             memset(sendBuff, 0, sizeof(sendBuff));
             if(status == SQLITE_OK) {
-                strcpy(sendBuff, "El libro se ha agregado correctamente");
+                strcpy(sendBuff, "El libro se ha agregado correctamente\n");
             } else {
-                strcpy(sendBuff, "El libro libro se ha agregado correctamente");
+                strcpy(sendBuff, "El libro libro se ha agregado correctamente\n");
             }
             send(comm_socket, sendBuff, strlen(sendBuff) + 1, 0);
 
