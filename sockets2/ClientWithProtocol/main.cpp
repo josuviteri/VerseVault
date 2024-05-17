@@ -26,8 +26,10 @@ using namespace std;
 //"Sin dolor no hay gloria" - Proverbio Romano
 SOCKET s;
 char sendBuff[512], recvBuff[512];
+int es_admin = 0;
 
 void leerLibro(SOCKET client_socket, const char* titulo);
+void buscarLibro(SOCKET client_socket);
 
 
 char imprimirInicial1(){
@@ -44,6 +46,40 @@ char imprimirInicial1(){
 	return opcion;
 }
 
+void buscarLibro(SOCKET client_socket) {
+
+    char opcion[10];
+
+    std::cout << "Selecciona el tipo de busqueda:\n";
+    std::cout << "1. Por titulo\n";
+    std::cout << "2. Por autor\n";
+    std::cout << "Opcion: ";
+    std::cin.getline(opcion, sizeof(opcion));
+
+
+    if (strcmp(opcion, "1") == 0) {
+        char titulo[100];
+        std::cout << "Ingresa el titulo del libro a buscar: ";
+        std::cin.getline(titulo, sizeof(titulo));
+        send(client_socket, titulo, strlen(titulo) + 1, 0);
+    } else if (strcmp(opcion, "2") == 0) {
+        char autor[100];
+        std::cout << "Ingresa el nombre del autor a buscar: ";
+        std::cin.getline(autor, sizeof(autor));
+        send(client_socket, autor, strlen(autor) + 1, 0);
+    } else {
+        std::cerr << "Opcion no valida." << std::endl;
+        return;
+    }
+
+    memset(recvBuff, 0, sizeof(recvBuff));
+    int recv_size = recv(client_socket, recvBuff, sizeof(recvBuff) - 1, 0);
+    if (recv_size <= 0) {
+        perror("Error al recibir resultado de búsqueda");
+    }
+
+    std::cout << "Resultados de la búsqueda:\n" << recvBuff << std::endl;
+}
 
 void leerLibro(SOCKET client_socket, const char* titulo) {
     char sendBuff[512], recvBuff[2048];
@@ -87,7 +123,7 @@ void menuMiLista() {
 
         //Falta mostrar la lista actual del cliente
 
-        printf("1.Agregar Libro a Mi Lista\n2.Eliminar Libro de Mi Lista\n3.Descargar Libro\n4.Leer Libro\n5.Volver\n");
+        printf("1. Agregar Libro a Mi Lista\n2. Eliminar Libro de Mi Lista\n3. Descargar Libro\n4. Leer Libro\n5. Volver\n");
 
         fgets(input, sizeof(input), stdin);
         sscanf(input, " %c", &sel);
@@ -191,13 +227,15 @@ void imprimirMenu(){
     char idioma[10];
     char fecha_publicacion[11];
     char fecha_actual[10];
+    bool salir = false; // Bandera para salir del bucle
+
 
     printf(NEGRITA"Menu Principal\n\n" QUITAR_NEGRITA);
 
-
-    do{
+    if (es_admin == 1) {
+        do{
         printf("\nSelecciona una opcion: \n");
-        printf("1. Mi Lista\n2.Buscar Libro\n3.Agregar Libro BD (admin only)\n4.Eliminar Libro BD (admin only)\n5.Volver\n");
+        printf("1. Mi Lista\n2. Buscar Libro\n3. Agregar Libro BD (admin only)\n4. Eliminar Libro BD (admin only)\n5. Volver\n");
 
         fgets(input, sizeof(input), stdin);
         sscanf(input, " %c", &sel);
@@ -239,9 +277,47 @@ void imprimirMenu(){
             printf("\nIntroduce un valor valido\n\n");
         }
 
-    }while(sel != '5' && sel != '4' && sel != '3' && sel != '2' && sel != '1' && sel != '1');
-}
+        }while(sel != '5' && sel != '4' && sel != '3' && sel != '2' && sel != '1');
+} else {
+        do {
+            printf("\nSelecciona una opcion: \n");
+            printf("1. Mi Lista\n2. Buscar Libro\n3. Volver\n");
 
+            fgets(input, sizeof(input), stdin);
+            sscanf(input, " %c", &sel);
+
+            switch (sel) {
+                case '1':
+                    printf("\ncorrecto 1\n\n");
+                    menuMiLista();
+                    break;
+                case '2':
+                    printf("\ncorrecto 2\n\n");
+
+                    strcpy(sendBuff, "BUSCAR-LIBRO");
+                    send(s, sendBuff, strlen(sendBuff) + 1, 0);
+
+                    buscarLibro(s);
+
+
+                    strcpy(sendBuff, "BUSCAR-LIBRO-END");
+                    send(s, sendBuff, strlen(sendBuff) + 1, 0);
+
+                    //buscarLibro();
+
+                    break;
+                case '3':
+                    printf("\ncerrando sesion...\n\n");
+                    //salir = true;
+                    break;
+                default:
+                    printf("\nIntroduce un valor valido\n\n");
+                    break;
+            }
+
+        } while (!salir);
+    }
+}
 
 void imprimirMenuInvitado() {
     char input[10];
@@ -303,6 +379,14 @@ void imprimirInicial() {
 
             recv(s, recvBuff, sizeof(recvBuff), 0);
             printf("Usuario: %s \n\n", recvBuff);
+
+            recv(s, recvBuff, sizeof(recvBuff), 0);
+
+            if (strcmp(recvBuff, "-1") == 0) {
+                cliente.es_admin = 0;
+            } else {
+                cliente.es_admin = 1;
+            }
 
             if (strcmp(recvBuff, "-1") != 0){ //ENTRA al siguiente menu, si el inicio de sesion ha sido corecto
                 imprimirMenu();
