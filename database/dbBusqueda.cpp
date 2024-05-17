@@ -80,7 +80,7 @@ void peticionAutor(const char *autor) {
 }
 
 
-void peticionAutorPorTitulo(char *titulo){
+int peticionAutorPorTitulo(char *titulo){
     sqlite3 *db;
     char query[200]; // Ajusta el tamaño según tus necesidades
     sqlite3_stmt *stmt;
@@ -90,7 +90,7 @@ void peticionAutorPorTitulo(char *titulo){
     rc = sqlite3_open("libreria.db", &db); // Cambiado a "libreria.db"
     if (rc) {
         fprintf(stderr, "Error al abrir la base de datos: %s\n", sqlite3_errmsg(db));
-        return;
+        return -1;
     }
 
     // Construir la consulta SQL para buscar el libro por título
@@ -101,7 +101,7 @@ void peticionAutorPorTitulo(char *titulo){
     if (rc != SQLITE_OK) {
         fprintf(stderr, "Error al preparar la consulta SQL: %s\n", sqlite3_errmsg(db));
         sqlite3_close(db);
-        return;
+        return -1;
     }
 
     // Ejecutar la consulta SQL y manejar los resultados
@@ -118,6 +118,7 @@ void peticionAutorPorTitulo(char *titulo){
     // Finalizar la consulta y cerrar la base de datos
     sqlite3_finalize(stmt);
     sqlite3_close(db);
+    return rc;
 }
 
 int peticionIdLibroPorTitulo(const std::string& titulo) {

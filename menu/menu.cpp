@@ -22,9 +22,9 @@ using namespace std;
 #define QUITAR_NEGRITA "" //"\e[m" // Renombramos el codigo de quitar la negrita a los caracteres para que sea mas entendible
 //"Sin dolor no hay gloria" - Proverbio Romano
 int id_cliente_actual = -1;
-time_t rawtime;
-struct tm* timeinfo;
-char actualTime[80];
+//time_t rawtime;
+//struct tm* timeinfo;
+//char actualTime[80];
 int es_admin = 0;
 bool salir = false; // Bandera para salir del programa
 
@@ -36,9 +36,9 @@ void imprimirInicial() {
     char pass[31];
     char sel;
 
-    time(&rawtime);
-    timeinfo = localtime(&rawtime);
-    strftime(actualTime, sizeof(actualTime), "%Y-%m-%d", timeinfo);
+    //time(&rawtime);
+    //timeinfo = localtime(&rawtime);
+    //strftime(actualTime, sizeof(actualTime), "%Y-%m-%d", timeinfo);
 
     cout << "\nProyecto Programacion IV | Grupo PVI-04\n\n";
     cout << NEGRITA << "Bienvenido al Sistema de Libreria Virtual\nVerseVault\n\n" << QUITAR_NEGRITA;
@@ -614,14 +614,15 @@ void guardarProgresoListaPersonal(int id_cliente, char titulo[], char fecha_lec[
 
     return;
 }
-void descargarLibro(char *titulo){
+int descargarLibro(char *titulo){
 // Verificar si el archivo del libro ya existe en la carpeta
     ifstream archivo("../libros/" + string(titulo) + ".txt");
     if (archivo.good()) {
         cout << "El libro '" << titulo << "' ya esta descargado." << endl;
-        return; // Si el libro ya está en la carpeta, salir de la función
+        return SQLITE_OK; // Si el libro ya está en la carpeta, salir de la función
     }
-    peticionAutorPorTitulo(titulo);
+    int status = peticionAutorPorTitulo(titulo);
+    return status;
 }
 
 void buscarLibro(){
@@ -656,7 +657,7 @@ void buscarLibro(){
 
 
 void imprimirLineas(const vector<string>& lines, int start) {
-    int end = min(start + 20, static_cast<int>(lines.size()));
+    int end = min(start + convPag, static_cast<int>(lines.size()));
     for (int i = start; i < end; ++i) {
         cout << lines[i] << endl;
     }
@@ -675,7 +676,7 @@ bool CheckleerLibro(string titulo) {
             descargarLibro(tituloChar);
             // Crear un nuevo objeto ifstream para el archivo recién descargado
             ifstream archivoNuevo("../libros/" + titulo + ".txt");
-            leer(titulo, archivoNuevo);
+            //leer(titulo, archivoNuevo);
         } else {
             cout << "No se puede leer el libro sin descargarlo." << endl;
             return true;
@@ -715,7 +716,7 @@ void leer(string titulo, ifstream& archivo){
                 break;
             case 3:
                 cout << "Guardando progreso..." << endl;
-                actualizarProgreso(id_titulo,inicio/convPag, actualTime); // Guardar progreso antes de salir
+                //actualizarProgreso(id_titulo,inicio/convPag, actualTime); // Guardar progreso antes de salir
                 cout << "Saliendo del programa." << endl;
                 break;
             default:

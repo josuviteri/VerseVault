@@ -8,12 +8,12 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "C:/Users/dekum/Downloads/VerseVault/sqlite/sqlite3.c" "CMakeFiles/Server.dir/sqlite/sqlite3.c.obj" "gcc" "CMakeFiles/Server.dir/sqlite/sqlite3.c.obj.d"
-  "C:/Users/dekum/Downloads/VerseVault/curly/descargaArchivos.cpp" "CMakeFiles/Server.dir/curly/descargaArchivos.cpp.obj" "gcc" "CMakeFiles/Server.dir/curly/descargaArchivos.cpp.obj.d"
-  "C:/Users/dekum/Downloads/VerseVault/database/db2.cpp" "CMakeFiles/Server.dir/database/db2.cpp.obj" "gcc" "CMakeFiles/Server.dir/database/db2.cpp.obj.d"
-  "C:/Users/dekum/Downloads/VerseVault/database/dbBusqueda.cpp" "CMakeFiles/Server.dir/database/dbBusqueda.cpp.obj" "gcc" "CMakeFiles/Server.dir/database/dbBusqueda.cpp.obj.d"
-  "C:/Users/dekum/Downloads/VerseVault/menu/menu.cpp" "CMakeFiles/Server.dir/menu/menu.cpp.obj" "gcc" "CMakeFiles/Server.dir/menu/menu.cpp.obj.d"
-  "C:/Users/dekum/Downloads/VerseVault/sockets2/ServerWithProtocol/main.cpp" "CMakeFiles/Server.dir/sockets2/ServerWithProtocol/main.cpp.obj" "gcc" "CMakeFiles/Server.dir/sockets2/ServerWithProtocol/main.cpp.obj.d"
+  "D:/Archivos Uni/2 anio/Programacion IV/VerseVault/sqlite/sqlite3.c" "CMakeFiles/Server.dir/sqlite/sqlite3.c.obj" "gcc" "CMakeFiles/Server.dir/sqlite/sqlite3.c.obj.d"
+  "D:/Archivos Uni/2 anio/Programacion IV/VerseVault/curly/descargaArchivos.cpp" "CMakeFiles/Server.dir/curly/descargaArchivos.cpp.obj" "gcc" "CMakeFiles/Server.dir/curly/descargaArchivos.cpp.obj.d"
+  "D:/Archivos Uni/2 anio/Programacion IV/VerseVault/database/db2.cpp" "CMakeFiles/Server.dir/database/db2.cpp.obj" "gcc" "CMakeFiles/Server.dir/database/db2.cpp.obj.d"
+  "D:/Archivos Uni/2 anio/Programacion IV/VerseVault/database/dbBusqueda.cpp" "CMakeFiles/Server.dir/database/dbBusqueda.cpp.obj" "gcc" "CMakeFiles/Server.dir/database/dbBusqueda.cpp.obj.d"
+  "D:/Archivos Uni/2 anio/Programacion IV/VerseVault/menu/menu.cpp" "CMakeFiles/Server.dir/menu/menu.cpp.obj" "gcc" "CMakeFiles/Server.dir/menu/menu.cpp.obj.d"
+  "D:/Archivos Uni/2 anio/Programacion IV/VerseVault/sockets2/ServerWithProtocol/main.cpp" "CMakeFiles/Server.dir/sockets2/ServerWithProtocol/main.cpp.obj" "gcc" "CMakeFiles/Server.dir/sockets2/ServerWithProtocol/main.cpp.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

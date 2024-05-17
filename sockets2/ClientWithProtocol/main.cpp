@@ -3,18 +3,32 @@
 #include <stdio.h>
 #include <winsock2.h>
 #include <string.h>
+#include <string>
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <chrono> // Para utilizar std::this_thread::sleep_for
+#include <thread> // Para utilizar std::chrono::milliseconds
+
+
 #include "../../structs/cliente.h"
 #include "../../structs/libro.h"
 
 #define SERVER_IP "127.0.0.1"
 #define SERVER_PORT 6000
+#define convPag 20
 
+using namespace std;
 
 #define NEGRITA "\e[1m" // Renombramos el código de los caracteres en negrita para que sea mas entendible
 #define QUITAR_NEGRITA "\e[m" // Renombramos el codigo de quitar la negrita a los caracteres para que sea mas entendible
 //"Sin dolor no hay gloria" - Proverbio Romano
 SOCKET s;
 char sendBuff[512], recvBuff[512];
+
+void leerLibro(SOCKET client_socket, const char* titulo);
+
 
 char imprimirInicial1(){
 	printf("\nProyecto Programacion IV | Grupo PVI-04\n\n");
@@ -30,6 +44,32 @@ char imprimirInicial1(){
 	return opcion;
 }
 
+
+void leerLibro(SOCKET client_socket, const char* titulo) {
+    char sendBuff[512], recvBuff[2048];
+    int opcion;
+
+    do {
+        memset(recvBuff, 0, sizeof(recvBuff));
+        int recv_size = recv(client_socket, recvBuff, sizeof(recvBuff) - 1, 0);
+        if (recv_size <= 0) {
+            perror("Error al recibir contenido del libro");
+            break;
+        }
+
+        std::cout << recvBuff << std::endl;
+
+        std::cout << "\nOpciones: \n";
+        std::cout << "2. Siguiente pagina\n";
+        std::cout << "3. Pagina anterior\n";
+        std::cout << "4. Salir de la lectura\n";
+        std::cout << "Selecciona una opcion: ";
+        std::cin >> opcion;
+
+        sprintf(sendBuff, "%d", opcion);
+        send(client_socket, sendBuff, strlen(sendBuff) + 1, 0);
+    } while (opcion != 4);
+}
 
 void menuMiLista() {
     char input[10];
@@ -98,13 +138,40 @@ void menuMiLista() {
 
         }else if(sel == '3'){
             printf("\ncorrecto 3\n\n");
+            strcpy(sendBuff, "DESCARGAR-LIBRO");
+            send(s, sendBuff, strlen(sendBuff) + 1, 0);
+
             printf("\nIntroduce nombre del libro que quieras descargar en su lista: \n");
-            fgets(titulo, sizeof(titulo), stdin);
-            strtok(titulo, "\n"); // Elimina el carácter
+            fgets(libro.titulo, sizeof(libro.titulo), stdin);
+            strtok(libro.titulo, "\n"); // Elimina el carácter
+            send(s, libro.titulo, strlen(libro.titulo) + 1, 0);
+
+            strcpy(sendBuff, "DESCARGAR-LIBRO-END");
+            send(s, sendBuff, strlen(sendBuff) + 1, 0);
+
+            recv(s, recvBuff, sizeof(recvBuff), 0);
+            printf("%s", recvBuff);
+
             //descargarLibro(titulo);
 
         }else if(sel == '4'){
             printf("\ncorrecto 4\n\n");
+            strcpy(sendBuff, "LEER-LIBRO");
+            send(s, sendBuff, strlen(sendBuff) + 1, 0);
+
+            printf("\nIntroduce nombre del libro que quieras leer: \n");
+            fgets(libro.titulo, sizeof(libro.titulo), stdin);
+            strtok(libro.titulo, "\n"); // Elimina el carácter
+            send(s, libro.titulo, strlen(libro.titulo) + 1, 0);
+
+            leerLibro(s, libro.titulo);
+
+
+            strcpy(sendBuff, "LEER-LIBRO-END");
+            send(s, sendBuff, strlen(sendBuff) + 1, 0);
+
+
+
             //leer libro
         }else if(sel == '5'){
             printf("\nvolviendo...\n\n");

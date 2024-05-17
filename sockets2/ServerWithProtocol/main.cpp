@@ -1,14 +1,27 @@
 #include <stdio.h>
 #include <winsock2.h>
 #include <math.h>
+#include <vector>
+#include <string>
+#include <fstream>
+#include <sstream>
 #include "../../structs/cliente.h"
 #include "../../structs/libro.h"
 #include "../sqlite/sqlite3.h"
 #include "../database/db2.h"
 #include "../menu/menu.h"
+#include "../database/dbBusqueda.h"
 
 #define SERVER_IP "127.0.0.1"
 #define SERVER_PORT 6000
+#define convPag 20 // Número de líneas por página, ajusta según sea necesario
+
+using namespace std;
+
+void leerLibro(SOCKET client_socket, const string& titulo);
+time_t rawtime;
+struct tm* timeinfo;
+char actualTime[80];
 
 int main(int argc, char *argv[]) {
     WSADATA wsaData;
@@ -18,9 +31,7 @@ int main(int argc, char *argv[]) {
     struct sockaddr_in client;
     char sendBuff[512], recvBuff[512];
     Cliente cl;
-    time_t rawtime;
-    struct tm* timeinfo;
-    char actualTime[80];
+
 
     printf("\nInitialising Winsock...\n");
     if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
@@ -76,6 +87,7 @@ int main(int argc, char *argv[]) {
         time(&rawtime);
         timeinfo = localtime(&rawtime);
         strftime(actualTime, sizeof(actualTime), "%Y-%m-%d", timeinfo);
+
         memset(recvBuff, 0, sizeof(recvBuff));
         int recv_size = recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
         if (recv_size <= 0) {
@@ -262,33 +274,54 @@ int main(int argc, char *argv[]) {
             }
         }
 
+        if (strcmp(recvBuff, "DESCARGAR-LIBRO") == 0) {
+            Libro libro;
+            memset(&libro, 0, sizeof(Libro)); // Inicializa todo a cero
+
+            recv_size = recv(comm_socket, libro.titulo, sizeof(libro.titulo) - 1, 0);
+            if (recv_size <= 0) {
+                perror("Error al recibir titulo");
+                continue;
+            }
+            libro.titulo[recv_size] = '\0'; // Asegura terminador nulo
+
+            int status;
+            status = descargarLibro(libro.titulo);
+
+            memset(sendBuff, 0, sizeof(sendBuff));
+            if(status == SQLITE_OK) {
+                strcpy(sendBuff, "El libro se ha descargado correctamente\n");
+            } else {
+                strcpy(sendBuff, "El libro no se ha descargado correctamente\n");
+            }
+            send(comm_socket, sendBuff, strlen(sendBuff) + 1, 0);
 
 
-
-        
-        if (strcmp(recvBuff, "RAIZ") == 0) {
             memset(recvBuff, 0, sizeof(recvBuff));
             recv_size = recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
             if (recv_size <= 0) {
-                perror("Error al recibir número para calcular raíz");
-                continue;
-            }
-            int n = atoi(recvBuff);
-            float raiz = sqrt(n);
-
-            memset(recvBuff, 0, sizeof(recvBuff));
-            recv_size = recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
-            if (recv_size <= 0 || strcmp(recvBuff, "RAIZ-END") != 0) {
-                perror("Error al recibir comando RAIZ-END");
+                perror("Error al recibir DESCARGAR-LIBRO-END");
                 continue;
             }
 
-            memset(sendBuff, 0, sizeof(sendBuff));
-            sprintf(sendBuff, "%f", raiz);
-            if (send(comm_socket, sendBuff, strlen(sendBuff) + 1, 0) == -1) {
-                perror("Error al enviar resultado de raíz");
+            if (strcmp(recvBuff, "DESCARGAR-LIBRO-END") != 0) {
+                printf("Error: Comando DESCARGAR-LIBRO-END no recibido correctamente\n");
             }
-            printf("Response sent: %s \n", sendBuff);
+        }
+
+        if (strcmp(recvBuff, "LEER-LIBRO") == 0) {
+            // Código para manejar LEER-LIBRO
+            Libro libro;
+            memset(&libro, 0, sizeof(Libro)); // Inicializa todo a cero
+
+            recv_size = recv(comm_socket, libro.titulo, sizeof(libro.titulo) - 1, 0);
+            if (recv_size <= 0) {
+                perror("Error al recibir título del libro");
+                continue;
+            }
+            libro.titulo[recv_size] = '\0'; // Asegura terminador nulo
+
+            leerLibro(comm_socket, libro.titulo);
         }
 
         if (strcmp(recvBuff, "IP") == 0) {
@@ -315,4 +348,51 @@ int main(int argc, char *argv[]) {
     WSACleanup();
 
     return 0;
+}
+
+
+
+void leerLibro(SOCKET client_socket, const string& titulo) {
+    int id_titulo = peticionIdLibroPorTitulo(titulo);
+    ifstream archivo("../libros/" + titulo + ".txt"); // Ajusta la ruta del archivo según sea necesario
+    vector<string> lineas;
+    string linea;
+
+    archivo.clear();
+    archivo.seekg(0);
+
+    while (getline(archivo, linea)) {
+        lineas.push_back(linea);
+    }
+
+    int inicio = cargarProgreso(id_titulo) * convPag;
+    int opcion = 0;
+    char recvBuff[512];
+    do {
+        stringstream ss;
+        int end = min(inicio + convPag, static_cast<int>(lineas.size()));
+        for (int i = inicio; i < end; ++i) {
+            ss << lineas[i] << endl;
+        }
+        string result = ss.str();
+        send(client_socket, result.c_str(), result.size() + 1, 0);
+
+        memset(recvBuff, 0, sizeof(recvBuff));
+        int recv_size = recv(client_socket, recvBuff, sizeof(recvBuff), 0);
+        if (recv_size <= 0) {
+            perror("Error al recibir comando de lectura");
+            break;
+        }
+        sscanf(recvBuff, "%d", &opcion);
+
+        if (opcion == 2) { // Siguiente página
+            inicio += convPag;
+        } else if (opcion == 3) { // Página anterior
+            inicio = max(inicio - convPag, 0);
+        }
+    } while (opcion != 4);
+
+    archivo.close();
+    actualizarProgreso(id_titulo,inicio/convPag, actualTime); // Guardar progreso antes de salir
+
 }
