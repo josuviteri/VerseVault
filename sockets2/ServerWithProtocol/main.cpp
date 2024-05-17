@@ -2,6 +2,7 @@
 #include <winsock2.h>
 #include <math.h>
 #include "../../structs/cliente.h"
+#include "../../structs/libro.h"
 #include "../sqlite/sqlite3.h"
 #include "../database/db2.h"
 #include "../menu/menu.h"
@@ -16,6 +17,10 @@ int main(int argc, char *argv[]) {
     struct sockaddr_in server;
     struct sockaddr_in client;
     char sendBuff[512], recvBuff[512];
+    Cliente cl;
+    time_t rawtime;
+    struct tm* timeinfo;
+    char actualTime[80];
 
     printf("\nInitialising Winsock...\n");
     if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
@@ -68,6 +73,9 @@ int main(int argc, char *argv[]) {
 
     printf("Waiting for incoming commands from client... \n");
     do {
+        time(&rawtime);
+        timeinfo = localtime(&rawtime);
+        strftime(actualTime, sizeof(actualTime), "%Y-%m-%d", timeinfo);
         memset(recvBuff, 0, sizeof(recvBuff));
         int recv_size = recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
         if (recv_size <= 0) {
@@ -78,7 +86,6 @@ int main(int argc, char *argv[]) {
         printf("Command received: %s \n", recvBuff);
 
         if (strcmp(recvBuff, "INICIAR-SESION") == 0) {
-            Cliente cl;
             memset(&cl, 0, sizeof(Cliente)); // Inicializa todo a cero
 
             recv_size = recv(comm_socket, cl.email_cl, sizeof(cl.email_cl) - 1, 0);
@@ -149,10 +156,6 @@ int main(int argc, char *argv[]) {
             int registradoBien = 0;
             registradoBien = registrarClienteMenu(cl.nom_Cliente,cl.email_cl,cl.passw);
 
-            /*printf("\nhola soy : %i\n", cl.id_Cliente);
-            printf("\nCorreo soy : %s\n", cl.email_cl);
-            printf("\npass soy : %s\n", cl.passw);
-            */
 
             memset(sendBuff, 0, sizeof(sendBuff));
             sprintf(sendBuff, "%d", registradoBien);
@@ -189,6 +192,40 @@ int main(int argc, char *argv[]) {
 
         }
 
+        if (strcmp(recvBuff, "AGREGAR-LIBRO-LISTA") == 0) {
+            Libro libro;
+            memset(&libro, 0, sizeof(Libro)); // Inicializa todo a cero
+
+            recv_size = recv(comm_socket, libro.titulo, sizeof(libro.titulo) - 1, 0);
+            if (recv_size <= 0) {
+                perror("Error al recibir titulo");
+                continue;
+            }
+            libro.titulo[recv_size] = '\0'; // Asegura terminador nulo
+
+            int status;
+            status = aportarLibroMenu(cl.id_Cliente, libro.titulo, actualTime);
+
+            memset(sendBuff, 0, sizeof(sendBuff));
+            if(status == SQLITE_OK) {
+                strcpy(sendBuff, "El libro se ha agregado correctamente");
+            } else {
+                strcpy(sendBuff, "El libro libro se ha agregado correctamente");
+            }
+            send(comm_socket, sendBuff, strlen(sendBuff) + 1, 0);
+
+
+            memset(recvBuff, 0, sizeof(recvBuff));
+            recv_size = recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
+            if (recv_size <= 0) {
+                perror("Error al recibir AGREGAR-LIBRO-LISTA-END");
+                continue;
+            }
+
+            if (strcmp(recvBuff, "AGREGAR-LIBRO-LISTA-END") != 0) {
+                printf("Error: Comando AGREGAR-LIBRO-LISTA-END no recibido correctamente\n");
+            }
+        }
         
         if (strcmp(recvBuff, "RAIZ") == 0) {
             memset(recvBuff, 0, sizeof(recvBuff));

@@ -224,7 +224,7 @@ void menuMiLista() {
                 printf("\nIntroduce el titulo del libro que desea guardar en tu lista: \n");
                 fgets(titulo, sizeof(titulo), stdin);
                 strtok(titulo, "\n"); // Elimina el carácter
-                aportarLibroMenu(titulo, actualTime);
+                //aportarLibroMenu(titulo, actualTime);
                 break;
             case '2':
                 printf("\ncorrecto 2\n\n");
@@ -529,18 +529,18 @@ void eliminarLibroMenu(char titulo[]){
         return;
     }
 }
-void aportarLibroMenu(char titulo[], char fecha_lec[]){
+int aportarLibroMenu(int id_cliente, char titulo[], char fecha_lec[]){
     //debria contectarse y agregar un libro de los disponibles en la db a la lista personal
     sqlite3 *db;
         int al = sqlite3_open("libreria.db", &db);
     if (al != SQLITE_OK) {
         //////errorMsgg("Error opening database\n");
         printf("%s\n", sqlite3_errmsg(db));
-        return;
+        return -1;
     }
 
     // Intenta agregar el libro
-    al = agregarLibroMiLista(db, id_cliente_actual ,titulo, fecha_lec);
+    al = agregarLibroMiLista(db, id_cliente ,titulo, fecha_lec);
 
     if (al != SQLITE_OK) {
         printf("Error inserting new data\n");
@@ -554,8 +554,9 @@ void aportarLibroMenu(char titulo[], char fecha_lec[]){
     if (al != SQLITE_OK) {
         printf("Error closing database\n");
         printf("%s\n", sqlite3_errmsg(db));
-        return;
+        return -1;
     }
+    return al;
 }
 
 void eliminarLibroBD(char titulo[]){

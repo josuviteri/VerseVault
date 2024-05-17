@@ -33,7 +33,7 @@ void menuMiLista();
 //apartado gestion de contenido
 void agregarLibroMenu(char titulo[], char nom_autor[], char idioma[], char fecha_publicacion[]);
 void eliminarLibroMenu(char titulo[]);
-void aportarLibroMenu(char titulo[], char fecha_lec[]);
+int aportarLibroMenu(int id_cliente, char titulo[], char fecha_lec[]);
 void eliminarLibroBD(char titulo[]);
 void guardarProgresoListaPersonal(int id_cliente, char titulo[], char fecha_lec[], int pag_actual);
 void descargarLibro(char *titulo);

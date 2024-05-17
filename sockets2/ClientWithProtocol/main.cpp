@@ -3,7 +3,8 @@
 #include <stdio.h>
 #include <winsock2.h>
 #include <string.h>
-
+#include "../../structs/cliente.h"
+#include "../../structs/libro.h"
 
 #define SERVER_IP "127.0.0.1"
 #define SERVER_PORT 6000
@@ -38,6 +39,8 @@ void menuMiLista() {
     char idioma[10];
     char fecha_publicacion[11];
     char fecha_actual[10];
+    Libro libro;
+
     printf(NEGRITA"Menu Mi Lista\n\n" QUITAR_NEGRITA);
     do{
         printf("\nSelecciona una opcion: \n");
@@ -52,9 +55,22 @@ void menuMiLista() {
 
         if(sel == '1'){
             printf("\ncorrecto 1\n\n");
-            printf("\nIntroduce el titulo del libro que desea guardar en tu lista: \n");
-            fgets(titulo, sizeof(titulo), stdin);
-            strtok(titulo, "\n"); // Elimina el carácter
+
+        	strcpy(sendBuff, "AGREGAR-LIBRO-LISTA");
+        	send(s, sendBuff, strlen(sendBuff) + 1, 0);
+
+        	printf("\nIntroduce el titulo del libro que desea guardar en tu lista:\n");
+        	fgets(libro.titulo, sizeof(libro.titulo), stdin);
+        	strtok(libro.titulo, "\n");
+        	send(s, libro.titulo, strlen(libro.titulo) + 1, 0);
+
+
+        	recv(s, recvBuff, sizeof(recvBuff), 0);
+			printf("%s", recvBuff);
+
+        	strcpy(sendBuff, "AGREGAR-LIBRO-LISTA-END");
+        	send(s, sendBuff, strlen(sendBuff) + 1, 0);
+
             //aportarLibroMenu(titulo, actualTime);
         }else if(sel == '2'){
             printf("\ncorrecto 2\n\n");
@@ -174,7 +190,8 @@ void imprimirInicial() {
     char email[101];
     char pass[31];
     char sel;
-
+	Cliente cliente;
+	Cliente clienteRegistro;
     printf("\nProyecto Programacion IV | Grupo PVI-04\n\n");
     printf(NEGRITA"Bienvenido al Sistema de Libreria Virtual\nVerseVault\n\n" QUITAR_NEGRITA);
 
@@ -190,14 +207,14 @@ void imprimirInicial() {
             send(s, sendBuff, strlen(sendBuff) + 1, 0);
 
             printf("\nIntroduce tus datos para iniciar sesion:\nIntroduce tu correo electronico:\n");
-            fgets(email, sizeof(email), stdin);
-            strtok(email, "\n");
-            send(s, email, strlen(email) + 1, 0);
+            fgets(cliente.email_cl, sizeof(cliente.email_cl), stdin);
+            strtok(cliente.email_cl, "\n");
+            send(s, cliente.email_cl, strlen(cliente.email_cl) + 1, 0);
 
             printf("\nIntroduce tu contrasenya:\n");
-            fgets(pass, sizeof(pass), stdin);
-            strtok(pass, "\n");
-            send(s, pass, strlen(pass) + 1, 0);
+            fgets(cliente.passw, sizeof(cliente.passw), stdin);
+            strtok(cliente.passw, "\n");
+            send(s, cliente.passw, strlen(cliente.passw) + 1, 0);
 
             recv(s, recvBuff, sizeof(recvBuff), 0);
             printf("Usuario: %s \n\n", recvBuff);
@@ -216,22 +233,22 @@ void imprimirInicial() {
 
 
             printf("\nIntroduce tus datos para registrarte:\nIntroduce tu nombre:\n(30 caracteres como maximo)\n");
-            fgets(nombre, sizeof(nombre), stdin);
-            strtok(nombre, "\n");
-            send(s, nombre, strlen(nombre) + 1, 0);
+            fgets(clienteRegistro.nom_Cliente, sizeof(clienteRegistro.nom_Cliente), stdin);
+            strtok(clienteRegistro.nom_Cliente, "\n");
+            send(s, clienteRegistro.nom_Cliente, strlen(clienteRegistro.nom_Cliente) + 1, 0);
 
 
             printf("\nIntroduce tu correo electronico:\n");
-            fgets(email, sizeof(email), stdin);
-            strtok(email, "\n");
-            send(s, email, strlen(email) + 1, 0);
+            fgets(clienteRegistro.email_cl, sizeof(clienteRegistro.email_cl), stdin);
+            strtok(clienteRegistro.email_cl, "\n");
+            send(s, clienteRegistro.email_cl, strlen(clienteRegistro.email_cl) + 1, 0);
 
 
 
             printf("\nIntroduce tu contrasenya:\n(30 caracteres como maximo)\n");
-            fgets(pass, sizeof(pass), stdin);
-            strtok(pass, "\n");
-            send(s, pass, strlen(pass) + 1, 0);
+            fgets(clienteRegistro.passw, sizeof(clienteRegistro.passw), stdin);
+            strtok(clienteRegistro.passw, "\n");
+            send(s, clienteRegistro.passw, strlen(clienteRegistro.passw) + 1, 0);
 
             recv(s, recvBuff, sizeof(recvBuff), 0);
 
