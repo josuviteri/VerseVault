@@ -8,7 +8,9 @@ add_executable(ProgIV curly/descargaArchivos.cpp
         sqlite/sqlite3.c
         database/db2.cpp
         database/dbBusqueda.cpp
-        main.cpp )
+        main.cpp
+        window/window.cpp
+        window/window.h)
 
 
 

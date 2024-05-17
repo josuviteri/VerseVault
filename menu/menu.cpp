@@ -12,6 +12,7 @@
 #include <vector>
 #include <chrono> // Para utilizar std::this_thread::sleep_for
 #include <thread> // Para utilizar std::chrono::milliseconds
+#include "../window/window.h"
 
 
 using namespace std;
@@ -682,11 +683,9 @@ bool CheckleerLibro(string titulo) {
     return true;
 }
 
-void leer(string titulo, ifstream& archivo){
-    // Reiniciamos el puntero de lectura al principio del archivo
+void leer(string titulo, ifstream& archivo) {
     archivo.clear(); // Limpiamos cualquier error o bandera de fin de archivo
     archivo.seekg(0); // Nos movemos al principio del archivo
-
 
     int id_titulo = peticionIdLibroPorTitulo(titulo);
     vector<string> lineas;
@@ -697,27 +696,44 @@ void leer(string titulo, ifstream& archivo){
 
     int inicio = cargarProgreso(id_titulo) * convPag; // Cargar progreso almacenado
     int opcion;
+
+    window* pWindow = new window(lineas);
+    if (pWindow == nullptr) {
+        cout << "Error al crear la ventana." << endl;
+        return;
+    }
+
+    bool running = true;
     do {
-        imprimirLineas(lineas, inicio);
+        window* pWindow = new window(lineas);
+        if (!pWindow->processMessages()) {
+            std::cout << "Closing Window\n";
+            running = false;
+        }
+
         cout << "\nOpciones: 1. Continuar, 2. Retroceder, 3. Salir: ";
         cin >> opcion;
 
         switch (opcion) {
             case 1:
                 inicio += convPag;
-                break;
+            break;
             case 2:
                 inicio = max(0, inicio - convPag);
-                break;
+            break;
             case 3:
                 cout << "Guardando progreso..." << endl;
-                actualizarProgreso(id_titulo,inicio/convPag, actualTime); // Guardar progreso antes de salir
-                cout << "Saliendo del programa." << endl;
-                break;
+            actualizarProgreso(id_titulo, inicio / convPag, actualTime); // Guardar progreso antes de salir
+            cout << "Saliendo del programa." << endl;
+            running = false;
+            break;
             default:
                 cout << "Opcion invalida. Intentalo de nuevo." << endl;
         }
-    } while (opcion != 3);
+
+    } while (running);
+
+    delete pWindow; // Liberar la memoria después de salir del bucle
 }
 
 

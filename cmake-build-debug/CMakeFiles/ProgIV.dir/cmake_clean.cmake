@@ -11,6 +11,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/ProgIV.dir/menu/menu.cpp.obj.d"
   "CMakeFiles/ProgIV.dir/sqlite/sqlite3.c.obj"
   "CMakeFiles/ProgIV.dir/sqlite/sqlite3.c.obj.d"
+  "CMakeFiles/ProgIV.dir/window/window.cpp.obj"
+  "CMakeFiles/ProgIV.dir/window/window.cpp.obj.d"
   "ProgIV.exe"
   "ProgIV.exe.manifest"
   "ProgIV.pdb"
