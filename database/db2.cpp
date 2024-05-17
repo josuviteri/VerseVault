@@ -541,12 +541,12 @@ int guardarProgreso(sqlite3 *db, int id_cliente, const char titulo[], const char
     return SQLITE_OK;
 }
 
-int eliminarLibro(sqlite3 *db, char titulo[]){
+int eliminarLibro(sqlite3 *db, int idCliente,char titulo[]){
     sqlite3_stmt *stmt = NULL;
     int result;
 
     // Consulta SQL para obtener el id_libro
-    char query[] = "DELETE FROM Progreso WHERE id_libro IN (SELECT id_libro FROM Libro WHERE titulo = ?)";
+    char query[] = "DELETE FROM Progreso WHERE id_libro IN (SELECT id_libro FROM Libro WHERE titulo = ?) AND id_cl = ?";
 
     result = sqlite3_prepare_v2(db, query, strlen(query) + 1, &stmt, NULL);
     if (result != SQLITE_OK) {
@@ -562,7 +562,13 @@ int eliminarLibro(sqlite3 *db, char titulo[]){
         sqlite3_finalize(stmt);
         return result;
     }
-
+    result = sqlite3_bind_int(stmt, 2, idCliente);
+    if (result != SQLITE_OK) {
+        errorMsg("Error binding client parameter for delet\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        sqlite3_finalize(stmt);
+        return result;
+    }
     result = sqlite3_step(stmt);
         if (result != SQLITE_DONE) {
         errorMsg("Error inserting new data into LIBRO table\n");

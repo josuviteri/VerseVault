@@ -75,11 +75,27 @@ void menuMiLista() {
 
             //aportarLibroMenu(titulo, actualTime);
         }else if(sel == '2'){
-            printf("\ncorrecto 2\n\n");
-            printf("\nIntroduce nombre del libro que quiera eliminar de su lista: \n");
-            fgets(titulo, sizeof(titulo), stdin);
-            strtok(titulo, "\n"); // Elimina el carácter
-            //eliminarLibroMenu(titulo);
+        	printf("\ncorrecto 2\n\n");
+        	strcpy(sendBuff, "ELIMINAR-LIBRO-LISTA");
+        	send(s, sendBuff, strlen(sendBuff) + 1, 0);
+
+        	printf("\nIntroduce el titulo del libro que desea eliminar de tu lista:\n");
+        	fgets(libro.titulo, sizeof(libro.titulo), stdin);
+        	strtok(libro.titulo, "\n");
+        	send(s, libro.titulo, strlen(libro.titulo) + 1, 0);
+
+
+        	recv(s, recvBuff, sizeof(recvBuff), 0);
+        	printf("%s", recvBuff);
+
+        	strcpy(sendBuff, "ELIMINAR-LIBRO-LISTA-END");
+        	send(s, sendBuff, strlen(sendBuff) + 1, 0);
+
+        	menuMiLista();
+
+
+
+
         }else if(sel == '3'){
             printf("\ncorrecto 3\n\n");
             printf("\nIntroduce nombre del libro que quieras descargar en su lista: \n");

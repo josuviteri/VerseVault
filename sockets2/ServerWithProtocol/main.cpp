@@ -210,7 +210,7 @@ int main(int argc, char *argv[]) {
             if(status == SQLITE_OK) {
                 strcpy(sendBuff, "El libro se ha agregado correctamente\n");
             } else {
-                strcpy(sendBuff, "El libro libro se ha agregado correctamente\n");
+                strcpy(sendBuff, "El libro no se ha agregado correctamente\n");
             }
             send(comm_socket, sendBuff, strlen(sendBuff) + 1, 0);
 
@@ -226,6 +226,45 @@ int main(int argc, char *argv[]) {
                 printf("Error: Comando AGREGAR-LIBRO-LISTA-END no recibido correctamente\n");
             }
         }
+
+        if (strcmp(recvBuff, "ELIMINAR-LIBRO-LISTA") == 0) {
+            Libro libro;
+            memset(&libro, 0, sizeof(Libro)); // Inicializa todo a cero
+
+            recv_size = recv(comm_socket, libro.titulo, sizeof(libro.titulo) - 1, 0);
+            if (recv_size <= 0) {
+                perror("Error al recibir titulo");
+                continue;
+            }
+            libro.titulo[recv_size] = '\0'; // Asegura terminador nulo
+
+            int status;
+            status = eliminarLibroMenu(cl.id_Cliente,  libro.titulo);
+
+            memset(sendBuff, 0, sizeof(sendBuff));
+            if(status == SQLITE_OK) {
+                strcpy(sendBuff, "El libro se ha eliminado correctamente\n");
+            } else {
+                strcpy(sendBuff, "El libro no se ha eliminado correctamente\n");
+            }
+            send(comm_socket, sendBuff, strlen(sendBuff) + 1, 0);
+
+
+            memset(recvBuff, 0, sizeof(recvBuff));
+            recv_size = recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
+            if (recv_size <= 0) {
+                perror("Error al recibir ELIMINAR-LIBRO-LISTA-END");
+                continue;
+            }
+
+            if (strcmp(recvBuff, "ELIMINAR-LIBRO-LISTA-END") != 0) {
+                printf("Error: Comando ELIMINAR-LIBRO-LISTA-END no recibido correctamente\n");
+            }
+        }
+
+
+
+
         
         if (strcmp(recvBuff, "RAIZ") == 0) {
             memset(recvBuff, 0, sizeof(recvBuff));

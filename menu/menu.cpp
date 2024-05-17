@@ -231,7 +231,7 @@ void menuMiLista() {
                 printf("\nIntroduce nombre del libro que quiera eliminar de su lista: \n");
                 fgets(titulo, sizeof(titulo), stdin);
                 strtok(titulo, "\n"); // Elimina el carácter
-                eliminarLibroMenu(titulo);
+                //eliminarLibroMenu(titulo);
                 break;
             case '3':
                 printf("\ncorrecto 3\n\n");
@@ -501,18 +501,18 @@ void agregarLibroMenu(char titulo[], char nom_autor[], char idioma[], char fecha
         return;
     }
 }
-void eliminarLibroMenu(char titulo[]){
+int eliminarLibroMenu(int id_cliente, char titulo[]){
     //debria contectarse a la db y eliminar un libro de la lista personal
     sqlite3 *db;
     int al = sqlite3_open("libreria.db", &db);
     if (al != SQLITE_OK) {
         //////errorMsgg("Error opening database\n");
         printf("%s\n", sqlite3_errmsg(db));
-        return;
+        return -1;
     }
 
     // Intenta agregar el libro
-    al = eliminarLibro(db, titulo);
+    al = eliminarLibro(db, id_cliente, titulo);
 
     if (al != SQLITE_OK) {
         printf("Error deleting data");
@@ -526,8 +526,9 @@ void eliminarLibroMenu(char titulo[]){
     if (al != SQLITE_OK) {
         printf("Error closing database\n");
         printf("%s\n", sqlite3_errmsg(db));
-        return;
+        return -1;
     }
+    return al;
 }
 int aportarLibroMenu(int id_cliente, char titulo[], char fecha_lec[]){
     //debria contectarse y agregar un libro de los disponibles en la db a la lista personal
