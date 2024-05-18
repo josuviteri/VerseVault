@@ -233,7 +233,37 @@ bool endsWith(const std::string &str, const std::string &suffix) {
     return str.compare(str.length() - suffix.length(), suffix.length(), suffix) == 0;
 }
 
+int esAdmin(const char* email) {
+    sqlite3* db;
+    char query[200];
+    sqlite3_stmt* stmt;
+    int rc;
+    int isAdmin = 0; // Inicialmente suponemos que el cliente no es admin
 
+    rc = sqlite3_open("libreria.db", &db);
+    if (rc) {
+        fprintf(stderr, "Error al abrir la base de datos: %s\n", sqlite3_errmsg(db));
+        return 0;
+    }
+
+    snprintf(query, sizeof(query), "SELECT es_admin FROM Cliente WHERE email_cl ='%s'", email);
+
+    rc = sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "Error al preparar la consulta SQL: %s\n", sqlite3_errmsg(db));
+        sqlite3_close(db);
+        return 0;
+    }
+
+    if (sqlite3_step(stmt) == SQLITE_ROW) {
+        isAdmin = sqlite3_column_int(stmt, 0);
+    }
+
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
+
+    return isAdmin;
+}
 
 int iniciarSesion(sqlite3 *db, char email_cl[], char pass_cl[]) {
     sqlite3_stmt *stmt;

@@ -27,6 +27,7 @@ using namespace std;
 SOCKET s;
 char sendBuff[512], recvBuff[512];
 int es_admin = 0;
+Cliente cliente;
 
 void leerLibro(SOCKET client_socket, const char* titulo);
 void buscarLibro(SOCKET client_socket);
@@ -229,57 +230,81 @@ void imprimirMenu(){
     char fecha_publicacion[11];
     char fecha_actual[10];
     bool salir = false; // Bandera para salir del bucle
-
+    Libro libro;
 
     printf(NEGRITA"Menu Principal\n\n" QUITAR_NEGRITA);
 
-    if (es_admin == 1) {
-        do{
-        printf("\nSelecciona una opcion: \n");
-        printf("1. Mi Lista\n2. Buscar Libro\n3. Agregar Libro BD (admin only)\n4. Eliminar Libro BD (admin only)\n5. Volver\n");
+    if (cliente.es_admin == 1) {
+        do{printf("\nSelecciona una opcion: \n");
+            printf("1. Mi Lista\n2. Buscar Libro\n3. Agregar Libro BD (admin only)\n4. Eliminar Libro BD (admin only)\n5. Volver\n");
 
-        fgets(input, sizeof(input), stdin);
-        sscanf(input, " %c", &sel);
+            fgets(input, sizeof(input), stdin);
+            sscanf(input, " %c", &sel);
 
-        if(sel == '1'){
-            printf("\ncorrecto 1\n\n");
-            menuMiLista();
+            switch(sel) {
+                case '1':
+                    printf("\ncorrecto 1\n\n");
+                    menuMiLista();
+                    break;
 
-        }else if(sel == '2'){
-            printf("\ncorrecto 2\n\n");
-            //buscarLibro();
+                case '2':
+                    printf("\ncorrecto 2\n\n");
+                    strcpy(sendBuff, "BUSCAR-LIBRO");
+                    send(s, sendBuff, strlen(sendBuff) + 1, 0);
+                    buscarLibro(s);
+                    strcpy(sendBuff, "BUSCAR-LIBRO-END");
+                    send(s, sendBuff, strlen(sendBuff) + 1, 0);
+                    //imprimirMenu();
+                    break;
 
-        }else if(sel == '3'){
-            printf("\ncorrecto 4\n\n");
-            printf("\nIntroduce los datos del libro:\nIntroduce el nombre del libro:\n(30 caracteres como maximo)\n");
-            fgets(titulo, sizeof(titulo), stdin);
-            strtok(titulo, "\n"); // Elimina el carácter
+                case '3':
+                    printf("\ncorrecto 4\n\n");
+                    strcpy(sendBuff, "AGREGAR-LIBRO-BD");
+                    send(s, sendBuff, strlen(sendBuff) + 1, 0);
+                    printf("\nIntroduce los datos del libro:\nIntroduce el nombre del libro:\n(30 caracteres como maximo)\n");
 
-            printf("\nIntroduce el nombre del autor:\n");
-            fgets(nom_autor, sizeof(nom_autor), stdin);
-            strtok(nom_autor, "\n"); // Elimina el carácter
+                    fgets(libro.titulo, sizeof(libro.titulo), stdin);
+                    strtok(libro.titulo, "\n");
+                    send(s, libro.titulo, strlen(libro.titulo) + 1, 0);
 
+                    printf("\nIntroduce el nombre del autor:\n");
+                    fgets(libro.autor_Libro, sizeof(libro.autor_Libro), stdin);
+                    strtok(libro.autor_Libro, "\n");
+                    send(s, libro.autor_Libro, strlen(libro.autor_Libro) + 1, 0);
 
-            printf("\nIntroduce el idioma de una manera reducida:\n(ejemplo: es, en...)\n");
-            fgets(idioma, sizeof(idioma), stdin);
-            strtok(idioma, "\n"); // Elimina el carácter
+                    printf("\nIntroduce el idioma de una manera reducida:\n(ejemplo: es, en...)\n");
+                    fgets(libro.idioma, sizeof(idioma), stdin);
+                    strtok(libro.idioma, "\n");
+                    send(s, libro.idioma, strlen(libro.idioma) + 1, 0);
 
-            printf("\nIntroduce la fecha de publicacion del libro: \n(formato:aaaa-mm-dd)\n");
-            fgets(fecha_publicacion, sizeof(fecha_publicacion), stdin);
-            strtok(fecha_publicacion, "\n"); // Elimina el carácter
+                    printf("\nIntroduce la fecha de publicacion del libro: \n(formato:aaaa-mm-dd)\n");
+                    fgets(libro.fecha_Publicacion, sizeof(fecha_publicacion), stdin);
+                    strtok(libro.fecha_Publicacion, "\n");
+                    send(s, libro.fecha_Publicacion, strlen(libro.fecha_Publicacion) + 1, 0);
 
-            //agregarLibroMenu(titulo, nom_autor, idioma, fecha_publicacion);
-        }else if(sel == '4'){
+                    recv(s, recvBuff, sizeof(recvBuff), 0);
+                    printf("%s \n\n", recvBuff);
 
-        }else if(sel == '5'){
-            printf("\ncerrando sesion...\n\n");
-            //imprimirInicial();
-        }else{
-            printf("\nIntroduce un valor valido\n\n");
-        }
+                    strcpy(sendBuff, "AGREGAR-LIBRO-BD-END");
+                    send(s, sendBuff, strlen(sendBuff) + 1, 0);
+                    imprimirMenu();
+                    break;
 
-        }while(sel != '5' && sel != '4' && sel != '3' && sel != '2' && sel != '1');
-} else {
+                case '4':
+                    // Coloca aquí la lógica para la opción 4
+                    break;
+
+                case '5':
+                    printf("\ncerrando sesion...\n\n");
+                    salir = true;
+                    break;
+
+                default:
+                    printf("\nIntroduce un valor valido\n\n");
+                    break;
+            }
+        } while(!salir);
+    } else {
         do {
             printf("\nSelecciona una opcion: \n");
             printf("1. Mi Lista\n2. Buscar Libro\n3. Volver\n");
@@ -352,7 +377,8 @@ void imprimirInicial() {
     char email[101];
     char pass[31];
     char sel;
-	Cliente cliente;
+    bool salir = false;
+
 	Cliente clienteRegistro;
     printf("\nProyecto Programacion IV | Grupo PVI-04\n\n");
     printf(NEGRITA"Bienvenido al Sistema de Libreria Virtual\nVerseVault\n\n" QUITAR_NEGRITA);
@@ -382,11 +408,12 @@ void imprimirInicial() {
             printf("Usuario: %s \n\n", recvBuff);
 
             recv(s, recvBuff, sizeof(recvBuff), 0);
+            printf("Soy: %s \n\n", recvBuff);
 
-            if (strcmp(recvBuff, "-1") == 0) {
-                cliente.es_admin = 0;
-            } else {
+            if (strcmp(recvBuff, "1") == 0) {
                 cliente.es_admin = 1;
+            } else {
+                cliente.es_admin = 0;
             }
 
             if (strcmp(recvBuff, "-1") != 0){ //ENTRA al siguiente menu, si el inicio de sesion ha sido corecto
@@ -440,11 +467,12 @@ void imprimirInicial() {
 
         }else if(sel == '4'){
             printf("\ncerrando...\n");
+            salir = true;
         }else{
             printf("\nIntroduce un valor valido\n\n");
     }
 
-    }while(sel != '4' && sel != '3' && sel != '2' && sel != '1');
+    }while(!salir);
 }
 
 

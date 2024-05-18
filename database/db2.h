@@ -12,6 +12,7 @@ int deleteAllClients(sqlite3 *db);
 
 int registrarCliente(sqlite3 *db, char nom_cl[], char email_cl[], char pass_cl[]);
 bool endsWith(const std::string &str, const std::string &suffix);
+int esAdmin(const char* email);
 
 int iniciarSesion(sqlite3 *db, char email_cl[], char pass_cl[]);
 

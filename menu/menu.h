@@ -31,7 +31,7 @@ int registrarClienteMenu(char nom_cl[], char email_cl[], char pass_cl[]);
 void menuMiLista();
 
 //apartado gestion de contenido
-void agregarLibroMenu(char titulo[], char nom_autor[], char idioma[], char fecha_publicacion[]);
+int agregarLibroMenu(char titulo[], char nom_autor[], char idioma[], char fecha_publicacion[]);
 int eliminarLibroMenu(int id_cliente, char titulo[]);
 int aportarLibroMenu(int id_cliente, char titulo[], char fecha_lec[]);
 void eliminarLibroBD(char titulo[]);

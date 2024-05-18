@@ -138,6 +138,11 @@ int main(int argc, char *argv[]) {
             } else {
                 cl.es_admin = 0;
             }
+            if (esAdmin(cl.email_cl) == 1 ) {
+                cl.es_admin = 1;
+            } else {
+                cl.es_admin = 0;
+            }
 
             memset(sendBuff, 0, sizeof(sendBuff));
             sprintf(sendBuff, "%d", cl.es_admin);
@@ -363,8 +368,6 @@ int main(int argc, char *argv[]) {
             memset(&cl, 0, sizeof(Cliente)); // Inicializa todo a cero
 
 
-
-
             buscarLibro(comm_socket);
 
             memset(recvBuff, 0, sizeof(recvBuff));
@@ -378,6 +381,64 @@ int main(int argc, char *argv[]) {
                 printf("Error: Comando BUSCAR-LIBRO-END no recibido correctamente\n");
             }
         }
+
+        if (strcmp(recvBuff, "AGREGAR-LIBRO-BD") == 0) {
+            Libro libro;
+            memset(&libro, 0, sizeof(Libro)); // Inicializa todo a cero
+
+            recv_size = recv(comm_socket, libro.titulo, sizeof(libro.titulo) - 1, 0);
+            if (recv_size <= 0) {
+                perror("Error al recibir titulo");
+                continue;
+            }
+            libro.titulo[recv_size] = '\0'; // Asegura terminador nulo
+
+            recv_size = recv(comm_socket, libro.autor_Libro, sizeof(libro.autor_Libro) - 1, 0);
+            if (recv_size <= 0) {
+                perror("Error al recibir autor");
+                continue;
+            }
+            libro.autor_Libro[recv_size] = '\0'; // Asegura terminador nulo
+
+            recv_size = recv(comm_socket, libro.idioma, sizeof(libro.idioma) - 1, 0);
+            if (recv_size <= 0) {
+                perror("Error al recibir idioma");
+                continue;
+            }
+            libro.idioma[recv_size] = '\0'; // Asegura terminador nulo
+
+            recv_size = recv(comm_socket, libro.fecha_Publicacion, sizeof(libro.fecha_Publicacion) - 1, 0);
+            if (recv_size <= 0) {
+                perror("Error al recibir fecha publicacion");
+                continue;
+            }
+            libro.fecha_Publicacion[recv_size] = '\0'; // Asegura terminador nulo
+
+
+            int status;
+            status = agregarLibroMenu(libro.titulo,libro.autor_Libro, libro.idioma, libro.fecha_Publicacion);
+
+            memset(sendBuff, 0, sizeof(sendBuff));
+            if(status == SQLITE_OK) {
+                strcpy(sendBuff, "El libro se ha agregado correctamente a la BD\n");
+            } else {
+                strcpy(sendBuff, "El libro no se ha agregado correctamente a la BD\n");
+            }
+            send(comm_socket, sendBuff, strlen(sendBuff) + 1, 0);
+
+
+            memset(recvBuff, 0, sizeof(recvBuff));
+            recv_size = recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
+            if (recv_size <= 0) {
+                perror("Error al recibir AGREGAR-LIBRO-BD-END");
+                continue;
+            }
+
+            if (strcmp(recvBuff, "AGREGAR-LIBRO-BD-END") != 0) {
+                printf("Error: Comando AGREGAR-LIBRO-BD-END no recibido correctamente\n");
+            }
+        }
+
 
         if (strcmp(recvBuff, "EXIT") == 0)
             break;

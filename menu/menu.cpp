@@ -477,14 +477,14 @@ int registrarClienteMenu(char nom_cl[], char email_cl[], char pass_cl[]){
 }
 
 //apartado gestion de contenido de la db
-void agregarLibroMenu(char titulo[], char nom_autor[], char idioma[], char fecha_publicacion[]){
+int agregarLibroMenu(char titulo[], char nom_autor[], char idioma[], char fecha_publicacion[]){
     //debria contectarse y agregar un libro a la db
     sqlite3 *db;
     int rl = sqlite3_open("libreria.db", &db);
     if (rl != SQLITE_OK) {
         //////errorMsgg("Error opening database\n");
         printf("Error opening database\n");
-        return;
+        return -1;
     }
     rl = agregarLibro(db, titulo, nom_autor, idioma, fecha_publicacion);
     if (rl != SQLITE_OK) {
@@ -498,8 +498,9 @@ void agregarLibroMenu(char titulo[], char nom_autor[], char idioma[], char fecha
     if (rl != SQLITE_OK) {
         printf("Error closing database\n");
         printf("%s\n", sqlite3_errmsg(db));
-        return;
+        return -1;
     }
+    return rl;
 }
 int eliminarLibroMenu(int id_cliente, char titulo[]){
     //debria contectarse a la db y eliminar un libro de la lista personal
