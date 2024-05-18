@@ -37,7 +37,7 @@ int aportarLibroMenu(int id_cliente, char titulo[], char fecha_lec[]);
 void eliminarLibroBD(char titulo[]);
 void guardarProgresoListaPersonal(int id_cliente, char titulo[], char fecha_lec[], int pag_actual);
 int descargarLibro(char *titulo);
-void buscarLibro();
+//void buscarLibro();
 
 void imprimirLineas(const std::vector<std::string>& lines, int start);
 bool CheckleerLibro(std::string titulo);

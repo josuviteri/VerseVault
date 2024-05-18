@@ -2,8 +2,8 @@
 #define DBBUSQUEDA_H
 
 
-void peticionTitulo(const char *titulo);
-void peticionAutor(const char *autor);
+char* peticionTitulo(const char *titulo);
+char* peticionAutor(const char *autor);
 int peticionAutorPorTitulo(char* titulo);
 int peticionIdLibroPorTitulo(const std::string& titulo);
 

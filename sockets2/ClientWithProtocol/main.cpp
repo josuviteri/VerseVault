@@ -30,6 +30,7 @@ int es_admin = 0;
 
 void leerLibro(SOCKET client_socket, const char* titulo);
 void buscarLibro(SOCKET client_socket);
+void imprimirInicial();
 
 
 char imprimirInicial1(){
@@ -56,7 +57,7 @@ void buscarLibro(SOCKET client_socket) {
     std::cout << "Opcion: ";
     std::cin.getline(opcion, sizeof(opcion));
 
-
+    send(client_socket, opcion, strlen(opcion) + 1, 0);
     if (strcmp(opcion, "1") == 0) {
         char titulo[100];
         std::cout << "Ingresa el titulo del libro a buscar: ";
@@ -75,10 +76,10 @@ void buscarLibro(SOCKET client_socket) {
     memset(recvBuff, 0, sizeof(recvBuff));
     int recv_size = recv(client_socket, recvBuff, sizeof(recvBuff) - 1, 0);
     if (recv_size <= 0) {
-        perror("Error al recibir resultado de búsqueda");
+        perror("Error al recibir resultado de busqueda");
     }
 
-    std::cout << "Resultados de la búsqueda:\n" << recvBuff << std::endl;
+    std::cout << "Resultados de la busqueda:\n" << recvBuff << std::endl;
 }
 
 void leerLibro(SOCKET client_socket, const char* titulo) {
@@ -308,7 +309,7 @@ void imprimirMenu(){
                     break;
                 case '3':
                     printf("\ncerrando sesion...\n\n");
-                    //salir = true;
+                    salir = true;
                     break;
                 default:
                     printf("\nIntroduce un valor valido\n\n");

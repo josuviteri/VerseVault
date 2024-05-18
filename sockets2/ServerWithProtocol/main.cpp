@@ -362,46 +362,10 @@ int main(int argc, char *argv[]) {
         if (strcmp(recvBuff, "BUSCAR-LIBRO") == 0) {
             memset(&cl, 0, sizeof(Cliente)); // Inicializa todo a cero
 
-            recv_size = recv(comm_socket, cl.email_cl, sizeof(cl.email_cl) - 1, 0);
-            if (recv_size <= 0) {
-                perror("Error al recibir email");
-                continue;
-            }
-            cl.email_cl[recv_size] = '\0'; // Asegura terminador nulo
-
-            recv_size = recv(comm_socket, cl.passw, sizeof(cl.passw) - 1, 0);
-            if (recv_size <= 0) {
-                perror("Error al recibir contraseña");
-                continue;
-            }
-            cl.passw[recv_size] = '\0'; // Asegura terminador nulo
-
-            cl.id_Cliente = iniciarSesionMenu(cl.email_cl, cl.passw);
-
-            /*printf("\nhola soy : %i\n", cl.id_Cliente);
-            printf("\nCorreo soy : %s\n", cl.email_cl);
-            printf("\npass soy : %s\n", cl.passw);
-            */
-
-            memset(sendBuff, 0, sizeof(sendBuff));
-            sprintf(sendBuff, "%d", cl.id_Cliente);
-            if (send(comm_socket, sendBuff, strlen(sendBuff) + 1, 0) == -1) {
-                perror("Error al enviar ID de cliente");
-            }
 
 
-            // Verificar si el correo electrónico termina con "@opendeusto.es"
-            if (endsWith(cl.email_cl, "@opendeusto.es") || endsWith(cl.email_cl, "@deusto.es")) {
-                cl.es_admin = 1;
-            } else {
-                cl.es_admin = 0;
-            }
 
-            memset(sendBuff, 0, sizeof(sendBuff));
-            sprintf(sendBuff, "%d", cl.es_admin);
-            if (send(comm_socket, sendBuff, strlen(sendBuff) + 1, 0) == -1) {
-                perror("Error al enviar si es admin el cliente");
-            }
+            buscarLibro(comm_socket);
 
             memset(recvBuff, 0, sizeof(recvBuff));
             recv_size = recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
@@ -410,8 +374,8 @@ int main(int argc, char *argv[]) {
                 continue;
             }
 
-            if (strcmp(recvBuff, "INICIAR-SESION-END") != 0) {
-                printf("Error: Comando INICIAR-SESION-END no recibido correctamente\n");
+            if (strcmp(recvBuff, "BUSCAR-LIBRO-END") != 0) {
+                printf("Error: Comando BUSCAR-LIBRO-END no recibido correctamente\n");
             }
         }
 
@@ -475,33 +439,49 @@ void leerLibro(SOCKET client_socket, const string& titulo) {
 void buscarLibro(SOCKET client_socket) {
     char opcion[10];
     char recvBuff[512];
-    vector<Libro> resultados;
+    char* resultados;
 
-    recv(client_socket, recvBuff, sizeof(recvBuff), 0);
+    // Recibir la opción seleccionada por el cliente
+    int recv_size = recv(client_socket, recvBuff, sizeof(recvBuff) - 1, 0);
+    if (recv_size <= 0) {
+        perror("Error al recibir opción de búsqueda");
+        return;
+    }
+    recvBuff[recv_size] = '\0';
     strcpy(opcion, recvBuff);
 
     if (strcmp(opcion, "1") == 0) {
         // Búsqueda por título
         char titulo[100];
-        recv(client_socket, recvBuff, sizeof(recvBuff), 0);
+        recv_size = recv(client_socket, recvBuff, sizeof(recvBuff) - 1, 0);
+        if (recv_size <= 0) {
+            perror("Error al recibir título");
+            return;
+        }
+        recvBuff[recv_size] = '\0';
         strcpy(titulo, recvBuff);
         resultados = peticionTitulo(titulo);
     } else if (strcmp(opcion, "2") == 0) {
         // Búsqueda por autor
         char autor[100];
-        recv(client_socket, recvBuff, sizeof(recvBuff), 0);
+        recv_size = recv(client_socket, recvBuff, sizeof(recvBuff) - 1, 0);
+        if (recv_size <= 0) {
+            perror("Error al recibir autor");
+            return;
+        }
+        recvBuff[recv_size] = '\0';
         strcpy(autor, recvBuff);
         resultados = peticionAutor(autor);
+
     } else {
         strcpy(recvBuff, "Opcion no valida.");
         send(client_socket, recvBuff, strlen(recvBuff) + 1, 0);
         return;
     }
+    printf("%s",resultados);
+    // Enviar los resultados al cliente
+    send(client_socket, resultados, strlen(resultados) + 1, 0);
 
-    stringstream ss;
-    for (const auto& libro : resultados) {
-        ss << "Titulo: " << libro.titulo << ", Autor: " << libro.autor << endl;
-    }
-    string result = ss.str();
-    send(client_socket, result.c_str(), result.size(), 0);
+    // Liberar memoria asignada para los resultados
+    free(resultados);
 }

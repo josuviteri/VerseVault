@@ -125,7 +125,7 @@ void imprimirMenu() {
                     break;
                 case '2':
                     printf("\ncorrecto 2\n\n");
-                    buscarLibro();
+                    //buscarLibro();
                     break;
                 case '3':
                     printf("\ncorrecto 4\n\n");
@@ -181,7 +181,7 @@ void imprimirMenu() {
                     break;
                 case '2':
                     printf("\ncorrecto 2\n\n");
-                    buscarLibro();
+                    //buscarLibro();
                     break;
                 case '3':
                     printf("\ncerrando sesion...\n\n");
@@ -382,7 +382,7 @@ void imprimirGestionInvitado() {
         switch (sel) {
             case '1':
                 printf("\ncorrecto 1\n\n");
-                buscarLibro();
+                //buscarLibro();
                 break;
             case '2':
                 printf("\ncorrecto 2\n\n");
@@ -625,7 +625,7 @@ int descargarLibro(char *titulo){
     return status;
 }
 
-void buscarLibro(){
+/*void buscarLibro(){
    char opcion[10]; // Opción seleccionada por el usuario
 
     // Solicitar al usuario que ingrese el tipo de búsqueda
@@ -653,7 +653,7 @@ void buscarLibro(){
     } else {
         printf("Opcion no valida.\n");
     }
-}
+}*/
 
 
 void imprimirLineas(const vector<string>& lines, int start) {
