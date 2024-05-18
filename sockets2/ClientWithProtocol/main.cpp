@@ -32,7 +32,7 @@ Cliente cliente;
 void leerLibro(SOCKET client_socket, const char* titulo);
 void buscarLibro(SOCKET client_socket);
 void imprimirInicial();
-
+void imprimirGestionInvitado();
 
 void limpiarBuffer() {
     int c;
@@ -381,7 +381,7 @@ void imprimirMenuInvitado() {
 
         if (sel == '1') {
             printf("\ncorrecto 2\n\n");
-            // imprimirGestionInvitado();
+            imprimirGestionInvitado();
         } else if (sel == '2') {
             printf("\ncerrando sesion...\n\n");
             return; // Salir del menú de invitado
@@ -390,6 +390,87 @@ void imprimirMenuInvitado() {
         }
 
     } while (sel != '2' && sel != '1');
+}
+
+void imprimirGestionInvitado() {
+    char input[10];
+    char sel;
+    char titulo[30];
+    char nom_autor[30];
+    char idioma[10];
+    char fecha_publicacion[11];
+    Libro libro;
+
+    printf(NEGRITA "Menu de Gestion de Contenido\nSesion de invitado\n\n" QUITAR_NEGRITA);
+
+    do {
+        printf("\nSelecciona una opcion: \n");
+        printf("1. Buscar Libro\n2. Aportar Libro a la BD\n3. Volver\n");
+
+        fgets(input, sizeof(input), stdin);
+        sscanf(input, " %c", &sel);
+
+        switch (sel) {
+            case '1':
+                printf("\ncorrecto 1\n\n");
+
+                strcpy(sendBuff, "BUSCAR-LIBRO");
+                send(s, sendBuff, strlen(sendBuff) + 1, 0);
+
+                buscarLibro(s);
+
+
+                strcpy(sendBuff, "BUSCAR-LIBRO-END");
+                send(s, sendBuff, strlen(sendBuff) + 1, 0);
+                //buscarLibro();
+                break;
+            case '2':
+                printf("\ncorrecto 2\n\n");
+
+                strcpy(sendBuff, "AGREGAR-LIBRO-BD");
+                send(s, sendBuff, strlen(sendBuff) + 1, 0);
+                printf("\nIntroduce los datos del libro:\nIntroduce el nombre del libro:\n(30 caracteres como maximo)\n");
+
+                fgets(libro.titulo, sizeof(libro.titulo), stdin);
+                strtok(libro.titulo, "\n");
+                send(s, libro.titulo, strlen(libro.titulo) + 1, 0);
+
+                printf("\nIntroduce el nombre del autor:\n");
+                fgets(libro.autor_Libro, sizeof(libro.autor_Libro), stdin);
+                strtok(libro.autor_Libro, "\n");
+                send(s, libro.autor_Libro, strlen(libro.autor_Libro) + 1, 0);
+
+                printf("\nIntroduce el idioma de una manera reducida:\n(ejemplo: es, en...)\n");
+                fgets(libro.idioma, sizeof(idioma), stdin);
+                strtok(libro.idioma, "\n");
+                send(s, libro.idioma, strlen(libro.idioma) + 1, 0);
+
+                printf("\nIntroduce la fecha de publicacion del libro: \n(formato:aaaa-mm-dd)\n");
+                fgets(libro.fecha_Publicacion, sizeof(fecha_publicacion), stdin);
+                strtok(libro.fecha_Publicacion, "\n");
+                send(s, libro.fecha_Publicacion, strlen(libro.fecha_Publicacion) + 1, 0);
+
+                recv(s, recvBuff, sizeof(recvBuff), 0);
+                printf("%s \n\n", recvBuff);
+
+
+                memset(sendBuff, 0, sizeof(sendBuff));
+                strcpy(sendBuff, "AGREGAR-LIBRO-BD-END");
+                send(s, sendBuff, strlen(sendBuff) + 1, 0);
+                //imprimirMenu();
+
+                //agregarLibroMenu(titulo, nom_autor, idioma, fecha_publicacion);
+                break;
+            case '3':
+                printf("\nvolviendo...\n\n");
+                imprimirMenuInvitado();
+                break;
+            default:
+                printf("\nIntroduce un valor valido\n\n");
+                break;
+        }
+        limpiarBuffer();
+    } while (sel != '3');
 }
 
 void imprimirInicial() {
