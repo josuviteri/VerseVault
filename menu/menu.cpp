@@ -22,9 +22,9 @@ using namespace std;
 #define QUITAR_NEGRITA "" //"\e[m" // Renombramos el codigo de quitar la negrita a los caracteres para que sea mas entendible
 //"Sin dolor no hay gloria" - Proverbio Romano
 int id_cliente_actual = -1;
-time_t rawtime;
-struct tm* timeinfo;
-char actualTime[80];
+//time_t rawtime;
+//struct tm* timeinfo;
+//char actualTime[80];
 int es_admin = 0;
 bool salir = false; // Bandera para salir del programa
 
@@ -36,9 +36,9 @@ void imprimirInicial() {
     char pass[31];
     char sel;
 
-    time(&rawtime);
-    timeinfo = localtime(&rawtime);
-    strftime(actualTime, sizeof(actualTime), "%Y-%m-%d", timeinfo);
+    //time(&rawtime);
+    //timeinfo = localtime(&rawtime);
+    //strftime(actualTime, sizeof(actualTime), "%Y-%m-%d", timeinfo);
 
     cout << "\nProyecto Programacion IV | Grupo PVI-04\n\n";
     cout << NEGRITA << "Bienvenido al Sistema de Libreria Virtual\nVerseVault\n\n" << QUITAR_NEGRITA;
@@ -125,7 +125,7 @@ void imprimirMenu() {
                     break;
                 case '2':
                     printf("\ncorrecto 2\n\n");
-                    buscarLibro();
+                    //buscarLibro();
                     break;
                 case '3':
                     printf("\ncorrecto 4\n\n");
@@ -181,7 +181,7 @@ void imprimirMenu() {
                     break;
                 case '2':
                     printf("\ncorrecto 2\n\n");
-                    buscarLibro();
+                    //buscarLibro();
                     break;
                 case '3':
                     printf("\ncerrando sesion...\n\n");
@@ -224,14 +224,14 @@ void menuMiLista() {
                 printf("\nIntroduce el titulo del libro que desea guardar en tu lista: \n");
                 fgets(titulo, sizeof(titulo), stdin);
                 strtok(titulo, "\n"); // Elimina el carácter
-                aportarLibroMenu(titulo, actualTime);
+                //aportarLibroMenu(titulo, actualTime);
                 break;
             case '2':
                 printf("\ncorrecto 2\n\n");
                 printf("\nIntroduce nombre del libro que quiera eliminar de su lista: \n");
                 fgets(titulo, sizeof(titulo), stdin);
                 strtok(titulo, "\n"); // Elimina el carácter
-                eliminarLibroMenu(titulo);
+                //eliminarLibroMenu(titulo);
                 break;
             case '3':
                 printf("\ncorrecto 3\n\n");
@@ -382,7 +382,7 @@ void imprimirGestionInvitado() {
         switch (sel) {
             case '1':
                 printf("\ncorrecto 1\n\n");
-                buscarLibro();
+                //buscarLibro();
                 break;
             case '2':
                 printf("\ncorrecto 2\n\n");
@@ -421,19 +421,19 @@ void imprimirGestionInvitado() {
 
 
 //apartado gestion usuarios
-void iniciarSesionMenu(char email_cl[], char pass_cl[]){
+int iniciarSesionMenu(char email_cl[], char pass_cl[]){
     sqlite3 *db;
     int rc = sqlite3_open("libreria.db", &db);
     if (rc != SQLITE_OK) {
         //errorMsgg("Error opening database\n");
         printf("Error opening database\n");
-        return;
+        return -1;
     }
-
-    id_cliente_actual = iniciarSesion(db, email_cl, pass_cl);
-    if (id_cliente_actual != -1) {
+    int id_cliente_actu = -1;
+    id_cliente_actu = iniciarSesion(db, email_cl, pass_cl);
+    if (id_cliente_actu != -1) {
         printf("Inicio de sesion exitoso. Bienvenido\n");
-        imprimirMenu();
+        //imprimirMenu();
     } else {
         printf("Inicio de sesion fallido. Verifica tus credenciales.\n");
     }
@@ -442,20 +442,21 @@ void iniciarSesionMenu(char email_cl[], char pass_cl[]){
     if (rc != SQLITE_OK) {
         printf("Error opening database\n");
         printf("%s\n", sqlite3_errmsg(db));
-        return;
+        return -1;
     }
+    return id_cliente_actu;
 }
 
 
 
 
-void registrarClienteMenu(char nom_cl[], char email_cl[], char pass_cl[]){
+int registrarClienteMenu(char nom_cl[], char email_cl[], char pass_cl[]){
     sqlite3 *db;
     int rc = sqlite3_open("libreria.db", &db);
     if (rc != SQLITE_OK) {
         //////errorMsgg("Error opening database\n");
         printf("Error opening database\n");
-        return;
+        return -1;
     }
 
     rc = registrarCliente(db, nom_cl, email_cl, pass_cl);
@@ -470,19 +471,20 @@ void registrarClienteMenu(char nom_cl[], char email_cl[], char pass_cl[]){
     if (rc != SQLITE_OK) {
         printf("Error closing database\n");
         printf("%s\n", sqlite3_errmsg(db));
-        return;
+        return -1;
     }
+    return rc;
 }
 
 //apartado gestion de contenido de la db
-void agregarLibroMenu(char titulo[], char nom_autor[], char idioma[], char fecha_publicacion[]){
+int agregarLibroMenu(char titulo[], char nom_autor[], char idioma[], char fecha_publicacion[]){
     //debria contectarse y agregar un libro a la db
     sqlite3 *db;
     int rl = sqlite3_open("libreria.db", &db);
     if (rl != SQLITE_OK) {
         //////errorMsgg("Error opening database\n");
         printf("Error opening database\n");
-        return;
+        return -1;
     }
     rl = agregarLibro(db, titulo, nom_autor, idioma, fecha_publicacion);
     if (rl != SQLITE_OK) {
@@ -496,21 +498,22 @@ void agregarLibroMenu(char titulo[], char nom_autor[], char idioma[], char fecha
     if (rl != SQLITE_OK) {
         printf("Error closing database\n");
         printf("%s\n", sqlite3_errmsg(db));
-        return;
+        return -1;
     }
+    return rl;
 }
-void eliminarLibroMenu(char titulo[]){
+int eliminarLibroMenu(int id_cliente, char titulo[]){
     //debria contectarse a la db y eliminar un libro de la lista personal
     sqlite3 *db;
     int al = sqlite3_open("libreria.db", &db);
     if (al != SQLITE_OK) {
         //////errorMsgg("Error opening database\n");
         printf("%s\n", sqlite3_errmsg(db));
-        return;
+        return -1;
     }
 
     // Intenta agregar el libro
-    al = eliminarLibro(db, titulo);
+    al = eliminarLibro(db, id_cliente, titulo);
 
     if (al != SQLITE_OK) {
         printf("Error deleting data");
@@ -524,21 +527,22 @@ void eliminarLibroMenu(char titulo[]){
     if (al != SQLITE_OK) {
         printf("Error closing database\n");
         printf("%s\n", sqlite3_errmsg(db));
-        return;
+        return -1;
     }
+    return al;
 }
-void aportarLibroMenu(char titulo[], char fecha_lec[]){
+int aportarLibroMenu(int id_cliente, char titulo[], char fecha_lec[]){
     //debria contectarse y agregar un libro de los disponibles en la db a la lista personal
     sqlite3 *db;
         int al = sqlite3_open("libreria.db", &db);
     if (al != SQLITE_OK) {
         //////errorMsgg("Error opening database\n");
         printf("%s\n", sqlite3_errmsg(db));
-        return;
+        return -1;
     }
 
     // Intenta agregar el libro
-    al = agregarLibroMiLista(db, id_cliente_actual ,titulo, fecha_lec);
+    al = agregarLibroMiLista(db, id_cliente ,titulo, fecha_lec);
 
     if (al != SQLITE_OK) {
         printf("Error inserting new data\n");
@@ -552,18 +556,19 @@ void aportarLibroMenu(char titulo[], char fecha_lec[]){
     if (al != SQLITE_OK) {
         printf("Error closing database\n");
         printf("%s\n", sqlite3_errmsg(db));
-        return;
+        return -1;
     }
+    return al;
 }
 
-void eliminarLibroBD(char titulo[]){
+int eliminarLibroBD(char titulo[]){
     //debria contectarse a la db y eliminar un libro de la lista personal
     sqlite3 *db;
     int al = sqlite3_open("libreria.db", &db);
     if (al != SQLITE_OK) {
         //////errorMsgg("Error opening database\n");
         printf("%s\n", sqlite3_errmsg(db));
-        return;
+        return -1;
     }
 
     // Intenta agregar el libro
@@ -581,8 +586,9 @@ void eliminarLibroBD(char titulo[]){
     if (al != SQLITE_OK) {
         printf("Error closing database\n");
         printf("%s\n", sqlite3_errmsg(db));
-        return;
+        return -1;
     }
+    return al;
 }
 void guardarProgresoListaPersonal(int id_cliente, char titulo[], char fecha_lec[], int pag_actual) {
     sqlite3 *db;
@@ -610,17 +616,18 @@ void guardarProgresoListaPersonal(int id_cliente, char titulo[], char fecha_lec[
 
     return;
 }
-void descargarLibro(char *titulo){
+int descargarLibro(char *titulo){
 // Verificar si el archivo del libro ya existe en la carpeta
     ifstream archivo("../libros/" + string(titulo) + ".txt");
     if (archivo.good()) {
         cout << "El libro '" << titulo << "' ya esta descargado." << endl;
-        return; // Si el libro ya está en la carpeta, salir de la función
+        return SQLITE_OK; // Si el libro ya está en la carpeta, salir de la función
     }
-    peticionAutorPorTitulo(titulo);
+    int status = peticionAutorPorTitulo(titulo);
+    return status;
 }
 
-void buscarLibro(){
+/*void buscarLibro(){
    char opcion[10]; // Opción seleccionada por el usuario
 
     // Solicitar al usuario que ingrese el tipo de búsqueda
@@ -648,11 +655,11 @@ void buscarLibro(){
     } else {
         printf("Opcion no valida.\n");
     }
-}
+}*/
 
 
 void imprimirLineas(const vector<string>& lines, int start) {
-    int end = min(start + 20, static_cast<int>(lines.size()));
+    int end = min(start + convPag, static_cast<int>(lines.size()));
     for (int i = start; i < end; ++i) {
         cout << lines[i] << endl;
     }
@@ -671,7 +678,7 @@ bool CheckleerLibro(string titulo) {
             descargarLibro(tituloChar);
             // Crear un nuevo objeto ifstream para el archivo recién descargado
             ifstream archivoNuevo("../libros/" + titulo + ".txt");
-            leer(titulo, archivoNuevo);
+            //leer(titulo, archivoNuevo);
         } else {
             cout << "No se puede leer el libro sin descargarlo." << endl;
             return true;
@@ -711,7 +718,7 @@ void leer(string titulo, ifstream& archivo){
                 break;
             case 3:
                 cout << "Guardando progreso..." << endl;
-                actualizarProgreso(id_titulo,inicio/convPag, actualTime); // Guardar progreso antes de salir
+                //actualizarProgreso(id_titulo,inicio/convPag, actualTime); // Guardar progreso antes de salir
                 cout << "Saliendo del programa." << endl;
                 break;
             default:

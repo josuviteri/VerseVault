@@ -25,19 +25,19 @@ void imprimirMenuInvitado();
 void imprimirGestion();
 void imprimirGestionInvitado();
 //apartado gestion usuarios
-void iniciarSesionMenu(char email_cl[], char pass_cl[]);
-void registrarClienteMenu(char nom_cl[], char email_cl[], char pass_cl[]);
+int iniciarSesionMenu(char email_cl[], char pass_cl[]);
+int registrarClienteMenu(char nom_cl[], char email_cl[], char pass_cl[]);
 
 void menuMiLista();
 
 //apartado gestion de contenido
-void agregarLibroMenu(char titulo[], char nom_autor[], char idioma[], char fecha_publicacion[]);
-void eliminarLibroMenu(char titulo[]);
-void aportarLibroMenu(char titulo[], char fecha_lec[]);
-void eliminarLibroBD(char titulo[]);
+int agregarLibroMenu(char titulo[], char nom_autor[], char idioma[], char fecha_publicacion[]);
+int eliminarLibroMenu(int id_cliente, char titulo[]);
+int aportarLibroMenu(int id_cliente, char titulo[], char fecha_lec[]);
+int eliminarLibroBD(char titulo[]);
 void guardarProgresoListaPersonal(int id_cliente, char titulo[], char fecha_lec[], int pag_actual);
-void descargarLibro(char *titulo);
-void buscarLibro();
+int descargarLibro(char *titulo);
+//void buscarLibro();
 
 void imprimirLineas(const std::vector<std::string>& lines, int start);
 bool CheckleerLibro(std::string titulo);

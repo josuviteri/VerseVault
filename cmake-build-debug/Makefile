@@ -116,24 +116,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named ProgIV
+# Target rules for targets named Server
 
 # Build rule for target.
-ProgIV: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 ProgIV
-.PHONY : ProgIV
+Server: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 Server
+.PHONY : Server
 
 # fast build rule for target.
-ProgIV/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/build
-.PHONY : ProgIV/fast
+Server/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Server.dir\build.make CMakeFiles/Server.dir/build
+.PHONY : Server/fast
 
 curly/descargaArchivos.obj: curly/descargaArchivos.cpp.obj
 .PHONY : curly/descargaArchivos.obj
 
 # target to build an object file
 curly/descargaArchivos.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/curly/descargaArchivos.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Server.dir\build.make CMakeFiles/Server.dir/curly/descargaArchivos.cpp.obj
 .PHONY : curly/descargaArchivos.cpp.obj
 
 curly/descargaArchivos.i: curly/descargaArchivos.cpp.i
@@ -141,7 +141,7 @@ curly/descargaArchivos.i: curly/descargaArchivos.cpp.i
 
 # target to preprocess a source file
 curly/descargaArchivos.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/curly/descargaArchivos.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Server.dir\build.make CMakeFiles/Server.dir/curly/descargaArchivos.cpp.i
 .PHONY : curly/descargaArchivos.cpp.i
 
 curly/descargaArchivos.s: curly/descargaArchivos.cpp.s
@@ -149,7 +149,7 @@ curly/descargaArchivos.s: curly/descargaArchivos.cpp.s
 
 # target to generate assembly for a file
 curly/descargaArchivos.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/curly/descargaArchivos.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Server.dir\build.make CMakeFiles/Server.dir/curly/descargaArchivos.cpp.s
 .PHONY : curly/descargaArchivos.cpp.s
 
 database/db2.obj: database/db2.cpp.obj
@@ -157,7 +157,7 @@ database/db2.obj: database/db2.cpp.obj
 
 # target to build an object file
 database/db2.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/database/db2.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Server.dir\build.make CMakeFiles/Server.dir/database/db2.cpp.obj
 .PHONY : database/db2.cpp.obj
 
 database/db2.i: database/db2.cpp.i
@@ -165,7 +165,7 @@ database/db2.i: database/db2.cpp.i
 
 # target to preprocess a source file
 database/db2.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/database/db2.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Server.dir\build.make CMakeFiles/Server.dir/database/db2.cpp.i
 .PHONY : database/db2.cpp.i
 
 database/db2.s: database/db2.cpp.s
@@ -173,7 +173,7 @@ database/db2.s: database/db2.cpp.s
 
 # target to generate assembly for a file
 database/db2.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/database/db2.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Server.dir\build.make CMakeFiles/Server.dir/database/db2.cpp.s
 .PHONY : database/db2.cpp.s
 
 database/dbBusqueda.obj: database/dbBusqueda.cpp.obj
@@ -181,7 +181,7 @@ database/dbBusqueda.obj: database/dbBusqueda.cpp.obj
 
 # target to build an object file
 database/dbBusqueda.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/database/dbBusqueda.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Server.dir\build.make CMakeFiles/Server.dir/database/dbBusqueda.cpp.obj
 .PHONY : database/dbBusqueda.cpp.obj
 
 database/dbBusqueda.i: database/dbBusqueda.cpp.i
@@ -189,7 +189,7 @@ database/dbBusqueda.i: database/dbBusqueda.cpp.i
 
 # target to preprocess a source file
 database/dbBusqueda.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/database/dbBusqueda.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Server.dir\build.make CMakeFiles/Server.dir/database/dbBusqueda.cpp.i
 .PHONY : database/dbBusqueda.cpp.i
 
 database/dbBusqueda.s: database/dbBusqueda.cpp.s
@@ -197,39 +197,15 @@ database/dbBusqueda.s: database/dbBusqueda.cpp.s
 
 # target to generate assembly for a file
 database/dbBusqueda.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/database/dbBusqueda.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Server.dir\build.make CMakeFiles/Server.dir/database/dbBusqueda.cpp.s
 .PHONY : database/dbBusqueda.cpp.s
-
-main.obj: main.cpp.obj
-.PHONY : main.obj
-
-# target to build an object file
-main.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/main.cpp.obj
-.PHONY : main.cpp.obj
-
-main.i: main.cpp.i
-.PHONY : main.i
-
-# target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/main.cpp.i
-.PHONY : main.cpp.i
-
-main.s: main.cpp.s
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/main.cpp.s
-.PHONY : main.cpp.s
 
 menu/menu.obj: menu/menu.cpp.obj
 .PHONY : menu/menu.obj
 
 # target to build an object file
 menu/menu.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/menu/menu.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Server.dir\build.make CMakeFiles/Server.dir/menu/menu.cpp.obj
 .PHONY : menu/menu.cpp.obj
 
 menu/menu.i: menu/menu.cpp.i
@@ -237,7 +213,7 @@ menu/menu.i: menu/menu.cpp.i
 
 # target to preprocess a source file
 menu/menu.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/menu/menu.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Server.dir\build.make CMakeFiles/Server.dir/menu/menu.cpp.i
 .PHONY : menu/menu.cpp.i
 
 menu/menu.s: menu/menu.cpp.s
@@ -245,15 +221,39 @@ menu/menu.s: menu/menu.cpp.s
 
 # target to generate assembly for a file
 menu/menu.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/menu/menu.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Server.dir\build.make CMakeFiles/Server.dir/menu/menu.cpp.s
 .PHONY : menu/menu.cpp.s
+
+sockets2/ServerWithProtocol/main.obj: sockets2/ServerWithProtocol/main.cpp.obj
+.PHONY : sockets2/ServerWithProtocol/main.obj
+
+# target to build an object file
+sockets2/ServerWithProtocol/main.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Server.dir\build.make CMakeFiles/Server.dir/sockets2/ServerWithProtocol/main.cpp.obj
+.PHONY : sockets2/ServerWithProtocol/main.cpp.obj
+
+sockets2/ServerWithProtocol/main.i: sockets2/ServerWithProtocol/main.cpp.i
+.PHONY : sockets2/ServerWithProtocol/main.i
+
+# target to preprocess a source file
+sockets2/ServerWithProtocol/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Server.dir\build.make CMakeFiles/Server.dir/sockets2/ServerWithProtocol/main.cpp.i
+.PHONY : sockets2/ServerWithProtocol/main.cpp.i
+
+sockets2/ServerWithProtocol/main.s: sockets2/ServerWithProtocol/main.cpp.s
+.PHONY : sockets2/ServerWithProtocol/main.s
+
+# target to generate assembly for a file
+sockets2/ServerWithProtocol/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Server.dir\build.make CMakeFiles/Server.dir/sockets2/ServerWithProtocol/main.cpp.s
+.PHONY : sockets2/ServerWithProtocol/main.cpp.s
 
 sqlite/sqlite3.obj: sqlite/sqlite3.c.obj
 .PHONY : sqlite/sqlite3.obj
 
 # target to build an object file
 sqlite/sqlite3.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/sqlite/sqlite3.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Server.dir\build.make CMakeFiles/Server.dir/sqlite/sqlite3.c.obj
 .PHONY : sqlite/sqlite3.c.obj
 
 sqlite/sqlite3.i: sqlite/sqlite3.c.i
@@ -261,7 +261,7 @@ sqlite/sqlite3.i: sqlite/sqlite3.c.i
 
 # target to preprocess a source file
 sqlite/sqlite3.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/sqlite/sqlite3.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Server.dir\build.make CMakeFiles/Server.dir/sqlite/sqlite3.c.i
 .PHONY : sqlite/sqlite3.c.i
 
 sqlite/sqlite3.s: sqlite/sqlite3.c.s
@@ -269,7 +269,7 @@ sqlite/sqlite3.s: sqlite/sqlite3.c.s
 
 # target to generate assembly for a file
 sqlite/sqlite3.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ProgIV.dir\build.make CMakeFiles/ProgIV.dir/sqlite/sqlite3.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Server.dir\build.make CMakeFiles/Server.dir/sqlite/sqlite3.c.s
 .PHONY : sqlite/sqlite3.c.s
 
 # Help Target
@@ -280,7 +280,7 @@ help:
 	@echo ... depend
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... ProgIV
+	@echo ... Server
 	@echo ... curly/descargaArchivos.obj
 	@echo ... curly/descargaArchivos.i
 	@echo ... curly/descargaArchivos.s
@@ -290,12 +290,12 @@ help:
 	@echo ... database/dbBusqueda.obj
 	@echo ... database/dbBusqueda.i
 	@echo ... database/dbBusqueda.s
-	@echo ... main.obj
-	@echo ... main.i
-	@echo ... main.s
 	@echo ... menu/menu.obj
 	@echo ... menu/menu.i
 	@echo ... menu/menu.s
+	@echo ... sockets2/ServerWithProtocol/main.obj
+	@echo ... sockets2/ServerWithProtocol/main.i
+	@echo ... sockets2/ServerWithProtocol/main.s
 	@echo ... sqlite/sqlite3.obj
 	@echo ... sqlite/sqlite3.i
 	@echo ... sqlite/sqlite3.s

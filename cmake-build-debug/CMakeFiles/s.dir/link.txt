@@ -1,0 +1,3 @@
+"D:\Archivos Uni\Programas Raros\CLion 2023.3.4\bin\cmake\win\x64\bin\cmake.exe" -E rm -f CMakeFiles\s.dir/objects.a
+"D:\Archivos Uni\Programas Raros\CLion 2023.3.4\bin\mingw\bin\ar.exe" qc CMakeFiles\s.dir/objects.a @CMakeFiles\s.dir\objects1.rsp
+"D:\Archivos Uni\Programas Raros\CLion 2023.3.4\bin\mingw\bin\g++.exe" -g -Wl,--whole-archive CMakeFiles\s.dir/objects.a -Wl,--no-whole-archive -o s.exe -Wl,--out-implib,libs.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\s.dir\linkLibs.rsp
