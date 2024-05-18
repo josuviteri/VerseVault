@@ -561,14 +561,14 @@ int aportarLibroMenu(int id_cliente, char titulo[], char fecha_lec[]){
     return al;
 }
 
-void eliminarLibroBD(char titulo[]){
+int eliminarLibroBD(char titulo[]){
     //debria contectarse a la db y eliminar un libro de la lista personal
     sqlite3 *db;
     int al = sqlite3_open("libreria.db", &db);
     if (al != SQLITE_OK) {
         //////errorMsgg("Error opening database\n");
         printf("%s\n", sqlite3_errmsg(db));
-        return;
+        return -1;
     }
 
     // Intenta agregar el libro
@@ -586,8 +586,9 @@ void eliminarLibroBD(char titulo[]){
     if (al != SQLITE_OK) {
         printf("Error closing database\n");
         printf("%s\n", sqlite3_errmsg(db));
-        return;
+        return -1;
     }
+    return al;
 }
 void guardarProgresoListaPersonal(int id_cliente, char titulo[], char fecha_lec[], int pag_actual) {
     sqlite3 *db;

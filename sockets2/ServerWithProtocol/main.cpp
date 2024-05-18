@@ -428,14 +428,45 @@ int main(int argc, char *argv[]) {
 
 
             memset(recvBuff, 0, sizeof(recvBuff));
+            if (strcmp(recvBuff, "AGREGAR-LIBRO-BD-END") != 0) {
+                printf("Error: AGREGAR-LIBRO-BD-END no recibido correctamente\n");
+            }
+        }
+
+        if (strcmp(recvBuff, "ELIMINAR-LIBRO-BD") == 0) {
+            Libro libro;
+            memset(&libro, 0, sizeof(Libro)); // Inicializa todo a cero
+
+            recv_size = recv(comm_socket, libro.titulo, sizeof(libro.titulo) - 1, 0);
+            if (recv_size <= 0) {
+                perror("Error al recibir titulo");
+                continue;
+            }
+            libro.titulo[recv_size] = '\0'; // Asegura terminador nulo
+
+
+
+            int status;
+            status = eliminarLibroBD(libro.titulo);
+
+            memset(sendBuff, 0, sizeof(sendBuff));
+            if(status == SQLITE_OK) {
+                strcpy(sendBuff, "El libro se ha eliminado correctamente a la BD\n");
+            } else {
+                strcpy(sendBuff, "El libro NO se ha eliminado correctamente a la BD\n");
+            }
+            send(comm_socket, sendBuff, strlen(sendBuff) + 1, 0);
+
+
+            memset(recvBuff, 0, sizeof(recvBuff));
             recv_size = recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
             if (recv_size <= 0) {
-                perror("Error al recibir AGREGAR-LIBRO-BD-END");
+                perror("Error al recibir ELIMINAR-LIBRO-BD-END");
                 continue;
             }
 
-            if (strcmp(recvBuff, "AGREGAR-LIBRO-BD-END") != 0) {
-                printf("Error: Comando AGREGAR-LIBRO-BD-END no recibido correctamente\n");
+            if (strcmp(recvBuff, "ELIMINAR-LIBRO-BD-END") != 0) {
+                printf("Error: Comando ELIMINAR-LIBRO-BD-END no recibido correctamente\n");
             }
         }
 

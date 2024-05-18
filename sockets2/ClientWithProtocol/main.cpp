@@ -34,6 +34,10 @@ void buscarLibro(SOCKET client_socket);
 void imprimirInicial();
 
 
+void limpiarBuffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
 char imprimirInicial1(){
 	printf("\nProyecto Programacion IV | Grupo PVI-04\n\n");
     printf(NEGRITA"Bienvenido al Sistema de Libreria Virtual\nVerseVault\n\n" QUITAR_NEGRITA);
@@ -258,7 +262,7 @@ void imprimirMenu(){
                     break;
 
                 case '3':
-                    printf("\ncorrecto 4\n\n");
+                    printf("\ncorrecto 3\n\n");
                     strcpy(sendBuff, "AGREGAR-LIBRO-BD");
                     send(s, sendBuff, strlen(sendBuff) + 1, 0);
                     printf("\nIntroduce los datos del libro:\nIntroduce el nombre del libro:\n(30 caracteres como maximo)\n");
@@ -285,13 +289,29 @@ void imprimirMenu(){
                     recv(s, recvBuff, sizeof(recvBuff), 0);
                     printf("%s \n\n", recvBuff);
 
+
+                    memset(sendBuff, 0, sizeof(sendBuff));
                     strcpy(sendBuff, "AGREGAR-LIBRO-BD-END");
                     send(s, sendBuff, strlen(sendBuff) + 1, 0);
-                    imprimirMenu();
+                    //imprimirMenu();
+
                     break;
 
                 case '4':
-                    // Coloca aquí la lógica para la opción 4
+                    printf("\ncorrecto 4\n\n");
+                    strcpy(sendBuff, "ELIMINAR-LIBRO-BD");
+                    send(s, sendBuff, strlen(sendBuff) + 1, 0);
+
+                    printf("\nIntroduce nombre del libro que quiera eliminar de la BD: \n");
+                    fgets(libro.titulo, sizeof(libro.titulo), stdin);
+                    strtok(libro.titulo, "\n"); // Elimina el carácter
+                    send(s, libro.titulo, strlen(libro.titulo) + 1, 0);
+
+                    recv(s, recvBuff, sizeof(recvBuff), 0);
+                    printf("%s \n\n", recvBuff);
+
+                    
+                    //eliminarLibroBD(titulo);
                     break;
 
                 case '5':
@@ -303,6 +323,7 @@ void imprimirMenu(){
                     printf("\nIntroduce un valor valido\n\n");
                     break;
             }
+            limpiarBuffer();
         } while(!salir);
     } else {
         do {

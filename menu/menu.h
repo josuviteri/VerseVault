@@ -34,7 +34,7 @@ void menuMiLista();
 int agregarLibroMenu(char titulo[], char nom_autor[], char idioma[], char fecha_publicacion[]);
 int eliminarLibroMenu(int id_cliente, char titulo[]);
 int aportarLibroMenu(int id_cliente, char titulo[], char fecha_lec[]);
-void eliminarLibroBD(char titulo[]);
+int eliminarLibroBD(char titulo[]);
 void guardarProgresoListaPersonal(int id_cliente, char titulo[], char fecha_lec[], int pag_actual);
 int descargarLibro(char *titulo);
 //void buscarLibro();
