@@ -310,7 +310,7 @@ void imprimirMenu(){
                     recv(s, recvBuff, sizeof(recvBuff), 0);
                     printf("%s \n\n", recvBuff);
 
-                    
+
                     //eliminarLibroBD(titulo);
                     break;
 
@@ -507,10 +507,10 @@ void imprimirInicial() {
             send(s, cliente.passw, strlen(cliente.passw) + 1, 0);
 
             recv(s, recvBuff, sizeof(recvBuff), 0);
-            printf("Usuario: %s \n\n", recvBuff);
+            printf("Usuario ID: %s \n\n", recvBuff);
 
             recv(s, recvBuff, sizeof(recvBuff), 0);
-            printf("Soy: %s \n\n", recvBuff);
+            //printf("Soy: %s \n\n", recvBuff);
 
             if (strcmp(recvBuff, "1") == 0) {
                 cliente.es_admin = 1;
@@ -526,29 +526,29 @@ void imprimirInicial() {
             send(s, sendBuff, strlen(sendBuff) + 1, 0);
 
 
-        }else if(sel == '2'){
+        }if(sel == '2'){
             strcpy(sendBuff, "REGISTRAR");
             send(s, sendBuff, strlen(sendBuff) + 1, 0);
 
-
+            // Envío del nombre del cliente
             printf("\nIntroduce tus datos para registrarte:\nIntroduce tu nombre:\n(30 caracteres como maximo)\n");
             fgets(clienteRegistro.nom_Cliente, sizeof(clienteRegistro.nom_Cliente), stdin);
             strtok(clienteRegistro.nom_Cliente, "\n");
             send(s, clienteRegistro.nom_Cliente, strlen(clienteRegistro.nom_Cliente) + 1, 0);
 
-
+            // Envío del correo electrónico
             printf("\nIntroduce tu correo electronico:\n");
             fgets(clienteRegistro.email_cl, sizeof(clienteRegistro.email_cl), stdin);
             strtok(clienteRegistro.email_cl, "\n");
             send(s, clienteRegistro.email_cl, strlen(clienteRegistro.email_cl) + 1, 0);
 
-
-
+            // Envío de la contraseña
             printf("\nIntroduce tu contrasenya:\n(30 caracteres como maximo)\n");
             fgets(clienteRegistro.passw, sizeof(clienteRegistro.passw), stdin);
             strtok(clienteRegistro.passw, "\n");
             send(s, clienteRegistro.passw, strlen(clienteRegistro.passw) + 1, 0);
 
+            // Recibir respuesta del servidor
             recv(s, recvBuff, sizeof(recvBuff), 0);
 
             if (strcmp(recvBuff, "-1") == 0) {
@@ -556,6 +556,11 @@ void imprimirInicial() {
             } else {
                 printf("REGISTRO correcto");
             }
+
+            // Envío del comando "REGISTRAR-END"
+            strcpy(sendBuff, "REGISTRAR-END");
+            send(s, sendBuff, strlen(sendBuff) + 1, 0);
+
             //registrarClienteMenu(nombre,email,pass);
 
         }else if(sel == '3'){

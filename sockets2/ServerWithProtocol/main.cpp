@@ -35,6 +35,7 @@ int main(int argc, char *argv[]) {
     struct sockaddr_in client;
     char sendBuff[512], recvBuff[512];
     Cliente cl;
+    Cliente clRegistro;
 
 
     printf("\nInitialising Winsock...\n");
@@ -102,6 +103,7 @@ int main(int argc, char *argv[]) {
         printf("Command received: %s \n", recvBuff);
 
         if (strcmp(recvBuff, "INICIAR-SESION") == 0) {
+            printf("Received INICIAR-SESION command\n");
             memset(&cl, 0, sizeof(Cliente)); // Inicializa todo a cero
 
             recv_size = recv(comm_socket, cl.email_cl, sizeof(cl.email_cl) - 1, 0);
@@ -110,6 +112,7 @@ int main(int argc, char *argv[]) {
                 continue;
             }
             cl.email_cl[recv_size] = '\0'; // Asegura terminador nulo
+            printf("Email received: %s\n", cl.email_cl);
 
             recv_size = recv(comm_socket, cl.passw, sizeof(cl.passw) - 1, 0);
             if (recv_size <= 0) {
@@ -117,20 +120,19 @@ int main(int argc, char *argv[]) {
                 continue;
             }
             cl.passw[recv_size] = '\0'; // Asegura terminador nulo
+            printf("Password received: %s\n", cl.passw);
 
+            printf("Calling iniciarSesionMenu\n");
             cl.id_Cliente = iniciarSesionMenu(cl.email_cl, cl.passw);
-
-            /*printf("\nhola soy : %i\n", cl.id_Cliente);
-            printf("\nCorreo soy : %s\n", cl.email_cl);
-            printf("\npass soy : %s\n", cl.passw);
-            */
+            printf("ID Cliente: %d\n", cl.id_Cliente);
 
             memset(sendBuff, 0, sizeof(sendBuff));
             sprintf(sendBuff, "%d", cl.id_Cliente);
             if (send(comm_socket, sendBuff, strlen(sendBuff) + 1, 0) == -1) {
                 perror("Error al enviar ID de cliente");
+            } else {
+                printf("ID de cliente enviado correctamente\n");
             }
-
 
             // Verificar si el correo electrónico termina con "@opendeusto.es"
             if (endsWith(cl.email_cl, "@opendeusto.es") || endsWith(cl.email_cl, "@deusto.es")) {
@@ -143,11 +145,14 @@ int main(int argc, char *argv[]) {
             } else {
                 cl.es_admin = 0;
             }
+            printf("Admin status: %d\n", cl.es_admin);
 
             memset(sendBuff, 0, sizeof(sendBuff));
             sprintf(sendBuff, "%d", cl.es_admin);
             if (send(comm_socket, sendBuff, strlen(sendBuff) + 1, 0) == -1) {
                 perror("Error al enviar si es admin el cliente");
+            } else {
+                printf("Admin status enviado correctamente\n");
             }
 
             memset(recvBuff, 0, sizeof(recvBuff));
@@ -159,37 +164,40 @@ int main(int argc, char *argv[]) {
 
             if (strcmp(recvBuff, "INICIAR-SESION-END") != 0) {
                 printf("Error: Comando INICIAR-SESION-END no recibido correctamente\n");
+            } else {
+                printf("INICIAR-SESION-END recibido correctamente\n");
             }
         }
+
         if (strcmp(recvBuff, "REGISTRAR") == 0) {
-            Cliente cl;
-            memset(&cl, 0, sizeof(Cliente)); // Inicializa todo a cero
+
+            memset(&clRegistro, 0, sizeof(Cliente)); // Inicializa todo a cero
 
 
-            recv_size = recv(comm_socket, cl.nom_Cliente, sizeof(cl.nom_Cliente) - 1, 0);
+            recv_size = recv(comm_socket, clRegistro.nom_Cliente, sizeof(clRegistro.nom_Cliente) - 1, 0);
             if (recv_size <= 0) {
                 perror("Error al recibir nom_Cliente");
                 continue;
             }
-            cl.nom_Cliente[recv_size] = '\0'; // Asegura terminador nulo
+            clRegistro.nom_Cliente[recv_size] = '\0'; // Asegura terminador nulo
 
 
-            recv_size = recv(comm_socket, cl.email_cl, sizeof(cl.email_cl) - 1, 0);
+            recv_size = recv(comm_socket, clRegistro.email_cl, sizeof(clRegistro.email_cl) - 1, 0);
             if (recv_size <= 0) {
                 perror("Error al recibir email");
                 continue;
             }
-            cl.email_cl[recv_size] = '\0'; // Asegura terminador nulo
+            clRegistro.email_cl[recv_size] = '\0'; // Asegura terminador nulo
 
-            recv_size = recv(comm_socket, cl.passw, sizeof(cl.passw) - 1, 0);
+            recv_size = recv(comm_socket, clRegistro.passw, sizeof(clRegistro.passw) - 1, 0);
             if (recv_size <= 0) {
                 perror("Error al recibir contraseña");
                 continue;
             }
-            cl.passw[recv_size] = '\0'; // Asegura terminador nulo
+            clRegistro.passw[recv_size] = '\0'; // Asegura terminador nulo
 
             int registradoBien = 0;
-            registradoBien = registrarClienteMenu(cl.nom_Cliente,cl.email_cl,cl.passw);
+            registradoBien = registrarClienteMenu(clRegistro.nom_Cliente,clRegistro.email_cl,clRegistro.passw);
 
 
             memset(sendBuff, 0, sizeof(sendBuff));
