@@ -3,6 +3,7 @@
 #include "db2.h"
 #include <string>
 #include <iostream>
+#include "../structs/libro.h"
 
 void errorMsg(char mensaje[]) {
     FILE* f;
@@ -655,17 +656,19 @@ int eliminarLibroBD1(sqlite3 *db, char titulo[]){
 
     return SQLITE_OK;
 }
-void mostrarMiLista(int id_cliente_actual) {
+char* mostrarMiLista(int id_cliente_actual) {
     sqlite3 *db;
-    char query[400]; // Ajusta el tamaño según tus necesidades
+    char query[400];
     sqlite3_stmt *stmt;
+    char* resultados = NULL;
     int resultado;
+    int resultados_size = 0;
 
     // Abrir la base de datos
     resultado = sqlite3_open("libreria.db", &db);
     if (resultado) {
         fprintf(stderr, "Error al abrir la base de datos: %s\n", sqlite3_errmsg(db));
-        return;
+        return NULL;
     }
 
     // Construir la consulta SQL para buscar los libros del cliente actual en la tabla Progreso
@@ -676,17 +679,25 @@ void mostrarMiLista(int id_cliente_actual) {
     if (resultado != SQLITE_OK) {
         fprintf(stderr, "Error al preparar la consulta SQL: %s\n", sqlite3_errmsg(db));
         sqlite3_close(db);
-        return;
+        return NULL;
     }
 
+    // Inicializar la cadena de resultados
+    resultados = (char*)malloc(1024);
+    if (resultados == NULL) {
+        fprintf(stderr, "Error al asignar memoria\n");
+        sqlite3_finalize(stmt);
+        sqlite3_close(db);
+        return NULL;
+    }
+    resultados[0] = '\0';
+
     // Ejecutar la consulta SQL y manejar los resultados
-    printf("\nMi Lista:\n");
     int contador_libros = 0;
     while ((resultado = sqlite3_step(stmt)) == SQLITE_ROW) {
         contador_libros++;
         int id_libro = sqlite3_column_int(stmt, 0); // ID del libro
-        char fecha_lectura[100];
-        strcpy(fecha_lectura, (const char*)sqlite3_column_text(stmt, 1)); // Fecha de lectura
+        const char* fecha_lectura = (const char*)sqlite3_column_text(stmt, 1); // Fecha de lectura
         int pagina_actual = sqlite3_column_int(stmt, 2); // Página actual
 
         // Realizar una segunda consulta para obtener el título del libro
@@ -695,8 +706,20 @@ void mostrarMiLista(int id_cliente_actual) {
         sqlite3_stmt *titulo_stmt;
         int titulo_resultado = sqlite3_prepare_v2(db, titulo_query, -1, &titulo_stmt, NULL);
         if (titulo_resultado == SQLITE_OK && sqlite3_step(titulo_stmt) == SQLITE_ROW) {
-            const unsigned char *titulo = sqlite3_column_text(titulo_stmt, 0);
-            printf("\t%d.Titulo: %s, Fecha Lectura: %s, Pagina Actual: %d\n",contador_libros, titulo, fecha_lectura, pagina_actual);
+            const char *titulo = (const char*)sqlite3_column_text(titulo_stmt, 0);
+
+            char buffer[256];
+            snprintf(buffer, sizeof(buffer), "\t%d. Titulo: %s, Fecha Lectura: %s, Pagina Actual: %d\n", contador_libros, titulo, fecha_lectura, pagina_actual);
+            resultados_size += strlen(buffer) + 1;
+            resultados = (char*)realloc(resultados, resultados_size);
+            if (resultados == NULL) {
+                fprintf(stderr, "Error al reasignar memoria\n");
+                sqlite3_finalize(titulo_stmt);
+                sqlite3_finalize(stmt);
+                sqlite3_close(db);
+                return NULL;
+            }
+            strcat(resultados, buffer);
         }
 
         // Finalizar la consulta del título del libro
@@ -705,8 +728,9 @@ void mostrarMiLista(int id_cliente_actual) {
 
     // Verificar si no se encontraron libros
     if (contador_libros == 0) {
-        printf("\tNo se encontraron libros en tu lista.\n");
+        strcpy(resultados, "No se encontraron libros en tu lista.\n");
     }
+
     // Verificar si hubo un error al ejecutar la consulta
     if (resultado != SQLITE_DONE) {
         fprintf(stderr, "Error al ejecutar la consulta SQL: %s\n", sqlite3_errmsg(db));
@@ -715,7 +739,10 @@ void mostrarMiLista(int id_cliente_actual) {
     // Finalizar la consulta y cerrar la base de datos
     sqlite3_finalize(stmt);
     sqlite3_close(db);
+
+    return resultados;
 }
+
 int cargarProgreso(int id_libro) {
     sqlite3 *db;
     sqlite3_stmt *stmt;
@@ -782,17 +809,19 @@ void actualizarProgreso(int id_libro, int pagina_actual, char time[]) {
     sqlite3_close(db);
 }
 
-void mostrarRecomendaciones(){
+char* mostrarRecomendaciones() {
     sqlite3 *db;
     char query[200]; // Ajusta el tamaño según tus necesidades
     sqlite3_stmt *stmt;
     int resultado;
+    char* recomendaciones = NULL;
+    int recomendaciones_size = 0;
 
     // Abrir la base de datos
     resultado = sqlite3_open("libreria.db", &db);
     if (resultado) {
         fprintf(stderr, "Error al abrir la base de datos: %s\n", sqlite3_errmsg(db));
-        return;
+        return NULL;
     }
 
     // Construir la consulta SQL utilizando un JOIN para combinar los datos de las tablas Libro y Autor
@@ -803,17 +832,37 @@ void mostrarRecomendaciones(){
     if (resultado != SQLITE_OK) {
         fprintf(stderr, "Error al preparar la consulta SQL: %s\n", sqlite3_errmsg(db));
         sqlite3_close(db);
-        return;
+        return NULL;
     }
 
+    // Inicializar la cadena de resultados
+    recomendaciones = (char*)malloc(1024);
+    if (recomendaciones == NULL) {
+        fprintf(stderr, "Error al asignar memoria\n");
+        sqlite3_finalize(stmt);
+        sqlite3_close(db);
+        return NULL;
+    }
+    recomendaciones[0] = '\0';
+
     // Ejecutar la consulta SQL y manejar los resultados
-    printf("\nRecomendaciones:\n");
     int contador_libros = 0;
     while ((resultado = sqlite3_step(stmt)) == SQLITE_ROW) {
         contador_libros++;
         const unsigned char *titulo = sqlite3_column_text(stmt, 0); // Título del libro
         const unsigned char *nombre_autor = sqlite3_column_text(stmt, 1); // Nombre del autor
-        printf("\t%d.Titulo: %s  Autor: %s\n", contador_libros, titulo, nombre_autor);
+
+        char buffer[256];
+        snprintf(buffer, sizeof(buffer), "\t%d. Titulo: %s  Autor: %s\n", contador_libros, titulo, nombre_autor);
+        recomendaciones_size += strlen(buffer) + 1;
+        recomendaciones = (char*)realloc(recomendaciones, recomendaciones_size);
+        if (recomendaciones == NULL) {
+            fprintf(stderr, "Error al reasignar memoria\n");
+            sqlite3_finalize(stmt);
+            sqlite3_close(db);
+            return NULL;
+        }
+        strcat(recomendaciones, buffer);
     }
 
     // Verificar si hubo un error al ejecutar la consulta
@@ -824,5 +873,12 @@ void mostrarRecomendaciones(){
     // Finalizar la consulta y cerrar la base de datos
     sqlite3_finalize(stmt);
     sqlite3_close(db);
+
+    // Verificar si no se encontraron libros
+    if (contador_libros == 0) {
+        strcpy(recomendaciones, "No se encontraron recomendaciones.\n");
+    }
+
+    return recomendaciones;
 }
 

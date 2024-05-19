@@ -1,10 +1,11 @@
 -----VERSEVAULT-----
 
-OPCION BASICA:
-Ejecutable: main.exe
+RUN APP
 
-OPCION PRO:
-Abrir proyecto en Clion, entrar en .\main.cpp y dar al boton de run
+Abrir proyecto en Clion:
+  1. Entrar en .\sockets2\ServerWithProtocol.\main.cpp y dar al boton de run para abrir el Servidor
+  2. Compilar el cliente desde CMD con g++ .\sockets2\ClientWithProtocol.\main.cpp -lws2_32 -o client.exe
+  3. Runear client.exe y ya estas dentro de la app!!
 
 Github: https://github.com/josuviteri/VerseVault
 

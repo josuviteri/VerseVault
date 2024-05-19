@@ -123,106 +123,138 @@ void menuMiLista() {
     char fecha_actual[10];
     Libro libro;
 
-    printf(NEGRITA"Menu Mi Lista\n\n" QUITAR_NEGRITA);
-    do{
+    std::string lista_completa;
+    int recv_size = 0;
+
+
+    do {
+        strcpy(sendBuff, "MOSTRAR-LISTA");
+        send(s, sendBuff, strlen(sendBuff) + 1, 0);
+
+        do {
+            memset(recvBuff, 0, sizeof(recvBuff));
+            recv_size = recv(s, recvBuff, sizeof(recvBuff) - 1, 0);
+            if (recv_size <= 0) {
+                perror("Error al recibir datos de la lista");
+                break;
+            }
+            lista_completa += recvBuff;
+        } while (recv_size == sizeof(recvBuff) - 1);
+
+        std::cout << "Mi Lista:\n" << lista_completa << std::endl;
+
+        strcpy(sendBuff, "MOSTRAR-LISTA-END");
+        send(s, sendBuff, strlen(sendBuff) + 1, 0);
+
+        printf(NEGRITA"Menu Mi Lista\n\n" QUITAR_NEGRITA);
+
         printf("\nSelecciona una opcion: \n");
-
-        //Falta mostrar la lista actual del cliente
-
         printf("1. Agregar Libro a Mi Lista\n2. Eliminar Libro de Mi Lista\n3. Descargar Libro\n4. Leer Libro\n5. Volver\n");
 
         fgets(input, sizeof(input), stdin);
         sscanf(input, " %c", &sel);
+        std::string lista_recomendacioens;
+
+        switch (sel) {
+            case '1':
+                printf("\ncorrecto 1\n\n");
+
+                strcpy(sendBuff, "AGREGAR-LIBRO-LISTA");
+                send(s, sendBuff, strlen(sendBuff) + 1, 0);
+
+                do {
+                    memset(recvBuff, 0, sizeof(recvBuff));
+                    recv_size = recv(s, recvBuff, sizeof(recvBuff) - 1, 0);
+                    if (recv_size <= 0) {
+                        perror("Error al recibir datos de la lista");
+                        break;
+                    }
+                    lista_recomendacioens += recvBuff;
+                } while (recv_size == sizeof(recvBuff) - 1);
+
+                std::cout << "Recomendaciones:\n" << lista_recomendacioens << std::endl;
+
+                printf("\nIntroduce el titulo del libro que desea guardar en tu lista:\n");
+                fgets(libro.titulo, sizeof(libro.titulo), stdin);
+                strtok(libro.titulo, "\n");
+                send(s, libro.titulo, strlen(libro.titulo) + 1, 0);
+
+                recv(s, recvBuff, sizeof(recvBuff), 0);
+                printf("%s", recvBuff);
+
+                strcpy(sendBuff, "AGREGAR-LIBRO-LISTA-END");
+                send(s, sendBuff, strlen(sendBuff) + 1, 0);
+
+                strcpy(sendBuff, "MOSTRAR-LISTA");
+                send(s, sendBuff, strlen(sendBuff) + 1, 0);
 
 
-        if(sel == '1'){
-            printf("\ncorrecto 1\n\n");
+                //menuMiLista();
+                break;
 
-        	strcpy(sendBuff, "AGREGAR-LIBRO-LISTA");
-        	send(s, sendBuff, strlen(sendBuff) + 1, 0);
+            case '2':
+                printf("\ncorrecto 2\n\n");
+                strcpy(sendBuff, "ELIMINAR-LIBRO-LISTA");
+                send(s, sendBuff, strlen(sendBuff) + 1, 0);
 
-        	printf("\nIntroduce el titulo del libro que desea guardar en tu lista:\n");
-        	fgets(libro.titulo, sizeof(libro.titulo), stdin);
-        	strtok(libro.titulo, "\n");
-        	send(s, libro.titulo, strlen(libro.titulo) + 1, 0);
+                printf("\nIntroduce el titulo del libro que desea eliminar de tu lista:\n");
+                fgets(libro.titulo, sizeof(libro.titulo), stdin);
+                strtok(libro.titulo, "\n");
+                send(s, libro.titulo, strlen(libro.titulo) + 1, 0);
 
+                recv(s, recvBuff, sizeof(recvBuff), 0);
+                printf("%s", recvBuff);
 
-        	recv(s, recvBuff, sizeof(recvBuff), 0);
-			printf("%s", recvBuff);
-
-        	strcpy(sendBuff, "AGREGAR-LIBRO-LISTA-END");
-        	send(s, sendBuff, strlen(sendBuff) + 1, 0);
-
-        	menuMiLista();
-
-            //aportarLibroMenu(titulo, actualTime);
-        }else if(sel == '2'){
-        	printf("\ncorrecto 2\n\n");
-        	strcpy(sendBuff, "ELIMINAR-LIBRO-LISTA");
-        	send(s, sendBuff, strlen(sendBuff) + 1, 0);
-
-        	printf("\nIntroduce el titulo del libro que desea eliminar de tu lista:\n");
-        	fgets(libro.titulo, sizeof(libro.titulo), stdin);
-        	strtok(libro.titulo, "\n");
-        	send(s, libro.titulo, strlen(libro.titulo) + 1, 0);
-
-
-        	recv(s, recvBuff, sizeof(recvBuff), 0);
-        	printf("%s", recvBuff);
-
-        	strcpy(sendBuff, "ELIMINAR-LIBRO-LISTA-END");
-        	send(s, sendBuff, strlen(sendBuff) + 1, 0);
-
-        	menuMiLista();
-
-
-
-
-        }else if(sel == '3'){
-            printf("\ncorrecto 3\n\n");
-            strcpy(sendBuff, "DESCARGAR-LIBRO");
-            send(s, sendBuff, strlen(sendBuff) + 1, 0);
-
-            printf("\nIntroduce nombre del libro que quieras descargar en su lista: \n");
-            fgets(libro.titulo, sizeof(libro.titulo), stdin);
-            strtok(libro.titulo, "\n"); // Elimina el carácter
-            send(s, libro.titulo, strlen(libro.titulo) + 1, 0);
-
-            strcpy(sendBuff, "DESCARGAR-LIBRO-END");
-            send(s, sendBuff, strlen(sendBuff) + 1, 0);
-
-            recv(s, recvBuff, sizeof(recvBuff), 0);
-            printf("%s", recvBuff);
-
-            //descargarLibro(titulo);
-
-        }else if(sel == '4'){
-            printf("\ncorrecto 4\n\n");
-            strcpy(sendBuff, "LEER-LIBRO");
-            send(s, sendBuff, strlen(sendBuff) + 1, 0);
-
-            printf("\nIntroduce nombre del libro que quieras leer: \n");
-            fgets(libro.titulo, sizeof(libro.titulo), stdin);
-            strtok(libro.titulo, "\n"); // Elimina el carácter
-            send(s, libro.titulo, strlen(libro.titulo) + 1, 0);
-
-            leerLibro(s, libro.titulo);
-
-
-            strcpy(sendBuff, "LEER-LIBRO-END");
-            send(s, sendBuff, strlen(sendBuff) + 1, 0);
+                strcpy(sendBuff, "ELIMINAR-LIBRO-LISTA-END");
+                send(s, sendBuff, strlen(sendBuff) + 1, 0);
 
 
 
-            //leer libro
-        }else if(sel == '5'){
-            printf("\nvolviendo...\n\n");
-            //imprimirMenu();
-        }else{
-            printf("\nIntroduce un valor valido\n\n");
+                //menuMiLista();
+                break;
+
+            case '3':
+                printf("\ncorrecto 3\n\n");
+                strcpy(sendBuff, "DESCARGAR-LIBRO");
+                send(s, sendBuff, strlen(sendBuff) + 1, 0);
+
+                printf("\nIntroduce nombre del libro que quieras descargar en su lista: \n");
+                fgets(libro.titulo, sizeof(libro.titulo), stdin);
+                strtok(libro.titulo, "\n");
+                send(s, libro.titulo, strlen(libro.titulo) + 1, 0);
+
+                strcpy(sendBuff, "DESCARGAR-LIBRO-END");
+                send(s, sendBuff, strlen(sendBuff) + 1, 0);
+
+                recv(s, recvBuff, sizeof(recvBuff), 0);
+                printf("%s", recvBuff);
+                break;
+
+            case '4':
+                printf("\ncorrecto 4\n\n");
+                strcpy(sendBuff, "LEER-LIBRO");
+                send(s, sendBuff, strlen(sendBuff) + 1, 0);
+
+                printf("\nIntroduce nombre del libro que quieras leer: \n");
+                fgets(libro.titulo, sizeof(libro.titulo), stdin);
+                strtok(libro.titulo, "\n");
+                send(s, libro.titulo, strlen(libro.titulo) + 1, 0);
+
+                leerLibro(s, libro.titulo);
+
+                strcpy(sendBuff, "LEER-LIBRO-END");
+                send(s, sendBuff, strlen(sendBuff) + 1, 0);
+                break;
+
+            case '5':
+                printf("\nvolviendo...\n\n");
+                break;
+
+            default:
+                printf("\nIntroduce un valor valido\n\n");
+                break;
         }
-
-    }while(sel != '5' && sel != '4' && sel != '3' && sel != '2' && sel != '1');
+    } while (sel != '5');
 }
 
 void imprimirMenu(){
@@ -236,6 +268,8 @@ void imprimirMenu(){
     bool salir = false; // Bandera para salir del bucle
     Libro libro;
 
+    int recv_size = 0;
+
     printf(NEGRITA"Menu Principal\n\n" QUITAR_NEGRITA);
 
     if (cliente.es_admin == 1) {
@@ -244,10 +278,12 @@ void imprimirMenu(){
 
             fgets(input, sizeof(input), stdin);
             sscanf(input, " %c", &sel);
-
+            std::string lista_completa;
             switch(sel) {
                 case '1':
+
                     printf("\ncorrecto 1\n\n");
+
                     menuMiLista();
                     break;
 
@@ -255,7 +291,9 @@ void imprimirMenu(){
                     printf("\ncorrecto 2\n\n");
                     strcpy(sendBuff, "BUSCAR-LIBRO");
                     send(s, sendBuff, strlen(sendBuff) + 1, 0);
+
                     buscarLibro(s);
+
                     strcpy(sendBuff, "BUSCAR-LIBRO-END");
                     send(s, sendBuff, strlen(sendBuff) + 1, 0);
                     //imprimirMenu();
@@ -332,10 +370,11 @@ void imprimirMenu(){
 
             fgets(input, sizeof(input), stdin);
             sscanf(input, " %c", &sel);
-
+            std::string lista_completa;
             switch (sel) {
                 case '1':
                     printf("\ncorrecto 1\n\n");
+
                     menuMiLista();
                     break;
                 case '2':

@@ -156,4 +156,6 @@ CMakeFiles/Server.dir/database/db2.cpp.obj: \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/basic_ios.tcc \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/ostream.tcc \
  D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/istream \
- D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/istream.tcc
+ D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/istream.tcc \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/structs/libro.h \
+ D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/structs/autor.h

@@ -583,6 +583,8 @@ CMakeFiles/Server.dir/curly/descargaArchivos.cpp.obj: D:/Archivos\ Uni/2\ anio/P
 
 CMakeFiles/Server.dir/database/db2.cpp.obj: D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/database/db2.cpp \
   D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/sqlite/sqlite3.h \
+  D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/structs/autor.h \
+  D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/structs/libro.h \
   D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward/binders.h \
   D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bit \
   D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/alloc_traits.h \
@@ -3800,6 +3802,10 @@ D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/i
 
 D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/curly/descargaArchivos.h:
 
+D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/structs/autor.h:
+
+D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/structs/libro.h:
+
 D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/database/dbBusqueda.cpp:
 
 D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/menu/menu.cpp:
@@ -3821,10 +3827,6 @@ D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-m
 D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/menu/menu.h:
 
 D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/sockets2/ServerWithProtocol/main.cpp:
-
-D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/structs/autor.h:
-
-D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/structs/libro.h:
 
 D:/Archivos\ Uni/Programas\ Raros/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/math.h:
 

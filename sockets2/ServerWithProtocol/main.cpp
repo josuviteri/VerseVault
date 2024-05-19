@@ -239,6 +239,12 @@ int main(int argc, char *argv[]) {
             Libro libro;
             memset(&libro, 0, sizeof(Libro)); // Inicializa todo a cero
 
+            char* recomendaciones = mostrarRecomendaciones();
+            memset(sendBuff, 0, sizeof(sendBuff));
+            strcpy(sendBuff, recomendaciones);
+            send(comm_socket, sendBuff, strlen(sendBuff) + 1, 0);
+
+
             recv_size = recv(comm_socket, libro.titulo, sizeof(libro.titulo) - 1, 0);
             if (recv_size <= 0) {
                 perror("Error al recibir titulo");
@@ -354,6 +360,29 @@ int main(int argc, char *argv[]) {
 
             leerLibro(comm_socket, libro.titulo);
         }
+        if (strcmp(recvBuff, "MOSTRAR-LISTA") == 0) {
+            // Código para manejar MOSTRAR-LISTA
+
+
+            char* miLista = mostrarMiLista(cl.id_Cliente);
+            //printf(miLista);
+
+            memset(sendBuff, 0, sizeof(sendBuff));
+            strcpy(sendBuff, miLista);
+            send(comm_socket, sendBuff, strlen(sendBuff) + 1, 0);
+
+            memset(recvBuff, 0, sizeof(recvBuff));
+            recv_size = recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
+            if (recv_size <= 0) {
+                perror("Error al recibir MOSTRAR-LISTA-END");
+                continue;
+            }
+
+            if (strcmp(recvBuff, "MOSTRAR-LISTA-END") != 0) {
+                printf("Error: Comando MOSTRAR-LISTA-END no recibido correctamente\n");
+            }
+        }
+
 
         if (strcmp(recvBuff, "IP") == 0) {
             memset(recvBuff, 0, sizeof(recvBuff));
