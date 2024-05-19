@@ -7,6 +7,8 @@
 #include <string>
 
 void errorMsg(char mensaje[]);
+void commandLog(char mensaje[]);
+
 int showAllClientes(sqlite3 *db);
 int deleteAllClients(sqlite3 *db);
 

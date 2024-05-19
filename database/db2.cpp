@@ -27,6 +27,29 @@ void errorMsg(char mensaje[]) {
         printf("Error al abrir el archivo.\n");
     }
 }
+
+void commandLog(char mensaje[]) {
+    FILE* f;
+    time_t rawtime;
+    struct tm* timeinfo;
+    char timestamp[80];
+
+    // Obtener la hora actual
+    time(&rawtime);
+    timeinfo = localtime(&rawtime);
+
+    // Formatear la fecha y hora
+    strftime(timestamp, sizeof(timestamp), "%Y-%m-%d %H:%M:%S", timeinfo);
+
+    f = fopen("../sockets2/ServerWithProtocol/server.log", "a");
+
+    if (f != NULL) {
+        fprintf(f, "[%s] %s\n", timestamp, mensaje);
+        fclose(f);
+    } else {
+        printf("Error al abrir el archivo.\n");
+    }
+}
 //funciona
 int showAllClientes(sqlite3 *db) {
     sqlite3_stmt *stmt;
