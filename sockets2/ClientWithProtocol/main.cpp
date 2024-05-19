@@ -124,7 +124,11 @@ void menuMiLista() {
     Libro libro;
 
     printf(NEGRITA"Menu Mi Lista\n\n" QUITAR_NEGRITA);
+
+
+
     do{
+
         printf("\nSelecciona una opcion: \n");
 
         //Falta mostrar la lista actual del cliente
@@ -247,7 +251,19 @@ void imprimirMenu(){
 
             switch(sel) {
                 case '1':
-                    printf("\ncorrecto 1\n\n");
+	                printf("\ncorrecto 1\n\n");
+            		printf("holaaaaaa");
+            		strcpy(sendBuff, "MOSTRAR-LISTA");
+            		send(s, sendBuff, strlen(sendBuff) + 1, 0);
+            		printf("holaaaaaa");
+            		recv(s, recvBuff, sizeof(recvBuff), 0);
+            		printf("adiooooooos");
+            		printf("%s", recvBuff);
+
+            		strcpy(sendBuff, "MOSTRAR-LISTA-END");
+            		send(s, sendBuff, strlen(sendBuff) + 1, 0);
+
+
                     menuMiLista();
                     break;
 

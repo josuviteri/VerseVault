@@ -354,6 +354,23 @@ int main(int argc, char *argv[]) {
 
             leerLibro(comm_socket, libro.titulo);
         }
+        if (strcmp(recvBuff, "MOSTRAR-LISTA") == 0) {
+            // Código para manejar MOSTRAR-LISTA
+
+
+            char* miLista = mostrarMiLista(cl.id_Cliente);
+            printf(miLista);
+
+            memset(sendBuff, 0, sizeof(sendBuff));
+            strcpy(sendBuff, miLista);
+            send(comm_socket, sendBuff, strlen(sendBuff) + 1, 0);
+
+            memset(recvBuff, 0, sizeof(recvBuff));
+            if (strcmp(recvBuff, "MOSTRAR-LISTA-END") != 0) {
+                printf("Error: MOSTRAR-LISTA-END no recibido correctamente\n");
+            }
+        }
+
 
         if (strcmp(recvBuff, "IP") == 0) {
             memset(recvBuff, 0, sizeof(recvBuff));
