@@ -239,33 +239,43 @@ int main(int argc, char *argv[]) {
             Libro libro;
             memset(&libro, 0, sizeof(Libro)); // Inicializa todo a cero
 
-            char* recomendaciones = mostrarRecomendaciones();
+            /*char* recomendaciones = mostrarRecomendaciones();
+            if (recomendaciones == NULL) {
+                perror("Error al obtener recomendaciones");
+                continue;
+            }
+
+            // Enviar recomendaciones al cliente
             memset(sendBuff, 0, sizeof(sendBuff));
-            strcpy(sendBuff, recomendaciones);
+            strncpy(sendBuff, recomendaciones, sizeof(sendBuff) - 1);
             send(comm_socket, sendBuff, strlen(sendBuff) + 1, 0);
-
-
+            free(recomendaciones); // Liberar memoria de recomendaciones
+            */
+            // Recibir título del libro del cliente
+            memset(recvBuff, 0, sizeof(recvBuff));
             recv_size = recv(comm_socket, libro.titulo, sizeof(libro.titulo) - 1, 0);
             if (recv_size <= 0) {
-                perror("Error al recibir titulo");
+                perror("Error al recibir título");
                 continue;
             }
             libro.titulo[recv_size] = '\0'; // Asegura terminador nulo
 
+            // Agregar libro a la lista del cliente
             int status;
             status = aportarLibroMenu(cl.id_Cliente, libro.titulo, actualTime);
 
+            // Enviar confirmación al cliente
             memset(sendBuff, 0, sizeof(sendBuff));
-            if(status == SQLITE_OK) {
+            if (status == SQLITE_OK) {
                 strcpy(sendBuff, "El libro se ha agregado correctamente\n");
             } else {
                 strcpy(sendBuff, "El libro no se ha agregado correctamente\n");
             }
             send(comm_socket, sendBuff, strlen(sendBuff) + 1, 0);
 
-
+            // Esperar confirmación de fin del cliente
             memset(recvBuff, 0, sizeof(recvBuff));
-            recv_size = recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
+            recv_size = recv(comm_socket, recvBuff, sizeof(recvBuff) - 1, 0);
             if (recv_size <= 0) {
                 perror("Error al recibir AGREGAR-LIBRO-LISTA-END");
                 continue;
@@ -273,6 +283,31 @@ int main(int argc, char *argv[]) {
 
             if (strcmp(recvBuff, "AGREGAR-LIBRO-LISTA-END") != 0) {
                 printf("Error: Comando AGREGAR-LIBRO-LISTA-END no recibido correctamente\n");
+            }
+        }
+        if (strcmp(recvBuff, "MOSTRAR-RECOMENDACIONES") == 0) {
+
+            char* recomendaciones = mostrarRecomendaciones();
+            if (recomendaciones == NULL) {
+                perror("Error al obtener la lista");
+                continue;
+            }
+
+            memset(sendBuff, 0, sizeof(sendBuff));
+            strncpy(sendBuff, recomendaciones, sizeof(sendBuff) - 1);
+            send(comm_socket, sendBuff, strlen(sendBuff) + 1, 0);
+
+            free(recomendaciones);
+
+            memset(recvBuff, 0, sizeof(recvBuff));
+            recv_size = recv(comm_socket, recvBuff, sizeof(recvBuff) - 1, 0);
+            if (recv_size <= 0) {
+                perror("Error al recibir MOSTRAR-RECOMENDACIONES-END");
+                continue;
+            }
+
+            if (strcmp(recvBuff, "MOSTRAR-RECOMENDACIONES-END") != 0) {
+                printf("Error: Comando MOSTRAR-RECOMENDACIONES-END no recibido correctamente\n");
             }
         }
 
@@ -359,25 +394,37 @@ int main(int argc, char *argv[]) {
             libro.titulo[recv_size] = '\0'; // Asegura terminador nulo
 
             leerLibro(comm_socket, libro.titulo);
-        }
-        if (strcmp(recvBuff, "MOSTRAR-LISTA") == 0) {
-            // Código para manejar MOSTRAR-LISTA
-
-
-            char* miLista = mostrarMiLista(cl.id_Cliente);
-<<<<<<< HEAD
-            //printf(miLista);
-=======
-            printf(miLista);
->>>>>>> cfc543000dbc856502d956d07a85293ec3171289
-
-            memset(sendBuff, 0, sizeof(sendBuff));
-            strcpy(sendBuff, miLista);
-            send(comm_socket, sendBuff, strlen(sendBuff) + 1, 0);
 
             memset(recvBuff, 0, sizeof(recvBuff));
-<<<<<<< HEAD
             recv_size = recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
+            if (recv_size <= 0) {
+                perror("Error al recibir LEER-LIBRO-END");
+                continue;
+            }
+
+            if (strcmp(recvBuff, "LEER-LIBRO-END") != 0) {
+                printf("Error: Comando LEER-LIBRO-END no recibido correctamente\n");
+            }
+
+
+        }
+
+        if (strcmp(recvBuff, "MOSTRAR-LISTA") == 0) {
+            // Código para manejar MOSTRAR-LISTA
+            char* miLista = mostrarMiLista(cl.id_Cliente);
+            if (miLista == NULL) {
+                perror("Error al obtener la lista");
+                continue;
+            }
+
+            memset(sendBuff, 0, sizeof(sendBuff));
+            strncpy(sendBuff, miLista, sizeof(sendBuff) - 1);
+            send(comm_socket, sendBuff, strlen(sendBuff) + 1, 0);
+
+            free(miLista);  // Liberar memoria asignada por mostrarMiLista
+
+            memset(recvBuff, 0, sizeof(recvBuff));
+            recv_size = recv(comm_socket, recvBuff, sizeof(recvBuff) - 1, 0);
             if (recv_size <= 0) {
                 perror("Error al recibir MOSTRAR-LISTA-END");
                 continue;
@@ -385,10 +432,6 @@ int main(int argc, char *argv[]) {
 
             if (strcmp(recvBuff, "MOSTRAR-LISTA-END") != 0) {
                 printf("Error: Comando MOSTRAR-LISTA-END no recibido correctamente\n");
-=======
-            if (strcmp(recvBuff, "MOSTRAR-LISTA-END") != 0) {
-                printf("Error: MOSTRAR-LISTA-END no recibido correctamente\n");
->>>>>>> cfc543000dbc856502d956d07a85293ec3171289
             }
         }
 
@@ -497,9 +540,9 @@ int main(int argc, char *argv[]) {
 
             memset(sendBuff, 0, sizeof(sendBuff));
             if(status == SQLITE_OK) {
-                strcpy(sendBuff, "El libro se ha eliminado correctamente a la BD\n");
+                strcpy(sendBuff, "El libro se ha eliminado correctamente de la BD\n");
             } else {
-                strcpy(sendBuff, "El libro NO se ha eliminado correctamente a la BD\n");
+                strcpy(sendBuff, "El libro NO se ha eliminado correctamente de la BD\n");
             }
             send(comm_socket, sendBuff, strlen(sendBuff) + 1, 0);
 

@@ -123,38 +123,14 @@ void menuMiLista() {
     char fecha_actual[10];
     Libro libro;
 
-<<<<<<< HEAD
     std::string lista_completa;
     int recv_size = 0;
 
 
     do {
-        strcpy(sendBuff, "MOSTRAR-LISTA");
-        send(s, sendBuff, strlen(sendBuff) + 1, 0);
-
-        do {
-            memset(recvBuff, 0, sizeof(recvBuff));
-            recv_size = recv(s, recvBuff, sizeof(recvBuff) - 1, 0);
-            if (recv_size <= 0) {
-                perror("Error al recibir datos de la lista");
-                break;
-            }
-            lista_completa += recvBuff;
-        } while (recv_size == sizeof(recvBuff) - 1);
-
-        std::cout << "Mi Lista:\n" << lista_completa << std::endl;
-
-        strcpy(sendBuff, "MOSTRAR-LISTA-END");
-        send(s, sendBuff, strlen(sendBuff) + 1, 0);
-
-        printf(NEGRITA"Menu Mi Lista\n\n" QUITAR_NEGRITA);
-=======
-    printf(NEGRITA"Menu Mi Lista\n\n" QUITAR_NEGRITA);
 
 
-
-    do{
->>>>>>> cfc543000dbc856502d956d07a85293ec3171289
+        printf(NEGRITA "Menu Mi Lista\n\n" QUITAR_NEGRITA);
 
         printf("\nSelecciona una opcion: \n");
         printf("1. Agregar Libro a Mi Lista\n2. Eliminar Libro de Mi Lista\n3. Descargar Libro\n4. Leer Libro\n5. Volver\n");
@@ -167,37 +143,38 @@ void menuMiLista() {
             case '1':
                 printf("\ncorrecto 1\n\n");
 
+
                 strcpy(sendBuff, "AGREGAR-LIBRO-LISTA");
                 send(s, sendBuff, strlen(sendBuff) + 1, 0);
 
-                do {
-                    memset(recvBuff, 0, sizeof(recvBuff));
-                    recv_size = recv(s, recvBuff, sizeof(recvBuff) - 1, 0);
-                    if (recv_size <= 0) {
-                        perror("Error al recibir datos de la lista");
-                        break;
-                    }
-                    lista_recomendacioens += recvBuff;
-                } while (recv_size == sizeof(recvBuff) - 1);
 
-                std::cout << "Recomendaciones:\n" << lista_recomendacioens << std::endl;
-
+                // Pedir al usuario el título del libro
                 printf("\nIntroduce el titulo del libro que desea guardar en tu lista:\n");
                 fgets(libro.titulo, sizeof(libro.titulo), stdin);
                 strtok(libro.titulo, "\n");
+
+                // Enviar el título del libro al servidor
                 send(s, libro.titulo, strlen(libro.titulo) + 1, 0);
 
-                recv(s, recvBuff, sizeof(recvBuff), 0);
+                // Recibir confirmación del servidor
+                memset(recvBuff, 0, sizeof(recvBuff));
+                recv(s, recvBuff, sizeof(recvBuff) - 1, 0);
                 printf("%s", recvBuff);
 
+                // Enviar señal de fin al servidor
                 strcpy(sendBuff, "AGREGAR-LIBRO-LISTA-END");
                 send(s, sendBuff, strlen(sendBuff) + 1, 0);
 
+                // Mostrar lista actualizada
                 strcpy(sendBuff, "MOSTRAR-LISTA");
                 send(s, sendBuff, strlen(sendBuff) + 1, 0);
 
+                memset(recvBuff, 0, sizeof(recvBuff));
+                recv(s, recvBuff, sizeof(recvBuff) - 1, 0);
+                std::cout << "Mi Lista:\n" << recvBuff << std::endl;
 
-                //menuMiLista();
+                strcpy(sendBuff, "MOSTRAR-LISTA-END");
+                send(s, sendBuff, strlen(sendBuff) + 1, 0);
                 break;
 
             case '2':
@@ -212,13 +189,21 @@ void menuMiLista() {
 
                 recv(s, recvBuff, sizeof(recvBuff), 0);
                 printf("%s", recvBuff);
-
+                Sleep(1000);
                 strcpy(sendBuff, "ELIMINAR-LIBRO-LISTA-END");
                 send(s, sendBuff, strlen(sendBuff) + 1, 0);
 
 
 
-                //menuMiLista();
+                strcpy(sendBuff, "MOSTRAR-LISTA");
+                send(s, sendBuff, strlen(sendBuff) + 1, 0);
+                memset(recvBuff, 0, sizeof(recvBuff));
+
+                recv(s, recvBuff, sizeof(recvBuff) - 1, 0);
+                std::cout << "Mi Lista:\n" << recvBuff << std::endl;
+
+                strcpy(sendBuff, "MOSTRAR-LISTA-END");
+                send(s, sendBuff, strlen(sendBuff) + 1, 0);
                 break;
 
             case '3':
@@ -236,6 +221,18 @@ void menuMiLista() {
 
                 recv(s, recvBuff, sizeof(recvBuff), 0);
                 printf("%s", recvBuff);
+
+                Sleep(1000);
+
+                strcpy(sendBuff, "MOSTRAR-LISTA");
+                send(s, sendBuff, strlen(sendBuff) + 1, 0);
+                memset(recvBuff, 0, sizeof(recvBuff));
+
+                recv(s, recvBuff, sizeof(recvBuff) - 1, 0);
+                std::cout << "Mi Lista:\n" << recvBuff << std::endl;
+
+                strcpy(sendBuff, "MOSTRAR-LISTA-END");
+                send(s, sendBuff, strlen(sendBuff) + 1, 0);
                 break;
 
             case '4':
@@ -252,6 +249,8 @@ void menuMiLista() {
 
                 strcpy(sendBuff, "LEER-LIBRO-END");
                 send(s, sendBuff, strlen(sendBuff) + 1, 0);
+                sel = -1;
+
                 break;
 
             case '5':
@@ -289,24 +288,17 @@ void imprimirMenu(){
             std::string lista_completa;
             switch(sel) {
                 case '1':
-<<<<<<< HEAD
 
                     printf("\ncorrecto 1\n\n");
-=======
-	                printf("\ncorrecto 1\n\n");
-            		printf("holaaaaaa");
-            		strcpy(sendBuff, "MOSTRAR-LISTA");
-            		send(s, sendBuff, strlen(sendBuff) + 1, 0);
-            		printf("holaaaaaa");
-            		recv(s, recvBuff, sizeof(recvBuff), 0);
-            		printf("adiooooooos");
-            		printf("%s", recvBuff);
+                    strcpy(sendBuff, "MOSTRAR-LISTA");
+                    send(s, sendBuff, strlen(sendBuff) + 1, 0);
+                    memset(recvBuff, 0, sizeof(recvBuff));
 
-            		strcpy(sendBuff, "MOSTRAR-LISTA-END");
-            		send(s, sendBuff, strlen(sendBuff) + 1, 0);
+                    recv(s, recvBuff, sizeof(recvBuff) - 1, 0);
+                    std::cout << "Mi Lista:\n" << recvBuff << std::endl;
 
->>>>>>> cfc543000dbc856502d956d07a85293ec3171289
-
+                    strcpy(sendBuff, "MOSTRAR-LISTA-END");
+                    send(s, sendBuff, strlen(sendBuff) + 1, 0);
                     menuMiLista();
                     break;
 
@@ -397,7 +389,15 @@ void imprimirMenu(){
             switch (sel) {
                 case '1':
                     printf("\ncorrecto 1\n\n");
+                    strcpy(sendBuff, "MOSTRAR-LISTA");
+                    send(s, sendBuff, strlen(sendBuff) + 1, 0);
+                    memset(recvBuff, 0, sizeof(recvBuff));
 
+                    recv(s, recvBuff, sizeof(recvBuff) - 1, 0);
+                    std::cout << "Mi Lista:\n" << recvBuff << std::endl;
+
+                    strcpy(sendBuff, "MOSTRAR-LISTA-END");
+                    send(s, sendBuff, strlen(sendBuff) + 1, 0);
                     menuMiLista();
                     break;
                 case '2':
@@ -579,13 +579,12 @@ void imprimirInicial() {
             } else {
                 cliente.es_admin = 0;
             }
+            strcpy(sendBuff, "INICIAR-SESION-END");
+            send(s, sendBuff, strlen(sendBuff) + 1, 0);
 
             if (strcmp(recvBuff, "-1") != 0){ //ENTRA al siguiente menu, si el inicio de sesion ha sido corecto
                 imprimirMenu();
             }
-
-            strcpy(sendBuff, "INICIAR-SESION-END");
-            send(s, sendBuff, strlen(sendBuff) + 1, 0);
 
 
         }if(sel == '2'){
