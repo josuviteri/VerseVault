@@ -365,13 +365,18 @@ int main(int argc, char *argv[]) {
 
 
             char* miLista = mostrarMiLista(cl.id_Cliente);
+<<<<<<< HEAD
             //printf(miLista);
+=======
+            printf(miLista);
+>>>>>>> cfc543000dbc856502d956d07a85293ec3171289
 
             memset(sendBuff, 0, sizeof(sendBuff));
             strcpy(sendBuff, miLista);
             send(comm_socket, sendBuff, strlen(sendBuff) + 1, 0);
 
             memset(recvBuff, 0, sizeof(recvBuff));
+<<<<<<< HEAD
             recv_size = recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
             if (recv_size <= 0) {
                 perror("Error al recibir MOSTRAR-LISTA-END");
@@ -380,6 +385,10 @@ int main(int argc, char *argv[]) {
 
             if (strcmp(recvBuff, "MOSTRAR-LISTA-END") != 0) {
                 printf("Error: Comando MOSTRAR-LISTA-END no recibido correctamente\n");
+=======
+            if (strcmp(recvBuff, "MOSTRAR-LISTA-END") != 0) {
+                printf("Error: MOSTRAR-LISTA-END no recibido correctamente\n");
+>>>>>>> cfc543000dbc856502d956d07a85293ec3171289
             }
         }
 

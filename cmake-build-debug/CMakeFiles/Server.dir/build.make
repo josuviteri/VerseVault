@@ -43,19 +43,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "D:\Archivos Uni\Programas Raros\CLion 2023.3.4\bin\cmake\win\x64\bin\cmake.exe"
+CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2024.1\bin\cmake\win\x64\bin\cmake.exe"
 
 # The command to remove a file.
-RM = "D:\Archivos Uni\Programas Raros\CLion 2023.3.4\bin\cmake\win\x64\bin\cmake.exe" -E rm -f
+RM = "C:\Program Files\JetBrains\CLion 2024.1\bin\cmake\win\x64\bin\cmake.exe" -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "D:\Archivos Uni\2 anio\Programacion IV\VerseVault"
+CMAKE_SOURCE_DIR = C:\Users\asier\OneDrive\Escritorio\VerseVault
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\cmake-build-debug"
+CMAKE_BINARY_DIR = C:\Users\asier\OneDrive\Escritorio\VerseVault\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Server.dir/depend.make
@@ -70,93 +70,93 @@ include CMakeFiles/Server.dir/flags.make
 
 CMakeFiles/Server.dir/curly/descargaArchivos.cpp.obj: CMakeFiles/Server.dir/flags.make
 CMakeFiles/Server.dir/curly/descargaArchivos.cpp.obj: CMakeFiles/Server.dir/includes_CXX.rsp
-CMakeFiles/Server.dir/curly/descargaArchivos.cpp.obj: D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/curly/descargaArchivos.cpp
+CMakeFiles/Server.dir/curly/descargaArchivos.cpp.obj: C:/Users/asier/OneDrive/Escritorio/VerseVault/curly/descargaArchivos.cpp
 CMakeFiles/Server.dir/curly/descargaArchivos.cpp.obj: CMakeFiles/Server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\Archivos Uni\2 anio\Programacion IV\VerseVault\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Server.dir/curly/descargaArchivos.cpp.obj"
-	"D:\Archivos Uni\Programas Raros\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Server.dir/curly/descargaArchivos.cpp.obj -MF CMakeFiles\Server.dir\curly\descargaArchivos.cpp.obj.d -o CMakeFiles\Server.dir\curly\descargaArchivos.cpp.obj -c "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\curly\descargaArchivos.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\asier\OneDrive\Escritorio\VerseVault\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Server.dir/curly/descargaArchivos.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Server.dir/curly/descargaArchivos.cpp.obj -MF CMakeFiles\Server.dir\curly\descargaArchivos.cpp.obj.d -o CMakeFiles\Server.dir\curly\descargaArchivos.cpp.obj -c C:\Users\asier\OneDrive\Escritorio\VerseVault\curly\descargaArchivos.cpp
 
 CMakeFiles/Server.dir/curly/descargaArchivos.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Server.dir/curly/descargaArchivos.cpp.i"
-	"D:\Archivos Uni\Programas Raros\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\curly\descargaArchivos.cpp" > CMakeFiles\Server.dir\curly\descargaArchivos.cpp.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\asier\OneDrive\Escritorio\VerseVault\curly\descargaArchivos.cpp > CMakeFiles\Server.dir\curly\descargaArchivos.cpp.i
 
 CMakeFiles/Server.dir/curly/descargaArchivos.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Server.dir/curly/descargaArchivos.cpp.s"
-	"D:\Archivos Uni\Programas Raros\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\curly\descargaArchivos.cpp" -o CMakeFiles\Server.dir\curly\descargaArchivos.cpp.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\asier\OneDrive\Escritorio\VerseVault\curly\descargaArchivos.cpp -o CMakeFiles\Server.dir\curly\descargaArchivos.cpp.s
 
 CMakeFiles/Server.dir/menu/menu.cpp.obj: CMakeFiles/Server.dir/flags.make
 CMakeFiles/Server.dir/menu/menu.cpp.obj: CMakeFiles/Server.dir/includes_CXX.rsp
-CMakeFiles/Server.dir/menu/menu.cpp.obj: D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/menu/menu.cpp
+CMakeFiles/Server.dir/menu/menu.cpp.obj: C:/Users/asier/OneDrive/Escritorio/VerseVault/menu/menu.cpp
 CMakeFiles/Server.dir/menu/menu.cpp.obj: CMakeFiles/Server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\Archivos Uni\2 anio\Programacion IV\VerseVault\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Server.dir/menu/menu.cpp.obj"
-	"D:\Archivos Uni\Programas Raros\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Server.dir/menu/menu.cpp.obj -MF CMakeFiles\Server.dir\menu\menu.cpp.obj.d -o CMakeFiles\Server.dir\menu\menu.cpp.obj -c "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\menu\menu.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\asier\OneDrive\Escritorio\VerseVault\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Server.dir/menu/menu.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Server.dir/menu/menu.cpp.obj -MF CMakeFiles\Server.dir\menu\menu.cpp.obj.d -o CMakeFiles\Server.dir\menu\menu.cpp.obj -c C:\Users\asier\OneDrive\Escritorio\VerseVault\menu\menu.cpp
 
 CMakeFiles/Server.dir/menu/menu.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Server.dir/menu/menu.cpp.i"
-	"D:\Archivos Uni\Programas Raros\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\menu\menu.cpp" > CMakeFiles\Server.dir\menu\menu.cpp.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\asier\OneDrive\Escritorio\VerseVault\menu\menu.cpp > CMakeFiles\Server.dir\menu\menu.cpp.i
 
 CMakeFiles/Server.dir/menu/menu.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Server.dir/menu/menu.cpp.s"
-	"D:\Archivos Uni\Programas Raros\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\menu\menu.cpp" -o CMakeFiles\Server.dir\menu\menu.cpp.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\asier\OneDrive\Escritorio\VerseVault\menu\menu.cpp -o CMakeFiles\Server.dir\menu\menu.cpp.s
 
 CMakeFiles/Server.dir/sqlite/sqlite3.c.obj: CMakeFiles/Server.dir/flags.make
 CMakeFiles/Server.dir/sqlite/sqlite3.c.obj: CMakeFiles/Server.dir/includes_C.rsp
-CMakeFiles/Server.dir/sqlite/sqlite3.c.obj: D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/sqlite/sqlite3.c
+CMakeFiles/Server.dir/sqlite/sqlite3.c.obj: C:/Users/asier/OneDrive/Escritorio/VerseVault/sqlite/sqlite3.c
 CMakeFiles/Server.dir/sqlite/sqlite3.c.obj: CMakeFiles/Server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\Archivos Uni\2 anio\Programacion IV\VerseVault\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/Server.dir/sqlite/sqlite3.c.obj"
-	"D:\Archivos Uni\Programas Raros\CLion 2023.3.4\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Server.dir/sqlite/sqlite3.c.obj -MF CMakeFiles\Server.dir\sqlite\sqlite3.c.obj.d -o CMakeFiles\Server.dir\sqlite\sqlite3.c.obj -c "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\sqlite\sqlite3.c"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\asier\OneDrive\Escritorio\VerseVault\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/Server.dir/sqlite/sqlite3.c.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Server.dir/sqlite/sqlite3.c.obj -MF CMakeFiles\Server.dir\sqlite\sqlite3.c.obj.d -o CMakeFiles\Server.dir\sqlite\sqlite3.c.obj -c C:\Users\asier\OneDrive\Escritorio\VerseVault\sqlite\sqlite3.c
 
 CMakeFiles/Server.dir/sqlite/sqlite3.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/Server.dir/sqlite/sqlite3.c.i"
-	"D:\Archivos Uni\Programas Raros\CLion 2023.3.4\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\sqlite\sqlite3.c" > CMakeFiles\Server.dir\sqlite\sqlite3.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\asier\OneDrive\Escritorio\VerseVault\sqlite\sqlite3.c > CMakeFiles\Server.dir\sqlite\sqlite3.c.i
 
 CMakeFiles/Server.dir/sqlite/sqlite3.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/Server.dir/sqlite/sqlite3.c.s"
-	"D:\Archivos Uni\Programas Raros\CLion 2023.3.4\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\sqlite\sqlite3.c" -o CMakeFiles\Server.dir\sqlite\sqlite3.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\asier\OneDrive\Escritorio\VerseVault\sqlite\sqlite3.c -o CMakeFiles\Server.dir\sqlite\sqlite3.c.s
 
 CMakeFiles/Server.dir/database/db2.cpp.obj: CMakeFiles/Server.dir/flags.make
 CMakeFiles/Server.dir/database/db2.cpp.obj: CMakeFiles/Server.dir/includes_CXX.rsp
-CMakeFiles/Server.dir/database/db2.cpp.obj: D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/database/db2.cpp
+CMakeFiles/Server.dir/database/db2.cpp.obj: C:/Users/asier/OneDrive/Escritorio/VerseVault/database/db2.cpp
 CMakeFiles/Server.dir/database/db2.cpp.obj: CMakeFiles/Server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\Archivos Uni\2 anio\Programacion IV\VerseVault\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Server.dir/database/db2.cpp.obj"
-	"D:\Archivos Uni\Programas Raros\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Server.dir/database/db2.cpp.obj -MF CMakeFiles\Server.dir\database\db2.cpp.obj.d -o CMakeFiles\Server.dir\database\db2.cpp.obj -c "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\database\db2.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\asier\OneDrive\Escritorio\VerseVault\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Server.dir/database/db2.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Server.dir/database/db2.cpp.obj -MF CMakeFiles\Server.dir\database\db2.cpp.obj.d -o CMakeFiles\Server.dir\database\db2.cpp.obj -c C:\Users\asier\OneDrive\Escritorio\VerseVault\database\db2.cpp
 
 CMakeFiles/Server.dir/database/db2.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Server.dir/database/db2.cpp.i"
-	"D:\Archivos Uni\Programas Raros\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\database\db2.cpp" > CMakeFiles\Server.dir\database\db2.cpp.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\asier\OneDrive\Escritorio\VerseVault\database\db2.cpp > CMakeFiles\Server.dir\database\db2.cpp.i
 
 CMakeFiles/Server.dir/database/db2.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Server.dir/database/db2.cpp.s"
-	"D:\Archivos Uni\Programas Raros\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\database\db2.cpp" -o CMakeFiles\Server.dir\database\db2.cpp.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\asier\OneDrive\Escritorio\VerseVault\database\db2.cpp -o CMakeFiles\Server.dir\database\db2.cpp.s
 
 CMakeFiles/Server.dir/database/dbBusqueda.cpp.obj: CMakeFiles/Server.dir/flags.make
 CMakeFiles/Server.dir/database/dbBusqueda.cpp.obj: CMakeFiles/Server.dir/includes_CXX.rsp
-CMakeFiles/Server.dir/database/dbBusqueda.cpp.obj: D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/database/dbBusqueda.cpp
+CMakeFiles/Server.dir/database/dbBusqueda.cpp.obj: C:/Users/asier/OneDrive/Escritorio/VerseVault/database/dbBusqueda.cpp
 CMakeFiles/Server.dir/database/dbBusqueda.cpp.obj: CMakeFiles/Server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\Archivos Uni\2 anio\Programacion IV\VerseVault\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Server.dir/database/dbBusqueda.cpp.obj"
-	"D:\Archivos Uni\Programas Raros\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Server.dir/database/dbBusqueda.cpp.obj -MF CMakeFiles\Server.dir\database\dbBusqueda.cpp.obj.d -o CMakeFiles\Server.dir\database\dbBusqueda.cpp.obj -c "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\database\dbBusqueda.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\asier\OneDrive\Escritorio\VerseVault\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Server.dir/database/dbBusqueda.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Server.dir/database/dbBusqueda.cpp.obj -MF CMakeFiles\Server.dir\database\dbBusqueda.cpp.obj.d -o CMakeFiles\Server.dir\database\dbBusqueda.cpp.obj -c C:\Users\asier\OneDrive\Escritorio\VerseVault\database\dbBusqueda.cpp
 
 CMakeFiles/Server.dir/database/dbBusqueda.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Server.dir/database/dbBusqueda.cpp.i"
-	"D:\Archivos Uni\Programas Raros\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\database\dbBusqueda.cpp" > CMakeFiles\Server.dir\database\dbBusqueda.cpp.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\asier\OneDrive\Escritorio\VerseVault\database\dbBusqueda.cpp > CMakeFiles\Server.dir\database\dbBusqueda.cpp.i
 
 CMakeFiles/Server.dir/database/dbBusqueda.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Server.dir/database/dbBusqueda.cpp.s"
-	"D:\Archivos Uni\Programas Raros\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\database\dbBusqueda.cpp" -o CMakeFiles\Server.dir\database\dbBusqueda.cpp.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\asier\OneDrive\Escritorio\VerseVault\database\dbBusqueda.cpp -o CMakeFiles\Server.dir\database\dbBusqueda.cpp.s
 
 CMakeFiles/Server.dir/sockets2/ServerWithProtocol/main.cpp.obj: CMakeFiles/Server.dir/flags.make
 CMakeFiles/Server.dir/sockets2/ServerWithProtocol/main.cpp.obj: CMakeFiles/Server.dir/includes_CXX.rsp
-CMakeFiles/Server.dir/sockets2/ServerWithProtocol/main.cpp.obj: D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/sockets2/ServerWithProtocol/main.cpp
+CMakeFiles/Server.dir/sockets2/ServerWithProtocol/main.cpp.obj: C:/Users/asier/OneDrive/Escritorio/VerseVault/sockets2/ServerWithProtocol/main.cpp
 CMakeFiles/Server.dir/sockets2/ServerWithProtocol/main.cpp.obj: CMakeFiles/Server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\Archivos Uni\2 anio\Programacion IV\VerseVault\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Server.dir/sockets2/ServerWithProtocol/main.cpp.obj"
-	"D:\Archivos Uni\Programas Raros\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Server.dir/sockets2/ServerWithProtocol/main.cpp.obj -MF CMakeFiles\Server.dir\sockets2\ServerWithProtocol\main.cpp.obj.d -o CMakeFiles\Server.dir\sockets2\ServerWithProtocol\main.cpp.obj -c "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\sockets2\ServerWithProtocol\main.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\asier\OneDrive\Escritorio\VerseVault\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Server.dir/sockets2/ServerWithProtocol/main.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Server.dir/sockets2/ServerWithProtocol/main.cpp.obj -MF CMakeFiles\Server.dir\sockets2\ServerWithProtocol\main.cpp.obj.d -o CMakeFiles\Server.dir\sockets2\ServerWithProtocol\main.cpp.obj -c C:\Users\asier\OneDrive\Escritorio\VerseVault\sockets2\ServerWithProtocol\main.cpp
 
 CMakeFiles/Server.dir/sockets2/ServerWithProtocol/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Server.dir/sockets2/ServerWithProtocol/main.cpp.i"
-	"D:\Archivos Uni\Programas Raros\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\sockets2\ServerWithProtocol\main.cpp" > CMakeFiles\Server.dir\sockets2\ServerWithProtocol\main.cpp.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\asier\OneDrive\Escritorio\VerseVault\sockets2\ServerWithProtocol\main.cpp > CMakeFiles\Server.dir\sockets2\ServerWithProtocol\main.cpp.i
 
 CMakeFiles/Server.dir/sockets2/ServerWithProtocol/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Server.dir/sockets2/ServerWithProtocol/main.cpp.s"
-	"D:\Archivos Uni\Programas Raros\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\sockets2\ServerWithProtocol\main.cpp" -o CMakeFiles\Server.dir\sockets2\ServerWithProtocol\main.cpp.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\asier\OneDrive\Escritorio\VerseVault\sockets2\ServerWithProtocol\main.cpp -o CMakeFiles\Server.dir\sockets2\ServerWithProtocol\main.cpp.s
 
 # Object files for target Server
 Server_OBJECTS = \
@@ -177,11 +177,11 @@ Server.exe: CMakeFiles/Server.dir/database/db2.cpp.obj
 Server.exe: CMakeFiles/Server.dir/database/dbBusqueda.cpp.obj
 Server.exe: CMakeFiles/Server.dir/sockets2/ServerWithProtocol/main.cpp.obj
 Server.exe: CMakeFiles/Server.dir/build.make
-Server.exe: D:/Archivos\ Uni/2\ anio/Programacion\ IV/VerseVault/lib/libcurl.dll.a
+Server.exe: C:/Users/asier/OneDrive/Escritorio/VerseVault/lib/libcurl.dll.a
 Server.exe: CMakeFiles/Server.dir/linkLibs.rsp
 Server.exe: CMakeFiles/Server.dir/objects1.rsp
 Server.exe: CMakeFiles/Server.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="D:\Archivos Uni\2 anio\Programacion IV\VerseVault\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable Server.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\asier\OneDrive\Escritorio\VerseVault\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable Server.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Server.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -193,6 +193,6 @@ CMakeFiles/Server.dir/clean:
 .PHONY : CMakeFiles/Server.dir/clean
 
 CMakeFiles/Server.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" "D:\Archivos Uni\2 anio\Programacion IV\VerseVault" "D:\Archivos Uni\2 anio\Programacion IV\VerseVault" "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\cmake-build-debug" "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\cmake-build-debug" "D:\Archivos Uni\2 anio\Programacion IV\VerseVault\cmake-build-debug\CMakeFiles\Server.dir\DependInfo.cmake" "--color=$(COLOR)"
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\asier\OneDrive\Escritorio\VerseVault C:\Users\asier\OneDrive\Escritorio\VerseVault C:\Users\asier\OneDrive\Escritorio\VerseVault\cmake-build-debug C:\Users\asier\OneDrive\Escritorio\VerseVault\cmake-build-debug C:\Users\asier\OneDrive\Escritorio\VerseVault\cmake-build-debug\CMakeFiles\Server.dir\DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/Server.dir/depend
 

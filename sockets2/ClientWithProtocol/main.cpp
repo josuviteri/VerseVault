@@ -123,6 +123,7 @@ void menuMiLista() {
     char fecha_actual[10];
     Libro libro;
 
+<<<<<<< HEAD
     std::string lista_completa;
     int recv_size = 0;
 
@@ -147,6 +148,13 @@ void menuMiLista() {
         send(s, sendBuff, strlen(sendBuff) + 1, 0);
 
         printf(NEGRITA"Menu Mi Lista\n\n" QUITAR_NEGRITA);
+=======
+    printf(NEGRITA"Menu Mi Lista\n\n" QUITAR_NEGRITA);
+
+
+
+    do{
+>>>>>>> cfc543000dbc856502d956d07a85293ec3171289
 
         printf("\nSelecciona una opcion: \n");
         printf("1. Agregar Libro a Mi Lista\n2. Eliminar Libro de Mi Lista\n3. Descargar Libro\n4. Leer Libro\n5. Volver\n");
@@ -281,8 +289,23 @@ void imprimirMenu(){
             std::string lista_completa;
             switch(sel) {
                 case '1':
+<<<<<<< HEAD
 
                     printf("\ncorrecto 1\n\n");
+=======
+	                printf("\ncorrecto 1\n\n");
+            		printf("holaaaaaa");
+            		strcpy(sendBuff, "MOSTRAR-LISTA");
+            		send(s, sendBuff, strlen(sendBuff) + 1, 0);
+            		printf("holaaaaaa");
+            		recv(s, recvBuff, sizeof(recvBuff), 0);
+            		printf("adiooooooos");
+            		printf("%s", recvBuff);
+
+            		strcpy(sendBuff, "MOSTRAR-LISTA-END");
+            		send(s, sendBuff, strlen(sendBuff) + 1, 0);
+
+>>>>>>> cfc543000dbc856502d956d07a85293ec3171289
 
                     menuMiLista();
                     break;
