@@ -8,7 +8,8 @@ add_executable(Server curly/descargaArchivos.cpp
         sqlite/sqlite3.c
         database/db2.cpp
         database/dbBusqueda.cpp
-        sockets2/ServerWithProtocol/main.cpp)
+        sockets2/ServerWithProtocol/main.cpp
+)
 
 
 

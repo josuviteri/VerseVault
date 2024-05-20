@@ -713,7 +713,6 @@ void buscarLibro(SOCKET client_socket) {
         send(client_socket, recvBuff, strlen(recvBuff) + 1, 0);
         return;
     }
-    //printf("%s",resultados);
     // Enviar los resultados al cliente
     send(client_socket, resultados, strlen(resultados) + 1, 0);
 

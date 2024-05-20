@@ -131,3 +131,25 @@
 [2024-05-20 12:37:24] Admin status enviado correctamente
 [2024-05-20 12:37:24] INICIAR-SESION-END recibido correctamente
 [2024-05-20 12:37:51] El libro se ha eliminado correctamente
+[2024-05-20 21:46:10] Received INICIAR-SESION command
+[2024-05-20 21:46:11] Email received
+[2024-05-20 21:46:12] Password received
+[2024-05-20 21:46:12] Calling iniciarSesionMenu
+[2024-05-20 21:46:12] ID de cliente enviado correctamente
+[2024-05-20 21:46:12] Admin status enviado correctamente
+[2024-05-20 21:46:12] INICIAR-SESION-END recibido correctamente
+[2024-05-20 21:46:23] El libro se ha agregado correctamente
+[2024-05-20 21:46:33] El libro se ha eliminado correctamente
+[2024-05-20 21:46:43] El libro se ha descargado correctamente
+[2024-05-20 21:55:42] Received INICIAR-SESION command
+[2024-05-20 21:55:44] Email received
+[2024-05-20 21:55:45] Password received
+[2024-05-20 21:55:45] Calling iniciarSesionMenu
+[2024-05-20 21:55:45] ID de cliente enviado correctamente
+[2024-05-20 21:55:45] Admin status enviado correctamente
+[2024-05-20 21:55:45] INICIAR-SESION-END recibido correctamente
+[2024-05-20 21:55:54] El libro se ha agregado correctamente
+[2024-05-20 21:55:59] El libro se ha eliminado correctamente
+[2024-05-20 21:56:11] El libro se ha descargado correctamente
+[2024-05-20 21:56:20] El libro se ha descargado correctamente
+[2024-05-20 21:56:27] El libro se ha descargado correctamente

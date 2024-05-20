@@ -18,7 +18,7 @@
 #define SERVER_IP "127.0.0.1"
 #define SERVER_PORT 6000
 #define convPag 20
-
+#include "client.h"
 using namespace std;
 
 #define NEGRITA "\e[1m" // Renombramos el código de los caracteres en negrita para que sea mas entendible
@@ -29,10 +29,6 @@ char sendBuff[2048], recvBuff[2048];
 int es_admin = 0;
 Cliente cliente;
 
-void leerLibro(SOCKET client_socket, const char* titulo);
-void buscarLibro(SOCKET client_socket);
-void imprimirInicial();
-void imprimirGestionInvitado();
 
 void limpiarBuffer() {
     int c;
@@ -519,9 +515,7 @@ void imprimirGestionInvitado() {
                 memset(sendBuff, 0, sizeof(sendBuff));
                 strcpy(sendBuff, "AGREGAR-LIBRO-BD-END");
                 send(s, sendBuff, strlen(sendBuff) + 1, 0);
-                //imprimirMenu();
 
-                //agregarLibroMenu(titulo, nom_autor, idioma, fecha_publicacion);
                 break;
             case '3':
                 printf("\nvolviendo...\n\n");
@@ -622,7 +616,6 @@ void imprimirInicial() {
             strcpy(sendBuff, "REGISTRAR-END");
             send(s, sendBuff, strlen(sendBuff) + 1, 0);
 
-            //registrarClienteMenu(nombre,email,pass);
 
         }else if(sel == '3'){
             strcpy(sendBuff, "INVITADO");
@@ -706,87 +699,6 @@ int main(int argc, char *argv[])
 
 	//SEND and RECEIVE data (CLIENT/SERVER PROTOCOL)
     imprimirInicial();
-
-
-	/*char c;
-	do
-	{
-		c = imprimirInicial1();
-		if (c == '1')
-		{
-            // Enviar comando INICIAR-SESION
-            strcpy(sendBuff, "INICIAR-SESION");
-            send(s, sendBuff, strlen(sendBuff) + 1, 0); // +1 para incluir el terminador nulo
-
-            printf("\nIntroduce tus datos para iniciar sesion:\nIntroduce tu correo electronico:\n");
-
-            //iniciarSesionMenu(email,pass);
-            char* correo;
-            fgets(correo, sizeof(correo), stdin);
-            strtok(correo, "\n"); // Elimina el carácter
-
-            printf("\nIntroduce tu contrasenya:\n");
-
-            //iniciarSesionMenu(email,pass);
-            char* contra;
-            fgets(contra, sizeof(contra), stdin);
-            strtok(contra, "\n"); // Elimina el carácter
-
-
-            // Enviar usuario como carácter
-			send(s, correo, sizeof(correo), 0);
-
-			// Enviar contraseña como carácter
-			send(s, contra, sizeof(contra), 0);
-
-			// Enviar comando INICIAR-SESION-END
-			strcpy(sendBuff, "INICIAR-SESION-END");
-			send(s, sendBuff, strlen(sendBuff) + 1, 0);
-
-			// Recibir respuesta del servidor
-			recv(s, recvBuff, sizeof(recvBuff), 0);
-			printf("Usuario: %s \n", recvBuff);
-
-			// Pasar al menú de iniciar sesión
-		}
-
-		if (c == '2')
-		{
-			// SENDING command RAIZ and parameter to the server
-			strcpy(sendBuff, "RAIZ");
-			send(s, sendBuff, sizeof(sendBuff), 0);
-			strcpy(sendBuff, "9");
-			send(s, sendBuff, sizeof(sendBuff), 0);
-			strcpy(sendBuff, "RAIZ-END");
-			send(s, sendBuff, sizeof(sendBuff), 0);
-
-			// RECEIVING response to command RAIZ from the server
-			recv(s, recvBuff, sizeof(recvBuff), 0);
-			printf("Raiz cuadrada = %s \n", recvBuff);
-		}
-
-		if (c == '3')
-		{
-			// SENDING command IP
-			strcpy(sendBuff, "IP");
-			send(s, sendBuff, sizeof(sendBuff), 0);
-			strcpy(sendBuff, "IP-END");
-			send(s, sendBuff, sizeof(sendBuff), 0);
-
-			// RECEIVING response to command IP from the server
-			recv(s, recvBuff, sizeof(recvBuff), 0);
-			printf("IP del servidor = %s \n", recvBuff);
-		}
-
-		if (c == '4')
-		{
-			// SENDING command EXIT
-			strcpy(sendBuff, "EXIT");
-			send(s, sendBuff, sizeof(sendBuff), 0);
-		}
-	}while(c != '4');
-*/
-	// CLOSING the socket and cleaning Winsock...
 	closesocket(s);
 	WSACleanup();
 
