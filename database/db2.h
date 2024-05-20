@@ -7,6 +7,8 @@
 #include <string>
 
 void errorMsg(char mensaje[]);
+void commandLog(char mensaje[]);
+
 int showAllClientes(sqlite3 *db);
 int deleteAllClients(sqlite3 *db);
 
@@ -23,12 +25,12 @@ int guardarProgreso(sqlite3 *db, int id_cliente, const char titulo[], const char
 int eliminarLibro(sqlite3 *db, int idCliente,char titulo[]);
 int eliminarLibroBD1(sqlite3 *db, char titulo[]);
 
-void mostrarMiLista(int id_cliente_actual);
+char* mostrarMiLista(int id_cliente_actual);
 
 void actualizarProgreso(int id_libro, int pagina_actual, char time[]);
 int cargarProgreso(int id_libro);
 
-void mostrarRecomendaciones();
+char* mostrarRecomendaciones();
 
 
 #endif /* MENU_H */

@@ -1,0 +1,133 @@
+[2024-05-19 19:01:54] Received INICIAR-SESION command
+[2024-05-19 19:01:54] Email received
+[2024-05-19 19:26:15] Received INICIAR-SESION command
+[2024-05-19 19:26:15] Email received
+[2024-05-19 19:26:16] Password received
+[2024-05-19 19:26:16] Calling iniciarSesionMenu
+[2024-05-19 19:26:16] ID de cliente enviado correctamente
+[2024-05-19 19:26:16] Admin status enviado correctamente
+[2024-05-19 19:26:16] INICIAR-SESION-END recibido correctamente
+[2024-05-19 19:26:30] El libro no se ha agregado correctamente
+[2024-05-19 19:27:18] Received INICIAR-SESION command
+[2024-05-19 19:27:18] Email received
+[2024-05-19 19:27:21] Password received
+[2024-05-19 19:27:21] Calling iniciarSesionMenu
+[2024-05-19 19:27:21] ID de cliente enviado correctamente
+[2024-05-19 19:27:21] Admin status enviado correctamente
+[2024-05-19 19:27:21] INICIAR-SESION-END recibido correctamente
+[2024-05-19 19:27:31] El libro se ha agregado correctamente
+[2024-05-20 11:41:46] Received INICIAR-SESION command
+[2024-05-20 11:41:53] Email received
+[2024-05-20 11:41:53] Password received
+[2024-05-20 11:41:53] Calling iniciarSesionMenu
+[2024-05-20 11:41:53] ID de cliente enviado correctamente
+[2024-05-20 11:41:53] Admin status enviado correctamente
+[2024-05-20 11:41:53] INICIAR-SESION-END recibido correctamente
+[2024-05-20 11:45:08] El libro se ha eliminado correctamente
+[2024-05-20 11:46:22] El libro se ha agregado correctamente
+[2024-05-20 11:47:59] El libro no se ha descargado correctamente
+[2024-05-20 12:04:12] Received INICIAR-SESION command
+[2024-05-20 12:04:14] Email received
+[2024-05-20 12:04:15] Password received
+[2024-05-20 12:04:15] Calling iniciarSesionMenu
+[2024-05-20 12:04:15] ID de cliente enviado correctamente
+[2024-05-20 12:04:15] Admin status enviado correctamente
+[2024-05-20 12:04:15] INICIAR-SESION-END recibido correctamente
+[2024-05-20 12:04:25] Received INICIAR-SESION command
+[2024-05-20 12:04:26] Email received
+[2024-05-20 12:04:28] Password received
+[2024-05-20 12:04:28] Calling iniciarSesionMenu
+[2024-05-20 12:04:28] ID de cliente enviado correctamente
+[2024-05-20 12:04:28] Admin status enviado correctamente
+[2024-05-20 12:04:28] INICIAR-SESION-END recibido correctamente
+[2024-05-20 12:04:38] Received INICIAR-SESION command
+[2024-05-20 12:04:40] Email received
+[2024-05-20 12:04:41] Password received
+[2024-05-20 12:04:41] Calling iniciarSesionMenu
+[2024-05-20 12:04:41] ID de cliente enviado correctamente
+[2024-05-20 12:04:41] Admin status enviado correctamente
+[2024-05-20 12:04:41] INICIAR-SESION-END recibido correctamente
+[2024-05-20 12:11:16] Received INICIAR-SESION command
+[2024-05-20 12:11:19] Email received
+[2024-05-20 12:11:20] Password received
+[2024-05-20 12:11:20] Calling iniciarSesionMenu
+[2024-05-20 12:11:20] ID de cliente enviado correctamente
+[2024-05-20 12:11:20] Admin status enviado correctamente
+[2024-05-20 12:11:20] INICIAR-SESION-END recibido correctamente
+[2024-05-20 12:14:05] Received INICIAR-SESION command
+[2024-05-20 12:14:08] Email received
+[2024-05-20 12:14:09] Password received
+[2024-05-20 12:14:09] Calling iniciarSesionMenu
+[2024-05-20 12:14:09] ID de cliente enviado correctamente
+[2024-05-20 12:14:09] Admin status enviado correctamente
+[2024-05-20 12:14:09] INICIAR-SESION-END recibido correctamente
+[2024-05-20 12:14:34] Error: Comando BUSCAR-LIBRO-END no recibido correctamente
+[2024-05-20 12:14:42] Received INICIAR-SESION command
+[2024-05-20 12:14:43] Email received
+[2024-05-20 12:14:43] Password received
+[2024-05-20 12:14:43] Calling iniciarSesionMenu
+[2024-05-20 12:14:43] ID de cliente enviado correctamente
+[2024-05-20 12:14:43] Admin status enviado correctamente
+[2024-05-20 12:14:43] INICIAR-SESION-END recibido correctamente
+[2024-05-20 12:15:30] Error al recibir BUSCAR-LISTA-END
+[2024-05-20 12:16:03] Received INICIAR-SESION command
+[2024-05-20 12:16:06] Email received
+[2024-05-20 12:16:06] Password received
+[2024-05-20 12:16:06] Calling iniciarSesionMenu
+[2024-05-20 12:16:06] ID de cliente enviado correctamente
+[2024-05-20 12:16:06] Admin status enviado correctamente
+[2024-05-20 12:16:06] INICIAR-SESION-END recibido correctamente
+[2024-05-20 12:16:33] Error: Comando BUSCAR-LIBRO-END no recibido correctamente
+[2024-05-20 12:16:51] Received INICIAR-SESION command
+[2024-05-20 12:16:53] Email received
+[2024-05-20 12:16:54] Password received
+[2024-05-20 12:16:54] Calling iniciarSesionMenu
+[2024-05-20 12:16:54] ID de cliente enviado correctamente
+[2024-05-20 12:16:54] Admin status enviado correctamente
+[2024-05-20 12:16:54] INICIAR-SESION-END recibido correctamente
+[2024-05-20 12:18:02] Received INICIAR-SESION command
+[2024-05-20 12:18:03] Email received
+[2024-05-20 12:18:03] Password received
+[2024-05-20 12:18:03] Calling iniciarSesionMenu
+[2024-05-20 12:18:03] ID de cliente enviado correctamente
+[2024-05-20 12:18:03] Admin status enviado correctamente
+[2024-05-20 12:18:03] INICIAR-SESION-END recibido correctamente
+[2024-05-20 12:18:47] El libro se ha agregado correctamente a la BD
+[2024-05-20 12:18:47] Error: AGREGAR-LIBRO-BD-END no recibido correctamente
+[2024-05-20 12:20:03] El libro se ha eliminado correctamente de la BD
+[2024-05-20 12:21:00] Error: Comando ELIMINAR-LIBRO-BD-END no recibido correctamente
+[2024-05-20 12:31:57] Received INICIAR-SESION command
+[2024-05-20 12:31:58] Email received
+[2024-05-20 12:31:59] Password received
+[2024-05-20 12:31:59] Calling iniciarSesionMenu
+[2024-05-20 12:31:59] ID de cliente enviado correctamente
+[2024-05-20 12:31:59] Admin status enviado correctamente
+[2024-05-20 12:31:59] INICIAR-SESION-END recibido correctamente
+[2024-05-20 12:32:39] El libro se ha agregado correctamente
+[2024-05-20 12:33:03] El libro se ha eliminado correctamente
+[2024-05-20 12:33:47] El libro se ha agregado correctamente
+[2024-05-20 12:34:02] El libro se ha eliminado correctamente
+[2024-05-20 12:34:47] Received INICIAR-SESION command
+[2024-05-20 12:34:49] Email received
+[2024-05-20 12:34:51] Password received
+[2024-05-20 12:34:51] Calling iniciarSesionMenu
+[2024-05-20 12:34:51] ID de cliente enviado correctamente
+[2024-05-20 12:34:51] Admin status enviado correctamente
+[2024-05-20 12:34:51] INICIAR-SESION-END recibido correctamente
+[2024-05-20 12:35:02] El libro se ha agregado correctamente
+[2024-05-20 12:35:52] El libro se ha eliminado correctamente
+[2024-05-20 12:36:57] Received INICIAR-SESION command
+[2024-05-20 12:36:57] Email received
+[2024-05-20 12:36:58] Password received
+[2024-05-20 12:36:58] Calling iniciarSesionMenu
+[2024-05-20 12:36:58] ID de cliente enviado correctamente
+[2024-05-20 12:36:58] Admin status enviado correctamente
+[2024-05-20 12:36:58] INICIAR-SESION-END recibido correctamente
+[2024-05-20 12:37:23] Received INICIAR-SESION command
+[2024-05-20 12:37:24] Email received
+[2024-05-20 12:37:24] Password received
+[2024-05-20 12:37:24] Calling iniciarSesionMenu
+[2024-05-20 12:37:24] ID de cliente enviado correctamente
+[2024-05-20 12:37:24] Admin status enviado correctamente
+[2024-05-20 12:37:24] INICIAR-SESION-END recibido correctamente
+[2024-05-20 12:37:51] El libro se ha eliminado correctamente
