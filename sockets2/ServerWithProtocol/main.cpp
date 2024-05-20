@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
     SOCKET comm_socket;
     struct sockaddr_in server;
     struct sockaddr_in client;
-    char sendBuff[512], recvBuff[512];
+    char sendBuff[2048], recvBuff[2048];
     Cliente cl;
     Cliente clRegistro;
 
@@ -637,7 +637,7 @@ void leerLibro(SOCKET client_socket, const string& titulo) {
 
     int inicio = cargarProgreso(id_titulo) * convPag;
     int opcion = 0;
-    char recvBuff[512];
+    char recvBuff[2048];
     do {
         stringstream ss;
         int end = min(inicio + convPag, static_cast<int>(lineas.size()));
@@ -670,7 +670,7 @@ void leerLibro(SOCKET client_socket, const string& titulo) {
 
 void buscarLibro(SOCKET client_socket) {
     char opcion[10];
-    char recvBuff[512];
+    char recvBuff[1024];
     char* resultados;
 
     // Recibir la opción seleccionada por el cliente
@@ -713,7 +713,7 @@ void buscarLibro(SOCKET client_socket) {
         send(client_socket, recvBuff, strlen(recvBuff) + 1, 0);
         return;
     }
-    printf("%s",resultados);
+    //printf("%s",resultados);
     // Enviar los resultados al cliente
     send(client_socket, resultados, strlen(resultados) + 1, 0);
 

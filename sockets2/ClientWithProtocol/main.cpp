@@ -25,7 +25,7 @@ using namespace std;
 #define QUITAR_NEGRITA "\e[m" // Renombramos el codigo de quitar la negrita a los caracteres para que sea mas entendible
 //"Sin dolor no hay gloria" - Proverbio Romano
 SOCKET s;
-char sendBuff[512], recvBuff[512];
+char sendBuff[2048], recvBuff[2048];
 int es_admin = 0;
 Cliente cliente;
 
@@ -88,7 +88,7 @@ void buscarLibro(SOCKET client_socket) {
 }
 
 void leerLibro(SOCKET client_socket, const char* titulo) {
-    char sendBuff[512], recvBuff[2048];
+    char sendBuff[2048], recvBuff[2048];
     int opcion;
 
     do {
